@@ -66,7 +66,7 @@ func TestFuncParse(t *testing.T) {
 	if len(funcs) > 0 {
 		actual = StringFromFunc(funcs[0])
 	}
-	errortext := CompareText(expected, actual, 20, msgblock)
+	errortext := V_compareText(expected, actual, 20, msgblock)
 	if errortext != "" {
 		t.Error(errortext)
 	}

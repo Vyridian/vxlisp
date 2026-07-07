@@ -1,0 +1,209 @@
+
+  // Type_any
+  public class Type_any {
+    var type_type : Type_type?
+    var generic_any : Generic_any?
+    var type_const : Type_const?
+    var type_msgblock : Type_msgblock?
+    var type_delta : Type_delta?
+    var refcount : Int = 0
+    var backref : AnyObject? = nil
+    public init() {}
+  }
+
+  // Generic_any_type
+  public class Generic_any_type : Vx_Core.Generic_type {
+  }
+
+  // v_any_constructor
+  public static func v_any_constructor(
+  ) -> Type_any {
+    Vx_Core.v_global_reserve()
+    return Type_any()
+  }
+
+  // v_any_create
+  public static func v_any_create(
+  ) -> Type_any {
+    var output : Type_any = v_any_constructor()
+    v_any_startup(output)
+    return output
+  }
+
+  // v_any_register
+  public static func v_any_register(
+  ) -> Vx_Core.Type_type {
+    v_any_startup_type()
+    v_any_startup_empty()
+    return t_any
+  }
+
+  // v_any_shutdown - mutating
+  public static func v_any_shutdown(
+    _ value : Type_any
+  ) {
+    value.backref = nil
+    if let type_msgblock : Vx_Core.Type_msgblock = value.type_msgblock {
+      value.type_msgblock = nil
+      Vx_Core.v_release_any(type_msgblock.type_any)
+    }
+    if let type_const : Vx_Core.Type_const = value.type_const {
+      value.type_const = nil
+      Vx_Core.v_const_shutdown(type_const)
+    }
+    if let generic_any : Vx_Core.Generic_any = value.generic_any {
+      value.generic_any = nil
+      generic_any.v_shutdown()
+    }
+    if let type_list : Vx_Core.Type_list = value.p_type_list() {
+      type_list.type_any = Vx_Core.e_any
+      if let generic_list : Vx_Core.Generic_list = type_map.generic_list {
+        type_list.generic_list = nil
+      }
+      value.type_list = nil
+    }
+    if let type_map : Vx_Core.Type_map = value.p_type_map() {
+      type_map.type_any = Vx_Core.e_any
+      if let generic_map : Vx_Core.Generic_map = type_map.generic_map {
+        generic_map.listkeyn = []
+        type_map.generic_map = nil
+      }
+      value.generic_map = nil
+    }
+    if let type_struct : Vx_Core.Type_struct = value.p_type_struct() {
+      type_struct.type_any = Vx_Core.e_any
+      if let generic_struct : Vx_Core.Generic_struct = type_map.generic_struct {
+        generic_struct.listkeyn = []
+        type_map.generic_struct = nil
+      }
+      type_struct.generic_struct = nil
+      value.generic_struct = nil
+    }
+    value.type_type = nil
+    Vx_Core.v_global_release()
+  }
+
+  // v_any_startup - mutating
+  public static func v_any_startup(
+    _ value : Type_any
+  ) {
+    value.generic_any = e_generic_any
+  }
+
+  // v_any_startup_empty
+  public static func v_any_startup_empty() {
+    v_any_startup(e_any)
+    Vx_Core.v_startup_e(
+      t_any,
+      e_any
+    )
+  }
+
+  // v_any_startup_type
+  public static func v_any_startup_type() -> Vx_Core.Type_type {
+    let type_type = t_any
+    type_type.p_name = Vx_Core.v_string_from_stringn("vx/core/any")
+    type_type.p_extends = Vx_Core.e_string
+    let generic_type : Vx_Core.Generic_type = Generic_any_type()
+    Vx_Core.v_startup_t(
+      type_type,
+      generic_type
+    )
+    return type_type
+  }
+
+  // v_any_from_any
+  public static func v_any_from_any(
+    _ type_type : Type_type,
+    _ type_any : Type_any
+  ) -> Type_any {
+    let generic_type : Generic_type = v_generic_type_from_type(type_type)
+    let output : Type_any = generic_type.p_any_from_any(type_type, type_any)
+    return output
+  }
+
+  // v_copy
+  public static func v_copy(
+    _ type_any : Vx_Core.Type_any,
+    _ anylist : Vx_Core.Type_anylist
+  ) -> Type_any {
+    let type_type : Vx_Core.Type_type = Vx_Core.v_type_from_any(type_any)
+    let generic_type : Vx_Core.Generic_type = v_generic_type_from_type(type_type)
+    let output : Vx_Core.Type_any = generic_type.p_copy(type_any, anylist)
+    return output
+  }
+
+  // v_empty_from_any
+  public static func v_empty_from_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> Type_any {
+    let type_type : Type_type = Vx_Core.v_type_from_any(type_any)
+    let output : Vx_Core.Type_any = Vx_Core.v_empty(type_type)
+    return output
+  }
+
+  // v_new
+  public static func v_new(
+    _ type_type : Vx_Core.Type_type,
+    _ anylist : Vx_Core.Type_anylist
+  ) -> Type_any {
+    let generic_type : Vx_Core.Generic_type = v_generic_type_from_type(type_type)
+    let output : Vx_Core.Type_any = generic_type.p_new(type_type, anylist)
+    return output
+  }
+
+  // v_release_any
+  public static func v_release_any(
+    _ type_any : Type_any
+  ) {
+    type_any.refcount -= 1
+    if type_any.refcount <= 0 {
+      if type_any.refcount < 0 {
+        v_log_string(
+          "Error: Negative Refcount - " +
+          v_typenamen_from_any(type_any)
+        )
+      }
+      v_any_shutdown(type_any)
+    }
+  }
+
+  // v_release_listany
+  public static func v_release_listany(
+    _ listany : [Type_any]
+  ) {
+    for type_any : Type_any in listany {
+      v_release_any(type_any)
+    }
+  }
+
+  // v_release_listany_except
+  public static func v_release_listany_except(
+    _ listany : [Type_any],
+    _ except_any : Type_any
+  ) {
+    for type_any : Type_any in listany {
+      if type_any !== except_any {
+        v_release_any(type_any)
+      }
+    }
+  }
+
+  // v_reserve_any
+  public static func v_reserve_any(
+    _ type_any : Type_any
+  ) {
+    type_any.refcount += 1
+  }
+
+  // v_reserve_listany
+  public static func v_reserve_listany(
+    _ listany : [Type_any]
+  ) {
+    for type_any : Type_any in listany {
+      v_reserve_any(type_any)
+    }
+  }
+
+  public static let t_any : Vx_Core.Type_type = Vx_Core.Type_type()
+  public static let e_any : Type_any = Type_any()

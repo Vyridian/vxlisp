@@ -105,7 +105,7 @@ func TestProjectFromTextblock(t *testing.T) {
 
 	expected := StringFromProject(expectedprj)
 	actual := StringFromProject(prj)
-	errortext := CompareText(expected, actual, 20, msgblock)
+	errortext := V_compareText(expected, actual, 20, msgblock)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -126,14 +126,14 @@ func TestProjectFromTextblock(t *testing.T) {
 	cmdtexts := []string{"doc", "testjs"}
 	cmds, _ := ListCommandFromProject(prj, cmdtexts)
 	actual = StringFromListCmd(cmds)
-	errortext = CompareText(expected, actual, 20, msgblock)
+	errortext = V_compareText(expected, actual, 20, msgblock)
 	if errortext != "" {
 		t.Error(errortext)
 	}
 
 	expected = "../projects/myproject/build/java/test"
 	actual = StringPathFromProjectCmd(prj, cmd)
-	errortext = CompareText(expected, actual, 20, msgblock)
+	errortext = V_compareText(expected, actual, 20, msgblock)
 	if errortext != "" {
 		t.Error(errortext)
 	}

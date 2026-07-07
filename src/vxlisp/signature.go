@@ -1,5 +1,9 @@
 package vxlisp
 
+import (
+	vx_core "vxlisp/vxlisp/vx/core"
+)
+
 type vxsignature struct {
 	name          string
 	idx           int
@@ -181,7 +185,7 @@ func StringIndentFromSignature(
 	}
 	idx := ""
 	if signature.idx > 0 {
-		idx = lineindent + " :idx      " + StringFromInt(signature.idx)
+		idx = lineindent + " :idx      " + vx_core.V_stringn_from_intn(signature.idx)
 	}
 	output := "" +
 		"(signature" +

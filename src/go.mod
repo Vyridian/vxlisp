@@ -1,6 +1,6 @@
-module vxlisp-compiler
+module vxlisp
 
-go 1.20
+go 1.25
 
 require github.com/fsnotify/fsnotify v1.6.0
 

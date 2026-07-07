@@ -1,5 +1,9 @@
 package vxlisp
 
+import (
+	vx_core "vxlisp/vxlisp/vx/core"
+)
+
 type vxfunc struct {
 	name         string
 	pkgname      string
@@ -69,6 +73,7 @@ var func_boolean_write_from_file_string = NewFuncFromPkgnameName(
 var func_copy = NewFuncFromPkgnameName(
 	"vx/core", "copy")
 var func_empty = NewFuncFromPkgnameName("vx/core", "empty")
+var func_func = NewFuncFromPkgnameName("vx/core", "func")
 var func_let_async = NewFuncFromPkgnameName("vx/core", "let_async")
 var func_log = NewFuncFromPkgnameName("vx/core", "log")
 var func_log_1 = NewFuncFromPkgnameName("vx/core", "log_1")
@@ -442,7 +447,7 @@ func FuncFromTextblock(
 				}
 			default:
 				if testcls {
-					if BooleanFromStringStarts(word, ":") {
+					if vx_core.V_booleann_from_stringn_startsn(word, ":") {
 						testcls = false
 					} else {
 						testvalue, msgs := ValueFromTextblock(wordtextblock, fnc, pkg)
@@ -508,7 +513,7 @@ func FuncFromTextblock(
 						fnc.sideeffects = StringRemoveQuotes(word)
 					}
 					lastword = ""
-				} else if BooleanFromStringStarts(word, ":") && (textblock.blocktype != "\"") {
+				} else if vx_core.V_booleann_from_stringn_startsn(word, ":") && (textblock.blocktype != "\"") {
 					switch word {
 					case ":", ":alias", ":bigospace", ":bigotime", ":clientserver", ":doc", ":deprecated", ":sideeffects":
 						lastword = word
@@ -781,7 +786,7 @@ func NameFromFunc(
 		output = fnc.pkgname + "/" + fnc.name
 	}
 	if fnc.idx > 0 {
-		output = output + "_" + StringFromInt(fnc.idx)
+		output = output + "_" + vx_core.V_stringn_from_intn(fnc.idx)
 	}
 	return output
 }
@@ -824,7 +829,7 @@ func StringFromFuncIndent(
 		initindent := ""
 		lineindent := "\n"
 		if indent > 0 {
-			sindent := StringRepeat(" ", indent)
+			sindent := vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 			lineindent += sindent
 			initindent = lineindent
 		}
@@ -834,7 +839,7 @@ func StringFromFuncIndent(
 			lineindent + " :alias " + fnc.alias +
 			lineindent + " :pkg   " + fnc.pkgname
 		if fnc.idx > 0 {
-			output += lineindent + " :idx   " + StringFromInt(fnc.idx)
+			output += lineindent + " :idx   " + vx_core.V_stringn_from_intn(fnc.idx)
 		}
 		if fnc.vxtype.name != "" {
 			output += lineindent + " :type  " + NameFromType(fnc.vxtype)
@@ -877,7 +882,7 @@ func StringFromListFuncIndent(
 	if len(listfunc) > 0 {
 		lineindent := ""
 		if indent > 0 {
-			lineindent = "\n" + StringRepeat(" ", indent)
+			lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 		}
 		output += lineindent + "(funclist"
 		for _, fnc := range listfunc {
@@ -902,7 +907,7 @@ func StringFromNativeFunc(
 			}
 			if valuetext == lang {
 				isNative = true
-			} else if BooleanFromStringStarts(valuetext, ":") {
+			} else if vx_core.V_booleann_from_stringn_startsn(valuetext, ":") {
 				isNative = false
 			} else if isNative {
 				if argvalue.name == "newline" {
@@ -921,7 +926,7 @@ func StringIndexFromFunc(
 	fnc *vxfunc) string {
 	output := ""
 	if fnc.idx > 0 {
-		output = "_" + StringFromInt(fnc.idx)
+		output = "_" + vx_core.V_stringn_from_intn(fnc.idx)
 	}
 	return output
 }

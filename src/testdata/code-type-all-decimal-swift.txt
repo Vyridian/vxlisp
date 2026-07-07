@@ -1,0 +1,127 @@
+
+  // Type_decimal
+  public class Type_decimal {
+    var type_any : Vx_Core.Type_any = Vx_Core.e_any
+    var type_float : Vx_Core.Type_float = Vx_Core.e_float
+    var type_int : Vx_Core.Type_int = Vx_Core.e_int
+    var type_number : Vx_Core.Type_number = Vx_Core.e_number
+  }
+  // Generic_decimal_any
+  public class Generic_decimal_any : Vx_Core.Generic_any {
+    var backref : Type_decimal = e_decimal
+    // p_shutdown
+    override public func p_shutdown() {
+      v_decimal_shutdown(self.backref)
+    }
+    // p_type_type
+    override public func p_type_type() -> Vx_Core.Type_type {
+      return t_decimal
+    }
+  }
+  // Generic_decimal_type
+  public class Generic_decimal_type : Vx_Core.Generic_type {
+    // p_any_from_any
+    override public func p_any_from_any(
+      _ type_type : Vx_Core.Type_type,
+      _ type_any : Vx_Core.Type_any
+    ) -> Vx_Core.Type_any {
+      let value : Type_decimal = v_decimal_any_from_any(type_type, type_any)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+    // p_copy
+    override public func p_copy(
+      _ copyany : Vx_Core.Type_any,
+      _ type_anylist : Vx_Core.Type_anylist
+    ) -> Vx_Core.Type_any {
+      let copyval : Type_decimal = v_decimal_from_any(copyany)
+      let value : Type_decimal = v_decimal_copy(copyval, type_anylist)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+    // p_new
+    override public func p_new(
+      _ type_type : Vx_Core.Type_type,
+      _ type_anylist : Vx_Core.Type_anylist
+    ) -> Vx_Core.Type_any {
+      let value : Vx_Core.Type_decimal = f_decimal(type_anylist)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+  }
+  // v_decimal_constructor
+  public static func v_decimal_constructor(
+  ) -> Type_decimal {
+    Vx_Core.v_global_reserve()
+    return Type_decimal()
+  }
+  // v_decimal_create
+  public static func v_decimal_create(
+  ) -> Type_decimal {
+    var output : Type_decimal = v_decimal_constructor()
+    v_decimal_startup(output)
+    return output
+  }
+  // v_decimal_register
+  public static func v_decimal_register(
+  ) -> Vx_Core.Type_type {
+    v_decimal_startup_type()
+    v_decimal_startup_empty()
+    return t_decimal
+  }
+  // v_decimal_shutdown - mutating
+  public static func v_decimal_shutdown(
+    _ value : Type_decimal
+  ) {
+    let type_any : Vx_Core.Type_any = value.type_any
+    value.type_any = Vx_Core.e_any
+    if let generic_any : Generic_decimal_any = type_any.generic_any {
+      generic_any.backref = nil
+    }
+    var type_float : Vx_Core.Type_float = value.type_float
+    var type_int : Vx_Core.Type_int = value.type_int
+    var type_number : Vx_Core.Type_number = value.type_number
+    value.type_float = Vx_Core.e_float
+    value.type_int = Vx_Core.e_int
+    value.type_number = Vx_Core.e_number
+    Vx_Core.v_release_listany(
+      [
+        type_float.type_any,
+        type_int.type_any,
+        type_number.type_any
+      ]
+    )
+  }
+  // v_decimal_startup - mutating
+  public static func v_decimal_startup(
+    _ value : Type_decimal
+  ) {
+    let generic_any = Generic_decimal_any()
+    generic_any.backref = value
+    value.type_any = Vx_Core.v_any_new_from_type_generic_any(
+      t_decimal,
+      generic_any
+    )
+  }
+  // v_decimal_startup_empty
+  public static func v_decimal_startup_empty() {
+    v_decimal_startup(e_decimal)
+    Vx_Core.v_startup_e(
+      t_decimal,
+      e_decimal.type_any
+    )
+  }
+  // v_decimal_startup_type
+  public static func v_decimal_startup_type() -> Vx_Core.Type_type {
+    let type_type = t_decimal
+    type_type.p_name = Vx_Core.v_string_from_stringn("vx/core/decimal")
+    type_type.p_extends = Vx_Core.e_string
+    let generic_type : Vx_Core.Generic_type = Generic_decimal_type()
+    Vx_Core.v_startup_t(
+      type_type,
+      generic_type
+    )
+    return type_type
+  }
+  public static let t_decimal : Vx_Core.Type_type = Vx_Core.Type_type()
+  public static let e_decimal : Type_decimal = Type_decimal()

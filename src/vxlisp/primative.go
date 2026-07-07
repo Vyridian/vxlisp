@@ -4,23 +4,11 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	vx_core "vxlisp/vxlisp/vx/core"
 )
 
 func NewMapString() map[string]string {
 	return make(map[string]string)
-}
-
-func BooleanFromListStringContains(liststring []string, contains string) bool {
-	output := false
-	pos := IntFromListStringIndex(liststring, contains)
-	if pos >= 0 {
-		output = true
-	}
-	return output
-}
-
-func BooleanFromStringContains(str string, contains string) bool {
-	return strings.Contains(str, contains)
 }
 
 func BooleanFromStringEnds(str string, ends string) bool {
@@ -29,10 +17,6 @@ func BooleanFromStringEnds(str string, ends string) bool {
 
 func BooleanFromStringEquals(str string, equals string) bool {
 	return str == equals
-}
-
-func BooleanFromStringStarts(str string, starts string) bool {
-	return strings.HasPrefix(str, starts)
 }
 
 func BooleanFromStringStartsEnds(str string, starts string, ends string) bool {
@@ -76,26 +60,8 @@ func IntFromStringCount(str string, scount string) int {
 	return output
 }
 
-func IntFromListStringIndex(texts []string, index string) int {
-	output := -1
-	for pos, text := range texts {
-		if text == index {
-			output = pos
-		}
-	}
-	return output
-}
-
-func IntFromStringFind(str string, find string) int {
-	return strings.Index(str, find)
-}
-
-func IntFromStringFindLast(str string, findlast string) int {
-	return strings.LastIndex(str, findlast)
-}
-
 func IntFromStringFindNth(str string, find string, nth int) int {
-	output := -1
+	var output = -1
 	i := 0
 	for m := 1; m <= nth; m++ {
 		x := strings.Index(str[i:], find)
@@ -149,14 +115,14 @@ func ListStringFromStringSplitByDelims(str string, startdelim string, enddelim s
 	worktext := str
 	isdone := false
 	for ok := true; ok; ok = !isdone {
-		startpos := IntFromStringFind(worktext, startdelim)
+		startpos := vx_core.V_intn_from_stringn_findn(worktext, startdelim)
 		if startpos < 0 {
 			isdone = true
 			output = append(output, worktext)
 		} else {
 			output = append(output, worktext[0:startpos])
 			worktext = worktext[startpos:]
-			endpos := IntFromStringFind(worktext, enddelim)
+			endpos := vx_core.V_intn_from_stringn_findn(worktext, enddelim)
 			if endpos < 0 {
 				output = append(output, worktext)
 				isdone = true
@@ -183,10 +149,6 @@ func ListStringKeysFromStringMap(mapstring map[string]string) []string {
 func ListStringSort(liststring []string) []string {
 	sort.Strings(liststring)
 	return liststring
-}
-
-func ListStringFromStringSplit(str string, delim string) []string {
-	return strings.Split(str, delim)
 }
 
 func ListStringUniques(liststring []string) []string {
@@ -226,10 +188,6 @@ func StringFromBoolean(booleanval bool) string {
 	return output
 }
 
-func StringFromInt(intval int) string {
-	return strconv.Itoa(intval)
-}
-
 func StringFromStringBefore(text string, before string) string {
 	output := text
 	if BooleanFromStringEnds(text, before) {
@@ -246,13 +204,13 @@ func StringFromStringFromTo(text string, from string, to string) string {
 		ifrom := 0
 		ito := len(text)
 		if from != "" {
-			ifrom = IntFromStringFind(text, from)
+			ifrom = vx_core.V_intn_from_stringn_findn(text, from)
 			if ifrom < 0 {
 				ifrom = 0
 			}
 		}
 		if to != "" {
-			ito = IntFromStringFind(text, to)
+			ito = vx_core.V_intn_from_stringn_findn(text, to)
 			if ito < 0 {
 				ito = len(text)
 			}
@@ -263,29 +221,25 @@ func StringFromStringFromTo(text string, from string, to string) string {
 }
 
 func StringFromStringIndent2(str string, indent int) string {
-	output := StringFromStringFindReplace(str, "\n", "\n"+StringRepeat("  ", indent))
+	output := vx_core.V_stringn_from_stringn_findn_replacen(str, "\n", "\n"+vx_core.V_stringn_from_stringn_repeatn("  ", indent))
 	return output
 }
 
 func StringFromStringIndent(str string, indent string) string {
-	output := StringFromStringFindReplace(str, "\n", "\n"+indent)
+	output := vx_core.V_stringn_from_stringn_findn_replacen(str, "\n", "\n"+indent)
 	return output
 }
 
 func StringFromListString(liststring []string) string {
 	output := ""
 	if len(liststring) > 0 {
-		output = "(stringlist " + StringFromListStringJoin(liststring, " ") + ")"
+		output = "(stringlist " + vx_core.V_stringn_from_liststringn_joinn(liststring, " ") + ")"
 	}
 	return output
 }
 
-func StringFromListStringJoin(liststring []string, delim string) string {
-	return strings.Join(liststring, delim)
-}
-
 func StringOutdentLines(str string, indent string) string {
-	return StringFromStringFindReplace(str, "\n"+indent, "\n")
+	return vx_core.V_stringn_from_stringn_findn_replacen(str, "\n"+indent, "\n")
 }
 
 func StringRemoveQuotes(str string) string {
@@ -294,67 +248,13 @@ func StringRemoveQuotes(str string) string {
 		output = str[1 : len(str)-1]
 	} else if strings.HasPrefix(str, "\"") && strings.HasSuffix(str, "\"") {
 		output = str[1 : len(str)-1]
-		output = StringFromStringFindReplace(output, "\\\"", "\"")
+		output = vx_core.V_stringn_from_stringn_findn_replacen(output, "\\\"", "\"")
 	} else {
 		output = str
 	}
 	return output
 }
 
-func StringRepeat(str string, repeat int) string {
-	return strings.Repeat(str, repeat)
-}
-
-func StringFromStringFindReplace(str string, find string, replace string) string {
-	return strings.ReplaceAll(str, find, replace)
-}
-
-func StringSubstring(str string, startpos int, endpos int) string {
-	startnum := startpos
-	endnum := endpos
-	if startnum < 0 {
-		startnum = 0
-	}
-	if endnum < 0 {
-		endnum = len(str) + endnum
-	}
-	if endnum < startnum {
-		endnum = startnum
-	}
-	if len(str) < startnum {
-		startnum = 0
-	}
-	if len(str) < endnum {
-		endnum = len(str)
-	}
-	return str[startnum:endnum]
-}
-
 func StringTrim(str string) string {
 	return strings.TrimSpace(str)
-}
-
-func StringUCase(str string) string {
-	output := ""
-	if len(str) > 0 {
-		output = strings.ToUpper(str)
-	}
-	return output
-}
-
-func StringUCaseFirst(str string) string {
-	output := ""
-	if len(str) > 0 {
-		output = strings.ToUpper(str[0:1]) + str[1:]
-	}
-	return output
-}
-
-func StringUCaseFirstFromStringDelim(text string, delim string) string {
-	liststring := ListStringFromStringSplit(text, delim)
-	for i, text := range liststring {
-		liststring[i] = StringUCaseFirst(text)
-	}
-	output := StringFromListStringJoin(liststring, delim)
-	return output
 }

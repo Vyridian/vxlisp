@@ -1,0 +1,88 @@
+// Type_any
+type Type_any struct {
+	P_type_type  *Type_type
+	P_type_const *Type_const
+	P_isrun      bool
+	backref      any
+}
+
+// Type_any_generic
+type Type_any_generic struct {
+	Type_generic_base
+}
+
+func (type_generic Type_any_generic) p_code_from_any(
+	lang *Type_scope,
+	indent int,
+	path string,
+	type_any *Type_any) string {
+	var output = ""
+	return output
+}
+
+// V_any_from_type_backref
+func V_any_from_type_backref(
+	type_type *Type_type,
+	backref any) *Type_any {
+	var output *Type_any = V_any_create()
+	output.P_type_type = type_type
+	output.backref = backref
+	return output
+}
+
+// V_any_from_type_backref_type
+func V_any_from_type_backref_any(
+	type_type *Type_type,
+	value *Type_any) {
+	value.P_type_type = type_type
+	value.backref = value
+}
+
+// V_any_empty_from_type_backref_any
+func V_any_empty_from_type_backref_any(
+	type_type *Type_type,
+	value *Type_any) {
+	value.P_type_type = type_type
+	value.backref = value
+	value.P_type_const = V_const_empty(type_type)
+	type_type.P_path = type_type.P_pkgname + "/" + type_type.P_name
+	type_type.type_any.P_type_const = V_const_type(type_type)
+}
+
+// V_any_constructor
+func V_any_constructor() *Type_any {
+	var output = new(Type_any)
+	return output
+}
+
+// V_any_create
+func V_any_create() *Type_any {
+	var output = V_any_constructor()
+	V_any_initialize(output)
+	return output
+}
+
+// V_any_initialize
+func V_any_initialize(
+	value *Type_any) {
+	V_any_from_type_backref_any(
+		T_any,
+		value)
+}
+
+// V_any_startup
+func V_any_startup() *Type_type {
+	var t_variable = T_any
+	var e_variable = E_any
+	V_any_initialize(e_variable)
+	V_type_t_startup(
+		t_variable,
+		"vx/core",
+		"any",
+		E_string,
+		e_variable)
+	return t_variable
+}
+
+var T_any *Type_type = V_type_constructor()
+var E_any *Type_any = V_any_constructor()

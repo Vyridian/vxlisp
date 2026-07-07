@@ -3,7 +3,10 @@ package vxlisp
 import (
 	"sort"
 	"strings"
+	vx_core "vxlisp/vxlisp/vx/core"
 )
+
+var falseconst = NewConstFromNameType("vx/core/false", booleantype)
 
 type vxconst struct {
 	name          string
@@ -22,6 +25,24 @@ type vxconst struct {
 func NewConst() *vxconst {
 	output := new(vxconst)
 	output.vxtype = emptytype
+	output.value = emptyvalue
+	output.textblock = emptytextblock
+	return output
+}
+
+func NewConstFromNameType(
+	name string,
+	type_type *vxtype) *vxconst {
+	output := new(vxconst)
+	pos := vx_core.V_intn_from_stringn_findlastn(name, "/")
+	if pos < 0 {
+		output.name = name
+	} else {
+		output.pkgname = name[0:pos]
+		output.name = name[pos+1:]
+	}
+	output.alias = output.name
+	output.vxtype = type_type
 	output.value = emptyvalue
 	output.textblock = emptytextblock
 	return output
@@ -232,7 +253,7 @@ func StringFromConst(cnst *vxconst) string {
 func StringFromConstIndent(cnst *vxconst, indent int) string {
 	lineindent := ""
 	if indent > 0 {
-		lineindent = "\n" + StringRepeat(" ", indent)
+		lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 	}
 	output := "" +
 		lineindent + "(const" +
@@ -249,7 +270,7 @@ func StringFromConstIndent(cnst *vxconst, indent int) string {
 func StringFromListConstIndent(listconst []*vxconst, indent int) string {
 	lineindent := ""
 	if indent > 0 {
-		lineindent = "\n" + StringRepeat(" ", indent)
+		lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 	}
 	output := lineindent + "["
 	if len(listconst) > 0 {

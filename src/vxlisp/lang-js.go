@@ -3,6 +3,7 @@ package vxlisp
 import (
 	"sort"
 	"strings"
+	vx_core "vxlisp/vxlisp/vx/core"
 )
 
 func JsEmptyValueFromType(
@@ -40,7 +41,7 @@ func JsEmptyValueFromTypeIndent(
 				}
 				output = "" +
 					"{" +
-					"\n" + indent + "    " + StringFromListStringJoin(proptexts, ",\n"+indent+"    ") +
+					"\n" + indent + "    " + vx_core.V_stringn_from_liststringn_joinn(proptexts, ",\n"+indent+"    ") +
 					"\n" + indent + "  }"
 			} else if output == "" || strings.HasPrefix(output, ":") {
 				output = "\"" + output + "\""
@@ -119,7 +120,7 @@ func JsFromArg(
 		props = append(props, "\"multi\": "+StringFromBoolean(arg.multi))
 		output = "{" +
 			"\n" + indent + "  " +
-			StringFromListStringJoin(props, ",\n"+indent+"  ") +
+			vx_core.V_stringn_from_liststringn_joinn(props, ",\n"+indent+"  ") +
 			"\n" + indent + "}"
 	}
 	return output
@@ -138,7 +139,7 @@ func JsFromArgs(
 		}
 		output += "" +
 			"\n" + indent + "  " +
-			StringFromListStringJoin(props, ",\n"+indent+"  ") +
+			vx_core.V_stringn_from_liststringn_joinn(props, ",\n"+indent+"  ") +
 			"\n" + indent
 	}
 	output += "}"
@@ -243,7 +244,7 @@ func JsFromFunc(
 	properties = append(properties, "name          : \""+fnc.name+"\"")
 	properties = append(properties, "pkgname       : \""+fnc.pkgname+"\"")
 	properties = append(properties, "extends       : \":func\"")
-	properties = append(properties, "idx           : "+StringFromInt(fnc.idx))
+	properties = append(properties, "idx           : "+vx_core.V_stringn_from_intn(fnc.idx))
 	properties = append(properties, "allowfuncs    : []")
 	properties = append(properties, "disallowfuncs : []")
 	properties = append(properties, "allowtypes    : []")
@@ -266,7 +267,7 @@ func JsFromFunc(
 		proptext +
 		"\n    }" +
 		"\n"
-	sindent := StringRepeat("  ", indent)
+	sindent := vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	lineindent := "\n" + sindent
 	if fnc.vxtype.name != "none" {
 		footer += lineindent + "return output"
@@ -372,7 +373,7 @@ func JsFromPackage(
 	imports := ""
 	if len(pkg.listlib) > 0 {
 		depth := IntCountFromStringFind(pkg.name, "/")
-		prefix := StringRepeat("../", depth)
+		prefix := vx_core.V_stringn_from_stringn_repeatn("../", depth)
 		for _, lib := range pkg.listlib {
 			isskip := false
 			if lib.name == "vx/test" {
@@ -457,16 +458,16 @@ func JsFromPackage(
 	}
 	pkgdef := "" +
 		"\n    const constmap = vx_core.vx_new_map(vx_core.t_constmap, {" +
-		"\n      " + StringFromListStringJoin(constvalues, ",\n      ") +
+		"\n      " + vx_core.V_stringn_from_liststringn_joinn(constvalues, ",\n      ") +
 		"\n    })" +
 		"\n    const emptymap = vx_core.vx_new_map(vx_core.t_map, {" +
-		"\n      " + StringFromListStringJoin(emptyvalues, ",\n      ") +
+		"\n      " + vx_core.V_stringn_from_liststringn_joinn(emptyvalues, ",\n      ") +
 		"\n    })" +
 		"\n    const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {" +
-		"\n      " + StringFromListStringJoin(funcvalues, ",\n      ") +
+		"\n      " + vx_core.V_stringn_from_liststringn_joinn(funcvalues, ",\n      ") +
 		"\n    })" +
 		"\n    const typemap = vx_core.vx_new_map(vx_core.t_typemap, {" +
-		"\n      " + StringFromListStringJoin(typevalues, ",\n      ") +
+		"\n      " + vx_core.V_stringn_from_liststringn_joinn(typevalues, ",\n      ") +
 		"\n    })" +
 		"\n    const pkg = vx_core.vx_new_struct(vx_core.t_package, {" +
 		"\n      \"name\": \"" + pkg.name + "\"," +
@@ -523,15 +524,15 @@ func JsFromPackageName(
 	name string) string {
 	output := name
 	if strings.HasPrefix(name, "vx/") {
-		output = StringFromStringFindReplace(output, "vx/", "vx.")
+		output = vx_core.V_stringn_from_stringn_findn_replacen(output, "vx/", "vx.")
 	} else {
 		output = "vx." + output
 	}
-	output = StringFromStringFindReplace(output, "<", "lt")
-	output = StringFromStringFindReplace(output, ">", "gt")
-	output = StringFromStringFindReplace(output, "?", "is")
-	output = StringFromStringFindReplace(output, "-", "_")
-	output = StringFromStringFindReplace(output, "/", "_")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "<", "lt")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, ">", "gt")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "?", "is")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "-", "_")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "/", "_")
 	return output
 }
 
@@ -612,7 +613,7 @@ func JsFromValue(
 	test bool,
 	path string) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFromValue")
-	sindent := StringRepeat("  ", indent)
+	sindent := vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	output := ""
 	// constants, types, or function objects
 	valstr := ""
@@ -774,7 +775,7 @@ func JsFromValue(
 						msgblock = MsgblockAddBlock(msgblock, msgs)
 					}
 					if !multiline {
-						if BooleanFromStringContains(argtext, "\n") {
+						if vx_core.V_booleann_from_stringn_containsn(argtext, "\n") {
 							multiline = true
 						} else if argvalue.name != "" {
 							multiline = true
@@ -788,7 +789,7 @@ func JsFromValue(
 				}
 			}
 			if multiline {
-				output += "\n" + sindent + "  " + StringFromStringIndent(StringFromListStringJoin(argtexts, ",\n"), sindent+"  ")
+				output += "\n" + sindent + "  " + StringFromStringIndent(vx_core.V_stringn_from_liststringn_joinn(argtexts, ",\n"), sindent+"  ")
 				if multiflag {
 					output += "\n" + sindent + "  )"
 				}
@@ -798,7 +799,7 @@ func JsFromValue(
 					output += "\n" + sindent + ")"
 				}
 			} else {
-				output += StringFromListStringJoin(argtexts, ", ")
+				output += vx_core.V_stringn_from_liststringn_joinn(argtexts, ", ")
 				if multiflag {
 					output += ")"
 				}
@@ -827,7 +828,7 @@ func JsFromValue(
 	case "decimal", "int", "number", "string":
 		valstr = StringValueFromValue(value)
 		if valstr == "" {
-		} else if BooleanFromStringStarts(valstr, ":") {
+		} else if vx_core.V_booleann_from_stringn_startsn(valstr, ":") {
 			output = "\"" + valstr + "\""
 		} else if BooleanFromStringStartsEnds(valstr, "\"", "\"") {
 			output = valstr[1 : len(valstr)-1]
@@ -859,7 +860,7 @@ func JsNamesFromListFunc(
 		}
 		outputtypes = append(outputtypes, name)
 	}
-	return "[" + StringFromListStringJoin(outputtypes, ", ") + "]"
+	return "[" + vx_core.V_stringn_from_liststringn_joinn(outputtypes, ", ") + "]"
 }
 
 func JsNamesTFromListType(
@@ -994,7 +995,7 @@ func JsTestFromPackage(
 	msgblock := NewMsgBlock("JsTestFromPackage")
 	imports := ""
 	depth := IntCountFromStringFind(pkg.name, "/") + 1
-	prefix := StringRepeat("../", depth)
+	prefix := vx_core.V_stringn_from_stringn_repeatn("../", depth)
 	libpath := prefix + "src/" + pkg.name + ".js"
 	imports += "\nimport " + LangFromName(pkg.name) + " from \"" + libpath + "\""
 	if len(pkg.listlib) > 0 {
@@ -1028,7 +1029,7 @@ func JsTestFromPackage(
 		test, msgs := JsTestFromType(lang, typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		covertype = append(
-			covertype, "\""+typid+"\", "+StringFromInt(len(typ.testvalues)))
+			covertype, "\""+typid+"\", "+vx_core.V_stringn_from_intn(len(typ.testvalues)))
 		if command.filter == "" {
 		} else if NameFromType(typ) != command.filter {
 			test = ""
@@ -1058,7 +1059,7 @@ func JsTestFromPackage(
 			msgblock, msgs)
 		coverconst = append(
 			coverconst,
-			"\""+cnstid+"\", "+StringFromInt(len(cnst.listtestvalue)))
+			"\""+cnstid+"\", "+vx_core.V_stringn_from_intn(len(cnst.listtestvalue)))
 		if command.filter == "" {
 		} else if NameFromConst(cnst) != command.filter {
 			test = ""
@@ -1093,7 +1094,7 @@ func JsTestFromPackage(
 				test, msgs := JsTestFromFunc(lang, fnc)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
-				coverfunc = append(coverfunc, "\""+fncid+StringIndexFromFunc(fnc)+"\", "+StringFromInt(len(fnc.listtestvalue)))
+				coverfunc = append(coverfunc, "\""+fncid+StringIndexFromFunc(fnc)+"\", "+vx_core.V_stringn_from_intn(len(fnc.listtestvalue)))
 				if command.filter == "" {
 				} else if NameFromFunc(fnc) != command.filter {
 					test = ""
@@ -1297,9 +1298,9 @@ func JsTypeCoverageNumsValNew(
 	output := "" +
 		"vx_core.f_new_from_type(" +
 		"vx_test.t_testcoveragenums, " +
-		"\":pct\", " + StringFromInt(pct) + ", " +
-		"\":tests\", " + StringFromInt(tests) + ", " +
-		"\":total\", " + StringFromInt(total) +
+		"\":pct\", " + vx_core.V_stringn_from_intn(pct) + ", " +
+		"\":tests\", " + vx_core.V_stringn_from_intn(tests) + ", " +
+		"\":total\", " + vx_core.V_stringn_from_intn(total) +
 		")"
 	return output
 }
@@ -1353,7 +1354,7 @@ func JsApp(
 				switch contextfunc.pkgname {
 				case "", "vx/core":
 				default:
-					importname := StringFromStringFindReplace(contextfunc.pkgname, "/", "_")
+					importname := vx_core.V_stringn_from_stringn_findn_replacen(contextfunc.pkgname, "/", "_")
 					includetext += "\nimport " + importname + " from \"../src/" + contextfunc.pkgname + ".js\""
 				}
 			}
@@ -1369,7 +1370,7 @@ func JsApp(
 			switch mainfunc.pkgname {
 			case "", "vx/core":
 			default:
-				importname := StringFromStringFindReplace(mainfunc.pkgname, "/", "_")
+				importname := vx_core.V_stringn_from_stringn_findn_replacen(mainfunc.pkgname, "/", "_")
 				includetext += "\nimport " + importname + " from \"../src/" + mainfunc.pkgname + ".js\""
 			}
 			params := ""
@@ -1437,7 +1438,7 @@ func JsAppTest(
 			switch contextfunc.pkgname {
 			case "", "vx/core":
 			default:
-				importname := StringFromStringFindReplace(
+				importname := vx_core.V_stringn_from_stringn_findn_replacen(
 					contextfunc.pkgname, "/", "_")
 				includetext += "\nimport " + importname + " from \"../src/" + contextfunc.pkgname + ".js\"\n"
 			}
@@ -1456,21 +1457,21 @@ func JsAppTest(
 	for _, pkg := range listpackage {
 		iscontinue := true
 		if command.filter == "" {
-		} else if !BooleanFromStringStarts(command.filter, pkg.name) {
+		} else if !vx_core.V_booleann_from_stringn_startsn(command.filter, pkg.name) {
 			iscontinue = false
 		}
 		if iscontinue {
-			importname := StringFromStringFindReplace(pkg.name, "/", "_")
-			importname = StringFromStringFindReplace(importname, "-", "_")
-			importpath := StringFromStringFindReplace(pkg.name, "/", "/")
+			importname := vx_core.V_stringn_from_stringn_findn_replacen(pkg.name, "/", "_")
+			importname = vx_core.V_stringn_from_stringn_findn_replacen(importname, "-", "_")
+			importpath := vx_core.V_stringn_from_stringn_findn_replacen(pkg.name, "/", "/")
 			packageimport := "import " + importname + "_test from \"./" + importpath + "_test.js\""
 			packagetest := importname + "_test.test_package(context)"
 			listimport = append(listimport, packageimport)
 			listtest = append(listtest, packagetest)
 		}
 	}
-	packageimports := StringFromListStringJoin(listimport, "\n")
-	packagetests := StringFromListStringJoin(listtest, ",\n      ")
+	packageimports := vx_core.V_stringn_from_liststringn_joinn(listimport, "\n")
+	packagetests := vx_core.V_stringn_from_liststringn_joinn(listtest, ",\n      ")
 	output := "" +
 		`'strict mode'
 

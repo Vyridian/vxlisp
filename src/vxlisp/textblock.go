@@ -1,5 +1,9 @@
 package vxlisp
 
+import (
+	vx_core "vxlisp/vxlisp/vx/core"
+)
+
 type vxtextblock struct {
 	name          string
 	blocktype     string
@@ -45,18 +49,20 @@ func StringFromTextblockStartEnd(textblock *vxtextblock, startline int, startcha
 	} else {
 		endpos = IntFromStringFindNth(text, "\n", endlinenum) + endchar + 1
 	}
-	output = StringSubstring(text, startpos, endpos)
+	output = vx_core.V_stringn_from_string_startn_endn(text, startpos, endpos)
 	if startchar > 1 {
-		outdent := StringRepeat(" ", startchar-1)
+		outdent := vx_core.V_stringn_from_stringn_repeatn(" ", startchar-1)
 		suboutputs := ListStringFromStringSplitByDelims(output, "/*", "*/")
 		var chgoutputs []string
 		for _, suboutput := range suboutputs {
-			if !BooleanFromStringStarts(suboutput, "/*") {
+			if !vx_core.V_booleann_from_stringn_startsn(
+				suboutput,
+				"/*") {
 				suboutput = StringOutdentLines(suboutput, outdent)
 			}
 			chgoutputs = append(chgoutputs, suboutput)
 		}
-		output = StringFromListStringJoin(chgoutputs, "")
+		output = vx_core.V_stringn_from_liststringn_joinn(chgoutputs, "")
 	}
 	return output
 }
@@ -80,15 +86,15 @@ func StringFromTextblocks(textblocks []*vxtextblock, indent string) string {
 
 func StringFromTextblockIndent(textblock *vxtextblock, indent string) string {
 	text := textblock.text
-	if IntFromStringFind(textblock.text, "\n") >= 0 {
+	if vx_core.V_intn_from_stringn_findn(textblock.text, "\n") >= 0 {
 		text = "\n" + text
 	}
 	output := "" +
 		indent + "(textblock" +
 		"\n" + indent + " :name       " + textblock.name +
 		"\n" + indent + " :blocktype  " + textblock.blocktype +
-		"\n" + indent + " :linenum    " + StringFromInt(textblock.linenum) +
-		"\n" + indent + " :charnum    " + StringFromInt(textblock.charnum) +
+		"\n" + indent + " :linenum    " + vx_core.V_stringn_from_intn(textblock.linenum) +
+		"\n" + indent + " :charnum    " + vx_core.V_stringn_from_intn(textblock.charnum) +
 		"\n" + indent + " :text       \"" + text + "\"" +
 		"\n" + indent + " :textblocks " + StringFromTextblocks(textblock.listtextblock, indent+"  ") +
 		")\n"
@@ -119,8 +125,8 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 	startline := 0
 	startchar := 0
 	text := textblock.text
-	text = StringFromStringFindReplace(text, "\r\n", "\n")
-	text = StringFromStringFindReplace(text, "\r", "\n")
+	text = vx_core.V_stringn_from_stringn_findn_replacen(text, "\r\n", "\n")
+	text = vx_core.V_stringn_from_stringn_findn_replacen(text, "\r", "\n")
 	for _, rune := range text {
 		char := string(rune)
 		switch char {
@@ -203,21 +209,21 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 				if lastchar == "\\" {
 					word += char
 				} else {
-					if IntFromStringFind(word, "\n") >= 0 {
-						indentchars := StringRepeat(" ", quoteindent)
-						wordlines := ListStringFromStringSplit(word, "\n")
+					if vx_core.V_intn_from_stringn_findn(word, "\n") >= 0 {
+						indentchars := vx_core.V_stringn_from_stringn_repeatn(" ", quoteindent)
+						wordlines := vx_core.V_liststringn_from_stringn_splitn(word, "\n")
 						for wordidx, wordline := range wordlines {
 							switch wordidx {
 							case 0:
 								word += wordline
 							default:
 								if quoteindent == 0 {
-								} else if BooleanFromStringStarts(wordline, indentchars) {
+								} else if vx_core.V_booleann_from_stringn_startsn(wordline, indentchars) {
 									wordlines[wordidx] = wordline[len(indentchars):]
 								}
 							}
 						}
-						word = StringFromListStringJoin(wordlines, "\n")
+						word = vx_core.V_stringn_from_liststringn_joinn(wordlines, "\n")
 					}
 					wordtextblock := NewTextblockFromText(word)
 					wordtextblock.blocktype = BLOCKTYPE_QUOTE
@@ -253,7 +259,7 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 				}
 			case "/":
 				word += char
-				if BooleanFromStringStarts(word, "//") {
+				if vx_core.V_booleann_from_stringn_startsn(word, "//") {
 					startline = linenum
 					startchar = charnum - 1
 					word = ""

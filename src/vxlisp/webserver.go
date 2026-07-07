@@ -3,6 +3,7 @@ package vxlisp
 import (
 	"log"
 	"net/http"
+	vx_core "vxlisp/vxlisp/vx/core"
 )
 
 func WebServerStart(project *vxproject, command *vxcommand) {
@@ -12,9 +13,9 @@ func WebServerStart(project *vxproject, command *vxcommand) {
 		port = 8081
 	}
 
-	MsgPrint("Webserver running on http://localhost:" + StringFromInt(port) + "/public")
+	MsgPrint("Webserver running on http://localhost:" + vx_core.V_stringn_from_intn(port) + "/public")
 	http.Handle("/", http.FileServer(http.Dir(path)))
 
-	log.Fatal(http.ListenAndServe(":"+StringFromInt(port), nil))
+	log.Fatal(http.ListenAndServe(":"+vx_core.V_stringn_from_intn(port), nil))
 
 }

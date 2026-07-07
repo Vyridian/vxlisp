@@ -1,5 +1,9 @@
 package vxlisp
 
+import (
+	vx_core "vxlisp/vxlisp/vx/core"
+)
+
 type vxpackage struct {
 	name      string
 	alias     string
@@ -175,7 +179,7 @@ func ListPackageSortDependencies(
 				pkgname := pkg.name
 				listpkgname = append(listpkgname, pkgname)
 			}
-			pkgnames := StringFromListStringJoin(listpkgname, ", ")
+			pkgnames := vx_core.V_stringn_from_liststringn_joinn(listpkgname, ", ")
 			msg := NewMsg("Library dependencies cannot be resolved for packages: " + pkgnames)
 			msgblock = MsgblockAddError(msgblock, msg)
 		} else {
@@ -358,7 +362,7 @@ func PackageFromTextblock(
 								switch wordtextblock.blocktype {
 								case "//":
 								default:
-									if BooleanFromStringStarts(prop, ":") {
+									if vx_core.V_booleann_from_stringn_startsn(prop, ":") {
 										switch prop {
 										case ":alias", ":doc", ":libs":
 											lastprop = prop
@@ -389,7 +393,7 @@ func PackageFromTextblock(
 							}
 						}
 						if pkg.alias == "" {
-							pkg.alias = StringFromStringFindReplace(pkg.name, "/", "_")
+							pkg.alias = vx_core.V_stringn_from_stringn_findn_replacen(pkg.name, "/", "_")
 						}
 
 					}
@@ -439,7 +443,7 @@ func PackagePathNameFromName(
 	pkgname string) (string, string) {
 	path := ""
 	name := ""
-	ipos := IntFromStringFindLast(pkgname, "/")
+	ipos := vx_core.V_intn_from_stringn_findlastn(pkgname, "/")
 	if ipos > 0 {
 		path = pkgname[0 : ipos+1]
 		name = pkgname[ipos+1:]
@@ -461,7 +465,7 @@ func StringFromListPackageIndent(
 		output := ""
 		lineindent := ""
 		if indent > 0 {
-			lineindent = "\n" + StringRepeat(" ", indent)
+			lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 		}
 		output = lineindent + "(packagelist"
 		for _, pkg := range listpackage {
@@ -482,7 +486,7 @@ func StringFromPackageIndent(
 	indent int) string {
 	lineindent := ""
 	if indent > 0 {
-		lineindent = "\n" + StringRepeat(" ", indent)
+		lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 	}
 	output := "" +
 		lineindent + "(package" +
@@ -514,7 +518,9 @@ func TypeFromListPackage(listpkg []*vxpackage, pkgname string, typename string) 
 	return output, found
 }
 
-func TypeFromPackage(pkg *vxpackage, typename string) (*vxtype, bool) {
+func TypeFromPackage(
+	pkg *vxpackage,
+	typename string) (*vxtype, bool) {
 	found := false
 	var output *vxtype
 	maptype := MapTypeFromListType(pkg.listtype)

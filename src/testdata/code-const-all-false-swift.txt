@@ -1,0 +1,10 @@
+
+  // v_false_register - mutating
+  public static func v_false_register(
+  ) -> Vx_Core.Type_any {
+    var value : Vx_Core.Type_boolean = c_false
+    value.type_any.type_const = Vx_Core.v_const_new_from_namen("vx/core/false")
+    value.booleann = false
+    return value.type_any
+  }
+  public static let c_false : Vx_Core.Type_boolean = Vx_Core.v_boolean_constructor()

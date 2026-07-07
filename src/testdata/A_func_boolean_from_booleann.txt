@@ -1,0 +1,22 @@
+
+// :go
+// V_boolean_from_booleann
+func V_boolean_from_booleann(
+ booleann bool) *Type_boolean {
+ var output *Type_boolean = C_false
+ if booleann {
+  output = C_true
+ }
+ return output
+}
+// :swift
+// v_boolean_from_booleann
+public static func v_boolean_from_booleann(
+  _ booleann : Bool
+) -> Vx_Core.Type_boolean {
+  var output : Vx_Core.Type_boolean = Vx_Core.c_false
+  if booleann {
+    output = Vx_Core.c_true
+  }
+  return output
+}

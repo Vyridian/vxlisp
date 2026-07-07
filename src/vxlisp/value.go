@@ -1,5 +1,9 @@
 package vxlisp
 
+import (
+	vx_core "vxlisp/vxlisp/vx/core"
+)
+
 type vxvalue struct {
 	code        string
 	name        string
@@ -8,7 +12,7 @@ type vxvalue struct {
 	textblock   *vxtextblock
 	vxtype      *vxtype
 	generictype *vxtype
-	native      interface{}
+	native      any
 }
 
 var emptyvalue = NewValue()
@@ -178,7 +182,7 @@ func ListValueValidateTestFuncs(
 
 	var listtestvalue []vxvalue
 	for idx, value := range listvalue {
-		subpath := path + "/test" + StringFromInt(idx+1)
+		subpath := path + "/test" + vx_core.V_stringn_from_intn(idx+1)
 		switch value.code {
 		case ":func":
 			fnc := FuncFromValue(value)
@@ -206,7 +210,7 @@ func StringFromListValue(listvalue []vxvalue) string {
 func StringFromListValueIndent(listvalue []vxvalue, indent int) string {
 	lineindent := ""
 	if indent > 0 {
-		lineindent = "\n" + StringRepeat(" ", indent)
+		lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 	}
 	output := lineindent + "(valuelist"
 	for _, value := range listvalue {
@@ -224,7 +228,7 @@ func StringFromValueIndent(value vxvalue, indent int) string {
 	initindent := ""
 	lineindent := "\n"
 	if indent > 0 {
-		sindent := StringRepeat(" ", indent)
+		sindent := vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 		lineindent += sindent
 		initindent = lineindent
 	}
@@ -409,8 +413,8 @@ func ValueFromTextblock(
 				switch idx {
 				case 0:
 					fncname := clausepart
-					if BooleanFromStringStarts(fncname, ":") && (clausetextblock.blocktype != "\"") {
-						keyname := StringSubstring(fncname, 1, len(fncname))
+					if vx_core.V_booleann_from_stringn_startsn(fncname, ":") && (clausetextblock.blocktype != "\"") {
+						keyname := vx_core.V_stringn_from_string_startn_endn(fncname, 1, len(fncname))
 						if BooleanIsIntFromString(keyname) {
 							fncname = "any<-list"
 							arg := NewArg(":unknown")
@@ -424,7 +428,7 @@ func ValueFromTextblock(
 						}
 					} else if fncname == "/" {
 					} else {
-						pos := IntFromStringFindLast(fncname, "/")
+						pos := vx_core.V_intn_from_stringn_findlastn(fncname, "/")
 						if pos >= 0 {
 							pkgcode := fncname[0:pos]
 							pkgpath := LibraryPathFromPackage(pkg, pkgcode)
@@ -540,14 +544,14 @@ func ValueFromTextblock(
 			output = NewValueFromFunc(fnc)
 		}
 	case "\"":
-		text = StringFromStringFindReplace(text, "“", "\"")
-		text = StringFromStringFindReplace(text, "”", "\"")
-		text = StringFromStringFindReplace(text, "\\\"", "\"")
+		text = vx_core.V_stringn_from_stringn_findn_replacen(text, "“", "\"")
+		text = vx_core.V_stringn_from_stringn_findn_replacen(text, "”", "\"")
+		text = vx_core.V_stringn_from_stringn_findn_replacen(text, "\\\"", "\"")
 		output = NewValueFromString("\"" + text + "\"")
 	case "`":
 		output = NewValueFromString("\"" + text + "\"")
 	case "text":
-		if BooleanFromStringStarts(text, ":") {
+		if vx_core.V_booleann_from_stringn_startsn(text, ":") {
 			output = NewValueFromString(text)
 		} else if text == "infinity" {
 			output = NewValueFromUnknown(text)
@@ -607,7 +611,7 @@ func ValueLink(
 			pkgname := value.pkg
 			valname := value.name
 			if pkgname == "" {
-				ipos := IntFromStringFindLast(valname, "/")
+				ipos := vx_core.V_intn_from_stringn_findlastn(valname, "/")
 				if ipos < 0 {
 				} else if ipos == (len(valname) - 1) {
 				} else {
@@ -641,7 +645,7 @@ func ValueLink(
 		fnc := FuncFromValue(value)
 		subpath += "/" + fnc.name
 		if fnc.idx > 0 {
-			subpath += "/" + StringFromInt(fnc.idx)
+			subpath += "/" + vx_core.V_stringn_from_intn(fnc.idx)
 		}
 		lookuparg, ok := ArgFromListScope(listscope, fnc.name)
 		if ok {
@@ -720,7 +724,9 @@ func ValueLink(
 					valuearg2 := fnc.listarg[1].value
 					if valuearg2.code == "string" {
 						keyarg2 := StringValueFromValue(valuearg2)
-						if !BooleanFromStringStarts(keyarg2, ":") {
+						if !vx_core.V_booleann_from_stringn_startsn(
+							keyarg2,
+							":") {
 							//msg := NewMsgFromTextblock(textblock, subpath, "any<-struct property must be a :keyword. (type "+typearg1.name+" "+keyarg2+")")
 							//msgblock = MsgblockAddError(msgblock, msg)
 						} else {

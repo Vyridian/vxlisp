@@ -2,6 +2,7 @@ package vxlisp
 
 import (
 	"strings"
+	vx_core "vxlisp/vxlisp/vx/core"
 )
 
 type vxlang struct {
@@ -22,6 +23,7 @@ type vxlang struct {
 	forcemulti    bool
 	argjoin       string
 	genericcount  int
+	version       int
 	serror        string
 	fileblacklist []string
 	filewhitelist []string
@@ -63,10 +65,10 @@ func LangFilesFromProjectCmd(
 	for _, pkg := range pkgs {
 		iscontinue := true
 		if len(lang.filewhitelist) > 0 {
-			iscontinue = BooleanFromListStringContains(lang.filewhitelist, pkg.name)
+			iscontinue = vx_core.V_booleann_from_liststringn_containsn(lang.filewhitelist, pkg.name)
 		}
 		if len(lang.fileblacklist) > 0 {
-			iscontinue = !BooleanFromListStringContains(lang.fileblacklist, pkg.name)
+			iscontinue = !vx_core.V_booleann_from_liststringn_containsn(lang.fileblacklist, pkg.name)
 		}
 		if iscontinue {
 			subprefix, subdomainpath := LangPackageSubPrefixSubDomainPath(
@@ -78,7 +80,7 @@ func LangFilesFromProjectCmd(
 				pkgpath = pkgname[0:pos]
 				pkgname = pkgname[pos+1:]
 			}
-			pkgname = StringUCaseFirst(pkgname)
+			pkgname = vx_core.V_stringn_uppercasefirst(pkgname)
 			pkgpath = LangNativePkgpath(lang, pkgpath)
 			switch command.code {
 			case ":source":
@@ -128,7 +130,7 @@ func LangForList(
 	typ *vxtype,
 	listvar string,
 	body string) string {
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	header := LangForListHeader(lang, indent,
 		forvar, typ, listvar)
 	footer := sindent + "}"
@@ -145,13 +147,13 @@ func LangFromName(
 	if output == "extends" {
 		output = "extend"
 	}
-	output = StringFromStringFindReplace(output, "->", "_to_")
-	output = StringFromStringFindReplace(output, "<-", "_from_")
-	output = StringFromStringFindReplace(output, "<", "lt")
-	output = StringFromStringFindReplace(output, ">", "gt")
-	output = StringFromStringFindReplace(output, "?", "is")
-	output = StringFromStringFindReplace(output, "-", "_")
-	output = StringFromStringFindReplace(output, "/", "_")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "->", "_to_")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "<-", "_from_")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "<", "lt")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, ">", "gt")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "?", "is")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "-", "_")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "/", "_")
 	return output
 }
 
@@ -160,82 +162,88 @@ func LangFromPackage(
 	pkg *vxpackage,
 	project *vxproject,
 	pkgprefix string) (string, *vxmsgblock) {
+	var output string = ""
 	msgblock := NewMsgBlock("LangFromPackage")
-	pkgpath, pkgname := LangPackagePathFromPrefixName(
-		lang, pkgprefix, pkg.name)
-	specialcode := project.mapnative[pkg.name+"_"+lang.name+".txt"]
-	if specialcode != "" {
-		specialcode += "\n"
-	}
-	typkeys := ListKeyFromMapType(pkg.maptype)
-	typetexts := ""
-	packageline := LangNativePackageLine(
-		lang, pkg.name, pkgpath)
-	namespaceopen, namespaceclose := LangNamespaceOpenClose(
-		lang, pkgname, pkgpath)
-	packagestatic := "" +
-		LangVarCollection(lang, 2, rawmaptype, anytype,
-			"maptype", ":new") +
-		LangVarCollection(lang, 2, rawmaptype, anytype,
-			"mapconst", ":new") +
-		LangVarCollection(lang, 2, rawmaptype, functype,
-			"mapfunc", ":new")
-	for _, typid := range typkeys {
-		typ := pkg.maptype[typid]
-		typetext, msgs := LangType(lang, typ)
-		msgblock = MsgblockAddBlock(msgblock, msgs)
-		typetexts += typetext
-		packagestatic += "" +
-			"\n    maptype.put(\"" + typ.name + "\", " + LangTypeT(lang, typ) + ")" + lang.lineend
-	}
-	cnstkeys := ListKeyFromMapConst(pkg.mapconst)
-	consttexts := ""
-	staticopen, staticclose := LangNativePackageStaticOpenClose(lang)
-	for _, cnstid := range cnstkeys {
-		cnst := pkg.mapconst[cnstid]
-		consttext, constlate, msgs := LangConst(lang, cnst, project, pkg)
-		msgblock = MsgblockAddBlock(msgblock, msgs)
-		consttexts += consttext
-		staticopen += constlate
-		packagestatic += "" +
-			"\n    mapconst.put(\"" + cnst.name + "\", " + LangConstC(lang, cnst) + ")" + lang.lineend
-	}
-	fnckeys := ListKeyFromMapFunc(pkg.mapfunc)
-	functexts := ""
-	for _, fncid := range fnckeys {
-		fncs := pkg.mapfunc[fncid]
-		for _, fnc := range fncs {
-			fnctext, msgs := LangFunc(lang, fnc)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-			functexts += fnctext
-			packagestatic += "" +
-				"\n    mapfunc.put(\"" + fnc.name + LangIndexFromFunc(fnc) + "\", " + LangFuncT(lang, fnc) + ")" + lang.lineend
+	if lang.version == 2 {
+		output, msgblock = lang_from_package(
+			lang, pkg, project, pkgprefix)
+	} else {
+		pkgpath, pkgname := LangPackagePathFromPrefixName(
+			lang, pkgprefix, pkg.name)
+		specialcode := project.mapnative[pkg.name+"_"+lang.name+".txt"]
+		if specialcode != "" {
+			specialcode += "\n"
 		}
+		typkeys := ListKeyFromMapType(pkg.maptype)
+		typetexts := ""
+		packageline := LangNativePackageLine(
+			lang, pkg.name, pkgpath)
+		namespaceopen, namespaceclose := LangNamespaceOpenClose(
+			lang, pkgname, pkgpath)
+		packagestatic := "" +
+			LangVarCollection(lang, 2, rawmaptype, anytype,
+				"maptype", ":new") +
+			LangVarCollection(lang, 2, rawmaptype, anytype,
+				"mapconst", ":new") +
+			LangVarCollection(lang, 2, rawmaptype, functype,
+				"mapfunc", ":new")
+		for _, typid := range typkeys {
+			typ := pkg.maptype[typid]
+			typetext, msgs := LangType(lang, typ)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+			typetexts += typetext
+			packagestatic += "" +
+				"\n    maptype.put(\"" + typ.name + "\", " + LangTypeT(lang, typ) + ")" + lang.lineend
+		}
+		cnstkeys := ListKeyFromMapConst(pkg.mapconst)
+		consttexts := ""
+		staticopen, staticclose := LangNativePackageStaticOpenClose(lang)
+		for _, cnstid := range cnstkeys {
+			cnst := pkg.mapconst[cnstid]
+			consttext, constlate, msgs := LangConst(lang, cnst, project, pkg)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+			consttexts += consttext
+			staticopen += constlate
+			packagestatic += "" +
+				"\n    mapconst.put(\"" + cnst.name + "\", " + LangConstC(lang, cnst) + ")" + lang.lineend
+		}
+		fnckeys := ListKeyFromMapFunc(pkg.mapfunc)
+		functexts := ""
+		for _, fncid := range fnckeys {
+			fncs := pkg.mapfunc[fncid]
+			for _, fnc := range fncs {
+				fnctext, msgs := LangFunc(lang, fnc)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+				functexts += fnctext
+				packagestatic += "" +
+					"\n    mapfunc.put(\"" + fnc.name + LangIndexFromFunc(fnc) + "\", " + LangFuncT(lang, fnc) + ")" + lang.lineend
+			}
+		}
+		packagestatic += "" +
+			"\n    " + LangPkgNameDot(lang, "vx/core") + "vx_global_package_set(" +
+			"\n      \"" + pkg.name + "\"," +
+			"\n      " + LangFuncCallVx(lang, 3, func_mapimmutable, "maptype") + "," +
+			"\n      " + LangFuncCallVx(lang, 3, func_mapimmutable, "mapconst") + "," +
+			"\n      " + LangFuncCallVx(lang, 3, func_mapimmutable, "mapfunc") +
+			"\n    )" + lang.lineend
+		staticopen += packagestatic
+		body := "" +
+			specialcode +
+			typetexts +
+			consttexts +
+			functexts +
+			staticopen +
+			staticclose
+			//		emptytypes
+		imports := LangPackageImports(
+			lang, pkg, pkgprefix, body, false)
+		output = "" +
+			packageline +
+			imports +
+			namespaceopen +
+			body +
+			namespaceclose
 	}
-	packagestatic += "" +
-		"\n    " + LangPkgNameDot(lang, "vx/core") + "vx_global_package_set(" +
-		"\n      \"" + pkg.name + "\"," +
-		"\n      " + LangFuncCallVx(lang, 3, func_mapimmutable, "maptype") + "," +
-		"\n      " + LangFuncCallVx(lang, 3, func_mapimmutable, "mapconst") + "," +
-		"\n      " + LangFuncCallVx(lang, 3, func_mapimmutable, "mapfunc") +
-		"\n    )" + lang.lineend
-	staticopen += packagestatic
-	body := "" +
-		specialcode +
-		typetexts +
-		consttexts +
-		functexts +
-		staticopen +
-		staticclose
-		//		emptytypes
-	imports := LangPackageImports(
-		lang, pkg, pkgprefix, body, false)
-	output := "" +
-		packageline +
-		imports +
-		namespaceopen +
-		body +
-		namespaceclose
 	return output, msgblock
 }
 
@@ -295,7 +303,7 @@ func LangFromValue(
 	case "string":
 		valstr = StringValueFromValue(value)
 		if valstr == "" {
-		} else if BooleanFromStringStarts(valstr, ":") {
+		} else if vx_core.V_booleann_from_stringn_startsn(valstr, ":") {
 			output = valstr
 		} else if BooleanFromStringStartsEnds(valstr, "\"", "\"") {
 			valstr = valstr[1 : len(valstr)-1]
@@ -344,7 +352,7 @@ func LangFromValue(
 func LangArgGenericFromType(
 	lang *vxlang,
 	typ *vxtype) vxarg {
-	typename := StringFromStringFindReplace(
+	typename := vx_core.V_stringn_from_stringn_findn_replacen(
 		typ.name, "-", "_")
 	output := NewArg("generic_" + typename)
 	output.vxtype = typ
@@ -408,11 +416,11 @@ func LangLambdaFromArgList(
 			}
 		}
 	}
-	lambdanames := StringFromListStringJoin(lambdaargnames, ", ")
-	lambdatext := StringFromListStringJoin(lambdatypenames, ", ")
+	lambdanames := vx_core.V_stringn_from_liststringn_joinn(lambdaargnames, ", ")
+	lambdatext := vx_core.V_stringn_from_liststringn_joinn(lambdatypenames, ", ")
 	lambdavartext := ""
 	if len(lambdavars) > 0 {
-		lambdavartext = StringFromListStringJoin(lambdavars, "")
+		lambdavartext = vx_core.V_stringn_from_liststringn_joinn(lambdavars, "")
 	}
 	return lambdatext, lambdavartext, lambdanames
 }
@@ -466,11 +474,11 @@ func LangTypeCoverageNumsValNew(
 				LangTypeT(lang, testcoveragenumstype)},
 			[]string{
 				"\":pct\"",
-				StringFromInt(pct),
+				vx_core.V_stringn_from_intn(pct),
 				"\":tests\"",
-				StringFromInt(tests),
+				vx_core.V_stringn_from_intn(tests),
 				"\":total\"",
-				StringFromInt(total)})
+				vx_core.V_stringn_from_intn(total)})
 }
 
 func LangWriteFromProjectCmd(
@@ -914,7 +922,9 @@ func LangApp(
 		"output", "\"\"")
 	outputclose := LangVarSet(lang, 3,
 		"output",
-		"mainstring.vx_string()")
+		LangFuncCallMethod(lang, 3,
+			"mainstring",
+			"vx_string"))
 	doc := "" +
 		"/**" +
 		"\n * App" +

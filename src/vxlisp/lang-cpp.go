@@ -2,6 +2,7 @@ package vxlisp
 
 import (
 	"strings"
+	vx_core "vxlisp/vxlisp/vx/core"
 )
 
 var issharedpointer = false
@@ -37,7 +38,7 @@ func ListCaptureFromFunc(
 				listsubsubarg := ListArgFromValue(subargvalue)
 				for _, subsubarg := range listsubsubarg {
 					inner := LangFromName(subsubarg.alias)
-					if !BooleanFromListStringContains(listlocalarg, inner) {
+					if !vx_core.V_booleann_from_liststringn_containsn(listlocalarg, inner) {
 						listlocalarg = append(listlocalarg, inner)
 					}
 				}
@@ -45,7 +46,7 @@ func ListCaptureFromFunc(
 				var listmore []string
 				listmore = ListCaptureFromValue(arg.value, listlocalarg, subpath)
 				for _, outer := range listmore {
-					if !BooleanFromListStringContains(output, outer) {
+					if !vx_core.V_booleann_from_liststringn_containsn(output, outer) {
 						output = append(output, outer)
 					}
 				}
@@ -65,7 +66,7 @@ func ListCaptureFromFunc(
 				listsubarg := ListArgFromValue(argvalue)
 				for _, subarg := range listsubarg {
 					inner := LangFromName(subarg.alias)
-					if !BooleanFromListStringContains(listlocalarg, inner) {
+					if !vx_core.V_booleann_from_liststringn_containsn(listlocalarg, inner) {
 						listlocalarg = append(listlocalarg, inner)
 					}
 				}
@@ -73,7 +74,7 @@ func ListCaptureFromFunc(
 					subargvalue := subarg.value
 					listmore := ListCaptureFromValue(subargvalue, listlocalarg, subpath)
 					for _, outer := range listmore {
-						if !BooleanFromListStringContains(output, outer) {
+						if !vx_core.V_booleann_from_liststringn_containsn(output, outer) {
 							output = append(output, outer)
 						}
 					}
@@ -84,13 +85,13 @@ func ListCaptureFromFunc(
 				case ":arg":
 					subarg := ArgFromValue(argvalue)
 					outer := LangFromName(subarg.alias)
-					if !BooleanFromListStringContains(listlocalarg, outer) {
+					if !vx_core.V_booleann_from_liststringn_containsn(listlocalarg, outer) {
 						listlocalarg = append(listlocalarg, outer)
 					}
 				case ":func":
 					listmore := ListCaptureFromValue(argvalue, listlocalarg, subpath)
 					for _, outer := range listmore {
-						if !BooleanFromListStringContains(output, outer) {
+						if !vx_core.V_booleann_from_liststringn_containsn(output, outer) {
 							output = append(output, outer)
 						}
 					}
@@ -99,13 +100,15 @@ func ListCaptureFromFunc(
 		}
 	case "vx/core/native":
 		nativetext := StringFromNativeFunc(fnc, ":cpp")
-		istartpos := IntFromStringFind(nativetext, "// :capture ")
+		istartpos := vx_core.V_intn_from_stringn_findn(nativetext, "// :capture ")
 		if istartpos >= 0 {
 			iendpos := IntFromStringFindStart(nativetext, "\n", istartpos)
 			if iendpos >= 0 {
 				capturetext := nativetext[istartpos+12 : iendpos]
 				capturetext = StringTrim(capturetext)
-				capturetexts := ListStringFromStringSplit(capturetext, ", ")
+				capturetexts := vx_core.V_liststringn_from_stringn_splitn(
+					capturetext,
+					", ")
 				output = append(output, capturetexts...)
 			}
 		}
@@ -124,7 +127,7 @@ func ListCaptureFromFunc(
 			value := arg.value
 			listmore := ListCaptureFromValue(value, listinnerarg, subpath)
 			for _, outer := range listmore {
-				if !BooleanFromListStringContains(output, outer) {
+				if !vx_core.V_booleann_from_liststringn_containsn(output, outer) {
 					output = append(output, outer)
 				}
 			}
@@ -146,8 +149,8 @@ func ListCaptureFromValue(
 			outer = arg.name
 		}
 		outer = LangFromName(outer)
-		if BooleanFromListStringContains(listinnerarg, outer) {
-		} else if !BooleanFromListStringContains(output, outer) {
+		if vx_core.V_booleann_from_liststringn_containsn(listinnerarg, outer) {
+		} else if !vx_core.V_booleann_from_liststringn_containsn(output, outer) {
 			output = append(output, outer)
 		}
 	case ":func":
@@ -158,8 +161,8 @@ func ListCaptureFromValue(
 		}
 		listmore := ListCaptureFromFunc(fnc, listinnerarg, subpath)
 		for _, more := range listmore {
-			if BooleanFromListStringContains(listinnerarg, more) {
-			} else if BooleanFromListStringContains(output, more) {
+			if vx_core.V_booleann_from_liststringn_containsn(listinnerarg, more) {
+			} else if vx_core.V_booleann_from_liststringn_containsn(output, more) {
 			} else {
 				output = append(output, more)
 			}
@@ -175,7 +178,9 @@ func CppAbstractInterfaceFromInterface(
 		"\n    Abstract_" + typename + "() {};" +
 		"\n    virtual ~Abstract_" + typename + "() = 0;"
 	classinterfaces := ""
-	listinterfaces := ListStringFromStringSplit(interfaces, "\n")
+	listinterfaces := vx_core.V_liststringn_from_stringn_splitn(
+		interfaces,
+		"\n")
 	partial := ""
 	for _, item := range listinterfaces {
 		isfunc := false
@@ -199,15 +204,15 @@ func CppAbstractInterfaceFromInterface(
 				isfunc = true
 			}
 			if isfunc {
-				isstatic := BooleanFromStringContains(item, " static ")
+				isstatic := vx_core.V_booleann_from_stringn_containsn(item, " static ")
 				if isstatic {
 					classinterfaces += "\n" + item
 				} else {
-					abstractinterface := StringFromStringFindReplace(item, ";", " = 0;")
+					abstractinterface := vx_core.V_stringn_from_stringn_findn_replacen(item, ";", " = 0;")
 					abstractinterface = StringTrim(abstractinterface)
 					abstractinterfaces += "\n    virtual " + abstractinterface
 					classinterface := StringTrim(item)
-					classinterface = StringFromStringFindReplace(classinterface, ";", " override;")
+					classinterface = vx_core.V_stringn_from_stringn_findn_replacen(classinterface, ";", " override;")
 					classinterfaces += "\n    virtual " + classinterface
 				}
 			} else if item != "" {
@@ -231,11 +236,11 @@ func CppArgMapFromListArg(
 			listtext = append(
 				listtext, argtext)
 		}
-		lineindent := "\n" + StringRepeat(
+		lineindent := "\n" + vx_core.V_stringn_from_stringn_repeatn(
 			"  ", indent)
 		output = "vx_core::vx_argmap_from_listarg({" +
 			lineindent + "  " +
-			StringFromListStringJoin(listtext, ","+lineindent+"  ") +
+			vx_core.V_stringn_from_liststringn_joinn(listtext, ","+lineindent+"  ") +
 			lineindent + "})"
 	}
 	return output
@@ -247,7 +252,7 @@ func CppCaptureFromFunc(
 	var listinnerarg []string
 	var listcapturetext []string = ListCaptureFromFunc(
 		fnc, listinnerarg, path)
-	output := StringFromListStringJoin(
+	output := vx_core.V_stringn_from_liststringn_joinn(
 		listcapturetext, ", ")
 	return output
 }
@@ -258,7 +263,7 @@ func CppCaptureFromValue(
 	var listinnerarg []string
 	var listcapturetext []string = ListCaptureFromValue(
 		value, listinnerarg, path)
-	output := StringFromListStringJoin(
+	output := vx_core.V_stringn_from_liststringn_joinn(
 		listcapturetext, ", ")
 	return output
 }
@@ -269,7 +274,7 @@ func CppCaptureFromValueListInner(
 	path string) string {
 	var listcapturetext []string = ListCaptureFromValue(
 		value, listinnerarg, path)
-	output := StringFromListStringJoin(
+	output := vx_core.V_stringn_from_liststringn_joinn(
 		listcapturetext, ", ")
 	return output
 }
@@ -401,7 +406,7 @@ func CppFilesFromProjectCmd(
 			pkgpath = pkgname[0:pos]
 			pkgname = pkgname[pos+1:]
 		}
-		pkgname = StringFromStringFindReplace(
+		pkgname = vx_core.V_stringn_from_stringn_findn_replacen(
 			pkgname, "/", "_")
 		switch command.code {
 		case ":source":
@@ -444,7 +449,7 @@ func CppFromArg(
 	lang *vxlang,
 	arg vxarg,
 	indent int) string {
-	lineindent := "\n" + StringRepeat("  ", indent)
+	lineindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	output := "" +
 		"vx_core::vx_new_arg(" +
 		lineindent + "  \"" + arg.name + "\", // name" +
@@ -775,7 +780,7 @@ func CppBodyFromFunc(
 	if fnc.async {
 		functypetext = "vx_core::vx_Type_async"
 	}
-	simpleargtext := StringFromListStringJoin(
+	simpleargtext := vx_core.V_stringn_from_liststringn_joinn(
 		listsimplearg, ", ")
 	classname := "Class_" + funcname
 	fullabstractname := pkgname + "::Abstract_" + funcname
@@ -818,7 +823,7 @@ func CppBodyFromFunc(
 			"\n    " + returntype + " " + classname + "::vx_" + funcname + "(" + simpleargtext + ") const {" +
 			"\n      " + returntype + " output = " + returne + ";" +
 			"\n      if (fn) {" +
-			"\n        output = fn(" + StringFromListStringJoin(listargname, ", ") + ");" +
+			"\n        output = fn(" + vx_core.V_stringn_from_liststringn_joinn(listargname, ", ") + ");" +
 			"\n      }" +
 			"\n      return output;" +
 			"\n    }" +
@@ -842,7 +847,7 @@ func CppBodyFromFunc(
 			"\n    vx_core::vx_Type_async " + classname + "::vx_" + funcname + "(" + simpleargtext + ") const {" +
 			"\n      vx_core::vx_Type_async output = NULL;" +
 			"\n      if (fn) {" +
-			"\n        output = fn(" + StringFromListStringJoin(listargname, ", ") + ");" +
+			"\n        output = fn(" + vx_core.V_stringn_from_liststringn_joinn(listargname, ", ") + ");" +
 			"\n        output->type = generic_any_1;" +
 			"\n      } else {" +
 			"\n        output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));" +
@@ -867,7 +872,7 @@ func CppBodyFromFunc(
 			"\n    " + returntype + " " + classname + "::vx_" + funcname + "(" + simpleargtext + ") const {" +
 			"\n      " + returntype + " output = " + returnetype + ";" +
 			"\n      if (fn) {" +
-			"\n        output = fn(" + StringFromListStringJoin(listargname, ", ") + ");" +
+			"\n        output = fn(" + vx_core.V_stringn_from_liststringn_joinn(listargname, ", ") + ");" +
 			"\n      }" +
 			"\n      return output;" +
 			"\n    }" +
@@ -903,7 +908,7 @@ func CppBodyFromFunc(
 				}
 				listsubargname = append(
 					listsubargname, "inputval")
-				subargnames := StringFromListStringJoin(
+				subargnames := vx_core.V_stringn_from_liststringn_joinn(
 					listsubargname, ", ")
 				if fnc.async {
 					asyncbody := ""
@@ -962,8 +967,9 @@ func CppBodyFromFunc(
 		lang, fnc.value, fnc.pkgname, fnc, 0, true, false, path)
 	msgblock = MsgblockAddBlock(
 		msgblock, msgs)
-	valuetexts := ListStringFromStringSplit(
-		valuetext, "\n")
+	valuetexts := vx_core.V_liststringn_from_stringn_splitn(
+		valuetext,
+		"\n")
 	var chgvaluetexts []string
 	chgvaluetexts = append(
 		chgvaluetexts, valuetexts...)
@@ -992,10 +998,10 @@ func CppBodyFromFunc(
 			lineindent + "}"
 	}
 	lineindent = "\n" + indent
-	valuetext = StringFromListStringJoin(
+	valuetext = vx_core.V_stringn_from_liststringn_joinn(
 		chgvaluetexts, "\n")
-	if IntFromStringFind(valuetext, "output ") >= 0 {
-	} else if IntFromStringFind(valuetext, "output->") >= 0 {
+	if vx_core.V_intn_from_stringn_findn(valuetext, "output ") >= 0 {
+	} else if vx_core.V_intn_from_stringn_findn(valuetext, "output->") >= 0 {
 	} else if fnc.vxtype.name == "none" {
 	} else if valuetext == "" {
 	} else {
@@ -1020,40 +1026,40 @@ func CppBodyFromFunc(
 		//if returntype != "void" {
 		returnvalue += "\n      return "
 		//}
-		returnvalue += pkgname + "::f_" + funcname + "(" + StringFromListStringJoin(listargname, ", ") + ");"
+		returnvalue += pkgname + "::f_" + funcname + "(" + vx_core.V_stringn_from_liststringn_joinn(listargname, ", ") + ");"
 	} else if fnc.async {
 		returnvalue += "" +
 			"\n      vx_core::vx_Type_async output;" +
 			"\n      if (!fn) {" +
 			"\n        output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));" +
 			"\n      } else {" +
-			"\n        output = fn(" + StringFromListStringJoin(listargname, ", ") + ");" +
+			"\n        output = fn(" + vx_core.V_stringn_from_liststringn_joinn(listargname, ", ") + ");" +
 			"\n      }" +
 			"\n      return output;"
 	} else {
-		if BooleanFromStringStarts(fnc.name, "boolean<-") {
+		if vx_core.V_booleann_from_stringn_startsn(fnc.name, "boolean<-") {
 			returnvalue += "" +
 				"\n      vx_core::Type_boolean output = vx_core::c_false;" +
 				"\n      if (fn) {" +
-				"\n        output = vx_core::vx_any_from_any(vx_core::t_boolean, fn(" + StringFromListStringJoin(listargname, ", ") + "));" +
+				"\n        output = vx_core::vx_any_from_any(vx_core::t_boolean, fn(" + vx_core.V_stringn_from_liststringn_joinn(listargname, ", ") + "));" +
 				"\n      }"
-		} else if BooleanFromStringStarts(fnc.name, "int<-") {
+		} else if vx_core.V_booleann_from_stringn_startsn(fnc.name, "int<-") {
 			returnvalue += "" +
 				"\n      vx_core::Type_int output = vx_core::e_int;" +
 				"\n      if (fn) {" +
-				"\n        output = vx_core::vx_any_from_any(vx_core::t_int, fn(" + StringFromListStringJoin(listargname, ", ") + "));" +
+				"\n        output = vx_core::vx_any_from_any(vx_core::t_int, fn(" + vx_core.V_stringn_from_liststringn_joinn(listargname, ", ") + "));" +
 				"\n      }"
-		} else if BooleanFromStringStarts(fnc.name, "string<-") {
+		} else if vx_core.V_booleann_from_stringn_startsn(fnc.name, "string<-") {
 			returnvalue += "" +
 				"\n      vx_core::Type_string output = vx_core::e_string;" +
 				"\n      if (fn) {" +
-				"\n        output = vx_core::vx_any_from_any(vx_core::t_string, fn(" + StringFromListStringJoin(listargname, ", ") + "));" +
+				"\n        output = vx_core::vx_any_from_any(vx_core::t_string, fn(" + vx_core.V_stringn_from_liststringn_joinn(listargname, ", ") + "));" +
 				"\n      }"
 		} else {
 			returnvalue += "" +
 				"\n      " + CppPointerDefFromClassName("T") + " output = vx_core::vx_empty(generic_any_1);" +
 				"\n      if (fn) {" +
-				"\n        output = vx_core::vx_any_from_any(generic_any_1, fn(" + StringFromListStringJoin(listargname, ", ") + "));" +
+				"\n        output = vx_core::vx_any_from_any(generic_any_1, fn(" + vx_core.V_stringn_from_liststringn_joinn(listargname, ", ") + "));" +
 				"\n      }"
 		}
 		//		if returntype != "void" {
@@ -1067,23 +1073,23 @@ func CppBodyFromFunc(
 	case 0:
 	case 1:
 		reserve = "" +
-			lineindent + "vx_core::vx_reserve(" + StringFromListStringJoin(listreleasename, ", ") + ");"
+			lineindent + "vx_core::vx_reserve(" + vx_core.V_stringn_from_liststringn_joinn(listreleasename, ", ") + ");"
 		if fnc.async || fnc.vxtype.name == "none" {
 			release = "" +
-				lineindent + "vx_core::vx_release_one(" + StringFromListStringJoin(listreleasename, ", ") + ");"
+				lineindent + "vx_core::vx_release_one(" + vx_core.V_stringn_from_liststringn_joinn(listreleasename, ", ") + ");"
 		} else {
 			release = "" +
-				lineindent + "vx_core::vx_release_one_except(" + StringFromListStringJoin(listreleasename, ", ") + ", output);"
+				lineindent + "vx_core::vx_release_one_except(" + vx_core.V_stringn_from_liststringn_joinn(listreleasename, ", ") + ", output);"
 		}
 	default:
 		reserve = "" +
-			lineindent + "vx_core::vx_reserve({" + StringFromListStringJoin(listreleasename, ", ") + "});"
+			lineindent + "vx_core::vx_reserve({" + vx_core.V_stringn_from_liststringn_joinn(listreleasename, ", ") + "});"
 		if fnc.async || fnc.vxtype.name == "none" {
 			release = "" +
-				lineindent + "vx_core::vx_release_one({" + StringFromListStringJoin(listreleasename, ", ") + "});"
+				lineindent + "vx_core::vx_release_one({" + vx_core.V_stringn_from_liststringn_joinn(listreleasename, ", ") + "});"
 		} else {
 			release = "" +
-				lineindent + "vx_core::vx_release_one_except({" + StringFromListStringJoin(listreleasename, ", ") + "}, output);"
+				lineindent + "vx_core::vx_release_one_except({" + vx_core.V_stringn_from_liststringn_joinn(listreleasename, ", ") + "}, output);"
 		}
 	}
 	defaultvalue := ""
@@ -1171,7 +1177,7 @@ func CppBodyFromFunc(
 		"\n      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(" +
 		"\n        \"" + fnc.pkgname + "\", // pkgname" +
 		"\n        \"" + fnc.name + "\", // name" +
-		"\n        " + StringFromInt(fnc.idx) + ", // idx" +
+		"\n        " + vx_core.V_stringn_from_intn(fnc.idx) + ", // idx" +
 		"\n        " + StringFromBoolean(fnc.async) + ", // async" +
 		"\n        this->vx_typedef() // typedef" +
 		"\n      );" +
@@ -1221,7 +1227,7 @@ func CppConstListFromListConst(
 			typetext := LangConstName(cnst)
 			listtext = append(listtext, typetext)
 		}
-		output = "vx_core::vx_anylist_from_listany({" + StringFromListStringJoin(listtext, ", ") + "})"
+		output = "vx_core::vx_anylist_from_listany({" + vx_core.V_stringn_from_liststringn_joinn(listtext, ", ") + "})"
 	}
 	return output
 }
@@ -1238,13 +1244,13 @@ func CppFuncDefsFromFuncs(
 				lineindent + "  vx_core::Type_funcdef::vx_funcdef_new(" +
 				lineindent + "    \"" + fnc.pkgname + "\"," +
 				lineindent + "    \"" + fnc.name + "\"," +
-				lineindent + "    " + StringFromInt(fnc.idx) + "," +
+				lineindent + "    " + vx_core.V_stringn_from_intn(fnc.idx) + "," +
 				lineindent + "    " + StringFromBoolean(fnc.async) + "," +
 				lineindent + "    null" +
 				lineindent + "  )"
 			outputtypes = append(outputtypes, name)
 		}
-		output = "vx_core::arraylist_from_array(" + StringFromListStringJoin(outputtypes, ",") + lineindent + ")"
+		output = "vx_core::arraylist_from_array(" + vx_core.V_stringn_from_liststringn_joinn(outputtypes, ",") + lineindent + ")"
 	}
 	return output
 }
@@ -1273,12 +1279,16 @@ func CppFromPackage(
 		specialheader = StringFromStringFromTo(extratext, delimheader, delimbody)
 		specialbody = StringFromStringFromTo(extratext, delimbody, "")
 		if specialtype != "" {
-			specialtype = StringFromStringFindReplace(specialtype, delimheadertype, "")
-			specialtypeorder = ListStringFromStringSplit(specialtype, "\n")
+			specialtype = vx_core.V_stringn_from_stringn_findn_replacen(specialtype, delimheadertype, "")
+			specialtypeorder = vx_core.V_liststringn_from_stringn_splitn(
+				specialtype,
+				"\n")
 		}
 		if specialfunc != "" {
-			specialfunc = StringFromStringFindReplace(specialfunc, delimheaderfunc, "")
-			specialfuncorder = ListStringFromStringSplit(specialfunc, "\n")
+			specialfunc = vx_core.V_stringn_from_stringn_findn_replacen(specialfunc, delimheaderfunc, "")
+			specialfuncorder = vx_core.V_liststringn_from_stringn_splitn(
+				specialfunc,
+				"\n")
 		}
 	}
 	forwardheader := "\n  // forward declarations"
@@ -1433,7 +1443,7 @@ func CppFromPackage(
 	packagestatic += "" +
 		"\n      vx_core::vx_global_package_set(\"" + pkg.name + "\", maptype, mapconst, mapfunc);"
 	headerfilename := pkg.name
-	ipos := IntFromStringFindLast(headerfilename, "/")
+	ipos := vx_core.V_intn_from_stringn_findlastn(headerfilename, "/")
 	if ipos >= 0 {
 		headerfilename = headerfilename[ipos+1:]
 	}
@@ -1478,8 +1488,8 @@ func CppFromPackage(
 	headerimports := CppImportsFromPackage(pkg, "", header, false)
 	namespaceopen, namespaceclose := LangNamespaceOpenClose(lang, pkgname, "")
 	headeroutput := "" +
-		"#ifndef " + StringUCase(pkgname+"_hpp") +
-		"\n#define " + StringUCase(pkgname+"_hpp") +
+		"#ifndef " + vx_core.V_stringn_uppercase(pkgname+"_hpp") +
+		"\n#define " + vx_core.V_stringn_uppercase(pkgname+"_hpp") +
 		"\n" +
 		headerimports +
 		namespaceopen +
@@ -1541,7 +1551,7 @@ func CppBodyFromType(
 	createtext, msgs := CppFromValue(lang, typ.createvalue, "", emptyfunc, 0, true, false, path)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if createtext != "" {
-		createlines := ListStringFromStringSplit(createtext, "\n")
+		createlines := vx_core.V_liststringn_from_stringn_splitn(createtext, "\n")
 		isbody := true
 		for _, createline := range createlines {
 			trimline := StringTrim(createline)
@@ -2482,7 +2492,7 @@ func CppBodyFromType(
 			"\n"
 		destructor += "" +
 			"\n      vx_core::vx_release_one({" +
-			"\n        " + StringFromListStringJoin(destroyfields, ",\n        ") +
+			"\n        " + vx_core.V_stringn_from_liststringn_joinn(destroyfields, ",\n        ") +
 			"\n      });"
 	}
 	vxmsgblock := ""
@@ -2591,7 +2601,7 @@ func CppFromValue(
 	path string) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("CppFromValue")
 	var output = ""
-	sindent := StringRepeat("  ", indent)
+	sindent := vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	valstr := ""
 	switch value.code {
 	case ":arg":
@@ -2648,7 +2658,7 @@ func CppFromValue(
 						if BooleanFromStringStartsEnds(propname, "\"", "\"") {
 							propname = propname[1 : len(propname)-1]
 						}
-						if BooleanFromStringStarts(propname, ":") {
+						if vx_core.V_booleann_from_stringn_startsn(propname, ":") {
 							propname = propname[1:]
 						}
 						structvalue := funcargs[0].value
@@ -2789,7 +2799,7 @@ func CppFromValue(
 									var lambdaargrelease []string
 									for lambdaidx, lambdaarg := range arglist {
 										lambdaargpath := argsubpath + ":lambdaarg/" + lambdaarg.name
-										arglineindent := "\n" + StringRepeat("  ", argindent)
+										arglineindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", argindent)
 										lambdaargname := LangFromName(lambdaarg.alias)
 										lambdatypename := LangNameTypeFromTypeSimple(lang, lambdaarg.vxtype, true)
 										if lambdaarg.async {
@@ -2808,14 +2818,14 @@ func CppFromValue(
 											switch len(lambdaargrelease) {
 											case 0:
 											case 1:
-												lambdarelease = arglineindent + "vx_core::vx_release_one(" + StringFromListStringJoin(lambdaargrelease, "") + ");"
+												lambdarelease = arglineindent + "vx_core::vx_release_one(" + vx_core.V_stringn_from_liststringn_joinn(lambdaargrelease, "") + ");"
 											default:
-												lambdarelease = arglineindent + "vx_core::vx_release_one({" + StringFromListStringJoin(lambdaargrelease, ", ") + "});"
+												lambdarelease = arglineindent + "vx_core::vx_release_one({" + vx_core.V_stringn_from_liststringn_joinn(lambdaargrelease, ", ") + "});"
 											}
 											valuecapturetext := CppCaptureFromValueListInner(funcarg.value, localargs, valuesubpath)
 											lambdavaluetext, msgs := CppFromValue(lang, lambdaarg.value, pkgname, fnc, argindent, true, test, lambdaargpath)
 											msgblock = MsgblockAddBlock(msgblock, msgs)
-											outputname := "output_" + StringFromInt(argindent)
+											outputname := "output_" + vx_core.V_stringn_from_intn(argindent)
 											lambdatext += "" +
 												arglineindent + "vx_core::vx_Type_async future_" + lambdaargname + " = " + lambdavaluetext + ";" +
 												//												arglineindent + "std::function<vx_core::Type_any(" + CppNameTypeFromType(lambdaarg.vxtype) + ")> fn_any_any_" + CppFromName(lambdaarg.name) + " = [" + valuecapturetext + "](" + CppNameTypeFromType(lambdaarg.vxtype) + " " + CppFromName(lambdaarg.name) + ") {"
@@ -2844,21 +2854,21 @@ func CppFromValue(
 									switch len(lambdaargrelease) {
 									case 0:
 									case 1:
-										lambdarelease = "\n    vx_core::vx_release_one_except(" + StringFromListStringJoin(lambdaargrelease, ", ") + ", output_" + StringFromInt(argindent) + ");"
+										lambdarelease = "\n    vx_core::vx_release_one_except(" + vx_core.V_stringn_from_liststringn_joinn(lambdaargrelease, ", ") + ", output_" + vx_core.V_stringn_from_intn(argindent) + ");"
 									default:
-										lambdarelease = "\n    vx_core::vx_release_one_except({" + StringFromListStringJoin(lambdaargrelease, ", ") + "}, output_" + StringFromInt(argindent) + ");"
+										lambdarelease = "\n    vx_core::vx_release_one_except({" + vx_core.V_stringn_from_liststringn_joinn(lambdaargrelease, ", ") + "}, output_" + vx_core.V_stringn_from_intn(argindent) + ");"
 									}
 									argtext = "" +
 										"vx_core::t_any_from_func_async->vx_fn_new({" + capturetext + "}, [" + capturetext + "]() {" +
 										lambdatext +
-										"\n    vx_core::Type_any output_" + StringFromInt(argindent) + " = " + work + ";" +
+										"\n    vx_core::Type_any output_" + vx_core.V_stringn_from_intn(argindent) + " = " + work + ";" +
 										lambdarelease +
-										"\n    return output_" + StringFromInt(argindent) + ";" +
+										"\n    return output_" + vx_core.V_stringn_from_intn(argindent) + ";" +
 										aftertext +
 										"\n})"
 								} else {
 									argindent := 1
-									arglineindent := "\n" + StringRepeat("  ", argindent)
+									arglineindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", argindent)
 									var lambdaargrelease []string
 									for _, lambdaarg := range arglist {
 										lambdaargname := LangFromName(lambdaarg.alias)
@@ -2873,14 +2883,14 @@ func CppFromValue(
 									work, msgs := CppFromValue(lang, argvalue, pkgname, fnc, 0, true, test, argsubpath)
 									msgblock = MsgblockAddBlock(msgblock, msgs)
 									work = StringFromStringIndent(work, "  ")
-									outputname := "output_" + StringFromInt(argindent)
+									outputname := "output_" + vx_core.V_stringn_from_intn(argindent)
 									lambdarelease := ""
 									switch len(lambdaargrelease) {
 									case 0:
 									case 1:
-										lambdarelease = arglineindent + "vx_core::vx_release_one_except(" + StringFromListStringJoin(lambdaargrelease, ", ") + ", " + outputname + ");"
+										lambdarelease = arglineindent + "vx_core::vx_release_one_except(" + vx_core.V_stringn_from_liststringn_joinn(lambdaargrelease, ", ") + ", " + outputname + ");"
 									default:
-										lambdarelease = arglineindent + "vx_core::vx_release_one_except({" + StringFromListStringJoin(lambdaargrelease, ", ") + "}, " + outputname + ");"
+										lambdarelease = arglineindent + "vx_core::vx_release_one_except({" + vx_core.V_stringn_from_liststringn_joinn(lambdaargrelease, ", ") + "}, " + outputname + ");"
 									}
 									argtext = "" +
 										"vx_core::t_any_from_func->vx_fn_new({" + capturetext + "}, [" + capturetext + "]() {" +
@@ -2909,8 +2919,8 @@ func CppFromValue(
 									}
 									argtext = "" +
 										"vx_core::t_" + argvaluefuncname + "->vx_fn_new({" + capturetext + "}, [" + capturetext + "]() {" +
-										"\n  " + argvaluetypename + " output_" + StringFromInt(subindent) + " = " + work + ";" +
-										"\n  return output_" + StringFromInt(subindent) + ";" +
+										"\n  " + argvaluetypename + " output_" + vx_core.V_stringn_from_intn(subindent) + " = " + work + ";" +
+										"\n  return output_" + vx_core.V_stringn_from_intn(subindent) + ";" +
 										"\n})"
 								}
 							case ":funcref":
@@ -2926,8 +2936,8 @@ func CppFromValue(
 								argtext = "" +
 									LangTypeT(lang, funcarg.vxtype) + "->vx_fn_new({" + capturetext + "}, [" + capturetext + "](" + lambdatext + ") {" +
 									lambdavartext +
-									"\n  " + outputtype + " output_" + StringFromInt(subindent) + " = " + work + ";" +
-									"\n  return output_" + StringFromInt(subindent) + ";" +
+									"\n  " + outputtype + " output_" + vx_core.V_stringn_from_intn(subindent) + " = " + work + ";" +
+									"\n  return output_" + vx_core.V_stringn_from_intn(subindent) + ";" +
 									"\n})"
 							default:
 								funcargasync := funcarg.vxtype.vxfunc.async
@@ -2949,14 +2959,14 @@ func CppFromValue(
 								}
 								work, msgs := CppFromValue(lang, argvalue, pkgname, fnc, workindent, true, test, argsubpath)
 								if converttoasync {
-									work = "vx_core::f_async(" + LangTypeT(lang, argfunctype) + ",\n" + StringRepeat("  ", workindent) + work + "\n  )"
+									work = "vx_core::f_async(" + LangTypeT(lang, argfunctype) + ",\n" + vx_core.V_stringn_from_stringn_repeatn("  ", workindent) + work + "\n  )"
 								}
 								msgblock = MsgblockAddBlock(msgblock, msgs)
 								if argvalue.code == ":func" && argvalue.name == "native" {
 								} else {
 									work = "" +
-										"\n  " + LangNameTypeFromTypeSimple(lang, argvalue.vxtype, true) + " output_" + StringFromInt(workindent) + " = " + work + ";" +
-										"\n  return output_" + StringFromInt(workindent) + ";"
+										"\n  " + LangNameTypeFromTypeSimple(lang, argvalue.vxtype, true) + " output_" + vx_core.V_stringn_from_intn(workindent) + " = " + work + ";" +
+										"\n  return output_" + vx_core.V_stringn_from_intn(workindent) + ";"
 								}
 								capturetext := CppCaptureFromValue(argvalue, argsubpath)
 								argtext = "" +
@@ -2971,7 +2981,7 @@ func CppFromValue(
 							argtext = work
 						}
 						if !multiline {
-							if BooleanFromStringContains(argtext, "\n") {
+							if vx_core.V_booleann_from_stringn_containsn(argtext, "\n") {
 								multiline = true
 							} else if argvalue.name != "" {
 								multiline = true
@@ -3020,7 +3030,7 @@ func CppFromValue(
 				}
 			}
 			if multiline {
-				output += "\n" + sindent + "  " + StringFromStringIndent(StringFromListStringJoin(argtexts, ",\n"), sindent+"  ")
+				output += "\n" + sindent + "  " + StringFromStringIndent(vx_core.V_stringn_from_liststringn_joinn(argtexts, ",\n"), sindent+"  ")
 				if multiflag {
 					output += "\n" + sindent + "  })"
 				}
@@ -3033,7 +3043,7 @@ func CppFromValue(
 					output += "\n" + sindent + ")"
 				}
 			} else {
-				output += StringFromListStringJoin(argtexts, ", ")
+				output += vx_core.V_stringn_from_liststringn_joinn(argtexts, ", ")
 				if multiflag {
 					output += "})"
 				}
@@ -3063,7 +3073,7 @@ func CppFromValue(
 	case "string":
 		valstr = StringValueFromValue(value)
 		if valstr == "" {
-		} else if BooleanFromStringStarts(valstr, ":") {
+		} else if vx_core.V_booleann_from_stringn_startsn(valstr, ":") {
 			output = valstr
 		} else if BooleanFromStringStartsEnds(valstr, "\"", "\"") {
 			valstr = valstr[1 : len(valstr)-1]
@@ -3122,7 +3132,7 @@ func CppFuncListFromListFunc(
 			typetext := LangFuncT(lang, fnc)
 			listtext = append(listtext, typetext)
 		}
-		output = "vx_core::vx_funclist_from_listfunc({" + StringFromListStringJoin(listtext, ", ") + "})"
+		output = "vx_core::vx_funclist_from_listfunc({" + vx_core.V_stringn_from_liststringn_joinn(listtext, ", ") + "})"
 	}
 	return output
 }
@@ -3164,7 +3174,7 @@ func CppGenericNameFromType(
 	typ *vxtype) string {
 	output := ""
 	if typ.isgeneric {
-		output = "generic_" + StringFromStringFindReplace(typ.name, "-", "_")
+		output = "generic_" + vx_core.V_stringn_from_stringn_findn_replacen(typ.name, "-", "_")
 	}
 	return output
 }
@@ -3175,59 +3185,59 @@ func CppImportsFromPackage(
 	body string,
 	test bool) string {
 	output := ""
-	if BooleanFromStringContains(body, "std::any") {
+	if vx_core.V_booleann_from_stringn_containsn(body, "std::any") {
 		output += "#include <any>\n"
 	}
-	if BooleanFromStringContains(body, "va_start(") {
+	if vx_core.V_booleann_from_stringn_containsn(body, "va_start(") {
 		output += "#include <cstdarg>\n"
 	}
-	if BooleanFromStringContains(body, "std::exception") {
+	if vx_core.V_booleann_from_stringn_containsn(body, "std::exception") {
 		output += "#include <exception>\n"
 	}
-	if BooleanFromStringContains(body, " std::function<") {
+	if vx_core.V_booleann_from_stringn_containsn(body, " std::function<") {
 		output += "#include <functional>\n"
 	}
-	if BooleanFromStringContains(body, " std::future<") {
+	if vx_core.V_booleann_from_stringn_containsn(body, " std::future<") {
 		output += "#include <future>\n"
 	}
-	if BooleanFromStringContains(body, " std::cout ") {
+	if vx_core.V_booleann_from_stringn_containsn(body, " std::cout ") {
 		output += "#include <iostream>\n"
-	} else if BooleanFromStringContains(body, " std::ifstream ") {
+	} else if vx_core.V_booleann_from_stringn_containsn(body, " std::ifstream ") {
 		output += "#include <iostream>\n"
-	} else if BooleanFromStringContains(body, " std::ofstream ") {
+	} else if vx_core.V_booleann_from_stringn_containsn(body, " std::ofstream ") {
 		output += "#include <iostream>\n"
 	}
-	if BooleanFromStringContains(body, " std::filesystem::") {
+	if vx_core.V_booleann_from_stringn_containsn(body, " std::filesystem::") {
 		output += "#include <filesystem>\n"
 	}
-	if BooleanFromStringContains(body, " std::ifstream ") {
+	if vx_core.V_booleann_from_stringn_containsn(body, " std::ifstream ") {
 		output += "#include <fstream>\n"
-	} else if BooleanFromStringContains(body, " std::ofstream ") {
+	} else if vx_core.V_booleann_from_stringn_containsn(body, " std::ofstream ") {
 		output += "#include <fstream>\n"
 	}
-	if BooleanFromStringContains(body, "std::map<") {
+	if vx_core.V_booleann_from_stringn_containsn(body, "std::map<") {
 		output += "#include <map>\n"
 	}
-	if BooleanFromStringContains(body, "std::shared_ptr") {
+	if vx_core.V_booleann_from_stringn_containsn(body, "std::shared_ptr") {
 		output += "#include <memory>\n"
 	}
-	if BooleanFromStringContains(body, "std::set<") {
+	if vx_core.V_booleann_from_stringn_containsn(body, "std::set<") {
 		output += "#include <set>\n"
 	}
-	if BooleanFromStringContains(body, "std::stringstream") {
+	if vx_core.V_booleann_from_stringn_containsn(body, "std::stringstream") {
 		output += "#include <sstream>\n"
 	}
-	if BooleanFromStringContains(body, "std::string") {
+	if vx_core.V_booleann_from_stringn_containsn(body, "std::string") {
 		output += "#include <string>\n"
 	}
-	if BooleanFromStringContains(body, "std::isclass<") {
+	if vx_core.V_booleann_from_stringn_containsn(body, "std::isclass<") {
 		output += "#include <type_traits>\n"
 	}
-	if BooleanFromStringContains(body, "std::vector<") {
+	if vx_core.V_booleann_from_stringn_containsn(body, "std::vector<") {
 		output += "#include <vector>\n"
 	}
 	slashcount := IntFromStringCount(pkg.name, "/")
-	slashprefix := StringRepeat("../", slashcount)
+	slashprefix := vx_core.V_stringn_from_stringn_repeatn("../", slashcount)
 	if test {
 		output += "#include \"" + slashprefix + "../main/" + pkg.name + ".hpp\"\n"
 	}
@@ -3248,14 +3258,14 @@ func CppImportsFromPackage(
 				libpath = "../main/" + libpath
 			}
 			if isskip {
-			} else if BooleanFromStringStarts(libpath, "<") {
+			} else if vx_core.V_booleann_from_stringn_startsn(libpath, "<") {
 				importline := "#include " + libpath + "\n"
-				if IntFromStringFind(output, importline) < 0 {
+				if vx_core.V_intn_from_stringn_findn(output, importline) < 0 {
 					output += importline
 				}
 			} else {
 				importline := "#include \"" + slashprefix + libpath + ".hpp\"\n"
-				if IntFromStringFind(output, importline) < 0 {
+				if vx_core.V_intn_from_stringn_findn(output, importline) < 0 {
 					output += importline
 				}
 			}
@@ -3283,7 +3293,9 @@ func CppHeaderFromType(
 	interfaces := ""
 	createtext, _ := CppFromValue(lang, typ.createvalue, "", emptyfunc, 0, true, false, "")
 	if createtext != "" {
-		createlines := ListStringFromStringSplit(createtext, "\n")
+		createlines := vx_core.V_liststringn_from_stringn_splitn(
+			createtext,
+			"\n")
 		isheader := false
 		for _, createline := range createlines {
 			trimline := StringTrim(createline)
@@ -3543,7 +3555,7 @@ func CppHeaderFromType(
 					traitname := "public virtual " + CppNameAbstractFullFromType(lang, trait)
 					traitnames = append(traitnames, traitname)
 				}
-				extends += ", " + StringFromListStringJoin(traitnames, ", ")
+				extends += ", " + vx_core.V_stringn_from_liststringn_joinn(traitnames, ", ")
 			}
 			for _, arg := range ListPropertyTraitFromType(typ) {
 				argclassname := LangTypeName(lang, arg.vxtype)
@@ -3769,8 +3781,8 @@ func CppHeaderFromFunc(
 			listsimpleargtext = append(listsimpleargtext, argtypename+" "+argname)
 		}
 	}
-	argtext := StringFromListStringJoin(listargtext, ", ")
-	simpleargtext := StringFromListStringJoin(listsimpleargtext, ", ")
+	argtext := vx_core.V_stringn_from_liststringn_joinn(listargtext, ", ")
+	simpleargtext := vx_core.V_stringn_from_liststringn_joinn(listsimpleargtext, ", ")
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-context",
 		"vx/core/any<-any-key-value",
@@ -3862,7 +3874,7 @@ func CppHeaderFromFunc(
 			"\n    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;"
 	}
 	fnheaders := CppHeaderFnFromFunc(fnc)
-	classinterfaces := StringFromStringFindReplace(
+	classinterfaces := vx_core.V_stringn_from_stringn_findn_replacen(
 		abstractinterfaces, " = 0;", ";")
 	output := "" +
 		"\n  // (func " + fnc.name + ")" +
@@ -3932,11 +3944,11 @@ func CppLambdaFromArgList(
 				lambdavars, lambdavar)
 		}
 	}
-	lambdanames := StringFromListStringJoin(lambdaargnames, ", ")
-	lambdatext := StringFromListStringJoin(lambdatypenames, ", ")
+	lambdanames := vx_core.V_stringn_from_liststringn_joinn(lambdaargnames, ", ")
+	lambdatext := vx_core.V_stringn_from_liststringn_joinn(lambdatypenames, ", ")
 	lambdavartext := ""
 	if len(lambdavars) > 0 {
-		lambdavartext = "\n  " + StringFromListStringJoin(lambdavars, "\n  ")
+		lambdavartext = "\n  " + vx_core.V_stringn_from_liststringn_joinn(lambdavars, "\n  ")
 	}
 	return lambdatext, lambdavartext, lambdanames
 }
@@ -4080,7 +4092,7 @@ func CppReplFromFunc(
 		case "vx/core/new<-type", "vx/core/empty":
 		default:
 			if fnc.generictype != nil {
-				replparam := outputtype + " generic_" + LangFromName(fnc.generictype.name) + " = vx_core::vx_any_from_any(" + outputttype + ", arglist->vx_get_any(vx_core::vx_new_int(" + StringFromInt(argidx) + ")));"
+				replparam := outputtype + " generic_" + LangFromName(fnc.generictype.name) + " = vx_core::vx_any_from_any(" + outputttype + ", arglist->vx_get_any(vx_core::vx_new_int(" + vx_core.V_stringn_from_intn(argidx) + ")));"
 				replparams += "\n      " + replparam
 				listargname = append(listargname, "generic_"+LangFromName(fnc.generictype.name))
 			}
@@ -4088,14 +4100,14 @@ func CppReplFromFunc(
 	}
 	if fnc.context {
 		listargname = append(listargname, "context")
-		replparam := "vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(" + StringFromInt(argidx) + ")));"
+		replparam := "vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(" + vx_core.V_stringn_from_intn(argidx) + ")));"
 		replparams += "\n      " + replparam
 	}
 	for _, arg := range fnc.listarg {
 		if (funcname == "let" || funcname == "let_async") && arg.name == "args" {
 		} else {
 			argname := LangFromName(arg.alias)
-			replparam := LangNameTypeFromTypeSimple(lang, arg.vxtype, true) + " " + argname + " = vx_core::vx_any_from_any(" + LangTypeTSimple(lang, arg.vxtype, true) + ", arglist->vx_get_any(vx_core::vx_new_int(" + StringFromInt(argidx) + ")));"
+			replparam := LangNameTypeFromTypeSimple(lang, arg.vxtype, true) + " " + argname + " = vx_core::vx_any_from_any(" + LangTypeTSimple(lang, arg.vxtype, true) + ", arglist->vx_get_any(vx_core::vx_new_int(" + vx_core.V_stringn_from_intn(argidx) + ")));"
 			replparams += "\n      " + replparam
 			listargname = append(listargname, argname)
 			argidx += 1
@@ -4150,7 +4162,7 @@ func CppTestCase(
 		var descnames []string
 		var desctexts []string
 		for idx, testvalue := range testvalues {
-			sidx := StringFromInt(idx + 1)
+			sidx := vx_core.V_stringn_from_intn(idx + 1)
 			subpath := path + "/tests" + sidx
 			resultname := "testresult_" + sidx
 			descname := "testdescribe_" + sidx
@@ -4169,8 +4181,8 @@ func CppTestCase(
 				"\n    });"
 			desctexts = append(desctexts, desctext)
 		}
-		describenamelist := StringFromListStringJoin(descnames, ",\n      ")
-		describetextlist := StringFromListStringJoin(desctexts, "")
+		describenamelist := vx_core.V_stringn_from_liststringn_joinn(descnames, ",\n      ")
+		describetextlist := vx_core.V_stringn_from_liststringn_joinn(desctexts, "")
 		output = "" +
 			"\n  vx_test::Type_testcase " + testcasename + "(vx_core::Type_context context) {" +
 			"\n    vx_core::vx_log(\"Test Start: " + testcasename + "\");" +
@@ -4257,7 +4269,7 @@ func CppTestFromPackage(
 		test, msgs := CppTestFromType(lang, typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		covertype = append(
-			covertype, "vx_core::vx_new_string(\":"+typid+"\"), vx_core::vx_new_int("+StringFromInt(len(typ.testvalues))+")")
+			covertype, "vx_core::vx_new_string(\":"+typid+"\"), vx_core::vx_new_int("+vx_core.V_stringn_from_intn(len(typ.testvalues))+")")
 		if command.filter == "" {
 		} else if NameFromType(typ) != command.filter {
 			test = ""
@@ -4287,7 +4299,7 @@ func CppTestFromPackage(
 		test, msgs := CppTestFromConst(lang, cnst)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		coverconst = append(
-			coverconst, "vx_core::vx_new_string(\":"+cnstid+"\"), vx_core::vx_new_int("+StringFromInt(len(cnst.listtestvalue))+")")
+			coverconst, "vx_core::vx_new_string(\":"+cnstid+"\"), vx_core::vx_new_int("+vx_core.V_stringn_from_intn(len(cnst.listtestvalue))+")")
 		if command.filter == "" {
 		} else if NameFromConst(cnst) != command.filter {
 			test = ""
@@ -4320,7 +4332,7 @@ func CppTestFromPackage(
 			test, msgs := CppTestFromFunc(lang, fnc)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
-			coverfunc = append(coverfunc, "vx_core::vx_new_string(\":"+fncid+LangIndexFromFunc(fnc)+"\"), vx_core::vx_new_int("+StringFromInt(len(fnc.listtestvalue))+")")
+			coverfunc = append(coverfunc, "vx_core::vx_new_string(\":"+fncid+LangIndexFromFunc(fnc)+"\"), vx_core::vx_new_int("+vx_core.V_stringn_from_intn(len(fnc.listtestvalue))+")")
 			if command.filter == "" {
 			} else if NameFromFunc(fnc) != command.filter {
 				test = ""
@@ -4442,17 +4454,17 @@ func CppTestFromPackage(
 		"\n"
 	imports := CppImportsFromPackage(pkg, "", body, true)
 	slashcount := IntFromStringCount(pkg.name, "/")
-	slashprefix := StringRepeat("../", slashcount)
+	slashprefix := vx_core.V_stringn_from_stringn_repeatn("../", slashcount)
 	simplename := pkg.name
-	ipos := IntFromStringFindLast(simplename, "/")
+	ipos := vx_core.V_intn_from_stringn_findlastn(simplename, "/")
 	if ipos >= 0 {
 		simplename = simplename[ipos+1:]
 	}
 	namespaceopen, namespaceclose := LangNamespaceOpenClose(
 		lang, pkgname+"_test", "")
 	headertext := "" +
-		"#ifndef " + StringUCase(pkgname+"_test_hpp") +
-		"\n#define " + StringUCase(pkgname+"_test_hpp") +
+		"#ifndef " + vx_core.V_stringn_uppercase(pkgname+"_test_hpp") +
+		"\n#define " + vx_core.V_stringn_uppercase(pkgname+"_test_hpp") +
 		"\n#include \"" + slashprefix + "../main/vx/core.hpp\"" +
 		"\n#include \"" + slashprefix + "../main/vx/test.hpp\"" +
 		"\n" +
@@ -4508,9 +4520,9 @@ func CppTypeCoverageNumsValNew(
 	total int) string {
 	return "" +
 		"vx_core::vx_new(vx_test::t_testcoveragenums, {" +
-		"\n        vx_core::vx_new_string(\":pct\"), vx_core::vx_new_int(" + StringFromInt(pct) + "), " +
-		"\n        vx_core::vx_new_string(\":tests\"), vx_core::vx_new_int(" + StringFromInt(tests) + "), " +
-		"\n        vx_core::vx_new_string(\":total\"), vx_core::vx_new_int(" + StringFromInt(total) + ")" +
+		"\n        vx_core::vx_new_string(\":pct\"), vx_core::vx_new_int(" + vx_core.V_stringn_from_intn(pct) + "), " +
+		"\n        vx_core::vx_new_string(\":tests\"), vx_core::vx_new_int(" + vx_core.V_stringn_from_intn(tests) + "), " +
+		"\n        vx_core::vx_new_string(\":total\"), vx_core::vx_new_int(" + vx_core.V_stringn_from_intn(total) + ")" +
 		"\n      })"
 }
 
@@ -4575,7 +4587,7 @@ func CppTypeDefFromType(
 
 func CppTypeIntValNew(
 	val int) string {
-	return "vx_core::vx_new_int(" + StringFromInt(val) + ")"
+	return "vx_core::vx_new_int(" + vx_core.V_stringn_from_intn(val) + ")"
 }
 
 func CppTypeListFromListType(
@@ -4588,14 +4600,14 @@ func CppTypeListFromListType(
 			typetext := LangTypeT(lang, typ)
 			listtext = append(listtext, typetext)
 		}
-		output = "vx_core::vx_typelist_from_listany({" + StringFromListStringJoin(listtext, ", ") + "})"
+		output = "vx_core::vx_typelist_from_listany({" + vx_core.V_stringn_from_liststringn_joinn(listtext, ", ") + "})"
 	}
 	return output
 }
 
 func CppTypeStringValNew(
 	val string) string {
-	valstr := StringFromStringFindReplace(val, "\n", "\\n")
+	valstr := vx_core.V_stringn_from_stringn_findn_replacen(val, "\n", "\\n")
 	return "vx_core::vx_new_string(\"" + valstr + "\")"
 }
 
@@ -4612,7 +4624,7 @@ func CppWriteFromProjectCmd(
 	switch command.code {
 	case ":test":
 		targetpath := PathFromProjectCmd(project, command)
-		ipos := IntFromStringFindLast(targetpath, "/")
+		ipos := vx_core.V_intn_from_stringn_findlastn(targetpath, "/")
 		if ipos > 0 {
 			targetpath = targetpath[0:ipos]
 		}
@@ -4765,18 +4777,18 @@ func CppAppTest(
 	for _, pkg := range listpackage {
 		iscontinue := true
 		if command.filter == "" {
-		} else if !BooleanFromStringStarts(command.filter, pkg.name) {
+		} else if !vx_core.V_booleann_from_stringn_startsn(command.filter, pkg.name) {
 			iscontinue = false
 		}
 		if iscontinue {
-			pkgname := StringFromStringFindReplace(pkg.name, "/", "_")
+			pkgname := vx_core.V_stringn_from_stringn_findn_replacen(pkg.name, "/", "_")
 			testpackage := pkgname + "_test::test_package(context)"
 			listtestpackage = append(listtestpackage, testpackage)
 			importline := "#include \"" + pkg.name + "_test.hpp\"\n"
 			imports += importline
 		}
 	}
-	testpackages := StringFromListStringJoin(listtestpackage, ",\n    ")
+	testpackages := vx_core.V_stringn_from_liststringn_joinn(listtestpackage, ",\n    ")
 	tests := ""
 	if project.name == "core" {
 		tests += "" + `

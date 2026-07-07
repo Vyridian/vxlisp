@@ -1,6 +1,12 @@
 package vxlisp
 
-func HtmlFromConsts(consts []*vxconst, indent string) (string, string) {
+import (
+	vx_core "vxlisp/vxlisp/vx/core"
+)
+
+func HtmlFromConsts(
+	consts []*vxconst,
+	indent string) (string, string) {
 	lineindent := "\n" + indent
 	nav := ""
 	detail := ""
@@ -198,7 +204,7 @@ func HtmlFromListPackage(listpackage []*vxpackage, indent string) (string, strin
 			lineindent + "    </summary>" +
 			lineindent + "    <ul>" +
 			lineindent + "      <li>" +
-			lineindent + "        " + StringFromListStringJoin(pkgtypes, ", ") +
+			lineindent + "        " + vx_core.V_stringn_from_liststringn_joinn(pkgtypes, ", ") +
 			lineindent + "      </li>" +
 			lineindent + "    </ul>" +
 			lineindent + "  </details>" +
@@ -208,7 +214,7 @@ func HtmlFromListPackage(listpackage []*vxpackage, indent string) (string, strin
 			lineindent + "    </summary>" +
 			lineindent + "    <ul>" +
 			lineindent + "      <li>" +
-			lineindent + StringFromListStringJoin(pkgconsts, ", ") +
+			lineindent + vx_core.V_stringn_from_liststringn_joinn(pkgconsts, ", ") +
 			lineindent + "      </li>" +
 			lineindent + "    </ul>" +
 			lineindent + "  </details>" +
@@ -218,7 +224,7 @@ func HtmlFromListPackage(listpackage []*vxpackage, indent string) (string, strin
 			lineindent + "    </summary>" +
 			lineindent + "    <ul>" +
 			lineindent + "      <li>" +
-			lineindent + StringFromListStringJoin(pkgfuncs, ", ") +
+			lineindent + vx_core.V_stringn_from_liststringn_joinn(pkgfuncs, ", ") +
 			lineindent + "      </li>" +
 			lineindent + "    </ul>" +
 			lineindent + "  </details>" +
@@ -310,7 +316,7 @@ func HtmlFromProject(prj *vxproject) string {
 				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.langcode) + "</div>" +
 				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.main) + "</div>" +
 				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.context) + "</div>" +
-				lineindent + "                  <div class=\"td\">" + StringFromInt(cmd.port) + "</div>" +
+				lineindent + "                  <div class=\"td\">" + vx_core.V_stringn_from_intn(cmd.port) + "</div>" +
 				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.doc) + "</div>" +
 				lineindent + "                </div>"
 		}
@@ -582,10 +588,10 @@ func HtmlFromSourceCode(text string, indent string) string {
 
 func HtmlFromString(text string) string {
 	output := text
-	output = StringFromStringFindReplace(output, "&", "&amp;")
-	output = StringFromStringFindReplace(output, "<", "&lt;")
-	output = StringFromStringFindReplace(output, ">", "&gt;")
-	output = StringFromStringFindReplace(output, "\"", "&quot;")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "&", "&amp;")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "<", "&lt;")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, ">", "&gt;")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "\"", "&quot;")
 	return output
 }
 
@@ -819,7 +825,7 @@ func HtmlNameFromConst(cnst *vxconst) string {
 func HtmlNameFromFunc(fnc *vxfunc) string {
 	output := HtmlFromName(fnc.pkgname) + "/" + HtmlFromName(fnc.name)
 	if fnc.idx > 0 {
-		output += "_" + StringFromInt(fnc.idx)
+		output += "_" + vx_core.V_stringn_from_intn(fnc.idx)
 	}
 	return output
 }

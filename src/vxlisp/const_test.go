@@ -58,7 +58,7 @@ func TestConstFromTextblock(t *testing.T) {
 	if len(consts) > 0 {
 		actual = StringFromConst(consts[0])
 	}
-	errortext := CompareText(expected, actual, 20, msgblock)
+	errortext := V_compareText(expected, actual, 20, msgblock)
 	if errortext != "" {
 		t.Error(errortext)
 	}

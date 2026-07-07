@@ -2,10 +2,12 @@ package vxlisp
 
 import (
 	"strings"
+	vx_core "vxlisp/vxlisp/vx/core"
 )
 
 var langcpp = NewLangCpp()
 var langcsharp = NewLangCsharp()
+var langgo = NewLangGo()
 var langjava = NewLangJava()
 var langjs = NewLangJs()
 var langkotlin = NewLangKotlin()
@@ -54,6 +56,18 @@ func NewLangCsharp() *vxlang {
 	output.itfext = ":"
 	output.classext = ":"
 	output.typeref = "."
+	output.serror = "err"
+	return output
+}
+
+func NewLangGo() *vxlang {
+	output := new(vxlang)
+	output.name = "go"
+	output.sourcename = "Core"
+	output.sourcefile = ".go"
+	output.pkgpath = "Vx.Core"
+	output.pkgname = "Vx.Core"
+	output.indent = " "
 	output.serror = "err"
 	return output
 }
@@ -123,6 +137,7 @@ func NewLangSwift() *vxlang {
 	output.typeref = "."
 	output.forcemulti = true
 	output.genericcount = 1
+	output.version = 2
 	output.argjoin = ",\n"
 	output.serror = "error"
 	output.filewhitelist = []string{
@@ -155,7 +170,7 @@ func LangAppArgListInit(
 		output = LangVar(lang, 3, anylisttype,
 			"arglist",
 			LangPkgNameDot(lang, "vx/core")+"vx_anylist_from_arraystring(args)")
-	case langjava, langswift:
+	case langjava:
 		output = LangVal(lang, 3, anylisttype,
 			"arglist",
 			LangPkgNameDot(lang, "vx/core")+"vx_anylist_from_arraystring(args)")
@@ -163,6 +178,10 @@ func LangAppArgListInit(
 		output = LangVal(lang, 3, anylisttype,
 			"arglist",
 			LangPkgNameDot(lang, "vx/core")+"vx_anylist_from_arraystring(*args)")
+	case langswift:
+		output = LangVal(lang, 3, anylisttype,
+			"arglist",
+			LangPkgNameDot(lang, "vx/core")+"vx_anylist_from_liststring(args)")
 	}
 	return output
 }
@@ -208,10 +227,10 @@ func LangAppMainOpenClose(
 	case langswift:
 		mainopen = "" +
 			indent1 + "public static func main(_ args : [String]) {" +
-			indent1 + "  Vx.initialize()"
+			indent1 + "  Vx.startup()"
 		mainclose = "" +
+			indent1 + "  Vx.shutdown()" +
 			indent1 + "}" +
-			"\n" +
 			"\n" +
 			indent1 + "public static func args() -> [String] {" +
 			indent1 + "  let args1 : [String] = CommandLine.arguments" +
@@ -534,24 +553,24 @@ func LangFilesCustom(
 			for _, pkg := range pkgs {
 				iscontinue := true
 				if len(lang.filewhitelist) > 0 {
-					iscontinue = BooleanFromListStringContains(lang.filewhitelist, pkg.name)
+					iscontinue = vx_core.V_booleann_from_liststringn_containsn(lang.filewhitelist, pkg.name)
 				}
 				if len(lang.fileblacklist) > 0 {
-					iscontinue = !BooleanFromListStringContains(lang.fileblacklist, pkg.name)
+					iscontinue = !vx_core.V_booleann_from_liststringn_containsn(lang.fileblacklist, pkg.name)
 				}
 				if iscontinue {
-					packageinit += "\n    " + LangPkgNameDot(lang, pkg.name) + "vx_initialize()"
+					packageinit += "\n    " + LangPkgNameDot(lang, pkg.name) + "v_startup()"
 				}
 			}
 			text := "" +
 				"public enum Vx {" +
 				"\n" +
-				"\n  private static let initialized : Void = {" +
-				packageinit +
-				"\n  }()" +
+				"\n  public static func shutdown() {" +
+				"\n    Vx_Core.v_global_shutdown()" +
+				"\n  }" +
 				"\n" +
-				"\n  public static func initialize() {" +
-				"\n    _ = initialized" +
+				"\n  public static func startup() {" +
+				packageinit +
 				"\n  }" +
 				"\n" +
 				"\n}" +
@@ -619,7 +638,7 @@ func LangForListHeader(
 	forvar string,
 	typ *vxtype,
 	listvar string) string {
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	output := ""
 	switch lang {
 	case langcsharp:
@@ -667,11 +686,11 @@ func LangFuncCall(
 		}
 	}
 	soutdent := ""
-	sparams := StringFromListStringJoin(params, ", ")
+	sparams := vx_core.V_stringn_from_liststringn_joinn(params, ", ")
 	if len(sparams) > 20 {
 		lineindent1 := LangIndent(lang, indent, true)
 		lineindent2 := LangIndent(lang, indent+1, true)
-		sparams = lineindent2 + StringFromListStringJoin(params, ","+lineindent2)
+		sparams = lineindent2 + vx_core.V_stringn_from_liststringn_joinn(params, ","+lineindent2)
 		soutdent = lineindent1
 	}
 	output += LangPkgNameDot(lang, fnc.pkgname) + funcname + "(" + sparams + soutdent + ")"
@@ -695,11 +714,11 @@ func LangFuncCallMethod(
 	funcname string,
 	params ...string) string {
 	output := ""
-	sparams := StringFromListStringJoin(params, ", ")
+	sparams := vx_core.V_stringn_from_liststringn_joinn(params, ", ")
 	if indent > 0 && len(sparams) > 20 {
 		lineindent1 := LangIndent(lang, indent, true)
 		lineindent2 := LangIndent(lang, indent+1, true)
-		sparams = lineindent2 + StringFromListStringJoin(params, ","+lineindent2) + lineindent1
+		sparams = lineindent2 + vx_core.V_stringn_from_liststringn_joinn(params, ","+lineindent2) + lineindent1
 	}
 	output += varname + lang.typeref + funcname + "(" + sparams + ")"
 	return output
@@ -756,10 +775,10 @@ func LangFuncCallVariadic(
 	slead := ""
 	srest := ""
 	if len(lead) > 0 {
-		slead = lineindent2 + StringFromListStringJoin(lead, ","+lineindent2)
+		slead = lineindent2 + vx_core.V_stringn_from_liststringn_joinn(lead, ","+lineindent2)
 	}
 	if len(rest) > 0 {
-		srest = lineindent3 + StringFromListStringJoin(rest, ","+lineindent3)
+		srest = lineindent3 + vx_core.V_stringn_from_liststringn_joinn(rest, ","+lineindent3)
 	}
 	if len(lead) > 0 && len(rest) > 0 {
 		slead += ","
@@ -849,9 +868,9 @@ func LangFuncCleanup(
 						if arg.isgeneric {
 							switch NameFromType(arg.generictype) {
 							case "vx/core/list-1":
-								output = StringFromStringFindReplace(output, " : X", " : any Vx_Core.Type_list")
+								output = vx_core.V_stringn_from_stringn_findn_replacen(output, " : X", " : any Vx_Core.Type_list")
 							case "vx/core/map-1":
-								output = StringFromStringFindReplace(output, " : N", " : any Vx_Core.Type_map")
+								output = vx_core.V_stringn_from_stringn_findn_replacen(output, " : N", " : any Vx_Core.Type_map")
 							}
 						}
 					}
@@ -877,7 +896,7 @@ func LangFuncDefaultOutput(
 	isskipdefault := false
 	switch lang {
 	case langswift:
-		if BooleanFromStringContains(valuetext, "let output ") {
+		if vx_core.V_booleann_from_stringn_containsn(valuetext, "let output ") {
 			isskipdefault = true
 		}
 	}
@@ -980,7 +999,7 @@ func LangFuncDoc(
 		}
 		doc += "@function " + LangFromName(fnc.alias)
 		if fnc.idx > 0 {
-			doc += " " + StringFromInt(fnc.idx)
+			doc += " " + vx_core.V_stringn_from_intn(fnc.idx)
 		}
 		if fnc.doc != "" {
 			doc += "\n" + fnc.doc
@@ -1270,7 +1289,7 @@ func LangFuncInterfaceFn(
 			}
 			args = append(args, argtext)
 		}
-		argnames := StringFromListStringJoin(args, ", ")
+		argnames := vx_core.V_stringn_from_liststringn_joinn(args, ", ")
 		switch lang {
 		case langcsharp:
 			output = "" +
@@ -1290,7 +1309,7 @@ func LangFuncInterfaceFn(
 				"\n    }" +
 				"\n"
 		case langswift:
-			argnames := StringFromListStringJoin(args, ", _ ")
+			argnames := vx_core.V_stringn_from_liststringn_joinn(args, ", _ ")
 			if argnames != "" {
 				argnames = "_ " + argnames
 			}
@@ -1347,12 +1366,12 @@ func LangFuncLambdaFooter(
 		case langkotlin:
 			sreturn = lineindent2 + "output"
 			if outputnum > 0 {
-				sreturn += "_" + StringFromInt(outputnum)
+				sreturn += "_" + vx_core.V_stringn_from_intn(outputnum)
 			}
 		default:
 			sreturn = lineindent2 + "return output"
 			if outputnum > 0 {
-				sreturn += "_" + StringFromInt(outputnum)
+				sreturn += "_" + vx_core.V_stringn_from_intn(outputnum)
 			}
 			sreturn += lang.lineend
 		}
@@ -1423,7 +1442,7 @@ func LangFuncNativeAuto(
 			listargname = append(listargname, argname)
 		}
 	}
-	argnames := StringFromListStringJoin(listargname, ", ")
+	argnames := vx_core.V_stringn_from_liststringn_joinn(listargname, ", ")
 	output = LangPkgName(lang, fnc.pkgname) + lang.pkgref + "vx_" + LangFuncName(fnc) + "(" + argnames + ")" + lang.lineend
 	switch lang {
 	case langcpp:
@@ -1602,7 +1621,7 @@ func LangFuncVxFuncResolve(
 	fnc *vxfunc,
 	listargname []string) string {
 	output := ""
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	fntype := LangFuncIFnType(lang, fnc)
 	var returntype *vxtype
 	if fnc.generictype == nil {
@@ -1786,7 +1805,7 @@ func LangIfThen(
 	indent int,
 	ifclause string,
 	thenclause string) string {
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	output := ""
 	switch lang {
 	case langswift:
@@ -1845,7 +1864,7 @@ func LangIfElse(
 	lang *vxlang,
 	indent int,
 	elseclause string) string {
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	output := sindent + "} else {" + elseclause
 	return output
 }
@@ -1855,7 +1874,7 @@ func LangIfElseIf(
 	indent int,
 	ifclause string,
 	thenclause string) string {
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	output := ""
 	switch lang {
 	case langswift:
@@ -1875,7 +1894,7 @@ func LangIfElseType(
 	scastvar string,
 	isfuture bool,
 	thenclause string) string {
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	output := ""
 	switch lang {
 	case langcsharp:
@@ -1904,7 +1923,7 @@ func LangIfElseType(
 func LangIfEnd(
 	lang *vxlang,
 	indent int) string {
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	output := sindent + "}"
 	return output
 }
@@ -1922,29 +1941,29 @@ func LangImport(
 		importline = "#include \"" + pkgname + ".hpp\""
 	case langcsharp:
 	case langjava:
-		ipos := IntFromStringFindLast(pkgname, "/")
-		path := StringSubstring(pkgname, 0, ipos)
-		path = StringFromStringFindReplace(path, "/", ".")
-		name := StringSubstring(pkgname, ipos+1, len(pkgname))
-		name = StringUCaseFirst(name)
+		ipos := vx_core.V_intn_from_stringn_findlastn(pkgname, "/")
+		path := vx_core.V_stringn_from_string_startn_endn(pkgname, 0, ipos)
+		path = vx_core.V_stringn_from_stringn_findn_replacen(path, "/", ".")
+		name := vx_core.V_stringn_from_string_startn_endn(pkgname, ipos+1, len(pkgname))
+		name = vx_core.V_stringn_uppercasefirst(name)
 		importname := project.javadomain + "." + path + "." + name
 		importline = "import " + importname + lang.lineend
 	case langkotlin:
-		ipos := IntFromStringFindLast(pkgname, "/")
-		path := StringSubstring(pkgname, 0, ipos)
-		path = StringFromStringFindReplace(path, "/", ".")
+		ipos := vx_core.V_intn_from_stringn_findlastn(pkgname, "/")
+		path := vx_core.V_stringn_from_string_startn_endn(pkgname, 0, ipos)
+		path = vx_core.V_stringn_from_stringn_findn_replacen(path, "/", ".")
 		importname := project.javadomain + "." + path + ".*"
 		importline = "import " + importname
 	case langswift:
-		ipos := IntFromStringFind(pkgname, "/")
-		path := StringSubstring(pkgname, 0, ipos)
-		path = StringUCaseFirst(path)
+		ipos := vx_core.V_intn_from_stringn_findn(pkgname, "/")
+		path := vx_core.V_stringn_from_string_startn_endn(pkgname, 0, ipos)
+		path = vx_core.V_stringn_uppercasefirst(path)
 		importline = "import " + path
 	default:
-		path := StringFromStringFindReplace(pkgname, "/", ".")
+		path := vx_core.V_stringn_from_stringn_findn_replacen(pkgname, "/", ".")
 		importline = "import " + path + lang.lineend
 	}
-	if !BooleanFromStringContains(imports, importline) {
+	if !vx_core.V_booleann_from_stringn_containsn(imports, importline) {
 		output = importline + "\n"
 	}
 	return output
@@ -1958,7 +1977,7 @@ func LangIndent(
 	if line {
 		output += "\n"
 	}
-	output += StringRepeat(lang.indent, indent)
+	output += vx_core.V_stringn_from_stringn_repeatn(lang.indent, indent)
 	return output
 }
 
@@ -2017,8 +2036,8 @@ func LangNamespaceOpenClose(
 				"\n"
 			namespaceclose = "\n}\n"
 		} else {
-			ipos := IntFromStringFindLast(pkgname, ".")
-			after := StringSubstring(pkgname, ipos+1, len(pkgname))
+			ipos := vx_core.V_intn_from_stringn_findlastn(pkgname, ".")
+			after := vx_core.V_stringn_from_string_startn_endn(pkgname, ipos+1, len(pkgname))
 			namespaceopen = "\npublic static class " + after + " {\n\n"
 			namespaceclose = "\n}\n"
 		}
@@ -2071,7 +2090,7 @@ func LangOverride(
 			override3 = "override "
 		}
 	case langjava:
-		override1 = "\n" + StringRepeat("  ", indent) + "@Override"
+		override1 = "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent) + "@Override"
 	case langkotlin:
 		if !isinterface {
 			override2 = "override "
@@ -2101,41 +2120,41 @@ func LangPackageImports(
 	output := ""
 	switch lang {
 	case langjava:
-		if BooleanFromStringContains(body, "Arrays.") {
+		if vx_core.V_booleann_from_stringn_containsn(body, "Arrays.") {
 			output += "\nimport java.util.Arrays" + lang.lineend
 		}
-		if BooleanFromStringContains(body, " ArrayList<") {
+		if vx_core.V_booleann_from_stringn_containsn(body, " ArrayList<") {
 			output += "\nimport java.util.ArrayList" + lang.lineend
 		}
-		if BooleanFromStringContains(body, "Collections.") {
+		if vx_core.V_booleann_from_stringn_containsn(body, "Collections.") {
 			output += "\nimport java.util.Collections" + lang.lineend
 		}
-		if BooleanFromStringContains(body, " "+lang.future+"<") {
+		if vx_core.V_booleann_from_stringn_containsn(body, " "+lang.future+"<") {
 			output += "\nimport java.util.concurrent." + lang.future + lang.lineend
 		}
-		if BooleanFromStringContains(body, " ConcurrentLinkedDeque<") {
+		if vx_core.V_booleann_from_stringn_containsn(body, " ConcurrentLinkedDeque<") {
 			output += "\nimport java.util.concurrent.ConcurrentLinkedDeque" + lang.lineend
 		}
-		if BooleanFromStringContains(body, " ConcurrentHashMap<") {
+		if vx_core.V_booleann_from_stringn_containsn(body, " ConcurrentHashMap<") {
 			output += "\nimport java.util.concurrent.ConcurrentHashMap" + lang.lineend
 		}
-		if BooleanFromStringContains(body, " Deque<") {
+		if vx_core.V_booleann_from_stringn_containsn(body, " Deque<") {
 			output += "\nimport java.util.Deque" + lang.lineend
 		}
-		if BooleanFromStringContains(body, " LinkedHashMap<") {
+		if vx_core.V_booleann_from_stringn_containsn(body, " LinkedHashMap<") {
 			output += "\nimport java.util.LinkedHashMap" + lang.lineend
 		}
-		if BooleanFromStringContains(body, " List<") {
+		if vx_core.V_booleann_from_stringn_containsn(body, " List<") {
 			output += "\nimport java.util.List" + lang.lineend
 		}
-		if BooleanFromStringContains(body, " Map<") {
+		if vx_core.V_booleann_from_stringn_containsn(body, " Map<") {
 			output += "\nimport java.util.Map" + lang.lineend
 		}
-		if BooleanFromStringContains(body, " Set<") {
+		if vx_core.V_booleann_from_stringn_containsn(body, " Set<") {
 			output += "\nimport java.util.Set" + lang.lineend
 		}
 	case langkotlin:
-		if BooleanFromStringContains(body, " "+lang.future+"<") {
+		if vx_core.V_booleann_from_stringn_containsn(body, " "+lang.future+"<") {
 			output += "\nimport java.util.concurrent." + lang.future + lang.lineend
 		}
 	case langswift:
@@ -2165,14 +2184,14 @@ func LangPackageImports(
 				if lib.pkg != nil {
 					switch lang {
 					case langcsharp, langswift:
-						libpath = StringUCaseFirstFromStringDelim(libpkgpath, "/")
+						libpath = vx_core.V_stringn_ucasefirst_from_stringn_delimn(libpkgpath, "/")
 					case langjava, langkotlin:
 						libprefix := pkgpath
 						libprefix = lib.pkg.project.javadomain
 						libpath = libprefix + "/" + libpkgpath + "*"
 					}
 				}
-				libpath = StringFromStringFindReplace(libpath, "/", ".")
+				libpath = vx_core.V_stringn_from_stringn_findn_replacen(libpath, "/", ".")
 			}
 			if !isskip {
 				importline := ""
@@ -2181,7 +2200,7 @@ func LangPackageImports(
 				case langjava, langkotlin:
 					importline = "\nimport " + libpath + lang.lineend
 				}
-				if IntFromStringFind(output, importline) < 0 {
+				if vx_core.V_intn_from_stringn_findn(output, importline) < 0 {
 					output += importline
 				}
 			}
@@ -2200,10 +2219,10 @@ func LangNativePackageLine(
 	output := ""
 	switch lang {
 	case langcsharp:
-		ipos := IntFromStringFindLast(pkgname, "/")
-		csnamespace := StringSubstring(pkgname, 0, ipos)
-		csnamespace = StringFromStringFindReplace(csnamespace, "/", ".")
-		csnamespace = StringUCaseFirstFromStringDelim(csnamespace, ".")
+		ipos := vx_core.V_intn_from_stringn_findlastn(pkgname, "/")
+		csnamespace := vx_core.V_stringn_from_string_startn_endn(pkgname, 0, ipos)
+		csnamespace = vx_core.V_stringn_from_stringn_findn_replacen(csnamespace, "/", ".")
+		csnamespace = vx_core.V_stringn_ucasefirst_from_stringn_delimn(csnamespace, ".")
 		output = "namespace " + csnamespace + lang.lineend + "\n"
 	case langjava, langkotlin:
 		output = "package " + pkgpath + lang.lineend + "\n"
@@ -2220,34 +2239,34 @@ func LangPackagePathFromPrefixName(
 	name := ""
 	switch lang {
 	case langcsharp:
-		pkgpath = pkgprefix + StringUCaseFirstFromStringDelim(pkgname, "/")
-		ipos := IntFromStringFindLast(pkgpath, "/")
-		name = StringSubstring(pkgpath, ipos+1, len(pkgpath))
-		pkgpath = StringSubstring(pkgpath, 0, ipos)
-		pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
+		pkgpath = pkgprefix + vx_core.V_stringn_ucasefirst_from_stringn_delimn(pkgname, "/")
+		ipos := vx_core.V_intn_from_stringn_findlastn(pkgpath, "/")
+		name = vx_core.V_stringn_from_string_startn_endn(pkgpath, ipos+1, len(pkgpath))
+		pkgpath = vx_core.V_stringn_from_string_startn_endn(pkgpath, 0, ipos)
+		pkgpath = vx_core.V_stringn_from_stringn_findn_replacen(pkgpath, "/", ".")
 		pkgpath = LangFromName(pkgpath)
 		name = LangPkgName(lang, name)
 	case langkotlin:
 		pkgpath = pkgprefix + pkgname
-		ipos := IntFromStringFindLast(pkgpath, "/")
-		pkgpath = StringSubstring(pkgpath, 0, ipos)
-		pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
+		ipos := vx_core.V_intn_from_stringn_findlastn(pkgpath, "/")
+		pkgpath = vx_core.V_stringn_from_string_startn_endn(pkgpath, 0, ipos)
+		pkgpath = vx_core.V_stringn_from_stringn_findn_replacen(pkgpath, "/", ".")
 		pkgpath = LangFromName(pkgpath)
-		name = StringFromStringFindReplace(pkgname, "/", "_")
+		name = vx_core.V_stringn_from_stringn_findn_replacen(pkgname, "/", "_")
 		name = LangPkgName(lang, name)
 	case langswift:
 		pkgpath = pkgprefix + pkgname
-		ipos := IntFromStringFindLast(pkgpath, "/")
-		pkgpath = StringSubstring(pkgpath, 0, ipos)
-		pkgpath = StringFromStringFindReplace(pkgpath, "/", "_")
+		ipos := vx_core.V_intn_from_stringn_findlastn(pkgpath, "/")
+		pkgpath = vx_core.V_stringn_from_string_startn_endn(pkgpath, 0, ipos)
+		pkgpath = vx_core.V_stringn_from_stringn_findn_replacen(pkgpath, "/", "_")
 		pkgpath = LangFromName(pkgpath)
 		name = LangPkgName(lang, pkgname)
 	default:
 		pkgpath = pkgprefix + pkgname
-		ipos := IntFromStringFindLast(pkgpath, "/")
-		name = StringSubstring(pkgpath, ipos+1, len(pkgpath))
-		pkgpath = StringSubstring(pkgpath, 0, ipos)
-		pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
+		ipos := vx_core.V_intn_from_stringn_findlastn(pkgpath, "/")
+		name = vx_core.V_stringn_from_string_startn_endn(pkgpath, ipos+1, len(pkgpath))
+		pkgpath = vx_core.V_stringn_from_string_startn_endn(pkgpath, 0, ipos)
+		pkgpath = vx_core.V_stringn_from_stringn_findn_replacen(pkgpath, "/", ".")
 		pkgpath = LangFromName(pkgpath)
 		name = LangPkgName(lang, name)
 	}
@@ -2310,7 +2329,7 @@ func LangPackageSubPrefixSubDomainPath(
 	case langjava, langkotlin:
 		subproject := pkg.project
 		subprefix = subproject.javadomain + "/"
-		subdomainpath = StringFromStringFindReplace(subprefix, ".", "/")
+		subdomainpath = vx_core.V_stringn_from_stringn_findn_replacen(subprefix, ".", "/")
 	case langswift:
 	}
 	return subprefix, subdomainpath
@@ -2347,23 +2366,23 @@ func LangPkgName(
 	output := ""
 	switch lang {
 	case langcsharp:
-		output = StringUCaseFirstFromStringDelim(pkgname, "/")
-		output = StringFromStringFindReplace(output, "/", ".")
+		output = vx_core.V_stringn_ucasefirst_from_stringn_delimn(pkgname, "/")
+		output = vx_core.V_stringn_from_stringn_findn_replacen(output, "/", ".")
 	case langjava:
-		ipos := IntFromStringFindLast(pkgname, "/")
-		output = StringSubstring(pkgname, ipos+1, len(pkgname))
-		output = StringUCaseFirst(output)
+		ipos := vx_core.V_intn_from_stringn_findlastn(pkgname, "/")
+		output = vx_core.V_stringn_from_string_startn_endn(pkgname, ipos+1, len(pkgname))
+		output = vx_core.V_stringn_uppercasefirst(output)
 	case langswift:
-		output = StringUCaseFirstFromStringDelim(pkgname, "/")
-		output = StringFromStringFindReplace(output, "/", "_")
+		output = vx_core.V_stringn_ucasefirst_from_stringn_delimn(pkgname, "/")
+		output = vx_core.V_stringn_from_stringn_findn_replacen(output, "/", "_")
 	default:
 		output = pkgname
 	}
-	output = StringFromStringFindReplace(output, "<", "lt")
-	output = StringFromStringFindReplace(output, ">", "gt")
-	output = StringFromStringFindReplace(output, "?", "is")
-	output = StringFromStringFindReplace(output, "-", "_")
-	output = StringFromStringFindReplace(output, "/", "_")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "<", "lt")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, ">", "gt")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "?", "is")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "-", "_")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(output, "/", "_")
 	return output
 }
 
@@ -2373,7 +2392,7 @@ func LangNativePkgpath(
 	output := pkgpath
 	switch lang {
 	case langcsharp, langswift:
-		output = StringUCaseFirstFromStringDelim(
+		output = vx_core.V_stringn_ucasefirst_from_stringn_delimn(
 			pkgpath, "/")
 	}
 	return output
@@ -2603,17 +2622,17 @@ func LangTestImport(
 	case langcsharp:
 		importline = "using Xunit" + lang.lineend
 	case langjava:
-		ipos := IntFromStringFindLast(pkgname, "/")
-		path := StringSubstring(pkgname, 0, ipos)
-		path = StringFromStringFindReplace(path, "/", ".")
-		name := StringSubstring(pkgname, ipos+1, len(pkgname))
-		name = StringUCaseFirst(name)
+		ipos := vx_core.V_intn_from_stringn_findlastn(pkgname, "/")
+		path := vx_core.V_stringn_from_string_startn_endn(pkgname, 0, ipos)
+		path = vx_core.V_stringn_from_stringn_findn_replacen(path, "/", ".")
+		name := vx_core.V_stringn_from_string_startn_endn(pkgname, ipos+1, len(pkgname))
+		name = vx_core.V_stringn_uppercasefirst(name)
 		importname := project.javadomain + "." + path + "." + name + "Test"
 		importline = "import " + importname + lang.lineend
 	case langkotlin:
-		ipos := IntFromStringFindLast(pkgname, "/")
-		path := StringSubstring(pkgname, 0, ipos)
-		path = StringFromStringFindReplace(path, "/", ".")
+		ipos := vx_core.V_intn_from_stringn_findlastn(pkgname, "/")
+		path := vx_core.V_stringn_from_string_startn_endn(pkgname, 0, ipos)
+		path = vx_core.V_stringn_from_stringn_findn_replacen(path, "/", ".")
 		importname := project.javadomain + "." + path + ".*"
 		importline = "import " + importname + lang.lineend
 	case langswift:
@@ -2621,7 +2640,9 @@ func LangTestImport(
 			"import VxTest" +
 			"\nimport TestLib"
 	}
-	if !BooleanFromStringContains(imports, importline) {
+	if !vx_core.V_booleann_from_stringn_containsn(
+		imports,
+		importline) {
 		output = importline + "\n"
 	}
 	return output
@@ -2899,7 +2920,7 @@ func LangTestPackage(
 	case langcsharp:
 		output = "" +
 			"\n  [Fact]" +
-			"\n  public void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
+			"\n  public void test_" + vx_core.V_stringn_from_stringn_findn_replacen(pkg.name, "/", "_") + "() {" +
 			LangVar(lang, 2, testpackagetype,
 				"testpackage",
 				LangFuncCallMethod(lang, 2,
@@ -2917,7 +2938,7 @@ func LangTestPackage(
 		output = "" +
 			"\n  @Test" +
 			"\n  @DisplayName(\"" + pkg.name + "\")" +
-			"\n  void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
+			"\n  void test_" + vx_core.V_stringn_from_stringn_findn_replacen(pkg.name, "/", "_") + "() {" +
 			"\n    com.vxlisp.vx.Test.Type_testpackage testpackage = " + LangPkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
 			"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
 			"\n  }" +
@@ -2926,14 +2947,14 @@ func LangTestPackage(
 		output = "" +
 			"\n  @Test" +
 			"\n  @DisplayName(\"" + pkg.name + "\")" +
-			"\n  fun test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() : Unit {" +
+			"\n  fun test_" + vx_core.V_stringn_from_stringn_findn_replacen(pkg.name, "/", "_") + "() : Unit {" +
 			"\n    val testpackage : vx_test.Type_testpackage = " + LangPkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
 			"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
 			"\n  }" +
 			"\n"
 	case langswift:
 		output = "" +
-			"\n  func test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
+			"\n  func test_" + vx_core.V_stringn_from_stringn_findn_replacen(pkg.name, "/", "_") + "() {" +
 			LangVar(lang, 2, testpackagetype,
 				"testpackage",
 				LangPkgName(lang, pkg.name)+
@@ -3002,13 +3023,13 @@ func LangTestPackages(
 	for _, pkg := range listpackage {
 		iscontinue := true
 		if len(lang.filewhitelist) > 0 {
-			iscontinue = BooleanFromListStringContains(lang.filewhitelist, pkg.name)
+			iscontinue = vx_core.V_booleann_from_liststringn_containsn(lang.filewhitelist, pkg.name)
 		}
 		if len(lang.fileblacklist) > 0 {
-			iscontinue = !BooleanFromListStringContains(lang.fileblacklist, pkg.name)
+			iscontinue = !vx_core.V_booleann_from_liststringn_containsn(lang.fileblacklist, pkg.name)
 		}
 		if command.filter == "" {
-		} else if !BooleanFromStringStarts(command.filter, pkg.name) {
+		} else if !vx_core.V_booleann_from_stringn_startsn(command.filter, pkg.name) {
 			iscontinue = false
 		}
 		if iscontinue {
@@ -3037,18 +3058,18 @@ func LangTestResourcesPath(
 	path := cmd.path
 	switch lang {
 	case langjava:
-		ipos := IntFromStringFindLast(path, "/test/")
+		ipos := vx_core.V_intn_from_stringn_findlastn(path, "/test/")
 		if ipos >= 0 {
 			path = path[0 : ipos+5]
 		}
 	}
-	ipos := IntFromStringFind(path, "/"+lang.name+"/")
+	ipos := vx_core.V_intn_from_stringn_findn(path, "/"+lang.name+"/")
 	if ipos >= 0 {
 		path = path[ipos+len(lang.name)+2:]
 	}
 	switch lang {
 	case langkotlin:
-		if BooleanFromStringStarts(path, "app/") {
+		if vx_core.V_booleann_from_stringn_startsn(path, "app/") {
 			path = path[4:]
 		}
 	}
@@ -3117,8 +3138,8 @@ func LangTestWriteTestSuite(
 			"\n  }" +
 			"\n"
 	case langjava:
-		body = StringFromStringFindReplace(body, " Core.", " com.vxlisp.vx.Core.")
-		body = StringFromStringFindReplace(body, " Test.", " com.vxlisp.vx.Test.")
+		body = vx_core.V_stringn_from_stringn_findn_replacen(body, " Core.", " com.vxlisp.vx.Core.")
+		body = vx_core.V_stringn_from_stringn_findn_replacen(body, " Test.", " com.vxlisp.vx.Test.")
 		output = "" +
 			"\n  @Test" +
 			"\n  @DisplayName(\"writetestsuite\")" +
@@ -3273,7 +3294,7 @@ func LangTypeGeneric(
 				lang, typ)
 			switch lang {
 			case langswift:
-				if BooleanFromStringStarts(typename, "any ") {
+				if vx_core.V_booleann_from_stringn_startsn(typename, "any ") {
 					typename = typename[4:]
 				}
 			}
@@ -3328,15 +3349,15 @@ func LangTypeInterfaceCustom(
 	ipos1 := 0
 	switch lang {
 	case langswift:
-		if BooleanFromStringStarts(customline, "public ") {
+		if vx_core.V_booleann_from_stringn_startsn(customline, "public ") {
 			ipos1 += 7
 		}
 	default:
-		if BooleanFromStringStarts(customline, "override ") {
+		if vx_core.V_booleann_from_stringn_startsn(customline, "override ") {
 			ipos1 += 9
 		}
 	}
-	ipos2 := IntFromStringFindLast(
+	ipos2 := vx_core.V_intn_from_stringn_findlastn(
 		customline, "{")
 	output := customline[ipos1:ipos2-1] + lang.lineend
 	return output
@@ -3356,7 +3377,7 @@ func LangTypeInterfaceHeader(
 		extendpart := LangTypeNameExtends(lang, extendtype)
 		extendtexts = append(extendtexts, extendpart)
 	}
-	extends = StringFromListStringJoin(extendtexts, ", ")
+	extends = vx_core.V_stringn_from_liststringn_joinn(extendtexts, ", ")
 	switch lang {
 	case langcsharp:
 		if extends != "" {
@@ -3732,9 +3753,9 @@ func LangTypeNameSimple(
 			name = LangFromName(typ.name)
 		} else if typ.isgeneric {
 			if simple {
-				if BooleanFromStringStarts(alias, "generic-") {
-					alias = StringFromStringFindReplace(alias, "generic-", "")
-					ipos := IntFromStringFindLast(alias, "-")
+				if vx_core.V_booleann_from_stringn_startsn(alias, "generic-") {
+					alias = vx_core.V_stringn_from_stringn_findn_replacen(alias, "generic-", "")
+					ipos := vx_core.V_intn_from_stringn_findlastn(alias, "-")
 					alias = alias[0:ipos]
 				}
 			} else {
@@ -4098,7 +4119,7 @@ func LangVarAll(
 			if varvalue == ":new" {
 				typetext = "Mutable" + typetext
 				svalue = "ArrayList<" + LangNameTypeFullFromType(lang, subtype) + ">()"
-			} else if BooleanFromStringStarts(svalue, "ArrayList<") {
+			} else if vx_core.V_booleann_from_stringn_startsn(svalue, "ArrayList<") {
 				typetext = "Mutable" + typetext
 			}
 		case rawmaptype:
@@ -4123,7 +4144,7 @@ func LangVarAll(
 			if varvalue == ":new" {
 				typetext = "Mutable" + typetext
 				svalue = "ArrayList<Any>()"
-			} else if BooleanFromStringStarts(svalue, "ArrayList<") {
+			} else if vx_core.V_booleann_from_stringn_startsn(svalue, "ArrayList<") {
 				typetext = "Mutable" + typetext
 			}
 		default:
@@ -4193,7 +4214,7 @@ func LangVarAll(
 			}
 		}
 		if isfuture {
-			if BooleanFromStringStarts(typetext, "any ") {
+			if vx_core.V_booleann_from_stringn_startsn(typetext, "any ") {
 				typetext = typetext[4:]
 			}
 			typetext = lang.future
@@ -4289,7 +4310,7 @@ func LangVarClassAll(
 	isnullable bool,
 	varvalue string) string {
 	classname := LangTypeClassFull(lang, vartype)
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	svalue := LangVarValue(lang, vartype, varvalue)
 	output := sindent
 	switch lang {
@@ -4421,7 +4442,7 @@ func LangVarFloatPlus(
 	varname string,
 	value string) string {
 	output := ""
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	switch typ {
 	case rawstringtype:
 		value = LangFloatFromString(lang, value)
@@ -4447,7 +4468,7 @@ func LangVarIntPlus(
 	varname string,
 	value string) string {
 	output := ""
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	switch typ {
 	case rawstringtype:
 		value = LangIntFromString(lang, value)
@@ -4465,7 +4486,7 @@ func LangVarListAdd(
 	varname string,
 	value string) string {
 	output := ""
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	switch lang {
 	case langcpp:
 		output = sindent + varname + ".push_back(" + value + ")" + lang.lineend
@@ -4485,7 +4506,7 @@ func LangVarListAddList(
 	varname string,
 	value string) string {
 	output := ""
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	switch lang {
 	case langcsharp:
 		output = sindent + varname + ".AddRange(" + value + ")" + lang.lineend
@@ -4588,7 +4609,7 @@ func LangVarMapRemove(
 	varname string,
 	key string) string {
 	output := ""
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	switch lang {
 	default:
 		output = sindent + varname + ".remove(" + key + ")" + lang.lineend
@@ -4603,7 +4624,7 @@ func LangVarMapSet(
 	key string,
 	value string) string {
 	output := ""
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	switch lang {
 	default:
 		output = sindent + varname + ".put(" + key + ", " + value + ")" + lang.lineend
@@ -4631,7 +4652,7 @@ func LangVarStringPlus(
 	varname string,
 	value string) string {
 	output := ""
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	switch lang {
 	default:
 		output = sindent + varname + " += " + value + lang.lineend
@@ -4662,7 +4683,7 @@ func LangVarStringBuilderPlus(
 	varname string,
 	value string) string {
 	output := ""
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	switch typ {
 	case rawfloattype:
 		value = LangStringFromFloat(lang, value)

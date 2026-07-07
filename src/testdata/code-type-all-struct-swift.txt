@@ -1,0 +1,178 @@
+
+  // Type_struct
+  public class Type_struct {
+    var type_any : Vx_Core.Type_any = Vx_Core.e_any
+    var listkeyn : [String] = []
+  }
+  // Type_struct_generic
+  public class Type_struct_generic : Vx_Core.Type_generic {
+    // p_type_type
+    override public func p_type_type() -> Vx_Core.Type_type {
+      return t_struct
+    }
+  }
+  // Generic_struct
+  public class Generic_struct {
+    var type_any : Vx_Core.Type_any = Vx_Core.e_any
+    // p_any_from_keyn
+    public func p_any_from_keyn(
+      _ keyn : String
+    ) -> Type_any {
+      return e_any
+    }
+    // p_anymap
+    public func p_anymap(
+    ) -> Type_anymap {
+      return e_anymap
+    }
+    // p_listkeyn
+    public func p_listkeyn(
+    ) -> [String] {
+      let type_type : Vx_Core.Type_type = Vx_Core.v_type_from_any(self.type_any)
+      return Vx_Core.v_listkeyn_property_from_type(type_type)
+    }
+    // p_mapany
+    public func p_mapany(
+    ) -> [String : Type_any] {
+      return [:]
+    }
+  }
+  // Generic_struct_struct
+  public class Generic_struct_struct : Vx_Core.Generic_struct {
+    var backref : Type_struct = e_struct
+  }
+  // Generic_struct_type
+  public class Generic_struct_type : Vx_Core.Generic_type {
+    // p_any_from_any
+    override public func p_any_from_any(
+      _ type_type : Vx_Core.Type_type,
+      _ type_any : Vx_Core.Type_any
+    ) -> Vx_Core.Type_any {
+      let value : Type_struct = v_struct_any_from_any(type_type, type_any)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+    // p_copy
+    override public func p_copy(
+      _ copyany : Vx_Core.Type_any,
+      _ type_anylist : Vx_Core.Type_anylist
+    ) -> Vx_Core.Type_any {
+      let copyval : Type_struct = v_struct_from_any(copyany)
+      let value : Type_struct = v_struct_copy(copyval, type_anylist)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+    // p_new
+    override public func p_new(
+      _ type_type : Vx_Core.Type_type,
+      _ type_anylist : Vx_Core.Type_anylist
+    ) -> Vx_Core.Type_any {
+      let value : Vx_Core.Type_struct = f_struct(type_anylist)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+  }
+  // v_struct_constructor
+  public static func v_struct_constructor(
+  ) -> Type_struct {
+    Vx_Core.v_global_reserve()
+    return Type_struct()
+  }
+  // v_struct_create
+  public static func v_struct_create(
+  ) -> Type_struct {
+    var output : Type_struct = v_struct_constructor()
+    v_struct_startup(output)
+    return output
+  }
+  // v_struct_register
+  public static func v_struct_register(
+  ) -> Vx_Core.Type_type {
+    v_struct_startup_type()
+    v_struct_startup_empty()
+    return t_struct
+  }
+  // v_struct_shutdown - mutating
+  public static func v_struct_shutdown(
+    _ value : Type_struct
+  ) {
+    let type_any : Vx_Core.Type_any = value.type_any
+    value.type_any = Vx_Core.e_any
+    if let generic_any : Generic_struct_any = type_any.generic_any {
+      generic_any.backref = nil
+    }
+    value.type_struct = Vx_Core.e_struct
+  }
+  // v_struct_startup - mutating
+  public static func v_struct_startup(
+    _ value : Type_struct
+  ) {
+    let generic_any : Generic_struct_any = Generic_struct_any()
+    generic_any.backref = value
+    value.type_any = Vx_Core.v_any_new_from_type_generic_any(
+      t_struct,
+      generic_any
+    )
+  }
+  // v_struct_startup_empty
+  public static func v_struct_startup_empty() {
+    v_struct_startup(e_struct)
+    Vx_Core.v_startup_e(
+      t_struct,
+      e_struct.type_any
+    )
+  }
+  // v_struct_startup_type
+  public static func v_struct_startup_type() -> Vx_Core.Type_type {
+    let type_type = t_struct
+    type_type.p_name = Vx_Core.v_string_from_stringn("vx/core/struct")
+    type_type.p_extends = Vx_Core.c_extends_struct
+    let generic_type : Vx_Core.Generic_type = Generic_struct_type()
+    Vx_Core.v_startup_t(
+      type_type,
+      generic_type
+    )
+    return type_type
+  }
+  // v_any_from_struct
+  public static func v_any_from_struct(
+    _ value : Vx_Core.Type_struct
+  ) -> Vx_Core.Type_any {
+    let output : Vx_Core.Type_any = value.type_any
+    return output
+  }
+  // v_struct_from_any
+  public static func v_struct_from_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_struct {
+    let generic_any : Vx_Core.Generic_any = Vx_Core.v_generic_any_from_any(type_any)
+    let output : Vx_Core.Type_struct = generic_any.p_type_struct()
+    return output
+  }
+  // v_struct_new_from_any_generic_struct
+  public static func v_struct_new_from_any_generic_struct(
+    _ type_any : Vx_Core.Type_any,
+    _ generic_struct : Vx_Core.Generic_struct
+  ) -> Vx_Core.Type_struct {
+    var output : Vx_Core.Type_struct = Vx_Core.Type_struct()
+    output.type_any = type_any
+    output.generic_struct = generic_struct
+    generic_struct.type_any = type_any
+    return output
+  }
+  // v_struct_copy
+  public static func v_struct_copy(
+    _ copyval : Vx_Core.Type_struct,
+    _ anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_struct {
+    return copyval
+  }
+  // f_struct
+  public static func f_struct(
+    _ anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_struct {
+    let output : Vx_Core.Type_struct = v_struct_copy(e_struct, anylist)
+    return output
+  }
+  public static let t_struct : Vx_Core.Type_type = Vx_Core.v_type_constructor()
+  public static let e_struct : Type_struct = v_struct_constructor()

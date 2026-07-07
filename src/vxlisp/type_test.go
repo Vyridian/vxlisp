@@ -52,7 +52,7 @@ func TestTypesParse(t *testing.T) {
 	if len(types) > 0 {
 		actual = StringFromType(types[0])
 	}
-	errortext := CompareText(expected, actual, 20, msgblock)
+	errortext := V_compareText(expected, actual, 20, msgblock)
 	if errortext != "" {
 		t.Error(errortext)
 	}

@@ -1,5 +1,9 @@
 package vxlisp
 
+import (
+	vx_core "vxlisp/vxlisp/vx/core"
+)
+
 type vxtype struct {
 	name           string
 	alias          string
@@ -53,13 +57,19 @@ var argtype = NewType("vx/core/arg")
 
 var arglisttype = NewTypeList("vx/core/arglist", argtype)
 
+var asynctype = NewType("vx/core/async")
+
 var booleantype = NewType("vx/core/boolean")
 
 var constdeftype = NewType("vx/core/constdef")
 
 var contexttype = NewContextType()
 
-var decimaltype = NewType("vx/core/decimal")
+var decimaltype = NewTypeFromNameAllowTypes(
+	"vx/core/decimal",
+	floattype,
+	inttype,
+	numbertype)
 
 var filetype = NewType("vx/data/file/file")
 
@@ -91,13 +101,28 @@ var maptype1 = NewTypeMap("vx/core/map1", anytype)
 
 var maptype2 = NewTypeMap("vx/core/map2", anytype)
 
-var msgtype = NewType("vx/core/msg")
+var msgtype = NewTypeStruct(
+	"vx/core/msg",
+	NewArgFromNameTypeFinal("code", stringtype, true),
+	NewArgFromNameTypeFinal("any", anytype, true),
+	NewArgFromNameTypeFinal("detail", anytype, true),
+	NewArgFromNameTypeFinal("path", stringtype, true),
+	NewArgFromNameTypeFinal("severity", inttype, true),
+	NewArgFromNameTypeFinal("text", stringtype, true))
 
-var msgblocktype = NewType("vx/core/msgblock")
+var msgblocktype = NewTypeStruct(
+	"vx/core/msgblock",
+	NewArgFromNameTypeFinal("msgs", msglisttype, true),
+	NewArgFromNameTypeFinal(
+		"msgblocks",
+		NewTypeList(
+			"vx/core/msgblocklist",
+			NewType("vx/core/msgblock")),
+		true))
 
-var msgblocklisttype = NewType("vx/core/msgblocklist")
+var msgblocklisttype = NewTypeList("vx/core/msgblocklist", msgblocktype)
 
-var msglisttype = NewType("vx/core/msglist")
+var msglisttype = NewTypeList("vx/core/msglist", msgtype)
 
 var nonetype = NewType("vx/core/none")
 
@@ -173,6 +198,8 @@ var testresulttype = NewTypeStruct("vx/test/testresult")
 
 var typedeftype = NewType("vx/core/typedef")
 
+var typetype = NewType("vx/core/type")
+
 var typelisttype = NewTypeList("vx/core/typelist", anytype)
 
 var unknowntype = NewType("vx/core/unknown")
@@ -201,7 +228,7 @@ func NewMapType() map[string]*vxtype {
 
 func NewType(typename string) *vxtype {
 	typ := new(vxtype)
-	pos := IntFromStringFindLast(typename, "/")
+	pos := vx_core.V_intn_from_stringn_findlastn(typename, "/")
 	if pos < 0 {
 		typ.name = typename
 	} else {
@@ -275,6 +302,14 @@ func NewTypeFromFunc(fnc *vxfunc) *vxtype {
 	return typ
 }
 
+func NewTypeFromNameAllowTypes(
+	typename string,
+	allowtypes ...*vxtype) *vxtype {
+	type_type := NewType(typename)
+	type_type.allowtypes = allowtypes
+	return type_type
+}
+
 func NewTypeList(typename string, basetype *vxtype) *vxtype {
 	typ := NewType(typename)
 	typ.extends = ":list"
@@ -321,9 +356,12 @@ func NewTypeMap(typename string, basetype *vxtype) *vxtype {
 	return typ
 }
 
-func NewTypeStruct(typename string) *vxtype {
+func NewTypeStruct(
+	typename string,
+	listproperty ...vxarg) *vxtype {
 	typ := NewType(typename)
 	typ.extends = ":struct"
+	typ.properties = listproperty
 	isfound := false
 	if BooleanFromStringEnds(typename, "-1") {
 		isfound = true
@@ -605,7 +643,7 @@ func ListNameFromListType(listtype []*vxtype) string {
 	for _, typ := range listtype {
 		names = append(names, typ.pkgname+"/"+typ.name)
 	}
-	return "[" + StringFromListStringJoin(names, " ") + "]"
+	return "[" + vx_core.V_stringn_from_liststringn_joinn(names, " ") + "]"
 }
 
 func ListNameFromMapType(maptype map[string]*vxtype) string {
@@ -621,7 +659,7 @@ func ListNameFromMapType(maptype map[string]*vxtype) string {
 			typ := maptype[key]
 			listname = append(listname, key+" "+typ.pkgname+"/"+typ.name)
 		}
-		output = "(typemap " + StringFromListStringJoin(listname, " ") + ")"
+		output = "(typemap " + vx_core.V_stringn_from_liststringn_joinn(listname, " ") + ")"
 	}
 	return output
 }
@@ -891,23 +929,23 @@ func MapGenericSetType(mapgeneric map[string]*vxtype, generic string, typ *vxtyp
 		mapgeneric = NewMapType()
 	}
 	mapgeneric[generic] = typ
-	if BooleanFromStringStarts(generic, "list-") {
+	if vx_core.V_booleann_from_stringn_startsn(generic, "list-") {
 		allowtype, ok := TypeAllowFromType(typ)
 		if ok {
 			switch NameFromType(allowtype) {
 			case "vx/core/any":
 			default:
-				generic = StringFromStringFindReplace(generic, "list-", "any-")
+				generic = vx_core.V_stringn_from_stringn_findn_replacen(generic, "list-", "any-")
 				mapgeneric[generic] = allowtype
 			}
 		}
-	} else if BooleanFromStringStarts(generic, "map-") {
+	} else if vx_core.V_booleann_from_stringn_startsn(generic, "map-") {
 		allowtype, ok := TypeAllowFromType(typ)
 		if ok {
 			switch NameFromType(allowtype) {
 			case "vx/core/any":
 			default:
-				generic = StringFromStringFindReplace(generic, "map-", "any-")
+				generic = vx_core.V_stringn_from_stringn_findn_replacen(generic, "map-", "any-")
 				mapgeneric[generic] = allowtype
 			}
 		}
@@ -973,7 +1011,7 @@ func StringFromTypeIndent(typ *vxtype, indent int) string {
 	initindent := ""
 	lineindent := "\n"
 	if indent > 0 {
-		sindent := StringRepeat(" ", indent)
+		sindent := vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 		lineindent += sindent
 		initindent = lineindent
 	}
@@ -1012,7 +1050,7 @@ func StringFromTypeIndent(typ *vxtype, indent int) string {
 func StringFromListTypeIndent(listtype []*vxtype, indent int) string {
 	lineindent := ""
 	if indent > 0 {
-		lineindent = "\n" + StringRepeat(" ", indent)
+		lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 	}
 	output := lineindent + "(typelist"
 	if len(listtype) > 0 {
@@ -1032,7 +1070,7 @@ func StringFromMapTypeIndent(maptype map[string]*vxtype, indent int) string {
 	initindent := ""
 	lineindent := "\n"
 	if indent > 0 {
-		sindent := StringRepeat(" ", indent)
+		sindent := vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 		lineindent += sindent
 		initindent = lineindent
 	}
@@ -1095,7 +1133,7 @@ func TypeFromTextblock(
 			typ.name = word
 		default:
 			if testcls {
-				if BooleanFromStringStarts(word, ":") {
+				if vx_core.V_booleann_from_stringn_startsn(word, ":") {
 					testcls = false
 					lastword = word
 				} else {
@@ -1183,7 +1221,7 @@ func TypeFromTextblock(
 								case ":...":
 									arg.multi = true
 								default:
-									if BooleanFromStringStarts(property, ":") {
+									if vx_core.V_booleann_from_stringn_startsn(property, ":") {
 										msg := NewMsgFromTextblock(
 											textblock, 0, 0, "", "Invalid Property", property, typ.properties)
 										msgblock = MsgblockAddError(msgblock, msg)
@@ -1221,7 +1259,7 @@ func TypeFromTextblock(
 					typ.convert = converts
 				}
 				lastword = ""
-			} else if BooleanFromStringStarts(word, ":") {
+			} else if vx_core.V_booleann_from_stringn_startsn(word, ":") {
 				switch word {
 				case ":", ":alias", ":allowfuncs", ":allowtypes", ":allowvalues", ":convert", ":create", ":default", ":deprecated", ":destroy", ":disallowfuncs", ":disallowtypes", ":disallowvalues", ":doc", ":extends", ":properties", ":traits":
 					lastword = word

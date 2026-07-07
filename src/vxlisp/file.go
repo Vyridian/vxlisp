@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	vx_core "vxlisp/vxlisp/vx/core"
 
 	"github.com/fsnotify/fsnotify"
 )
@@ -20,7 +21,8 @@ func NewFile() *vxfile {
 	return new(vxfile)
 }
 
-func BooleanExistsFromPath(path string) bool {
+func BooleanExistsFromPath(
+	path string) bool {
 	output := false
 	_, err := os.Stat(path)
 	if err == nil {
@@ -31,7 +33,9 @@ func BooleanExistsFromPath(path string) bool {
 	return output
 }
 
-func FolderCopyFromSourceTarget(sourcepath string, targetpath string) *vxmsgblock {
+func FolderCopyFromSourceTarget(
+	sourcepath string,
+	targetpath string) *vxmsgblock {
 	msgblock := NewMsgBlock("CopyFolderFromSourceTarget")
 	walkerror := filepath.Walk(sourcepath, func(path string, info fs.FileInfo, err error) error {
 		if err != nil {
@@ -39,7 +43,10 @@ func FolderCopyFromSourceTarget(sourcepath string, targetpath string) *vxmsgbloc
 		}
 
 		// copy to this path
-		path = StringFromStringFindReplace(path, "\\", "/")
+		path = vx_core.V_stringn_from_stringn_findn_replacen(
+			path,
+			"\\",
+			"/")
 		suffix := strings.TrimPrefix(path, sourcepath)
 		outpath := filepath.Join(targetpath, suffix)
 
@@ -90,7 +97,8 @@ func FolderCopyFromSourceTarget(sourcepath string, targetpath string) *vxmsgbloc
 	return msgblock
 }
 
-func ListenToPath(path string) {
+func ListenToPath(
+	path string) {
 	// creates a new file watcher
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
@@ -140,7 +148,10 @@ func ListStringReadFromPathExtension(
 				if info.IsDir() {
 				} else if extension != "" && !BooleanFromStringEnds(path, extension) {
 				} else {
-					path = StringFromStringFindReplace(path, "\\", "/")
+					path = vx_core.V_stringn_from_stringn_findn_replacen(
+						path,
+						"\\",
+						"/")
 					files = append(files, path)
 				}
 				return nil
@@ -163,9 +174,16 @@ func PathFromPathRelativePath(
 	basepath string,
 	relativepath string) string {
 	abspath, _ := PathAbsoluteFromPath(basepath)
-	abspath = StringFromStringFindReplace(abspath, "\\", "/")
-	listbasepath := ListStringFromStringSplit(abspath, "/")
-	listrelpath := ListStringFromStringSplit(relativepath, "/")
+	abspath = vx_core.V_stringn_from_stringn_findn_replacen(
+		abspath,
+		"\\",
+		"/")
+	listbasepath := vx_core.V_liststringn_from_stringn_splitn(
+		abspath,
+		"/")
+	listrelpath := vx_core.V_liststringn_from_stringn_splitn(
+		relativepath,
+		"/")
 	for _, relpath := range listrelpath {
 		switch relpath {
 		case ".":
@@ -177,7 +195,9 @@ func PathFromPathRelativePath(
 			listbasepath = append(listbasepath, relpath)
 		}
 	}
-	output := StringFromListStringJoin(listbasepath, "/")
+	output := vx_core.V_stringn_from_liststringn_joinn(
+		listbasepath,
+		"/")
 	return output
 }
 
@@ -188,7 +208,10 @@ func StringFromExec() string {
 		MsgLog(
 			err)
 	}
-	output = StringFromStringFindReplace(path, "\\", "/")
+	output = vx_core.V_stringn_from_stringn_findn_replacen(
+		path,
+		"\\",
+		"/")
 	return output
 }
 

@@ -217,7 +217,7 @@ func TestTextblockParse(t *testing.T) {
 	expectedblock.listtextblock = append(expectedblock.listtextblock, subblock)
 	expected := StringFromTextblock(expectedblock)
 	actual := StringFromTextblock(textblock)
-	errortext := CompareText(expected, actual, 10, msgblock)
+	errortext := V_compareText(expected, actual, 10, msgblock)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -236,13 +236,13 @@ func TestTextblockToTextWithin(t *testing.T) {
 	textblock := NewTextblockFromText(blocktext)
 	expected := "type"
 	actual := StringFromTextblockStartEnd(textblock, 1, 2, 1, 5)
-	errortext := CompareText(expected, actual, 20, msgblock)
+	errortext := V_compareText(expected, actual, 20, msgblock)
 	if errortext != "" {
 		t.Error(errortext)
 	}
 	expected = "(const c1)"
 	actual = StringFromTextblockStartEnd(textblock, 3, 1, 3, 10)
-	errortext = CompareText(expected, actual, 20, msgblock)
+	errortext = V_compareText(expected, actual, 20, msgblock)
 	if errortext != "" {
 		t.Error(errortext)
 	}

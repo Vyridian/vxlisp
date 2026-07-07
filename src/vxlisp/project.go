@@ -2,6 +2,7 @@ package vxlisp
 
 import (
 	"maps"
+	vx_core "vxlisp/vxlisp/vx/core"
 )
 
 type vxpath struct {
@@ -106,7 +107,7 @@ func ExecuteProjectFromArgs(
 			}
 		}
 		projectpath, _ = PathAbsoluteFromPath(projectpath)
-		projectpath = StringFromStringFindReplace(
+		projectpath = vx_core.V_stringn_from_stringn_findn_replacen(
 			projectpath, "\\", "/")
 		project, msgs := ProjectReadFromPath(projectpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -133,7 +134,7 @@ func FuncFromProjectFuncname(
 	funcname string) *vxfunc {
 	output := emptyfunc
 	if funcname != "" {
-		pos := IntFromStringFindLast(funcname, "/")
+		pos := vx_core.V_intn_from_stringn_findlastn(funcname, "/")
 		if pos > 0 {
 			packagename := funcname[0:pos]
 			fncname := funcname[pos+1:]
@@ -369,7 +370,7 @@ func ProjectReadAllFromPath(
 		}
 		if !msgblock.iserror {
 			for _, filename := range extrafilenames {
-				extraname := StringFromStringFindReplace(
+				extraname := vx_core.V_stringn_from_stringn_findn_replacen(
 					filename, projectpath+"/", "")
 				extratext, msgs := StringFromReadTextFile(filename)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -427,7 +428,7 @@ func ProjectFromTextblock(
 							switch wordtextblock.blocktype {
 							case "//":
 							default:
-								if BooleanFromStringStarts(word, ":") {
+								if vx_core.V_booleann_from_stringn_startsn(word, ":") {
 									switch word {
 									case ":author", ":cmds", ":doc", ":javadomain", ":libs", ":paths", ":projects", ":version":
 										lastword = word
@@ -489,7 +490,7 @@ func StringFromCmdIndent(
 	indent int) string {
 	lineindent := ""
 	if indent > 0 {
-		lineindent = "\n" + StringRepeat(" ", indent)
+		lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 	}
 	output := "" +
 		lineindent + "(cmd" +
@@ -511,7 +512,7 @@ func StringFromListCmdIndent(
 	output := ""
 	lineindent := ""
 	if indent > 0 {
-		lineindent = "\n" + StringRepeat(" ", indent)
+		lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 	}
 	output = lineindent + "(cmdlist"
 	for _, cmd := range cmds {
@@ -535,7 +536,7 @@ func StringFromListPathIndent(
 	} else {
 		lineindent := ""
 		if indent > 0 {
-			lineindent = "\n" + StringRepeat(" ", indent)
+			lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 		}
 		output = lineindent + "(pathlist"
 		for _, path := range listpath {
@@ -557,7 +558,7 @@ func StringFromPathIndent(
 	lineindent := ""
 	startindent := ""
 	if indent > 0 {
-		lineindent = "\n" + StringRepeat(" ", indent)
+		lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 		startindent = lineindent
 	}
 	output := "" +
@@ -579,7 +580,7 @@ func StringFromProjectIndent(
 	var pkgnames []string
 	lineindent := ""
 	startindent := ""
-	lineindent = "\n" + StringRepeat(" ", indent)
+	lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 	if indent > 0 {
 		startindent = lineindent
 	}
@@ -598,7 +599,7 @@ func StringFromProjectIndent(
 		project.listlib, indent+2) +
 		lineindent + " :paths " + StringFromListPathIndent(
 		project.listpath, indent+2) +
-		lineindent + " :packages [" + StringFromListStringJoin(
+		lineindent + " :packages [" + vx_core.V_stringn_from_liststringn_joinn(
 		pkgnames, " ") + "]" +
 		lineindent + " :projects " + StringFromListProjectIndent(
 		project.listproject, 2) + ")"
@@ -614,14 +615,14 @@ func StringFromListProjectIndent(
 	} else {
 		lineindent := ""
 		if indent > 0 {
-			lineindent = "\n" + StringRepeat(" ", indent)
+			lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 		}
 		var listtextproject []string
 		for _, project := range listproject {
 			textproject := StringFromProjectIndent(project, indent+1)
 			listtextproject = append(listtextproject, textproject)
 		}
-		output = lineindent + "(projectlist" + StringFromListStringJoin(listtextproject, lineindent+" ") + ")"
+		output = lineindent + "(projectlist" + vx_core.V_stringn_from_liststringn_joinn(listtextproject, lineindent+" ") + ")"
 	}
 	return output
 }
@@ -644,7 +645,7 @@ func StringPathFromProjectCmd(
 			case pathtext:
 				pathtext = pathpath
 			default:
-				pathtext = StringFromStringFindReplace(pathtext, "*"+pathname+"*", path.path)
+				pathtext = vx_core.V_stringn_from_stringn_findn_replacen(pathtext, "*"+pathname+"*", path.path)
 			}
 		}
 	}

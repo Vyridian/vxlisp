@@ -1,5 +1,9 @@
 package vxlisp
 
+import (
+	vx_core "vxlisp/vxlisp/vx/core"
+)
+
 type vxscope struct {
 	pkgname  string
 	pkgshort string
@@ -30,7 +34,7 @@ func ConstFromListScope(listscope []vxscope, pkgname string, cnstname string) (*
 	var cnst *vxconst
 	var ok = false
 	if pkgname == "" {
-		var ipos = IntFromStringFindLast(cnstname, "/")
+		var ipos = vx_core.V_intn_from_stringn_findlastn(cnstname, "/")
 		if ipos > 0 {
 			cnstname = cnstname[ipos+1:]
 		}
@@ -124,11 +128,11 @@ func StringFromScopeIndent(scope vxscope, indent string) string {
 	output := "" +
 		indent + "(scope" +
 		"\n" + indent + " :name    " + scope.pkgname +
-		"\n" + indent + " :argmap  " + StringFromListStringJoin(ListKeyFromMapArg(scope.maparg), ", ") +
+		"\n" + indent + " :argmap  " + vx_core.V_stringn_from_liststringn_joinn(ListKeyFromMapArg(scope.maparg), ", ") +
 		//"\n" + indent + " :argmap  " + TextFromArgMapIndent(scope.argmap, indent) +
-		"\n" + indent + " :cnstmap " + StringFromListStringJoin(ListKeyFromMapConst(scope.mapconst), ", ") +
-		"\n" + indent + " :funcmap " + StringFromListStringJoin(ListKeyFromMapFunc(scope.mapfunc), ", ") +
-		"\n" + indent + " :typemap " + StringFromListStringJoin(ListKeyFromMapType(scope.maptype), ", ") +
+		"\n" + indent + " :cnstmap " + vx_core.V_stringn_from_liststringn_joinn(ListKeyFromMapConst(scope.mapconst), ", ") +
+		"\n" + indent + " :funcmap " + vx_core.V_stringn_from_liststringn_joinn(ListKeyFromMapFunc(scope.mapfunc), ", ") +
+		"\n" + indent + " :typemap " + vx_core.V_stringn_from_liststringn_joinn(ListKeyFromMapType(scope.maptype), ", ") +
 		"\n" + indent + ")" +
 		"\n"
 	return output
@@ -152,21 +156,21 @@ func TypeFromListScope(listscope []vxscope, pkgname string, typename string, pat
 	var ok = false
 	isgeneric := false
 	origname := typename
-	ipos := IntFromStringFindLast(typename, "-1")
+	ipos := vx_core.V_intn_from_stringn_findlastn(typename, "-1")
 	if ipos < 0 {
-		ipos = IntFromStringFindLast(typename, "-2")
+		ipos = vx_core.V_intn_from_stringn_findlastn(typename, "-2")
 	}
 	if ipos < 0 {
-		ipos = IntFromStringFindLast(typename, "-3")
+		ipos = vx_core.V_intn_from_stringn_findlastn(typename, "-3")
 	}
 	if ipos < 0 {
-		ipos = IntFromStringFindLast(typename, "-4")
+		ipos = vx_core.V_intn_from_stringn_findlastn(typename, "-4")
 	}
 	if ipos < 0 {
-		ipos = IntFromStringFindLast(typename, "-5")
+		ipos = vx_core.V_intn_from_stringn_findlastn(typename, "-5")
 	}
 	if ipos >= 0 {
-		typename = StringSubstring(typename, 0, ipos)
+		typename = vx_core.V_stringn_from_string_startn_endn(typename, 0, ipos)
 		isgeneric = true
 	}
 	for _, scope := range listscope {

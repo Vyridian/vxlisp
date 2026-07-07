@@ -1,5 +1,9 @@
 package vxlisp
 
+import (
+	vx_core "vxlisp/vxlisp/vx/core"
+)
+
 type vxcommand struct {
 	name     string
 	code     string
@@ -60,7 +64,7 @@ func CommandFromTextblock(
 					switch proptextblock.blocktype {
 					case "//":
 					default:
-						if BooleanFromStringStarts(prop, ":") {
+						if vx_core.V_booleann_from_stringn_startsn(prop, ":") {
 							switch prop {
 							case ":code", ":config", ":context", ":doc", ":filter",
 								":lang", ":main", ":name", ":path", ":port":

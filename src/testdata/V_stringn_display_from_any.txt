@@ -1,0 +1,61 @@
+// :any
+(type any)
+// :any
+(empty any)
+// :string
+"Hello World"
+// :stringlist
+(stringlist
+ "Hello"
+ "World")
+// :stringmap
+(stringmap
+ :a "1"
+ :b "2")
+// :anylist
+(anylist
+ "Hello"
+ "World")
+// :var
+(var
+ :name "myvar"
+ :type string)
+// :func
+(func
+ :type boolean<-booleann
+ :return boolean
+ :varlist
+  (varlist
+   (var
+    :name "booleann"
+    :type booleann))
+ :value
+  (anylist
+   (var-declare
+    :var
+     (var
+      :name "output"
+      :type boolean
+      :mutable true))
+   (if
+    :return-type boolean
+    :thenelselist
+     (thenelselist
+      (thenelse
+       :code ":then"
+       :if
+        (var
+         :name "booleann"
+         :type booleann)
+       :then
+        (var-set
+         :var
+          (var
+           :name "output"
+           :type boolean
+           :mutable true)
+         :value true))))))
+// :func-declare
+(func-declare
+ :type boolean<-booleann
+ :prefix "v_")

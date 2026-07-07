@@ -167,7 +167,7 @@ func TestValueValidate(t *testing.T) {
 	value, _, msgs := ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
 	expected = NameFromType(expectedtype)
 	actual = NameFromType(value.vxtype)
-	errortext := CompareText(expected, actual, 20, msgs)
+	errortext := V_compareText(expected, actual, 20, msgs)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -195,7 +195,7 @@ func TestValueValidate(t *testing.T) {
 	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
 	expected = NameFromType(stringtype)
 	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
+	errortext = V_compareText(expected, actual, 20, msgs)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -207,7 +207,7 @@ func TestValueValidate(t *testing.T) {
 	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
 	expected = NameFromType(stringtype)
 	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
+	errortext = V_compareText(expected, actual, 20, msgs)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -221,7 +221,7 @@ func TestValueValidate(t *testing.T) {
 	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
 	expected = NameFromType(stringtype)
 	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
+	errortext = V_compareText(expected, actual, 20, msgs)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -235,7 +235,7 @@ func TestValueValidate(t *testing.T) {
 	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
 	expected = NameFromType(stringtype)
 	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
+	errortext = V_compareText(expected, actual, 20, msgs)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -316,7 +316,7 @@ func TestValueValidate(t *testing.T) {
 	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
 	expected = NameFromType(stringtype)
 	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
+	errortext = V_compareText(expected, actual, 20, msgs)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -348,7 +348,7 @@ func TestValueValidate(t *testing.T) {
 	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
 	expected = NameFromType(stringtype)
 	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
+	errortext = V_compareText(expected, actual, 20, msgs)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -363,7 +363,7 @@ func TestValueValidate(t *testing.T) {
 	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
 	expected = NameFromType(stringmaptype)
 	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
+	errortext = V_compareText(expected, actual, 20, msgs)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -377,7 +377,7 @@ func TestValueValidate(t *testing.T) {
 	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
 	expected = NameFromType(expectedtype)
 	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
+	errortext = V_compareText(expected, actual, 20, msgs)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -402,7 +402,7 @@ func TestValueValidate(t *testing.T) {
 	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
 	expected = NameFromType(expectedtype)
 	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
+	errortext = V_compareText(expected, actual, 20, msgs)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -429,7 +429,7 @@ func TestValueValidate(t *testing.T) {
 	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
 	expected = NameFromType(inttype)
 	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
+	errortext = V_compareText(expected, actual, 20, msgs)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -481,7 +481,7 @@ func TestValueValidate(t *testing.T) {
 	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
 	expected = NameFromType(stringlisttype)
 	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
+	errortext = V_compareText(expected, actual, 20, msgs)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -546,7 +546,7 @@ func TestValueValidate(t *testing.T) {
 	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
 	expected = NameFromType(intlisttype)
 	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
+	errortext = V_compareText(expected, actual, 20, msgs)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -670,7 +670,7 @@ func TestPackageValidate(t *testing.T) {
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	expected := ""
 	actual := ""
-	errortext := CompareText(expected, actual, 20, msgblock)
+	errortext := V_compareText(expected, actual, 20, msgblock)
 	if errortext != "" {
 		t.Error(errortext)
 	}

@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	vx_core "vxlisp/vxlisp/vx/core"
 )
 
 var outputlog = false
@@ -37,7 +38,9 @@ func NewMsg(
 	for _, msg := range data {
 		listtext = append(listtext, fmt.Sprint(msg))
 	}
-	output.text = StringFromListStringJoin(listtext, ", ")
+	output.text = vx_core.V_stringn_from_liststringn_joinn(
+		listtext,
+		", ")
 	return output
 }
 
@@ -63,17 +66,19 @@ func NewMsgFromTextblock(
 	}
 	header := path
 	if line > 0 {
-		header += " Line:" + StringFromInt(line)
+		header += " Line:" + vx_core.V_stringn_from_intn(line)
 	}
 	if char > 0 {
-		header += " Char:" + StringFromInt(char)
+		header += " Char:" + vx_core.V_stringn_from_intn(char)
 	}
 	header += "\n" + code + ":\n"
 	textblockdata := "" +
 		"\n" + textblock.name +
-		" Line:" + StringFromInt(textblock.linenum) +
-		" Char:" + StringFromInt(textblock.charnum)
-	sdata := StringFromListStringJoin(listsdata, "\n")
+		" Line:" + vx_core.V_stringn_from_intn(textblock.linenum) +
+		" Char:" + vx_core.V_stringn_from_intn(textblock.charnum)
+	sdata := vx_core.V_stringn_from_liststringn_joinn(
+		listsdata,
+		"\n")
 	body := textblock.text
 	if line < 10 {
 	} else if textblock.linenum == 1 && textblock.charnum == 1 {

@@ -61,7 +61,7 @@ func TestPackageParse(t *testing.T) {
 	expectedpkg.listfunc = append(expectedpkg.listfunc, fnc)
 	expected := StringFromPackage(expectedpkg)
 	actual := StringFromPackage(pkg)
-	errortext := CompareText(expected, actual, 20, msgblock)
+	errortext := V_compareText(expected, actual, 20, msgblock)
 	if errortext != "" {
 		t.Error(errortext)
 	}
@@ -146,7 +146,7 @@ func TestValuePackageValidate(t *testing.T) {
 	expectedpkg.listfunc = append(expectedpkg.listfunc, fnc2)
 	expected := StringFromPackage(expectedpkg)
 	actual := StringFromPackage(pkg)
-	errortext := CompareText(expected, actual, 20, msgblock)
+	errortext := V_compareText(expected, actual, 20, msgblock)
 	if errortext != "" {
 		t.Error(errortext)
 	}

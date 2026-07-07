@@ -2,7 +2,7 @@ package main
 
 import (
 	"os"
-	"vxlisp-compiler/vxlisp"
+	"vxlisp/vxlisp"
 )
 
 func main() {

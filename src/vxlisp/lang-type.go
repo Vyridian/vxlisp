@@ -1,6 +1,9 @@
 package vxlisp
 
-import "strings"
+import (
+	"strings"
+	vx_core "vxlisp/vxlisp/vx/core"
+)
 
 func LangType(
 	lang *vxlang,
@@ -537,7 +540,7 @@ func LangTypeInterface(
 	createtext, _ := LangFromValue(lang, 0,
 		typ.createvalue, "", emptyfunc, true, false, "")
 	if createtext != "" {
-		createlines := ListStringFromStringSplit(
+		createlines := vx_core.V_liststringn_from_stringn_splitn(
 			createtext, "\n")
 		isoverride := false
 		for _, createline := range createlines {
@@ -807,7 +810,7 @@ func LangTypeNameExtends(
 	output := LangTypeName(lang, typ)
 	switch lang {
 	case langswift:
-		if BooleanFromStringStarts(output, "any ") {
+		if vx_core.V_booleann_from_stringn_startsn(output, "any ") {
 			output = output[4:]
 		}
 	}
@@ -817,7 +820,7 @@ func LangTypeNameExtends(
 func LangTypeStringValNew(
 	lang *vxlang,
 	val string) string {
-	valstr := StringFromStringFindReplace(val, "\n", "\\n")
+	valstr := vx_core.V_stringn_from_stringn_findn_replacen(val, "\n", "\\n")
 	return LangPkgNameDot(lang, "vx/core") + "vx_new_string(\"" + valstr + "\")"
 }
 

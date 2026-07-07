@@ -3,6 +3,7 @@ package vxlisp
 import (
 	"sort"
 	"strings"
+	vx_core "vxlisp/vxlisp/vx/core"
 )
 
 type vxarg struct {
@@ -442,7 +443,7 @@ func StringFromArgIndent(arg vxarg, indent int) string {
 	initindent := ""
 	lineindent := "\n"
 	if indent > 0 {
-		sindent := StringRepeat(" ", indent)
+		sindent := vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 		lineindent += sindent
 		initindent = lineindent
 	}
@@ -488,7 +489,7 @@ func StringFromListArg(listarg []vxarg) string {
 func StringFromListArgIndent(listarg []vxarg, indent int) string {
 	lineindent := ""
 	if indent > 0 {
-		lineindent = "\n" + StringRepeat(" ", indent)
+		lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 	}
 	output := lineindent + "(arglist"
 	for _, arg := range listarg {
@@ -513,7 +514,7 @@ func StringFromMapArgIndent(maparg map[string]vxarg, indent string) string {
 		arg := maparg[id]
 		listtext = append(listtext, StringFromArg(arg))
 	}
-	return StringFromListStringJoin(listtext, "\n"+indent)
+	return vx_core.V_stringn_from_liststringn_joinn(listtext, "\n"+indent)
 }
 
 func TypeFromArg(arg vxarg) *vxtype {

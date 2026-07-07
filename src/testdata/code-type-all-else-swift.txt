@@ -1,0 +1,76 @@
+
+  // Type_else
+  public class Type_else {
+    var type_any : Vx_Core.Type_any = Vx_Core.e_any
+  }
+  // Generic_else_any
+  public class Generic_else_any : Vx_Core.Generic_any {
+    var backref : Type_else = e_else
+    override public func p_type_type() -> Vx_Core.Type_type {
+      return t_else
+    }
+  }
+  // Generic_else_type
+  public class Generic_else_type : Vx_Core.Generic_type {
+  }
+  // v_else_create
+  public static func v_else_create(
+  ) -> Type_else {
+    var output : Type_else = Type_else()
+    v_else_startup(output)
+    return output
+  }
+  // v_else_register
+  public static func v_else_register(
+  ) -> Vx_Core.Type_type {
+    v_else_startup_type()
+    v_else_startup_empty()
+    return t_else
+  }
+  // v_else_startup - mutating
+  public static func v_else_startup(
+    _ value : Type_else
+  ) {
+    let generic_any = Generic_else_any()
+    generic_any.backref = value
+    value.type_any = Vx_Core.v_any_new_from_type_generic_any(
+      t_else,
+      generic_any
+    )
+  }
+  // v_else_startup_empty
+  public static func v_else_startup_empty() {
+    v_else_startup(e_else)
+    Vx_Core.v_startup_e(
+      t_else,
+      e_else.type_any
+    )
+  }
+  // v_else_startup_type
+  public static func v_else_startup_type() -> Vx_Core.Type_type {
+    let type_type = t_else
+    type_type.p_name = Vx_Core.v_else_from_elsen("vx/core/else")
+    type_type.p_extends = Vx_Core.c_extends_func
+    let generic_type : Vx_Core.Generic_type = Generic_else_type()
+    Vx_Core.v_startup_t(
+      type_type,
+      generic_type
+    )
+    return type_type
+  }
+  // f_else
+  public static func f_else(
+    _ fn_any : Type_any_from_func
+  ) -> Type_thenelse {
+    var output : Type_thenelse = Vx_Core.f_thenelse(
+      Vx_Core.f_anylist(
+        v_any_from_stringn(":code"),
+        v_any_from_stringn(":else"),
+        v_any_from_from_stringn(":fn-any"),
+        v_any_from_fn_any(fn_any.type_any)
+      )
+    )
+    return output
+  }
+  public static let t_else : Vx_Core.Type_type = Vx_Core.Type_type()
+  public static let e_else : Type_else = Type_else()

@@ -1,0 +1,192 @@
+
+  // Type_new
+  public class Type_new {
+    var type_any : Vx_Core.Type_any = Vx_Core.e_any
+  }
+  // Generic_new_any
+  public class Generic_new_any : Vx_Core.Generic_any {
+    var backref : Type_new = e_new
+    // p_shutdown
+    override public func p_shutdown() {
+      v_new_shutdown(self.backref)
+    }
+    // p_type_type
+    override public func p_type_type() -> Vx_Core.Type_type {
+      return t_new
+    }
+  }
+  // Generic_new_type
+  public class Generic_new_type : Vx_Core.Generic_type {
+    // p_any_from_any
+    override public func p_any_from_any(
+      _ type_type : Vx_Core.Type_type,
+      _ type_any : Vx_Core.Type_any
+    ) -> Vx_Core.Type_any {
+      let value : Type_new = v_new_any_from_any(type_type, type_any)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+    // p_copy
+    override public func p_copy(
+      _ copyany : Vx_Core.Type_any,
+      _ type_anylist : Vx_Core.Type_anylist
+    ) -> Vx_Core.Type_any {
+      let copyval : Type_new = v_new_from_any(copyany)
+      let value : Type_new = v_new_copy(copyval, type_anylist)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+    // p_new
+    override public func p_new(
+      _ type_type : Vx_Core.Type_type,
+      _ type_anylist : Vx_Core.Type_anylist
+    ) -> Vx_Core.Type_any {
+      let value : Vx_Core.Type_new = f_new(type_type, type_anylist)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+  }
+  // v_new_constructor
+  public static func v_new_constructor(
+  ) -> Type_new {
+    Vx_Core.v_global_reserve()
+    return Type_new()
+  }
+  // v_new_create
+  public static func v_new_create(
+  ) -> Type_new {
+    var output : Type_new = v_new_constructor()
+    v_new_startup(output)
+    return output
+  }
+  // v_new_register
+  public static func v_new_register(
+  ) -> Vx_Core.Type_type {
+    v_new_startup_type()
+    v_new_startup_empty()
+    return t_new
+  }
+  // v_new_shutdown - mutating
+  public static func v_new_shutdown(
+    _ value : Type_new
+  ) {
+    let type_any : Vx_Core.Type_any = value.type_any
+    value.type_any = Vx_Core.e_any
+    if let generic_any : Generic_new_any = type_any.generic_any {
+      generic_any.backref = e_new
+    }
+  }
+  // v_new_startup - mutating
+  public static func v_new_startup(
+    _ value : Type_new
+  ) {
+    let generic_any : Generic_new_any = Generic_new_any()
+    generic_any.backref = value
+    value.type_any = Vx_Core.v_any_new_from_type_generic_any(
+      t_new,
+      generic_any
+    )
+  }
+  // v_new_startup_empty
+  public static func v_new_startup_empty() {
+    v_new_startup(e_new)
+    Vx_Core.v_startup_e(
+      t_new,
+      e_new.type_any
+    )
+  }
+  // v_new_startup_type
+  public static func v_new_startup_type() -> Vx_Core.Type_type {
+    let type_type = t_new
+    type_type.p_name = Vx_Core.v_string_from_stringn("vx/core/new")
+    type_type.p_extends = Vx_Core.c_extends_func
+    let generic_type : Vx_Core.Generic_type = Generic_new_type()
+    Vx_Core.v_startup_t(
+      type_type,
+      generic_type
+    )
+    return type_type
+  }
+  // v_any_from_new
+  public static func v_any_from_new(
+    _ value : Vx_Core.Type_new
+  ) -> Vx_Core.Type_any {
+    let output : Vx_Core.Type_any = value.type_any
+    return output
+  }
+  // v_new_from_any
+  public static func v_new_from_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_new {
+    var output : Vx_Core.Type_new = Vx_Core.e_new
+    if let generic_any : Generic_new_any = type_any.generic_any {
+      output = generic_any.backref
+    }
+    return output
+  }
+  // v_new_copy
+  public static func v_new_copy(
+    _ copyval : Vx_Core.Type_new,
+    _ anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_new {
+    var output : Vx_Core.Type_new = copyval
+    Vx_Core.v_reserve_listany(
+      [
+        copyval.type_any,
+        anylist.type_any
+      ]
+    )
+    let orig_anylist : Vx_Core.Type_anylist = copyval.type_func.anylist
+    let merged_anylist : Vx_Core.Type_anylist = Vx_Core.v_anylist_copy(
+      orig_anylist,
+      anylist
+    )
+    let msgblock : Vx_Core.Type_msgblock = Vx_Core.v_msgblock_from_any(
+      merged_anylist.type_any
+    )
+    var ischanged : Bool = false
+    let orig_msgblock : Vx_Core.Type_msgblock = Vx_Core.v_msgblock_from_any(
+      copyval.type_any
+    )
+    if msgblock !== orig_msgblock {
+      ischanged = true
+    }
+    if !ischanged {
+      ischanged = Vx_Core.v_booleann_issame_from_anylist_anylist(
+        orig_anylist,
+        merged_anylist
+      )
+    }
+    if ischanged {
+      let type_delta : Vx_Core.Type_delta = Vx_Core.v_delta_from_any(
+        merged_anylist.type_any
+      )
+      Vx_Core.v_reserve_any(anylist.type_any)
+      Vx_Core.v_reserve_msgblock(msgblock)
+      Vx_Core.v_reserve_delta(type_delta)
+      output = Type_new = v_new_create()
+      output.type_func.anylist = anylist
+      output.type_any.type_msgblock = msgblock
+      output.type_any.type_delta = delta
+    }
+    Vx_Core.v_release_except_listany(
+      output.type_any,
+      [
+        copyval.type_any,
+        anylist.type_any,
+        merged_anylist.type_any
+      ]
+    )
+    return output
+  }
+  // f_new
+  public static func f_new(
+    _ type_type : Type_type,
+    _ type_anylist : Type_anylist
+  ) -> Type_any {
+    var generic_type : Generic_type = v_generic_type_from_type(type_type)
+    var output : Type_any = generic_type.p_new(type_type, type_anylist)
+    return output
+  }
+  public static let t_new : Vx_Core.Type_type = Vx_Core.Type_type()
+  public static let e_new : Type_new = Type_new()

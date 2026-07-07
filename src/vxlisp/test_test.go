@@ -1,23 +1,31 @@
 package vxlisp
 
+import (
+	vx_core "vxlisp/vxlisp/vx/core"
+)
+
 func CompareInt(expected int, actual int, msgblock *vxmsgblock) string {
 	errortext := ""
 	if msgblock.iserror {
 		errortext = StringFromMsgblock(msgblock)
 	} else if expected != actual {
-		errortext = StringFromInt(expected) + " != " + StringFromInt(actual)
+		errortext = vx_core.V_stringn_from_intn(expected) + " != " + vx_core.V_stringn_from_intn(actual)
 	}
 	return errortext
 }
 
-func CompareText(expected string, actual string, size int, msgblock *vxmsgblock) string {
+func V_compareText(
+	expected string,
+	actual string,
+	size int,
+	msgblock *vxmsgblock) string {
 	foundline := 0
 	errortext := ""
 	if msgblock.iserror {
 		errortext = StringFromMsgblock(msgblock)
 	} else if expected != actual {
-		expectedlines := ListStringFromStringSplit(expected, "\n")
-		actuallines := ListStringFromStringSplit(actual, "\n")
+		expectedlines := vx_core.V_liststringn_from_stringn_splitn(expected, "\n")
+		actuallines := vx_core.V_liststringn_from_stringn_splitn(actual, "\n")
 		var maxlen = len(expectedlines)
 		if maxlen < len(actuallines) {
 			maxlen = len(actuallines)
@@ -68,7 +76,7 @@ func CompareText(expected string, actual string, size int, msgblock *vxmsgblock)
 				}
 				paddingtext := ""
 				if len(expectedline) < padding {
-					paddingtext = StringRepeat(" ", padding-len(expectedline))
+					paddingtext = vx_core.V_stringn_from_stringn_repeatn(" ", padding-len(expectedline))
 				}
 				errortext := expectedline + paddingtext + " -> " + actualline
 				if expectedline != actualline {
@@ -77,7 +85,7 @@ func CompareText(expected string, actual string, size int, msgblock *vxmsgblock)
 				errortexts = append(errortexts, errortext)
 			}
 		}
-		errortext = "Line: " + StringFromInt(foundline) + "\n" + StringFromListStringJoin(errortexts, "\n")
+		errortext = "Line: " + vx_core.V_stringn_from_intn(foundline) + "\n" + vx_core.V_stringn_from_liststringn_joinn(errortexts, "\n")
 	}
 	return errortext
 }

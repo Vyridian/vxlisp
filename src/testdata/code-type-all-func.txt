@@ -1,0 +1,214 @@
+
+  // Type_func
+  public class Type_func {
+    var type_any : Vx_Core.Type_any = Vx_Core.e_any
+    var type_type : Type_type
+    var anylist : Type_anylist
+    var context : Type_context
+    var scope : Type_scope
+  }
+  // Generic_func_any
+  public class Generic_func_any : Vx_Core.Generic_any {
+    // p_type_type
+    override public func p_type_type() -> Vx_Core.Type_type {
+      return t_func
+    }
+  }
+  // Type_scope
+  public class Type_scope {
+    var p_anymap : Type_anymap = e_anymap
+  }
+  // Type_var
+  public class Type_var {
+    var p_name : Type_string = e_string
+    var p_value : Type_any = e_any
+    var p_func : Type_func = e_func
+    var p_type : Type_type = e_type
+    var p_resolved : Type_boolean = c_false
+  }
+  // v_any_from_var_scope
+  public static func v_any_from_var_scope(
+    _ type_var : Type_var,
+    _ type_scope : Type_scope
+  ) -> Type_any {
+    var output : Type_any = p_value
+    if type_var.p_resolved === c_true {
+    } else if type_var.p_func !== e_func {
+      p_value = v_call_scope(
+        type_var.p_func,
+        type_scope
+      )
+    }
+  }
+  // v_call
+  public static func v_call(
+    _ type_func : Type_func
+  ) -> Type_any {
+    let type_type : Type_type = type_func.type_type
+    let context : Type_context = type_func.context
+    let scope : Type_anylist = type_func.scope
+    let anylist : Type_anylist = type_func.anylist
+    let generic_any : Generic_any = v_generic_any_from_any(type_type.type_any)
+    let output : Type_any = generic_any.v_call(context, scope, anylist)
+    return output
+  }
+  // v_anylist_from_anylist_scope
+  public static func v_anylist_from_anylist_scope(
+    _ type_anylist : Type_anylist,
+    _ type_scope : Type_scope
+  ) -> Type_anylist {
+    var output : Type_anylist = type_anylist
+    var ischanged : Bool = false
+    let listany : [Type_any] = type_anylist.listany
+    var listout : [Type_any] = []
+    for type_any : Type_any in listany {
+      let typenamen : String = v_typenamen_from_any(type_any)
+      switch typenamen {
+      case "vx/core/var":
+        let type_var : Type_var = v_var_from_any(type_any)
+        let out_any : Type_any = v_any_from_var_scope(type_var, type_scope)
+        listout.append(out_any)
+      default:
+        listout.append(type_any)
+      }
+    }
+    if ischanged {
+      output = v_anylist_from_listany(listout)
+    }
+    return output
+  }
+  // Generic_func_type
+  public class Generic_func_type : Vx_Core.Generic_type {
+    // p_any_from_any
+    override public func p_any_from_any(
+      _ type_type : Vx_Core.Type_type,
+      _ type_any : Vx_Core.Type_any
+    ) -> Vx_Core.Type_any {
+      let value : Type_func = v_func_any_from_any(type_type, type_any)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+    // p_copy
+    override public func p_copy(
+      _ copyany : Vx_Core.Type_any,
+      _ type_anylist : Vx_Core.Type_anylist
+    ) -> Vx_Core.Type_any {
+      let copyval : Type_func = v_func_from_any(copyany)
+      let value : Type_func = v_func_copy(copyval, type_anylist)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+    // p_new
+    override public func p_new(
+      _ type_type : Vx_Core.Type_type,
+      _ type_anylist : Vx_Core.Type_anylist
+    ) -> Vx_Core.Type_any {
+      let value : Type_func = f_func(type_anylist)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+  }
+  // v_func_constructor
+  public static func v_func_constructor(
+  ) -> Type_func {
+    Vx_Core.v_global_reserve()
+    return Type_func()
+  }
+  // v_func_create
+  public static func v_func_create(
+  ) -> Type_func {
+    var output : Type_func = v_func_constructor()
+    v_func_startup(output)
+    return output
+  }
+  // v_func_register
+  public static func v_func_register(
+  ) -> Vx_Core.Type_type {
+    v_func_startup_type()
+    v_func_startup_empty()
+    return t_func
+  }
+  // v_func_shutdown - mutating
+  public static func v_func_shutdown(
+    _ value : Type_func
+  ) {
+    let type_any : Vx_Core.Type_any = value.type_any
+    value.type_any = Vx_Core.e_any
+    if let generic_any : Generic_func_any = type_any.generic_any {
+      generic_any.backref = nil
+    }
+    value.type_func = Vx_Core.e_func
+  }
+  // v_func_startup - mutating
+  public static func v_func_startup(
+    _ value : Type_func
+  ) {
+    let generic_any : Generic_func_any = Generic_func_any()
+    generic_any.backref = value
+    value.type_any = Vx_Core.v_any_new_from_type_generic_any(
+      t_func,
+      generic_any
+    )
+  }
+  // v_func_startup_empty
+  public static func v_func_startup_empty() {
+    v_func_startup(e_func)
+    Vx_Core.v_startup_e(
+      t_func,
+      e_func.type_any
+    )
+  }
+  // v_func_startup_type
+  public static func v_func_startup_type() -> Vx_Core.Type_type {
+    let type_type = t_func
+    type_type.p_name = Vx_Core.v_string_from_stringn("vx/core/func")
+    type_type.p_extends = Vx_Core.c_extends_func
+    let generic_type : Vx_Core.Generic_type = Generic_func_type()
+    Vx_Core.v_startup_t(
+      type_type,
+      generic_type
+    )
+    return type_type
+  }
+  // v_any_from_func
+  public static func v_any_from_func(
+    _ value : Vx_Core.Type_func
+  ) -> Vx_Core.Type_any {
+    let output : Vx_Core.Type_any = value.type_any
+    return output
+  }
+  // v_func_from_any
+  public static func v_func_from_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_func {
+    let generic_any : Vx_Core.Generic_any = Vx_Core.v_generic_any_from_any(type_any)
+    let output : Vx_Core.Type_func = generic_any.p_type_func()
+    return output
+  }
+  // v_func_new_from_any_generic_func
+  public static func v_func_new_from_any_generic_func(
+    _ type_any : Type_any,
+    _ generic_func : Generic_func
+  ) -> Type_func {
+    let output : Type_func = Type_func()
+    output.type_any = type_any
+    output.generic_func = generic_func
+    generic_func.type_any = type_any
+    return output
+  }
+  // v_func_copy
+  public static func v_func_copy(
+    _ copyval : Vx_Core.Type_func,
+    _ anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_func {
+    return copyval
+  }
+  // f_func
+  public static func f_func(
+    _ anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_func {
+    let output : Vx_Core.Type_func = v_func_copy(e_func, anylist)
+    return output
+  }
+  public static let t_func : Vx_Core.Type_type = Vx_Core.v_type_constructor()
+  public static let e_func : Type_func = v_func_constructor()

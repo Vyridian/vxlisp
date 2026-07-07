@@ -1,0 +1,164 @@
+
+  // Type_list
+  public class Type_list {
+    var type_any : Vx_Core.Type_any = Vx_Core.e_any
+    var generic_list : Generic_list?
+  }
+  // Generic_list_any
+  public class Generic_list_any : Vx_Core.Generic_any {
+    // p_type_type
+    override public func p_type_type() -> Vx_Core.Type_type {
+      return t_list
+    }
+  }
+  // Generic_list
+  public class Generic_list {
+    // p_anylist
+    public func p_anylist(
+    ) -> Type_anylist {
+      return e_anylist
+    }
+    // p_listany
+    public func p_listany(
+    ) -> [Type_any] {
+      return []
+    }
+  }
+  // Generic_list_list
+  public class Generic_list_list : Vx_Core.Generic_list {
+  }
+  // Generic_list_type
+  public class Generic_list_type : Vx_Core.Generic_type {
+    // p_any_from_any
+    override public func p_any_from_any(
+      _ type_type : Vx_Core.Type_type,
+      _ type_any : Vx_Core.Type_any
+    ) -> Vx_Core.Type_any {
+      let value : Type_list = v_list_any_from_any(type_type, type_any)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+    // p_copy
+    override public func p_copy(
+      _ copyany : Vx_Core.Type_any,
+      _ type_anylist : Vx_Core.Type_anylist
+    ) -> Vx_Core.Type_any {
+      let copyval : Type_list = v_list_from_any(copyany)
+      let value : Type_list = v_list_copy(copyval, type_anylist)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+    // p_new
+    override public func p_new(
+      _ type_type : Vx_Core.Type_type,
+      _ type_anylist : Vx_Core.Type_anylist
+    ) -> Vx_Core.Type_any {
+      let value : Vx_Core.Type_list = f_list(type_anylist)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+  }
+  // v_list_constructor
+  public static func v_list_constructor(
+  ) -> Type_list {
+    Vx_Core.v_global_reserve()
+    return Type_list()
+  }
+  // v_list_create
+  public static func v_list_create(
+  ) -> Type_list {
+    var output : Type_list = v_list_constructor()
+    v_list_startup(output)
+    return output
+  }
+  // v_list_register
+  public static func v_list_register(
+  ) -> Vx_Core.Type_type {
+    v_list_startup_type()
+    v_list_startup_empty()
+    return t_list
+  }
+  // v_list_shutdown - mutating
+  public static func v_list_shutdown(
+    _ value : Type_list
+  ) {
+    let type_any : Vx_Core.Type_any = value.type_any
+    value.type_any = Vx_Core.e_any
+    if let generic_any : Generic_list_any = type_any.generic_any {
+      generic_any.backref = nil
+    }
+    value.type_list = Vx_Core.e_list
+  }
+  // v_list_startup - mutating
+  public static func v_list_startup(
+    _ value : Type_list
+  ) {
+    let generic_any : Generic_list_any = Generic_list_any()
+    generic_any.backref = value
+    value.type_any = Vx_Core.v_any_new_from_type_generic_any(
+      t_list,
+      generic_any
+    )
+  }
+  // v_list_startup_empty
+  public static func v_list_startup_empty() {
+    v_list_startup(e_list)
+    Vx_Core.v_startup_e(
+      t_list,
+      e_list.type_any
+    )
+  }
+  // v_list_startup_type
+  public static func v_list_startup_type() -> Vx_Core.Type_type {
+    let type_type = t_list
+    type_type.p_name = Vx_Core.v_string_from_stringn("vx/core/list")
+    type_type.p_extends = Vx_Core.c_extends_list
+    let generic_type : Vx_Core.Generic_type = Generic_list_type()
+    Vx_Core.v_startup_t(
+      type_type,
+      generic_type
+    )
+    return type_type
+  }
+  // v_any_from_list
+  public static func v_any_from_list(
+    _ value : Vx_Core.Type_list
+  ) -> Vx_Core.Type_any {
+    let output : Vx_Core.Type_any = value.type_any
+    return output
+  }
+  // v_list_from_any
+  public static func v_list_from_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_list {
+    let generic_any : Vx_Core.Generic_any = Vx_Core.v_generic_any_from_any(type_any)
+    let output : Vx_Core.Type_list = generic_any.p_type_list()
+    return output
+  }
+  // v_list_new_from_any_generic_list
+  public static func v_list_new_from_any_generic_list(
+    _ type_any : Type_any,
+    _ generic_list : Generic_list
+  ) -> Type_list {
+    let output : Type_list = Type_list()
+    output.type_any = type_any
+    output.generic_list = generic_list
+    generic_list.type_any = type_any
+    return output
+  }
+  // v_list_copy
+  public static func v_list_copy(
+    _ copyval : Vx_Core.Type_list,
+    _ anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_list {
+    return copyval
+  }
+  // f_list
+  public static func f_list(
+    _ anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_list {
+    let output : Vx_Core.Type_list = v_list_copy(e_list, anylist)
+    return output
+  }
+  public static let t_list : Vx_Core.Type_type = Vx_Core.v_type_constructor()
+  public static let e_list : Type_list = v_list_constructor()

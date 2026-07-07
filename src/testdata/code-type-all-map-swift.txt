@@ -1,0 +1,177 @@
+
+  // Type_map
+  public class Type_map {
+    var type_any : Vx_Core.Type_any = Vx_Core.e_any
+    var generic_map : Generic_map?
+  }
+  // Generic_map_any
+  public class Generic_map_any : Vx_Core.Generic_any {
+    // p_type_type
+    override public func p_type_type() -> Vx_Core.Type_type {
+      return t_map
+    }
+  }
+  // Generic_map
+  public class Generic_map {
+    var type_any : Vx_Core.Type_any = Vx_Core.e_any
+    var listkeyn : [String] = []
+    // p_any_from_keyn
+    public func p_any_from_keyn(
+      _ keyn : String
+    ) -> Type_any {
+      return e_any
+    }
+    // p_anymap
+    public func p_anymap(
+    ) -> Type_anymap {
+      return e_anymap
+    }
+    // p_mapany
+    public func p_mapany(
+    ) -> [String : Type_any] {
+      return [:]
+    }
+    // p_listkeyn
+    public func p_listkeyn(
+    ) -> [String] {
+      return listkeyn
+    }
+  }
+  // Generic_map_map
+  public class Generic_map_map : Vx_Core.Generic_map {
+  }
+  // Generic_map_type
+  public class Generic_map_type : Vx_Core.Generic_type {
+    // p_any_from_any
+    override public func p_any_from_any(
+      _ type_type : Vx_Core.Type_type,
+      _ type_any : Vx_Core.Type_any
+    ) -> Vx_Core.Type_any {
+      let value : Type_map = v_map_any_from_any(type_type, type_any)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+    // p_copy
+    override public func p_copy(
+      _ copyany : Vx_Core.Type_any,
+      _ type_anylist : Vx_Core.Type_anylist
+    ) -> Vx_Core.Type_any {
+      let copyval : Type_map = v_map_from_any(copyany)
+      let value : Type_map = v_map_copy(copyval, type_anylist)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+    // p_new
+    override public func p_new(
+      _ type_type : Vx_Core.Type_type,
+      _ type_anylist : Vx_Core.Type_anylist
+    ) -> Vx_Core.Type_any {
+      let value : Vx_Core.Type_map = f_map(type_anylist)
+      let output : Vx_Core.Type_any = value.type_any
+      return output
+    }
+  }
+  // v_map_constructor
+  public static func v_map_constructor(
+  ) -> Type_map {
+    Vx_Core.v_global_reserve()
+    return Type_map()
+  }
+  // v_map_create
+  public static func v_map_create(
+  ) -> Type_map {
+    var output : Type_map = v_map_constructor()
+    v_map_startup(output)
+    return output
+  }
+  // v_map_register
+  public static func v_map_register(
+  ) -> Vx_Core.Type_type {
+    v_map_startup_type()
+    v_map_startup_empty()
+    return t_map
+  }
+  // v_map_shutdown - mutating
+  public static func v_map_shutdown(
+    _ value : Type_map
+  ) {
+    let type_any : Vx_Core.Type_any = value.type_any
+    value.type_any = Vx_Core.e_any
+    if let generic_any : Generic_map_any = type_any.generic_any {
+      generic_any.backref = nil
+    }
+    value.type_map = Vx_Core.e_map
+  }
+  // v_map_startup - mutating
+  public static func v_map_startup(
+    _ value : Type_map
+  ) {
+    let generic_any : Generic_map_any = Generic_map_any()
+    generic_any.backref = value
+    value.type_any = Vx_Core.v_any_new_from_type_generic_any(
+      t_map,
+      generic_any
+    )
+  }
+  // v_map_startup_empty
+  public static func v_map_startup_empty() {
+    v_map_startup(e_map)
+    Vx_Core.v_startup_e(
+      t_map,
+      e_map.type_any
+    )
+  }
+  // v_map_startup_type
+  public static func v_map_startup_type() -> Vx_Core.Type_type {
+    let type_type = t_map
+    type_type.p_name = Vx_Core.v_string_from_stringn("vx/core/map")
+    type_type.p_extends = Vx_Core.c_extends_map
+    let generic_type : Vx_Core.Generic_type = Generic_map_type()
+    Vx_Core.v_startup_t(
+      type_type,
+      generic_type
+    )
+    return type_type
+  }
+  // v_any_from_map
+  public static func v_any_from_map(
+    _ value : Vx_Core.Type_map
+  ) -> Vx_Core.Type_any {
+    let output : Vx_Core.Type_any = value.type_any
+    return output
+  }
+  // v_map_from_any
+  public static func v_map_from_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_map {
+    let generic_any : Vx_Core.Generic_any = Vx_Core.v_generic_any_from_any(type_any)
+    let output : Vx_Core.Type_map = generic_any.p_type_map()
+    return output
+  }
+  // v_map_new_from_any_generic_map
+  public static func v_map_new_from_any_generic_map(
+    _ type_any : Type_any,
+    _ generic_map : Generic_map
+  ) -> Type_map {
+    let output : Type_map = Type_map()
+    output.type_any = type_any
+    output.generic_map = generic_map
+    generic_map.type_any = type_any
+    return output
+  }
+  // v_map_copy
+  public static func v_map_copy(
+    _ copyval : Vx_Core.Type_map,
+    _ anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_map {
+    return copyval
+  }
+  // f_map
+  public static func f_map(
+    _ anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_map {
+    let output : Vx_Core.Type_map = v_map_copy(e_map, anylist)
+    return output
+  }
+  public static let t_map : Vx_Core.Type_type = Vx_Core.v_type_constructor()
+  public static let e_map : Type_map = v_map_constructor()

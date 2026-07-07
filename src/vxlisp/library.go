@@ -1,5 +1,9 @@
 package vxlisp
 
+import (
+	vx_core "vxlisp/vxlisp/vx/core"
+)
+
 type vxlibrary struct {
 	name string
 	path string
@@ -98,7 +102,7 @@ func StringFromLibrary(library *vxlibrary) string {
 func StringFromLibraryIndent(library *vxlibrary, indent int) string {
 	lineindent := ""
 	if indent > 0 {
-		lineindent = "\n" + StringRepeat(" ", indent)
+		lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 	}
 	output := "" +
 		lineindent + "(library" +
@@ -118,7 +122,7 @@ func StringFromListLibraryIndent(listlib []*vxlibrary, indent int) string {
 	if len(listlib) > 0 {
 		lineindent := ""
 		if indent > 0 {
-			lineindent = "\n" + StringRepeat(" ", indent)
+			lineindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", indent)
 		}
 		output = lineindent + "(librarylist"
 		for _, lib := range listlib {

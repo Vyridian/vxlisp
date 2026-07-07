@@ -2,6 +2,7 @@ package vxlisp
 
 import (
 	"strings"
+	vx_core "vxlisp/vxlisp/vx/core"
 )
 
 func LangFunc(
@@ -94,16 +95,16 @@ func LangFuncArgText(
 		argjoin := lang.argjoin
 		switch argjoin {
 		case "":
-			output = StringFromListStringJoin(
+			output = vx_core.V_stringn_from_liststringn_joinn(
 				listargtext, ", ")
 		case ",\n":
-			lineindent1 := StringRepeat("  ", indent)
+			lineindent1 := vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 			lineindent2 := lineindent1 + "  "
-			output = StringFromListStringJoin(
+			output = vx_core.V_stringn_from_liststringn_joinn(
 				listargtext, argjoin+lineindent2)
 			output = "\n" + lineindent2 + output + "\n" + lineindent1
 		default:
-			output = StringFromListStringJoin(
+			output = vx_core.V_stringn_from_liststringn_joinn(
 				listargtext, argjoin)
 		}
 	}
@@ -146,12 +147,12 @@ func LangFuncDefFromFunc(
 	lang *vxlang,
 	indent int,
 	fnc *vxfunc) string {
-	lineindent := "\n" + StringRepeat("  ", indent)
+	lineindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	output := "" +
 		LangPkgNameDot(lang, "vx/core") + "funcdef_new(" +
 		lineindent + "  \"" + fnc.pkgname + "\", // pkgname" +
 		lineindent + "  \"" + fnc.name + "\", // name" +
-		lineindent + "  " + StringFromInt(fnc.idx) + ", // idx" +
+		lineindent + "  " + vx_core.V_stringn_from_intn(fnc.idx) + ", // idx" +
 		lineindent + "  " + StringFromBoolean(fnc.async) + ", // async" +
 		lineindent + "  " + LangTypeDef(lang, fnc.vxtype, 4) + " // typedef" +
 		lineindent + ")"
@@ -325,12 +326,12 @@ func LangFuncFFunc(
 			lang, 0, fnc.value, fnc.pkgname, fnc, true, false, path)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		debugtop, debugbottom := LangFuncDebug(lang, fnc, lineindent)
-		valuetexts := ListStringFromStringSplit(valuetext, "\n")
+		valuetexts := vx_core.V_liststringn_from_stringn_splitn(valuetext, "\n")
 		var chgvaluetexts []string
 		f_suppresswarnings := ""
 		for _, item := range valuetexts {
-			if BooleanFromStringContains(item, "@SuppressWarnings") {
-				f_suppresswarnings += "\n  " + StringTrim(StringFromStringFindReplace(item, "\\\"", "\""))
+			if vx_core.V_booleann_from_stringn_containsn(item, "@SuppressWarnings") {
+				f_suppresswarnings += "\n  " + StringTrim(vx_core.V_stringn_from_stringn_findn_replacen(item, "\\\"", "\""))
 			} else {
 				chgvaluetexts = append(chgvaluetexts, item)
 			}
@@ -339,10 +340,10 @@ func LangFuncFFunc(
 		case "vx/core/new", "vx/core/new<-type":
 			f_suppresswarnings = LangFuncNewSuppressWarnings(lang)
 		}
-		valuetext = StringFromListStringJoin(
+		valuetext = vx_core.V_stringn_from_liststringn_joinn(
 			chgvaluetexts, "\n")
-		if IntFromStringFind(valuetext, "output ") >= 0 {
-		} else if IntFromStringFind(valuetext, "output.") >= 0 {
+		if vx_core.V_intn_from_stringn_findn(valuetext, "output ") >= 0 {
+		} else if vx_core.V_intn_from_stringn_findn(valuetext, "output.") >= 0 {
 		} else if fnc.vxtype.name == "none" {
 		} else if valuetext == "" {
 		} else {
@@ -464,7 +465,7 @@ func LangFuncHeaderAll(
 	genericvars := LangFuncGenericVars(lang, indent+1, fnc, isinterface)
 	genericdef1, genericdef2, genericdef3 := LangFuncGenericDefinition(
 		lang, fnc)
-	sindent := "\n" + StringRepeat("  ", indent)
+	sindent := "\n" + vx_core.V_stringn_from_stringn_repeatn("  ", indent)
 	override1, override2, override3 := LangFuncOverride(
 		lang, fnc, sindent)
 	sinterface := ""
@@ -478,7 +479,7 @@ func LangFuncHeaderAll(
 		if value != "" {
 			soutput := "output"
 			if outputnum > 0 {
-				soutput += "_" + StringFromInt(outputnum)
+				soutput += "_" + vx_core.V_stringn_from_intn(outputnum)
 			}
 			isskip := false
 			switch NameFromType(fnc.vxtype) {
@@ -673,7 +674,7 @@ func LangFuncLambdaArgIndex(
 		if iswrapped {
 			g_ifuncdepth += 1
 			ioutputnum = g_ifuncdepth
-			outputname = "output_" + StringFromInt(ioutputnum)
+			outputname = "output_" + vx_core.V_stringn_from_intn(ioutputnum)
 			listarg := fnc.listarg
 			lastarg := listarg[len(listarg)-1]
 			if !fnc.async {
@@ -686,7 +687,7 @@ func LangFuncLambdaArgIndex(
 		}
 		if lambdaarg.async {
 			lastoutputnum := g_ifuncdepth
-			lastoutputname := "output_" + StringFromInt(lastoutputnum)
+			lastoutputname := "output_" + vx_core.V_stringn_from_intn(lastoutputnum)
 			listarg := fnc.listarg
 			lastarg := listarg[len(listarg)-1]
 			sfncvalue, msgs := LangFromValue(
@@ -694,7 +695,7 @@ func LangFuncLambdaArgIndex(
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			g_ifuncdepth += 1
 			ioutputargnum := g_ifuncdepth
-			outputname := "output_" + StringFromInt(ioutputargnum)
+			outputname := "output_" + vx_core.V_stringn_from_intn(ioutputargnum)
 			lambdavaluetext, msgs := LangFromValue(lang, indent+1,
 				lambdaarg.value, pkgname, fnc, true, test, argsubpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -807,7 +808,7 @@ func LangFuncValue(
 				if BooleanFromStringStartsEnds(propname, "\"", "\"") {
 					propname = propname[1 : len(propname)-1]
 				}
-				if BooleanFromStringStarts(propname, ":") {
+				if vx_core.V_booleann_from_stringn_startsn(propname, ":") {
 					propname = propname[1:]
 				}
 				structvalue := funcargs[0].value
@@ -951,7 +952,7 @@ func LangFuncValueArgIndex(
 			if argvalue.code == ":func" && argvalue.name == "fn" {
 				g_ifuncdepth += 1
 				ioutputnum := g_ifuncdepth
-				outputname := "output_" + StringFromInt(ioutputnum)
+				outputname := "output_" + vx_core.V_stringn_from_intn(ioutputnum)
 				argfunc := FuncFromValue(argvalue)
 				var lambdaargs []string
 				var lambdavars []string
@@ -971,8 +972,8 @@ func LangFuncValueArgIndex(
 								lambdaarg.name+"_any"))
 					lambdavars = append(lambdavars, lambdavar)
 				}
-				slambdaargs := StringFromListStringJoin(lambdaargs, ", ")
-				slambdavars := StringFromListStringJoin(lambdavars, "")
+				slambdaargs := vx_core.V_stringn_from_liststringn_joinn(lambdaargs, ", ")
+				slambdavars := vx_core.V_stringn_from_liststringn_joinn(lambdavars, "")
 				argfn := argfunc.listarg[1]
 				argfnvalue := argfn.value
 				if argfunc.async {
@@ -1065,7 +1066,7 @@ func LangFuncValueArgIndex(
 					if !argvaluearg.vxtype.isfunc {
 						g_ifuncdepth += 1
 						ioutputnum := g_ifuncdepth
-						outputname := "output_" + StringFromInt(ioutputnum)
+						outputname := "output_" + vx_core.V_stringn_from_intn(ioutputnum)
 						work, msgs := LangFromValue(lang, indent+2,
 							argvalue, pkgname, fnc, true, test, argsubpath)
 						msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -1101,7 +1102,7 @@ func LangFuncValueArgIndex(
 						soutput := ""
 						g_ifuncdepth += 1
 						ioutputnum := g_ifuncdepth
-						outputname := "output_" + StringFromInt(ioutputnum)
+						outputname := "output_" + vx_core.V_stringn_from_intn(ioutputnum)
 						if funcargfunc.async {
 							soutput = LangVarFuture(lang, indent+2, anytype,
 								outputname, work)
@@ -1124,7 +1125,7 @@ func LangFuncValueArgIndex(
 				default:
 					g_ifuncdepth += 1
 					ioutputnum := g_ifuncdepth
-					outputname := "output_" + StringFromInt(ioutputnum)
+					outputname := "output_" + vx_core.V_stringn_from_intn(ioutputnum)
 					funcargasync := arg.vxtype.vxfunc.async
 					argfuncasync := false
 					argfunctype := emptytype
@@ -1232,7 +1233,7 @@ func LangFuncValueNative(
 		} else if isgetnative {
 			if valuetext == ":auto" {
 				nativetext = valuetext
-			} else if BooleanFromStringStarts(valuetext, ":") {
+			} else if vx_core.V_booleann_from_stringn_startsn(valuetext, ":") {
 			} else {
 				if argvalue.name == "newline" {
 					nativetext = "\n"
@@ -1242,13 +1243,13 @@ func LangFuncValueNative(
 					msgblock = MsgblockAddBlock(msgblock, msgs)
 					nativetext = clstext
 					if nativeindent == "undefined" {
-						nativeindent = "\n" + StringRepeat(" ", argvalue.textblock.charnum)
+						nativeindent = "\n" + vx_core.V_stringn_from_stringn_repeatn(" ", argvalue.textblock.charnum)
 					} else if nativeindent != "" {
-						nativetext = StringFromStringFindReplace(nativetext, nativeindent, "\n")
+						nativetext = vx_core.V_stringn_from_stringn_findn_replacen(nativetext, nativeindent, "\n")
 					}
 				}
 				if !multiline {
-					if BooleanFromStringContains(nativetext, "\n") {
+					if vx_core.V_booleann_from_stringn_containsn(nativetext, "\n") {
 						multiline = true
 					} else if argvalue.name != "" {
 						multiline = true
@@ -1270,11 +1271,11 @@ func LangFuncValueNative(
 	}
 	if len(argtexts) > 0 {
 		if multiline {
-			sindent := StringRepeat("  ", indent)
-			alltext := StringFromListStringJoin(argtexts, "")
+			sindent := vx_core.V_stringn_from_stringn_repeatn("  ", indent)
+			alltext := vx_core.V_stringn_from_liststringn_joinn(argtexts, "")
 			output += StringFromStringIndent(alltext, sindent)
 		} else {
-			output += StringFromListStringJoin(argtexts, "")
+			output += vx_core.V_stringn_from_liststringn_joinn(argtexts, "")
 		}
 	}
 	return output, msgblock
@@ -1525,15 +1526,15 @@ func LangFuncVxFunc(
 			argtype := arg.vxtype
 			if !arg.isgeneric {
 				listarg = append(listarg, arg)
-			} else if BooleanFromStringStarts(argtype.name, "any-") {
+			} else if vx_core.V_booleann_from_stringn_startsn(argtype.name, "any-") {
 				argchg := NewArg(arg.name)
 				argchg.vxtype = anytype
 				listarg = append(listarg, argchg)
-			} else if BooleanFromStringStarts(argtype.name, "list-") {
+			} else if vx_core.V_booleann_from_stringn_startsn(argtype.name, "list-") {
 				argchg := NewArg(arg.name)
 				argchg.vxtype = listtype
 				listarg = append(listarg, argchg)
-			} else if BooleanFromStringStarts(argtype.name, "map-") {
+			} else if vx_core.V_booleann_from_stringn_startsn(argtype.name, "map-") {
 				argchg := NewArg(arg.name)
 				argchg.vxtype = maptype
 				listarg = append(listarg, argchg)
@@ -1775,7 +1776,7 @@ func LangFuncVxRepl(
 								"vx_any",
 								LangFuncCallVx(lang, 4,
 									func_new_int,
-									StringFromInt(argidx)))))
+									vx_core.V_stringn_from_intn(argidx)))))
 				replparams += replparam
 				listargname = append(
 					listargname, "generic_"+LangFromName(fnc.generictype.name))
@@ -1794,7 +1795,7 @@ func LangFuncVxRepl(
 						"vx_any",
 						LangFuncCallVx(lang, 4,
 							func_new_int,
-							StringFromInt(argidx)))))
+							vx_core.V_stringn_from_intn(argidx)))))
 			replparams += replparam
 			argidx += 1
 		}
@@ -1813,7 +1814,7 @@ func LangFuncVxRepl(
 								"vx_any",
 								LangFuncCallVx(lang, 4,
 									func_new_int,
-									StringFromInt(argidx)))))
+									vx_core.V_stringn_from_intn(argidx)))))
 				replparams += replparam
 				listargname = append(listargname, argname)
 				argidx += 1
