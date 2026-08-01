@@ -93,8 +93,8 @@ func StringFromTextblockIndent(textblock *vxtextblock, indent string) string {
 		indent + "(textblock" +
 		"\n" + indent + " :name       " + textblock.name +
 		"\n" + indent + " :blocktype  " + textblock.blocktype +
-		"\n" + indent + " :linenum    " + vx_core.V_stringn_from_intn(textblock.linenum) +
-		"\n" + indent + " :charnum    " + vx_core.V_stringn_from_intn(textblock.charnum) +
+		"\n" + indent + " :linenum    " + vx_core.V_stringn_cast_intn(textblock.linenum) +
+		"\n" + indent + " :charnum    " + vx_core.V_stringn_cast_intn(textblock.charnum) +
 		"\n" + indent + " :text       \"" + text + "\"" +
 		"\n" + indent + " :textblocks " + StringFromTextblocks(textblock.listtextblock, indent+"  ") +
 		")\n"

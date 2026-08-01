@@ -1,0 +1,10 @@
+
+// :go
+if var1 {
+}
+// :java
+if (var1) {
+}
+// :swift
+if var1 {
+}

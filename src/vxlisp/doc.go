@@ -316,7 +316,7 @@ func HtmlFromProject(prj *vxproject) string {
 				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.langcode) + "</div>" +
 				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.main) + "</div>" +
 				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.context) + "</div>" +
-				lineindent + "                  <div class=\"td\">" + vx_core.V_stringn_from_intn(cmd.port) + "</div>" +
+				lineindent + "                  <div class=\"td\">" + vx_core.V_stringn_cast_intn(cmd.port) + "</div>" +
 				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.doc) + "</div>" +
 				lineindent + "                </div>"
 		}
@@ -825,7 +825,7 @@ func HtmlNameFromConst(cnst *vxconst) string {
 func HtmlNameFromFunc(fnc *vxfunc) string {
 	output := HtmlFromName(fnc.pkgname) + "/" + HtmlFromName(fnc.name)
 	if fnc.idx > 0 {
-		output += "_" + vx_core.V_stringn_from_intn(fnc.idx)
+		output += "_" + vx_core.V_stringn_cast_intn(fnc.idx)
 	}
 	return output
 }

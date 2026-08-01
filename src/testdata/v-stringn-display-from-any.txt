@@ -24,7 +24,7 @@
 (func
  :type boolean<-booleann
  :return boolean
- :varlist
+ :arglist
   (varlist
    (var
     :name "booleann"
@@ -38,7 +38,6 @@
       :type boolean
       :mutable true))
    (if
-    :return-type boolean
     :thenelselist
      (thenelselist
       (thenelse

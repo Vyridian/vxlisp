@@ -7,11 +7,6 @@ import (
 
 /*
 
-import (
-	"testing"
-	"vxlisp/vxlisp/vx_core"
-)
-
 func TestCode_const_all_false(
 	t *testing.T) {
 	var listlang = []*vx_core.Type_lang{
@@ -28,7 +23,7 @@ func TestCode_const_all_false(
 }
 */
 
-func TestCode_type_all_any(
+func Test_code_type_all_any(
 	t *testing.T) {
 	var listlang = []*vx_core.Type_lang{
 		vx_core.C_lang_go,
@@ -37,15 +32,12 @@ func TestCode_type_all_any(
 	type_package.P_path = "vx/core"
 	var type_scope *vx_core.Type_scope = vx_core.V_scope_create()
 	type_scope.P_package = type_package
-	var type_type *vx_core.Type_type = vx_core.T_any
 	for _, type_lang := range listlang {
 		type_scope.P_lang = type_lang
-		var actualn string = code_type_all(
-			type_scope,
-			type_type)
+		var actualn string = ""
 		vx_core.V_test_from_file(
 			t,
-			"code-type-all-any-"+langswift.name,
+			"code-type-all-any-"+vx_core.V_namen_from_lang(type_lang),
 			actualn)
 	}
 }

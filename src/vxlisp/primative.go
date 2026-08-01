@@ -11,10 +11,6 @@ func NewMapString() map[string]string {
 	return make(map[string]string)
 }
 
-func BooleanFromStringEnds(str string, ends string) bool {
-	return strings.HasSuffix(str, ends)
-}
-
 func BooleanFromStringEquals(str string, equals string) bool {
 	return str == equals
 }
@@ -190,7 +186,7 @@ func StringFromBoolean(booleanval bool) string {
 
 func StringFromStringBefore(text string, before string) string {
 	output := text
-	if BooleanFromStringEnds(text, before) {
+	if vx_core.V_booleann_from_stringn_endsn(text, before) {
 		output = text[0 : len(text)-len(before)]
 	}
 	return output

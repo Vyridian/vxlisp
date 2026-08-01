@@ -999,7 +999,7 @@ func LangFuncDoc(
 		}
 		doc += "@function " + LangFromName(fnc.alias)
 		if fnc.idx > 0 {
-			doc += " " + vx_core.V_stringn_from_intn(fnc.idx)
+			doc += " " + vx_core.V_stringn_cast_intn(fnc.idx)
 		}
 		if fnc.doc != "" {
 			doc += "\n" + fnc.doc
@@ -1366,12 +1366,12 @@ func LangFuncLambdaFooter(
 		case langkotlin:
 			sreturn = lineindent2 + "output"
 			if outputnum > 0 {
-				sreturn += "_" + vx_core.V_stringn_from_intn(outputnum)
+				sreturn += "_" + vx_core.V_stringn_cast_intn(outputnum)
 			}
 		default:
 			sreturn = lineindent2 + "return output"
 			if outputnum > 0 {
-				sreturn += "_" + vx_core.V_stringn_from_intn(outputnum)
+				sreturn += "_" + vx_core.V_stringn_cast_intn(outputnum)
 			}
 			sreturn += lang.lineend
 		}
@@ -3082,7 +3082,7 @@ func LangTestTargetPath(
 	output := targetpath
 	switch lang {
 	case langjava:
-		if BooleanFromStringEnds(targetpath, "/java") {
+		if vx_core.V_booleann_from_stringn_endsn(targetpath, "/java") {
 			output = targetpath[0 : len(targetpath)-5]
 		}
 	}

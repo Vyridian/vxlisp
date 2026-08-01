@@ -182,7 +182,7 @@ func ListValueValidateTestFuncs(
 
 	var listtestvalue []vxvalue
 	for idx, value := range listvalue {
-		subpath := path + "/test" + vx_core.V_stringn_from_intn(idx+1)
+		subpath := path + "/test" + vx_core.V_stringn_cast_intn(idx+1)
 		switch value.code {
 		case ":func":
 			fnc := FuncFromValue(value)
@@ -645,7 +645,7 @@ func ValueLink(
 		fnc := FuncFromValue(value)
 		subpath += "/" + fnc.name
 		if fnc.idx > 0 {
-			subpath += "/" + vx_core.V_stringn_from_intn(fnc.idx)
+			subpath += "/" + vx_core.V_stringn_cast_intn(fnc.idx)
 		}
 		lookuparg, ok := ArgFromListScope(listscope, fnc.name)
 		if ok {

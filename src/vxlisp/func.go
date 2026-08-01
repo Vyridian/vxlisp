@@ -786,7 +786,7 @@ func NameFromFunc(
 		output = fnc.pkgname + "/" + fnc.name
 	}
 	if fnc.idx > 0 {
-		output = output + "_" + vx_core.V_stringn_from_intn(fnc.idx)
+		output = output + "_" + vx_core.V_stringn_cast_intn(fnc.idx)
 	}
 	return output
 }
@@ -839,7 +839,7 @@ func StringFromFuncIndent(
 			lineindent + " :alias " + fnc.alias +
 			lineindent + " :pkg   " + fnc.pkgname
 		if fnc.idx > 0 {
-			output += lineindent + " :idx   " + vx_core.V_stringn_from_intn(fnc.idx)
+			output += lineindent + " :idx   " + vx_core.V_stringn_cast_intn(fnc.idx)
 		}
 		if fnc.vxtype.name != "" {
 			output += lineindent + " :type  " + NameFromType(fnc.vxtype)
@@ -926,7 +926,7 @@ func StringIndexFromFunc(
 	fnc *vxfunc) string {
 	output := ""
 	if fnc.idx > 0 {
-		output = "_" + vx_core.V_stringn_from_intn(fnc.idx)
+		output = "_" + vx_core.V_stringn_cast_intn(fnc.idx)
 	}
 	return output
 }

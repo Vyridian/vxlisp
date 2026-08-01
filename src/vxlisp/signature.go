@@ -185,7 +185,7 @@ func StringIndentFromSignature(
 	}
 	idx := ""
 	if signature.idx > 0 {
-		idx = lineindent + " :idx      " + vx_core.V_stringn_from_intn(signature.idx)
+		idx = lineindent + " :idx      " + vx_core.V_stringn_cast_intn(signature.idx)
 	}
 	output := "" +
 		"(signature" +

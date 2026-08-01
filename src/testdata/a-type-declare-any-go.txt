@@ -1,0 +1,212 @@
+
+// (type any)
+type Type_any struct {
+ backref    any
+ refcount   int
+ P_type     *Type_type
+ P_const    *Type_const
+ P_msgblock *Type_msgblock
+ P_delta    *Type_delta
+ P_isrun    bool
+}
+
+// V_any_constructor
+func V_any_constructor() *Type_any {
+ var output *Type_any = new(Type_any)
+ return output
+}
+
+// V_any_create
+func V_any_create() *Type_any {
+ var output *Type_any = V_any_constructor()
+ V_any_initialize(
+  output)
+ return output
+}
+
+// V_any_initialize
+func V_any_initialize(
+ value *Type_any) {
+ value.P_type = T_any
+ value.backref = value
+}
+
+// V_any_shutdown
+func V_any_shutdown(
+ value *Type_any) {
+ value.backref = nil
+ var type_msgblock *Type_msgblock = value.P_msgblock
+ if type_msgblock != E_msgblock {
+  value.P_msgblock = E_msgblock
+  V_release_any(
+   type_msgblock.type_any)
+ }
+ var type_const *Type_const = value.P_const
+ if type_const != E_const {
+  value.P_const = E_const
+  V_release_any(
+   type_const.type_any)
+ }
+ value.P_type = E_type
+ V_global_release()
+}
+
+// V_any_startup
+func V_any_startup() *Type_type {
+ var t_variable *Type_type = T_any
+ var e_variable *Type_any = E_any
+ V_any_initialize(
+  e_variable)
+ V_type_t_startup(
+  t_variable,
+  "vx/core",
+  "any",
+  E_string,
+  e_variable)
+ t_variable.P_propertylist = V_varlist_from_listvar(
+  []*Type_var{
+   V_var_new_private_from_namen_type(
+    "backref",
+    T_any),
+   V_var_new_private_from_namen_type(
+    "refcount",
+    T_intn),
+   V_var_new_public_from_namen_type(
+    "type",
+    T_type),
+   V_var_new_public_from_namen_type(
+    "const",
+    T_const),
+   V_var_new_public_from_namen_type(
+    "msgblock",
+    T_msgblock),
+   V_var_new_public_from_namen_type(
+    "delta",
+    T_delta),
+   V_var_new_public_from_namen_type(
+    "isrun",
+    T_booleann)})
+ var output *Type_type = t_variable
+ return output
+}
+
+// V_any_from_type_backref
+func V_any_from_type_backref(
+ type_type *Type_type,
+ backref any) *Type_any {
+ var output *Type_any = V_any_create()
+ output.P_type = type_type
+ output.backref = backref
+ return output
+}
+
+// V_copy_any
+func V_copy_any(
+ type_any *Type_any,
+ type_anylist *Type_anylist) *Type_any {
+ var type_generic *Type_generic = V_generic_from_any(
+  type_any)
+ var output *Type_any = type_generic.P_copy_funcn(
+  type_any,
+  type_anylist)
+ return output
+}
+
+// V_new_any
+func V_new_any(
+ type_type *Type_type,
+ type_anylist *Type_anylist) *Type_any {
+ var type_generic *Type_generic = V_generic_from_type(
+  type_type)
+ var output *Type_any = type_generic.P_new_funcn(
+  type_type,
+  type_anylist)
+ return output
+}
+
+// V_release_any
+func V_release_any(
+ type_any *Type_any) {
+ type_any.refcount -= 1
+ if type_any.refcount <= 0 {
+  if type_any.refcount < 0 {
+   V_log_liststringn(
+    []string{
+     "Error: Negative Refcount - ",
+     V_typenamen_from_any(
+      type_any)})
+  }
+  V_shutdown_any(
+   type_any)
+ }
+}
+
+// V_shutdown_any
+func V_shutdown_any(
+ type_any *Type_any) {
+ var type_generic *Type_generic = V_generic_from_any(
+  type_any)
+ type_generic.P_shutdown_funcn(
+  type_any)
+}
+
+// V_any_cast_any
+func V_any_cast_any(
+ type_type *Type_type,
+ type_any *Type_any) *Type_any {
+ var type_generic *Type_generic = V_generic_from_type(
+  type_type)
+ var output *Type_any = type_generic.P_any_cast_any_funcn(
+  type_type,
+  type_any)
+ return output
+}
+
+// V_empty_from_any
+func V_empty_from_any(
+ type_any *Type_any) *Type_any {
+ var type_type *Type_type = Vx_Core.V_type_from_any(
+  type_any)
+ var output *Type_any = V_empty(
+  type_type)
+ return output
+}
+
+// V_release_listany
+func V_release_listany(
+ listany []*Type_any) {
+ for _, type_any := range listany {
+  V_release_any(
+  type_any)
+ }
+}
+
+// V_release_listany_except
+func V_release_listany_except(
+	listany []*Type_any,
+	except_any *Type_any) {
+	for _, type_any := range listany {
+		if type_any != except_any {
+			V_release_any(
+				type_any)
+	 	}
+	}
+}
+
+// V_reserve_any
+func V_reserve_any(
+	type_any *Type_any) {
+	type_any.refcount += 1
+}
+
+// v_reserve_listany
+func v_reserve_listany(
+	listany []*Type_any) {
+	for _, type_any := range listany {
+		V_reserve_any(
+			type_any)
+	}
+}
+
+var T_any *Type_type = V_type_constructor()
+var E_any *Type_any = V_any_constructor()

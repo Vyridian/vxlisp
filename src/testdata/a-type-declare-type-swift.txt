@@ -1,97 +1,29 @@
 
-  // Type_type
+  // (type type)
   public class Type_type {
-    var type_any : Vx_Core.Type_any = Vx_Core.e_any
-    var generic_type : Generic_type?
-    var p_name : Type_string = e_string
-    var p_extends : Type_string = e_string
+    var type_any : Vx_Core.Type_any?
+    var type_generic : Vx_Core.Type_generic?
+    var p_path : String
+    var p_pkgname : String
+    var p_name : String
+    var p_idx : Int
+    var p_extends : Vx_Core.Type_string?
+    var p_empty : Vx_Core.Type_any?
+    var p_propertylist : Vx_Core.Type_varlist?
+    var p_container : Vx_Core.Type_type?
+    var p_allowtypes : Vx_Core.Type_typelist?
+    var p_func : Vx_Core.Type_func?
+    var p_isnative : Bool
   }
-  // Type_type_generic
-  public class Type_type_generic : Vx_Core.Type_generic {
-    // p_shutdown
-    override public func p_shutdown() {
-      v_type_shutdown(self.backref)
-    }
-    // p_type_type
-    override public func p_type_type() -> Vx_Core.Type_type {
-      return t_type
-    }
-  }
-  // Generic_type
-  public class Generic_type {
-    // p_shutdown
-    public func p_shutdown() {}
-    // p_any_from_any
-    public func p_any_from_any(
-      _ type_type : Vx_Core.Type_type,
-      _ type_any : Vx_Core.Type_any
-    ) -> Vx_Core.Type_any {
-      return f_empty(type_type)
-    }
-    // p_call
-    public func p_call(
-      _ type_type : Vx_Core.Type_type,
-      _ anylist : Vx_Core.Type_anylist
-    ) -> Vx_Core.Type_any {
-      return self.p_new(type_type, anylist)
-    }
-    // p_empty
-    public func p_empty(
-    ) -> Vx_Core.Type_any {
-      return e_any
-    }
-    // p_copy
-    public func p_copy(
-      _ type_any : Vx_Core.Type_any,
-      _ anylist : Vx_Core.Type_anylist
-    ) -> Vx_Core.Type_any {
-      return v_empty_from_any(type_any)
-    }
-    // p_new
-    public func p_new(
-      _ type_type : Vx_Core.Type_type,
-      _ anylist : Vx_Core.Type_anylist
-    ) -> Vx_Core.Type_any {
-      return f_empty(type_type)
-    }
-  }
-  // Generic_type_type
-  public class Generic_type_type : Vx_Core.Generic_type {
-    // p_any_from_any
-    override public func p_any_from_any(
-      _ type_type : Vx_Core.Type_type,
-      _ type_any : Vx_Core.Type_any
-    ) -> Vx_Core.Type_any {
-      let value : Type_type = v_type_any_from_any(type_type, type_any)
-      let output : Vx_Core.Type_any = value.type_any
-      return output
-    }
-    // p_copy
-    override public func p_copy(
-      _ copyany : Vx_Core.Type_any,
-      _ type_anylist : Vx_Core.Type_anylist
-    ) -> Vx_Core.Type_any {
-      let copyval : Type_type = v_type_from_any(copyany)
-      let value : Type_type = v_type_copy(copyval, type_anylist)
-      let output : Vx_Core.Type_any = value.type_any
-      return output
-    }
-    // p_new
-    override public func p_new(
-      _ type_type : Vx_Core.Type_type,
-      _ type_anylist : Vx_Core.Type_anylist
-    ) -> Vx_Core.Type_any {
-      let value : Vx_Core.Type_type = f_type(type_anylist)
-      let output : Vx_Core.Type_any = value.type_any
-      return output
-    }
-  }
+
   // v_type_constructor
   public static func v_type_constructor(
   ) -> Type_type {
     Vx_Core.v_global_reserve()
-    return Type_type()
+    let output : Type_type = Vx_Core.Type_type()
+    return output
   }
+
   // v_type_create
   public static func v_type_create(
   ) -> Type_type {
@@ -99,14 +31,8 @@
     v_type_startup(output)
     return output
   }
-  // v_type_register
-  public static func v_type_register(
-  ) -> Vx_Core.Type_type {
-    v_type_startup_type()
-    v_type_startup_empty()
-    return t_type
-  }
-  // v_type_shutdown - mutating
+
+  // v_type_shutdown
   public static func v_type_shutdown(
     _ value : Type_type
   ) {
@@ -116,7 +42,8 @@
       generic_any.backref = Vx_Core.e_type
     }
   }
-  // v_type_startup - mutating
+
+  // v_type_startup
   public static func v_type_startup(
     _ value : Type_type
   ) {
@@ -127,6 +54,7 @@
       generic_any
     )
   }
+
   // v_type_startup_empty
   public static func v_type_startup_empty() {
     v_type_startup(e_type)
@@ -135,6 +63,7 @@
       e_type.type_any
     )
   }
+
   // v_type_startup_type
   public static func v_type_startup_type() -> Vx_Core.Type_type {
     let type_type = t_type
@@ -147,15 +76,17 @@
     )
     return type_type
   }
-  // v_any_from_type
-  public static func v_any_from_type(
+
+  // v_any_cast_type
+  public static func v_any_cast_type(
     _ value : Vx_Core.Type_type
   ) -> Vx_Core.Type_any {
     let output : Vx_Core.Type_any = value.type_any
     return output
   }
-  // v_type_from_any
-  public static func v_type_from_any(
+
+  // v_type_cast_any
+  public static func v_type_cast_any(
     _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_type {
     var output : Vx_Core.Type_type = Vx_Core.e_type
@@ -164,6 +95,7 @@
     }
     return output
   }
+
   // v_typename_from_any
   public static func v_typename_from_any(
     _ type_any : Vx_Core.Type_any
@@ -172,12 +104,14 @@
     let output : Vx_Core.Type_string = Vx_Core.v_typename_from_type(type_type)
     return output
   }
+
   // v_typename_from_type
   public static func v_typename_from_type(
     _ type_type : Vx_Core.Type_type
   ) -> Vx_Core.Type_string {
     return type_type.p_name
   }
+
   // v_typenamen_from_any
   public static func v_typenamen_from_any(
     _ type_any : Vx_Core.Type_any
@@ -186,6 +120,7 @@
     let output : String = Vx_Core.v_typenamen_from_type(type_type)
     return output
   }
+
   // v_typenamen_from_type
   public static func v_typenamen_from_type(
     _ type_type : Vx_Core.Type_type
@@ -194,6 +129,7 @@
     let output : String = Vx_Core.v_stringn_from_string(type_string)
     return output
   }
+
   // v_empty
   public static func v_empty(
     _ type_type : Vx_Core.Type_type
@@ -201,6 +137,7 @@
     let generic_type : Vx_Core.Generic_type = v_generic_type_from_type(type_type)
     return generic_type.p_empty()
   }
+
   // v_type_copy
   public static func v_type_copy(
     _ copyval : Vx_Core.Type_type,
@@ -208,6 +145,7 @@
   ) -> Vx_Core.Type_type {
     return copyval
   }
+
   // f_type
   public static func f_type(
     _ anylist : Vx_Core.Type_anylist
@@ -215,5 +153,6 @@
     let output : Vx_Core.Type_type = v_type_copy(e_type, anylist)
     return output
   }
+
   public static let t_type : Vx_Core.Type_type = Vx_Core.v_type_constructor()
   public static let e_type : Type_type = v_type_constructor()

@@ -1,0 +1,11 @@
+
+// :go
+var immutable_booleann bool = false
+var mutable_booleann bool = false
+var default_any *Type_any = E_any
+var nullable_any *Type_any
+// :swift
+let immutable_booleann : Bool = false
+var mutable_booleann : Bool = false
+var default_any : Vx_Core.Type_any = Vx_Core.e_any
+var nullable_any : Vx_Core.Type_any?

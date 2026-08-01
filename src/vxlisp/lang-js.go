@@ -244,7 +244,7 @@ func JsFromFunc(
 	properties = append(properties, "name          : \""+fnc.name+"\"")
 	properties = append(properties, "pkgname       : \""+fnc.pkgname+"\"")
 	properties = append(properties, "extends       : \":func\"")
-	properties = append(properties, "idx           : "+vx_core.V_stringn_from_intn(fnc.idx))
+	properties = append(properties, "idx           : "+vx_core.V_stringn_cast_intn(fnc.idx))
 	properties = append(properties, "allowfuncs    : []")
 	properties = append(properties, "disallowfuncs : []")
 	properties = append(properties, "allowtypes    : []")
@@ -1029,7 +1029,7 @@ func JsTestFromPackage(
 		test, msgs := JsTestFromType(lang, typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		covertype = append(
-			covertype, "\""+typid+"\", "+vx_core.V_stringn_from_intn(len(typ.testvalues)))
+			covertype, "\""+typid+"\", "+vx_core.V_stringn_cast_intn(len(typ.testvalues)))
 		if command.filter == "" {
 		} else if NameFromType(typ) != command.filter {
 			test = ""
@@ -1059,7 +1059,7 @@ func JsTestFromPackage(
 			msgblock, msgs)
 		coverconst = append(
 			coverconst,
-			"\""+cnstid+"\", "+vx_core.V_stringn_from_intn(len(cnst.listtestvalue)))
+			"\""+cnstid+"\", "+vx_core.V_stringn_cast_intn(len(cnst.listtestvalue)))
 		if command.filter == "" {
 		} else if NameFromConst(cnst) != command.filter {
 			test = ""
@@ -1094,7 +1094,7 @@ func JsTestFromPackage(
 				test, msgs := JsTestFromFunc(lang, fnc)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
-				coverfunc = append(coverfunc, "\""+fncid+StringIndexFromFunc(fnc)+"\", "+vx_core.V_stringn_from_intn(len(fnc.listtestvalue)))
+				coverfunc = append(coverfunc, "\""+fncid+StringIndexFromFunc(fnc)+"\", "+vx_core.V_stringn_cast_intn(len(fnc.listtestvalue)))
 				if command.filter == "" {
 				} else if NameFromFunc(fnc) != command.filter {
 					test = ""
@@ -1298,9 +1298,9 @@ func JsTypeCoverageNumsValNew(
 	output := "" +
 		"vx_core.f_new_from_type(" +
 		"vx_test.t_testcoveragenums, " +
-		"\":pct\", " + vx_core.V_stringn_from_intn(pct) + ", " +
-		"\":tests\", " + vx_core.V_stringn_from_intn(tests) + ", " +
-		"\":total\", " + vx_core.V_stringn_from_intn(total) +
+		"\":pct\", " + vx_core.V_stringn_cast_intn(pct) + ", " +
+		"\":tests\", " + vx_core.V_stringn_cast_intn(tests) + ", " +
+		"\":total\", " + vx_core.V_stringn_cast_intn(total) +
 		")"
 	return output
 }

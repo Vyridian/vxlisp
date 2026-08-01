@@ -474,11 +474,11 @@ func LangTypeCoverageNumsValNew(
 				LangTypeT(lang, testcoveragenumstype)},
 			[]string{
 				"\":pct\"",
-				vx_core.V_stringn_from_intn(pct),
+				vx_core.V_stringn_cast_intn(pct),
 				"\":tests\"",
-				vx_core.V_stringn_from_intn(tests),
+				vx_core.V_stringn_cast_intn(tests),
 				"\":total\"",
-				vx_core.V_stringn_from_intn(total)})
+				vx_core.V_stringn_cast_intn(total)})
 }
 
 func LangWriteFromProjectCmd(

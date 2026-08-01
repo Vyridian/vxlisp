@@ -66,16 +66,16 @@ func NewMsgFromTextblock(
 	}
 	header := path
 	if line > 0 {
-		header += " Line:" + vx_core.V_stringn_from_intn(line)
+		header += " Line:" + vx_core.V_stringn_cast_intn(line)
 	}
 	if char > 0 {
-		header += " Char:" + vx_core.V_stringn_from_intn(char)
+		header += " Char:" + vx_core.V_stringn_cast_intn(char)
 	}
 	header += "\n" + code + ":\n"
 	textblockdata := "" +
 		"\n" + textblock.name +
-		" Line:" + vx_core.V_stringn_from_intn(textblock.linenum) +
-		" Char:" + vx_core.V_stringn_from_intn(textblock.charnum)
+		" Line:" + vx_core.V_stringn_cast_intn(textblock.linenum) +
+		" Char:" + vx_core.V_stringn_cast_intn(textblock.charnum)
 	sdata := vx_core.V_stringn_from_liststringn_joinn(
 		listsdata,
 		"\n")

@@ -9,7 +9,7 @@ func CompareInt(expected int, actual int, msgblock *vxmsgblock) string {
 	if msgblock.iserror {
 		errortext = StringFromMsgblock(msgblock)
 	} else if expected != actual {
-		errortext = vx_core.V_stringn_from_intn(expected) + " != " + vx_core.V_stringn_from_intn(actual)
+		errortext = vx_core.V_stringn_cast_intn(expected) + " != " + vx_core.V_stringn_cast_intn(actual)
 	}
 	return errortext
 }
@@ -85,7 +85,7 @@ func V_compareText(
 				errortexts = append(errortexts, errortext)
 			}
 		}
-		errortext = "Line: " + vx_core.V_stringn_from_intn(foundline) + "\n" + vx_core.V_stringn_from_liststringn_joinn(errortexts, "\n")
+		errortext = "Line: " + vx_core.V_stringn_cast_intn(foundline) + "\n" + vx_core.V_stringn_from_liststringn_joinn(errortexts, "\n")
 	}
 	return errortext
 }

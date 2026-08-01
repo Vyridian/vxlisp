@@ -89,11 +89,11 @@ func LangTestCase(
 		var listtestdescribe []string
 		var desctexts []string
 		for idx, testvalue := range testvalues {
-			subpath := path + "/tests" + vx_core.V_stringn_from_intn(idx+1)
+			subpath := path + "/tests" + vx_core.V_stringn_cast_intn(idx+1)
 			descvaluetext, msgs := LangFromValue(lang, 4,
 				testvalue, testpkg, fnc, true, true, subpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
-			testdescribename := testcasename + "_testdescribe_" + vx_core.V_stringn_from_intn(idx+1)
+			testdescribename := testcasename + "_testdescribe_" + vx_core.V_stringn_cast_intn(idx+1)
 			desctext := LangFuncCallVariadicVx(lang, 2,
 				func_new,
 				[]string{
@@ -211,7 +211,7 @@ func LangTestFromPackage(
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		covertype = append(
 			covertype,
-			"\":"+typid+"\", "+vx_core.V_stringn_from_intn(len(typ.testvalues)))
+			"\":"+typid+"\", "+vx_core.V_stringn_cast_intn(len(typ.testvalues)))
 		if command.filter == "" {
 		} else if NameFromType(typ) != command.filter {
 			test = ""
@@ -241,7 +241,7 @@ func LangTestFromPackage(
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		coverconst = append(
 			coverconst,
-			"\":"+cnstid+"\", "+vx_core.V_stringn_from_intn(len(cnst.listtestvalue)))
+			"\":"+cnstid+"\", "+vx_core.V_stringn_cast_intn(len(cnst.listtestvalue)))
 		if command.filter == "" {
 		} else if NameFromConst(cnst) != command.filter {
 			test = ""
@@ -274,7 +274,7 @@ func LangTestFromPackage(
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			coverfunc = append(
 				coverfunc,
-				"\":"+fncid+LangIndexFromFunc(fnc)+"\", "+vx_core.V_stringn_from_intn(len(fnc.listtestvalue)))
+				"\":"+fncid+LangIndexFromFunc(fnc)+"\", "+vx_core.V_stringn_cast_intn(len(fnc.listtestvalue)))
 			if command.filter == "" {
 			} else if NameFromFunc(fnc) != command.filter {
 				test = ""

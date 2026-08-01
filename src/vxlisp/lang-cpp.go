@@ -185,22 +185,22 @@ func CppAbstractInterfaceFromInterface(
 	for _, item := range listinterfaces {
 		isfunc := false
 		if partial == "" {
-			if BooleanFromStringEnds(item, "(") {
+			if vx_core.V_booleann_from_stringn_endsn(item, "(") {
 				partial = item
 			}
 		} else {
 			partial += "\n" + item
-			if BooleanFromStringEnds(item, ";") {
+			if vx_core.V_booleann_from_stringn_endsn(item, ";") {
 				item = partial
 				partial = ""
 			}
 		}
 		if partial == "" {
-			if BooleanFromStringEnds(item, ");") {
+			if vx_core.V_booleann_from_stringn_endsn(item, ");") {
 				isfunc = true
-			} else if BooleanFromStringEnds(item, " override;") {
+			} else if vx_core.V_booleann_from_stringn_endsn(item, " override;") {
 				isfunc = true
-			} else if BooleanFromStringEnds(item, " const;") {
+			} else if vx_core.V_booleann_from_stringn_endsn(item, " const;") {
 				isfunc = true
 			}
 			if isfunc {
@@ -1008,7 +1008,7 @@ func CppBodyFromFunc(
 		valuetext = "output = " + valuetext
 	}
 	if valuetext == "" {
-	} else if !BooleanFromStringEnds(valuetext, ";") {
+	} else if !vx_core.V_booleann_from_stringn_endsn(valuetext, ";") {
 		valuetext += ";"
 	}
 	if valuetext != "" {
@@ -1177,7 +1177,7 @@ func CppBodyFromFunc(
 		"\n      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(" +
 		"\n        \"" + fnc.pkgname + "\", // pkgname" +
 		"\n        \"" + fnc.name + "\", // name" +
-		"\n        " + vx_core.V_stringn_from_intn(fnc.idx) + ", // idx" +
+		"\n        " + vx_core.V_stringn_cast_intn(fnc.idx) + ", // idx" +
 		"\n        " + StringFromBoolean(fnc.async) + ", // async" +
 		"\n        this->vx_typedef() // typedef" +
 		"\n      );" +
@@ -1244,7 +1244,7 @@ func CppFuncDefsFromFuncs(
 				lineindent + "  vx_core::Type_funcdef::vx_funcdef_new(" +
 				lineindent + "    \"" + fnc.pkgname + "\"," +
 				lineindent + "    \"" + fnc.name + "\"," +
-				lineindent + "    " + vx_core.V_stringn_from_intn(fnc.idx) + "," +
+				lineindent + "    " + vx_core.V_stringn_cast_intn(fnc.idx) + "," +
 				lineindent + "    " + StringFromBoolean(fnc.async) + "," +
 				lineindent + "    null" +
 				lineindent + "  )"
@@ -2825,7 +2825,7 @@ func CppFromValue(
 											valuecapturetext := CppCaptureFromValueListInner(funcarg.value, localargs, valuesubpath)
 											lambdavaluetext, msgs := CppFromValue(lang, lambdaarg.value, pkgname, fnc, argindent, true, test, lambdaargpath)
 											msgblock = MsgblockAddBlock(msgblock, msgs)
-											outputname := "output_" + vx_core.V_stringn_from_intn(argindent)
+											outputname := "output_" + vx_core.V_stringn_cast_intn(argindent)
 											lambdatext += "" +
 												arglineindent + "vx_core::vx_Type_async future_" + lambdaargname + " = " + lambdavaluetext + ";" +
 												//												arglineindent + "std::function<vx_core::Type_any(" + CppNameTypeFromType(lambdaarg.vxtype) + ")> fn_any_any_" + CppFromName(lambdaarg.name) + " = [" + valuecapturetext + "](" + CppNameTypeFromType(lambdaarg.vxtype) + " " + CppFromName(lambdaarg.name) + ") {"
@@ -2854,16 +2854,16 @@ func CppFromValue(
 									switch len(lambdaargrelease) {
 									case 0:
 									case 1:
-										lambdarelease = "\n    vx_core::vx_release_one_except(" + vx_core.V_stringn_from_liststringn_joinn(lambdaargrelease, ", ") + ", output_" + vx_core.V_stringn_from_intn(argindent) + ");"
+										lambdarelease = "\n    vx_core::vx_release_one_except(" + vx_core.V_stringn_from_liststringn_joinn(lambdaargrelease, ", ") + ", output_" + vx_core.V_stringn_cast_intn(argindent) + ");"
 									default:
-										lambdarelease = "\n    vx_core::vx_release_one_except({" + vx_core.V_stringn_from_liststringn_joinn(lambdaargrelease, ", ") + "}, output_" + vx_core.V_stringn_from_intn(argindent) + ");"
+										lambdarelease = "\n    vx_core::vx_release_one_except({" + vx_core.V_stringn_from_liststringn_joinn(lambdaargrelease, ", ") + "}, output_" + vx_core.V_stringn_cast_intn(argindent) + ");"
 									}
 									argtext = "" +
 										"vx_core::t_any_from_func_async->vx_fn_new({" + capturetext + "}, [" + capturetext + "]() {" +
 										lambdatext +
-										"\n    vx_core::Type_any output_" + vx_core.V_stringn_from_intn(argindent) + " = " + work + ";" +
+										"\n    vx_core::Type_any output_" + vx_core.V_stringn_cast_intn(argindent) + " = " + work + ";" +
 										lambdarelease +
-										"\n    return output_" + vx_core.V_stringn_from_intn(argindent) + ";" +
+										"\n    return output_" + vx_core.V_stringn_cast_intn(argindent) + ";" +
 										aftertext +
 										"\n})"
 								} else {
@@ -2883,7 +2883,7 @@ func CppFromValue(
 									work, msgs := CppFromValue(lang, argvalue, pkgname, fnc, 0, true, test, argsubpath)
 									msgblock = MsgblockAddBlock(msgblock, msgs)
 									work = StringFromStringIndent(work, "  ")
-									outputname := "output_" + vx_core.V_stringn_from_intn(argindent)
+									outputname := "output_" + vx_core.V_stringn_cast_intn(argindent)
 									lambdarelease := ""
 									switch len(lambdaargrelease) {
 									case 0:
@@ -2919,8 +2919,8 @@ func CppFromValue(
 									}
 									argtext = "" +
 										"vx_core::t_" + argvaluefuncname + "->vx_fn_new({" + capturetext + "}, [" + capturetext + "]() {" +
-										"\n  " + argvaluetypename + " output_" + vx_core.V_stringn_from_intn(subindent) + " = " + work + ";" +
-										"\n  return output_" + vx_core.V_stringn_from_intn(subindent) + ";" +
+										"\n  " + argvaluetypename + " output_" + vx_core.V_stringn_cast_intn(subindent) + " = " + work + ";" +
+										"\n  return output_" + vx_core.V_stringn_cast_intn(subindent) + ";" +
 										"\n})"
 								}
 							case ":funcref":
@@ -2936,8 +2936,8 @@ func CppFromValue(
 								argtext = "" +
 									LangTypeT(lang, funcarg.vxtype) + "->vx_fn_new({" + capturetext + "}, [" + capturetext + "](" + lambdatext + ") {" +
 									lambdavartext +
-									"\n  " + outputtype + " output_" + vx_core.V_stringn_from_intn(subindent) + " = " + work + ";" +
-									"\n  return output_" + vx_core.V_stringn_from_intn(subindent) + ";" +
+									"\n  " + outputtype + " output_" + vx_core.V_stringn_cast_intn(subindent) + " = " + work + ";" +
+									"\n  return output_" + vx_core.V_stringn_cast_intn(subindent) + ";" +
 									"\n})"
 							default:
 								funcargasync := funcarg.vxtype.vxfunc.async
@@ -2965,8 +2965,8 @@ func CppFromValue(
 								if argvalue.code == ":func" && argvalue.name == "native" {
 								} else {
 									work = "" +
-										"\n  " + LangNameTypeFromTypeSimple(lang, argvalue.vxtype, true) + " output_" + vx_core.V_stringn_from_intn(workindent) + " = " + work + ";" +
-										"\n  return output_" + vx_core.V_stringn_from_intn(workindent) + ";"
+										"\n  " + LangNameTypeFromTypeSimple(lang, argvalue.vxtype, true) + " output_" + vx_core.V_stringn_cast_intn(workindent) + " = " + work + ";" +
+										"\n  return output_" + vx_core.V_stringn_cast_intn(workindent) + ";"
 								}
 								capturetext := CppCaptureFromValue(argvalue, argsubpath)
 								argtext = "" +
@@ -4092,7 +4092,7 @@ func CppReplFromFunc(
 		case "vx/core/new<-type", "vx/core/empty":
 		default:
 			if fnc.generictype != nil {
-				replparam := outputtype + " generic_" + LangFromName(fnc.generictype.name) + " = vx_core::vx_any_from_any(" + outputttype + ", arglist->vx_get_any(vx_core::vx_new_int(" + vx_core.V_stringn_from_intn(argidx) + ")));"
+				replparam := outputtype + " generic_" + LangFromName(fnc.generictype.name) + " = vx_core::vx_any_from_any(" + outputttype + ", arglist->vx_get_any(vx_core::vx_new_int(" + vx_core.V_stringn_cast_intn(argidx) + ")));"
 				replparams += "\n      " + replparam
 				listargname = append(listargname, "generic_"+LangFromName(fnc.generictype.name))
 			}
@@ -4100,14 +4100,14 @@ func CppReplFromFunc(
 	}
 	if fnc.context {
 		listargname = append(listargname, "context")
-		replparam := "vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(" + vx_core.V_stringn_from_intn(argidx) + ")));"
+		replparam := "vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(" + vx_core.V_stringn_cast_intn(argidx) + ")));"
 		replparams += "\n      " + replparam
 	}
 	for _, arg := range fnc.listarg {
 		if (funcname == "let" || funcname == "let_async") && arg.name == "args" {
 		} else {
 			argname := LangFromName(arg.alias)
-			replparam := LangNameTypeFromTypeSimple(lang, arg.vxtype, true) + " " + argname + " = vx_core::vx_any_from_any(" + LangTypeTSimple(lang, arg.vxtype, true) + ", arglist->vx_get_any(vx_core::vx_new_int(" + vx_core.V_stringn_from_intn(argidx) + ")));"
+			replparam := LangNameTypeFromTypeSimple(lang, arg.vxtype, true) + " " + argname + " = vx_core::vx_any_from_any(" + LangTypeTSimple(lang, arg.vxtype, true) + ", arglist->vx_get_any(vx_core::vx_new_int(" + vx_core.V_stringn_cast_intn(argidx) + ")));"
 			replparams += "\n      " + replparam
 			listargname = append(listargname, argname)
 			argidx += 1
@@ -4162,7 +4162,7 @@ func CppTestCase(
 		var descnames []string
 		var desctexts []string
 		for idx, testvalue := range testvalues {
-			sidx := vx_core.V_stringn_from_intn(idx + 1)
+			sidx := vx_core.V_stringn_cast_intn(idx + 1)
 			subpath := path + "/tests" + sidx
 			resultname := "testresult_" + sidx
 			descname := "testdescribe_" + sidx
@@ -4269,7 +4269,7 @@ func CppTestFromPackage(
 		test, msgs := CppTestFromType(lang, typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		covertype = append(
-			covertype, "vx_core::vx_new_string(\":"+typid+"\"), vx_core::vx_new_int("+vx_core.V_stringn_from_intn(len(typ.testvalues))+")")
+			covertype, "vx_core::vx_new_string(\":"+typid+"\"), vx_core::vx_new_int("+vx_core.V_stringn_cast_intn(len(typ.testvalues))+")")
 		if command.filter == "" {
 		} else if NameFromType(typ) != command.filter {
 			test = ""
@@ -4299,7 +4299,7 @@ func CppTestFromPackage(
 		test, msgs := CppTestFromConst(lang, cnst)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		coverconst = append(
-			coverconst, "vx_core::vx_new_string(\":"+cnstid+"\"), vx_core::vx_new_int("+vx_core.V_stringn_from_intn(len(cnst.listtestvalue))+")")
+			coverconst, "vx_core::vx_new_string(\":"+cnstid+"\"), vx_core::vx_new_int("+vx_core.V_stringn_cast_intn(len(cnst.listtestvalue))+")")
 		if command.filter == "" {
 		} else if NameFromConst(cnst) != command.filter {
 			test = ""
@@ -4332,7 +4332,7 @@ func CppTestFromPackage(
 			test, msgs := CppTestFromFunc(lang, fnc)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
-			coverfunc = append(coverfunc, "vx_core::vx_new_string(\":"+fncid+LangIndexFromFunc(fnc)+"\"), vx_core::vx_new_int("+vx_core.V_stringn_from_intn(len(fnc.listtestvalue))+")")
+			coverfunc = append(coverfunc, "vx_core::vx_new_string(\":"+fncid+LangIndexFromFunc(fnc)+"\"), vx_core::vx_new_int("+vx_core.V_stringn_cast_intn(len(fnc.listtestvalue))+")")
 			if command.filter == "" {
 			} else if NameFromFunc(fnc) != command.filter {
 				test = ""
@@ -4520,9 +4520,9 @@ func CppTypeCoverageNumsValNew(
 	total int) string {
 	return "" +
 		"vx_core::vx_new(vx_test::t_testcoveragenums, {" +
-		"\n        vx_core::vx_new_string(\":pct\"), vx_core::vx_new_int(" + vx_core.V_stringn_from_intn(pct) + "), " +
-		"\n        vx_core::vx_new_string(\":tests\"), vx_core::vx_new_int(" + vx_core.V_stringn_from_intn(tests) + "), " +
-		"\n        vx_core::vx_new_string(\":total\"), vx_core::vx_new_int(" + vx_core.V_stringn_from_intn(total) + ")" +
+		"\n        vx_core::vx_new_string(\":pct\"), vx_core::vx_new_int(" + vx_core.V_stringn_cast_intn(pct) + "), " +
+		"\n        vx_core::vx_new_string(\":tests\"), vx_core::vx_new_int(" + vx_core.V_stringn_cast_intn(tests) + "), " +
+		"\n        vx_core::vx_new_string(\":total\"), vx_core::vx_new_int(" + vx_core.V_stringn_cast_intn(total) + ")" +
 		"\n      })"
 }
 
@@ -4587,7 +4587,7 @@ func CppTypeDefFromType(
 
 func CppTypeIntValNew(
 	val int) string {
-	return "vx_core::vx_new_int(" + vx_core.V_stringn_from_intn(val) + ")"
+	return "vx_core::vx_new_int(" + vx_core.V_stringn_cast_intn(val) + ")"
 }
 
 func CppTypeListFromListType(

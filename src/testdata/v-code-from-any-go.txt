@@ -1,0 +1,13 @@
+
+// :go
+T_any
+
+E_any
+
+T_type
+
+E_type
+
+T_const
+
+E_const

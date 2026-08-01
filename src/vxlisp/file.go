@@ -146,7 +146,7 @@ func ListStringReadFromPathExtension(
 			path,
 			func(path string, info os.FileInfo, err error) error {
 				if info.IsDir() {
-				} else if extension != "" && !BooleanFromStringEnds(path, extension) {
+				} else if extension != "" && !vx_core.V_booleann_from_stringn_endsn(path, extension) {
 				} else {
 					path = vx_core.V_stringn_from_stringn_findn_replacen(
 						path,

@@ -18,15 +18,13 @@ func lang_all_from_package(
 	var listall = listtype_from_listvxtype(listvxtype)
 	var text string = ""
 	for _, type_type := range listall {
-		text = code_type_class(type_lang, type_type)
+		text = code_type_declare(type_lang, type_type)
 		listoutput = append(listoutput, text)
 		text = code_type_generic(type_lang, type_type)
 		listoutput = append(listoutput, text)
 		text = code_type_funcs(type_lang, type_type)
 		listoutput = append(listoutput, text)
 	}
-	text = lang_const_funcs_from_listconst(type_lang, listconst)
-	listoutput = append(listoutput, text)
 	text = lang_type_t_from_listtype(type_lang, listall)
 	listoutput = append(listoutput, text)
 	text = lang_type_e_from_listtype(type_lang, listall)
@@ -43,7 +41,6 @@ func lang_const_all(
 	type_lang *vx_core.Type_scope,
 	type_const *vx_core.Type_const) string {
 	var output = "" +
-		code_const_funcs(type_lang, type_const) +
 		code_const_c(type_lang, type_const)
 	return output
 }
@@ -55,7 +52,7 @@ func code_const_c(
 	var type_lang *vx_core.Type_lang = type_scope.P_lang
 	var lineindent = vx_core.V_code_lineindent(type_scope, 1)
 	var constname = vx_core.V_code_namen(type_scope, type_const.P_name)
-	var type_type = type_const.P_const_type
+	var type_type = type_const.P_type
 	switch type_lang {
 	case vx_core.C_lang_swift:
 		output = lineindent + "public static let c_" + constname + " : " + vx_core.V_code_type_typename(type_scope, type_type) + " = " + vx_core.V_code_type_pkgname(type_scope, type_type) + "v_" + vx_core.V_code_type_name(type_scope, type_type) + "_constructor()"
@@ -74,52 +71,11 @@ func lang_const_c_from_listconst(
 	return output
 }
 
-func code_const_funcs(
-	type_scope *vx_core.Type_scope,
-	type_const *vx_core.Type_const) string {
-	var lineindent = vx_core.V_code_lineindent(type_scope, 1)
-	var type_lang *vx_core.Type_lang = type_scope.P_lang
-	var vxcore = vx_core.V_code_type_pkgname(type_scope, vx_core.T_any)
-	var constname = LangFromName(type_const.P_name)
-	var type_type = type_const.P_const_type
-	var typename = vx_core.V_code_type_typename(type_scope, type_type)
-	var output = ""
-	var value = ""
-	switch type_lang {
-	case vx_core.C_lang_swift:
-		switch type_const.P_name {
-		case "vx/core/false":
-			value = lineindent + "  value.booleann = false"
-		}
-		output = "" +
-			lineindent + "// V_" + constname + "_register - mutating" +
-			lineindent + "public static func V_" + constname + "_register(" +
-			lineindent + ") -> " + vxcore + "Type_any {" +
-			lineindent + "  var value : " + typename + " = c_" + constname +
-			lineindent + "  value.type_any.type_const = " + vxcore + "v_const_new_from_namen(\"" + type_const.P_name + "\")" +
-			value +
-			lineindent + "  return value.type_any" +
-			lineindent + "}"
-	}
-	return output
-}
-
 func lang_const_name(
 	type_lang *vx_core.Type_scope,
 	type_const *vx_core.Type_const) string {
 	var output = ""
 	output = LangFromName(type_const.P_name)
-	return output
-}
-
-func lang_const_funcs_from_listconst(
-	type_lang *vx_core.Type_scope,
-	listconst []*vx_core.Type_const) string {
-	var listoutput []string
-	for _, type_const := range listconst {
-		listoutput = append(listoutput, code_const_funcs(type_lang, type_const))
-	}
-	var output = vx_core.V_stringn_from_liststringn_joinn(listoutput, "")
 	return output
 }
 
@@ -194,7 +150,7 @@ func lang_func_var_from_name_type(
 	name string,
 	type_type *vx_core.Type_type) string {
 	var type_var *vx_core.Type_var = vx_core.V_var_create()
-	type_var.P_name = vx_core.V_string_from_stringn(name)
+	type_var.P_name = vx_core.V_string_cast_stringn(name)
 	switch type_type.P_path {
 	case "vx/core/any-1", "vx/core/any-2", "vx/core/any-3":
 		type_var.P_type = vx_core.T_any
@@ -218,9 +174,9 @@ func lang_func_body(
 	var lineindent = vx_core.V_code_lineindent(type_lang, indent)
 	var output string = "" +
 		lineindent + "var output : " +
-		vx_core.V_code_type_typename(type_lang, type_func.P_return_type) +
+		vx_core.V_code_type_typename(type_lang, type_func.P_return) +
 		" = " +
-		vx_core.V_code_e(type_lang, type_func.P_return_type)
+		vx_core.V_code_e(type_lang, type_func.P_return)
 	return output
 }
 
@@ -231,13 +187,13 @@ func code_func_code(
 	var output string = ""
 	var type_lang *vx_core.Type_lang = type_scope.P_lang
 	var lineindent string = vx_core.V_code_lineindent(type_scope, indent)
-	var value *vx_core.Type_any = type_func.P_value_any
+	var value *vx_core.Type_any = type_func.P_value
 	var func_type *vx_core.Type_type = type_func.P_func_type
 	switch func_type.P_path {
 	case "vx/core/var":
-		var type_var *vx_core.Type_var = vx_core.V_var_cast(value)
-		var varname string = vx_core.V_stringn_from_string(type_var.P_name)
-		var type_return *vx_core.Type_type = type_func.P_return_type
+		var type_var *vx_core.Type_var = vx_core.V_var_cast_any(value)
+		var varname string = vx_core.V_stringn_cast_string(type_var.P_name)
+		var type_return *vx_core.Type_type = type_func.P_return
 		var vartype string = vx_core.V_code_type_name(type_scope, type_return)
 		var varvalue string = ""
 		/*
@@ -267,7 +223,7 @@ func lang_func_name(
 	var type_type *vx_core.Type_type = type_func.P_func_type
 	output = LangFromName(type_type.P_name)
 	if type_type.P_idx > 0 {
-		output += "_" + vx_core.V_stringn_from_intn(type_type.P_idx)
+		output += "_" + vx_core.V_stringn_cast_intn(type_type.P_idx)
 	}
 	return output
 }
@@ -421,9 +377,9 @@ func code_generic_props(
 					[]*vx_core.Type_thenelse{
 						vx_core.V_then_from_booleann(
 							type_type.P_path == "vx/core/any",
-							vx_core.A_string_from_stringn("type_any")),
+							vx_core.A_string_cast_stringn("type_any")),
 						vx_core.V_else(
-							vx_core.A_string_from_stringn("v_" + typename + "_from_any(type_any)"))})) +
+							vx_core.A_string_cast_stringn("v_" + typename + "_from_any(type_any)"))})) +
 			lineindent + "  vx_core.V_" + typename + "_shutdown(value)" +
 			lineindent + "}"
 		listoutput = append(listoutput, prop)
@@ -632,7 +588,7 @@ func code_type_all(
 	type_scope *vx_core.Type_scope,
 	type_type *vx_core.Type_type) string {
 	var output = "" +
-		code_type_class(type_scope, type_type) +
+		code_type_declare(type_scope, type_type) +
 		code_type_generic(type_scope, type_type) +
 		code_type_funcs(type_scope, type_type) +
 		code_type_t_const(type_scope, type_type) +
@@ -640,24 +596,22 @@ func code_type_all(
 	return output
 }
 
-func code_type_class(
+func code_type_declare(
 	type_scope *vx_core.Type_scope,
 	type_type *vx_core.Type_type) string {
-	var output string = ""
-	var type_lang *vx_core.Type_lang = type_scope.P_lang
-	var lineindent = vx_core.V_code_lineindent(type_scope, 1)
-	var typename = vx_core.V_code_type_name(type_scope, type_type)
-	var props string = code_type_props(
+	var path string = "code_type_class"
+	var indent int = 0
+	var output string = vx_core.V_code_from_type_declare(
+		type_scope,
+		indent,
+		path,
+		vx_core.V_type_declare_from_type(
+			type_type))
+	/*
+		var props string = code_type_props(
 		type_scope,
 		type_type)
-	switch type_lang {
-	case vx_core.C_lang_swift:
-		output = "" +
-			lineindent + "// Type_" + typename +
-			lineindent + "public class Type_" + typename + " {" +
-			props +
-			lineindent + "}"
-	}
+	*/
 	return output
 }
 
@@ -962,11 +916,6 @@ func code_type_func_shutdown(
 				lineindent + "  }" +
 				lineindent + "  value.type_type = nil" +
 				lineindent + "  Vx_Core.v_global_release()" +
-				lineindent + "}" +
-				lineindent + "// V_" + typename + "_startup - mutating" +
-				lineindent + "public static func V_" + typename + "_startup(" +
-				lineindent + "  _ value : Type_" + typename +
-				lineindent + ") {" +
 				lineindent + "}"
 			listoutput = append(listoutput, funcn)
 		}
@@ -986,7 +935,7 @@ func code_type_func_shutdown(
 			subtypen = "" +
 				lineindent + "  value.type_struct = Vx_Core.e_struct"
 		default:
-			var containertype = type_type.P_container_type
+			var containertype = type_type.P_container
 			var containername = vx_core.V_code_type_name(type_scope, containertype)
 			switch type_lang {
 			case vx_core.C_lang_swift:
@@ -1053,203 +1002,17 @@ func code_type_func_shutdown(
 	return output
 }
 
-func code_type_func_startup(
-	type_scope *vx_core.Type_scope,
-	type_type *vx_core.Type_type) string {
-	var lineindent = vx_core.V_code_lineindent(type_scope, 1)
-	var type_lang *vx_core.Type_lang = type_scope.P_lang
-	var listoutput []string
-	var vxcore = vx_core.V_code_type_typename(type_scope, vx_core.T_any)
-	var typename = vx_core.V_code_type_name(type_scope, type_type)
-	var funcstartup = ""
-	switch type_type.P_path {
-	case "vx/core/any":
-		switch type_lang {
-		case vx_core.C_lang_swift:
-			funcstartup = "" +
-				lineindent + "// V_" + typename + "_startup - mutating" +
-				lineindent + "public static func V_" + typename + "_startup(" +
-				lineindent + "  _ value : Type_" + typename +
-				lineindent + ") {" +
-				lineindent + "}"
-		}
-		/*
-			default:
-				var subtypen = ""
-				switch type_type.P_path {
-				case "vx/core/list", "vx/core/map", "vx/core/struct":
-				default:
-					switch type_lang {
-					case vx_core.C_lang_swift:
-						switch extendsn {
-						case ":list":
-							subtypen = "" +
-								lineindent + "  value.type_list = " + vxcore + "v_list_new_from_any(" +
-								lineindent + "    value.type_any" +
-								lineindent + "  )"
-						case ":map":
-							subtypen = "" +
-								lineindent + "  value.type_map = " + vxcore + "v_map_new_from_any(" +
-								lineindent + "    value.type_any" +
-								lineindent + "  )"
-						case ":struct":
-							subtypen = "" +
-								lineindent + "  value.type_struct = " + vxcore + "v_struct_new_from_any(" +
-								lineindent + "    value.type_any" +
-								lineindent + "  )"
-						}
-					}
-				}
-		*/
-		funcstartup = "" +
-			lineindent + "// V_" + typename + "_startup - mutating" +
-			lineindent + "public static func V_" + typename + "_startup(" +
-			lineindent + "  _ value : " + vx_core.V_code_type_typename(type_scope, type_type) +
-			lineindent + ") {" +
-			lineindent + "  value.type_any = " + vxcore + "v_any_new_from_type_backref(" +
-			lineindent + "    " + code_type_t(type_scope, type_type) + "," +
-			lineindent + "    value" +
-			lineindent + "  )" +
-			lineindent + "}"
-		listoutput = append(listoutput, funcstartup)
-	}
-	var output = vx_core.V_stringn_from_liststringn_joinn(listoutput, "")
-	return output
-}
-
 func code_type_funcs(
 	type_scope *vx_core.Type_scope,
 	type_type *vx_core.Type_type) string {
 	var indent = 1
 	var path = type_type.P_path
-	var lineindent = vx_core.V_code_lineindent(type_scope, indent)
-	var vxcore = vx_core.V_code_type_pkgname(type_scope, vx_core.T_any)
 	var listoutput []string
-	var typename = vx_core.V_code_type_name(type_scope, type_type)
-	var extends = ""
-	switch type_type.P_extends {
-	case vx_core.E_string:
-		extends = vxcore + "e_string"
-	case vx_core.C_extends_func:
-		extends = vxcore + "e_extends_func"
-	case vx_core.C_extends_list:
-		extends = vxcore + "e_extends_list"
-	case vx_core.C_extends_map:
-		extends = vxcore + "e_extends_map"
-	case vx_core.C_extends_struct:
-		extends = vxcore + "e_extends_struct"
-	}
-	var e_typeany = "e_" + typename + ".type_any"
-	switch type_type.P_path {
-	case "vx/core/any":
-		e_typeany = "e_any"
-	}
-	var funcs = "" +
-		lineindent + "// V_" + typename + "_constructor" +
-		lineindent + "public static func V_" + typename + "_constructor(" +
-		lineindent + ") -> " + vx_core.V_code_type_typename(type_scope, type_type) + " {" +
-		lineindent + "  " + vxcore + "v_global_reserve()" +
-		lineindent + "  return Type_" + typename + "()" +
-		lineindent + "}" +
-		lineindent + "// V_" + typename + "_create" +
-		lineindent + "public static func V_" + typename + "_create(" +
-		lineindent + ") -> " + vx_core.V_code_type_typename(type_scope, type_type) + " {" +
-		lineindent + "  var output : " + vx_core.V_code_type_typename(type_scope, type_type) + " = vx_core.V_" + typename + "_constructor()" +
-		lineindent + "  V_" + typename + "_startup(output)" +
-		lineindent + "  return output" +
-		lineindent + "}" +
-		lineindent + "// V_" + typename + "_register" +
-		lineindent + "public static func V_" + typename + "_register(" +
-		lineindent + ") -> Vx_Core.Type_type {" +
-		lineindent + "  V_" + typename + "_startup_type()" +
-		lineindent + "  V_" + typename + "_startup_empty()" +
-		lineindent + "  return " + code_type_t(type_scope, type_type) +
-		lineindent + "}"
-	listoutput = append(listoutput, funcs)
+	var funcs = ""
 	funcs = code_type_func_shutdown(type_scope, type_type)
-	listoutput = append(listoutput, funcs)
-	funcs = code_type_func_startup(type_scope, type_type)
-	listoutput = append(listoutput, funcs)
-	funcs = "" +
-		lineindent + "// V_" + typename + "_startup_empty" +
-		lineindent + "public static func V_" + typename + "_startup_empty() {" +
-		lineindent + "  V_" + typename + "_startup(e_" + typename + ")" +
-		lineindent + "  " + vxcore + "v_startup_e(" +
-		lineindent + "    t_" + typename + "," +
-		lineindent + "    " + e_typeany +
-		lineindent + "  )" +
-		lineindent + "}" +
-		lineindent + "// V_" + typename + "_startup_type" +
-		lineindent + "public static func V_" + typename + "_startup_type() -> " + vx_core.V_code_type_typename(type_scope, vx_core.T_type) + " {" +
-		lineindent + "  let type_type = " + code_type_t(type_scope, type_type) +
-		lineindent + "  type_type.p_name = " + vxcore + "v_string_from_stringn(" +
-		lineindent + "    \"" + type_type.P_path + "\"" +
-		lineindent + "  )" +
-		lineindent + "  type_type.p_extends = " + extends +
-		lineindent + "  let type_generic : " + vxcore + "Type_generic = Type_" + typename + "_generic()" +
-		lineindent + "  " + vxcore + "v_startup_t(" +
-		lineindent + "    type_type," +
-		lineindent + "    type_generic" +
-		lineindent + "  )" +
-		lineindent + "  return type_type" +
-		lineindent + "}"
 	listoutput = append(listoutput, funcs)
 	var funccast = lang_type_func_cast(type_scope, path, type_type)
 	listoutput = append(listoutput, funccast)
-	switch type_type.P_path {
-	case "vx/core/any":
-		funcs = "" +
-			lineindent + "// V_copy" +
-			lineindent + "public static func V_copy(" +
-			lineindent + "  _ type_any : " + vxcore + "Type_any," +
-			lineindent + "  _ anylist : " + vxcore + "Type_anylist" +
-			lineindent + ") -> Type_any {" +
-			lineindent + "  let type_type : " + vxcore + "Type_type = " + vxcore + "v_type_from_any(type_any)" +
-			lineindent + "  let type_generic : " + vxcore + "Type_generic = vx_core.V_generic_from_type(type_type)" +
-			lineindent + "  let output : " + vxcore + "Type_any = type_generic.p_copy(type_any, anylist)" +
-			lineindent + "  return output" +
-			lineindent + "}" +
-			lineindent + "// V_empty_from_any" +
-			lineindent + "public static func V_empty_from_any(" +
-			lineindent + "  _ type_any : " + vx_core.V_code_type_typename(type_scope, vx_core.T_any) +
-			lineindent + ") -> " + vx_core.V_code_type_typename(type_scope, vx_core.T_any) + " {" +
-			lineindent + "  let type_type : " + vx_core.V_code_type_typename(type_scope, vx_core.T_type) + " = " + vxcore + "v_type_from_any(type_any)" +
-			lineindent + "  let output : " + vx_core.V_code_type_typename(type_scope, vx_core.T_any) + " = " + vxcore + "v_empty(type_type)" +
-			lineindent + "  return output" +
-			lineindent + "}" +
-			lineindent + "// V_new" +
-			lineindent + "public static func V_new(" +
-			lineindent + "  _ type_type : " + vx_core.V_code_type_typename(type_scope, vx_core.T_type) + "," +
-			lineindent + "  _ anylist : " + vx_core.V_code_type_typename(type_scope, vx_core.T_anylist) +
-			lineindent + ") -> " + vx_core.V_code_type_typename(type_scope, vx_core.T_any) + " {" +
-			lineindent + "  let type_generic : " + vxcore + "Type_generic = vx_core.V_generic_from_type(type_type)" +
-			lineindent + "  let output : " + vxcore + "Type_any = type_generic.p_new(type_type, anylist)" +
-			lineindent + "  return output" +
-			lineindent + "}"
-		listoutput = append(listoutput, funcs)
-	case "vx/core/struct":
-		funcs = "" +
-			lineindent + "// V_struct_new_from_any" +
-			lineindent + "public static func V_struct_new_from_any(" +
-			lineindent + "  _ type_any : " + vx_core.V_code_type_typename(type_scope, vx_core.T_any) +
-			lineindent + ") -> " + vx_core.V_code_type_typename(type_scope, vx_core.T_struct) + " {" +
-			lineindent + "  var output : " + vx_core.V_code_type_typename(type_scope, vx_core.T_struct) + " = " + vx_core.V_code_type_typename(type_scope, vx_core.T_struct) + "()" +
-			lineindent + "  output.type_any = type_any" +
-			lineindent + "  generic_struct.type_any = type_any" +
-			lineindent + "  return output" +
-			lineindent + "}"
-		listoutput = append(listoutput, funcs)
-	case "vx/core/type":
-		funcs = "" +
-			lineindent + "// V_empty" +
-			lineindent + "public static func V_empty(" +
-			lineindent + "  _ type_type : " + vxcore + "Type_type" +
-			lineindent + ") -> " + vxcore + "Type_any {" +
-			lineindent + "  let type_generic : " + vxcore + "Type_generic = V_generic_from_type(type_type)" +
-			lineindent + "  return type_generic.p_empty()" +
-			lineindent + "}"
-		listoutput = append(listoutput, funcs)
-	}
 	funcs = code_type_func_copy(type_scope, type_type)
 	listoutput = append(listoutput, funcs)
 	funcs = lang_type_func_list(type_scope, indent, path, type_type)
@@ -1273,11 +1036,11 @@ func lang_type_func_list(
 	case vx_core.C_extends_list:
 		var typename = vx_core.V_code_type_name(type_lang, type_type)
 		var liststring []string
-		var list_type = type_type.P_container_type
+		var list_type = type_type.P_container
 		var maintypename = vx_core.V_code_type_name(type_lang, list_type)
 		var prop = "" +
 			vx_core.V_code_from_any(type_lang, indent, path,
-				vx_core.A_string_from_stringn(
+				vx_core.A_string_cast_stringn(
 					"\n// V_"+typename+"_listany_from_"+typename+
 						"\npublic static func V_"+typename+"_listany_from_"+typename+"("+
 						"\n  _ type_"+typename+" : "+vx_core.V_code_type_typename(type_lang, type_type)+
@@ -1304,12 +1067,12 @@ func lang_type_func_list(
 							[]*vx_core.Type_thenelse{
 								vx_core.V_then_from_booleann(
 									type_type.P_path == "vx/core/any",
-									vx_core.V_string_cast_any(vx_core.E_string)),
+									vx_core.V_any_cast_string(vx_core.E_string)),
 								vx_core.V_then_from_booleann(
 									vx_core.V_func_from_type(type_type) != vx_core.E_func,
 									vx_core.A_anylist_run_from_listany(
 										[]*vx_core.Type_any{
-											vx_core.A_string_from_stringn(
+											vx_core.A_string_cast_stringn(
 												"\n// V_" + typename + "_listany_from_list" + allowtypename +
 													"\npublic static func V_" + typename + "_listany_from_list" + allowtypename + "(" +
 													"\n  _ listvalue : [" + vx_core.V_code_type_typename(type_lang, allow_type) + "]" +
@@ -1320,7 +1083,7 @@ func lang_type_func_list(
 													"\n  }" +
 													"\n  return output" +
 													"\n}"),
-											vx_core.A_string_from_stringn(
+											vx_core.A_string_cast_stringn(
 												"\n// V_" + typename + "_list" + allowtypename + "_from_listany" +
 													"\npublic static func V_" + typename + "_list" + allowtypename + "_from_listany(" +
 													"\n  _ listany : [" + vx_core.V_code_type_typename(type_lang, vx_core.T_any) + "]" +
@@ -1334,9 +1097,9 @@ func lang_type_func_list(
 															[]*vx_core.Type_thenelse{
 																vx_core.V_then_from_booleann(
 																	type_type.P_path == "vx/core/any",
-																	vx_core.A_string_from_stringn("type_any")),
+																	vx_core.A_string_cast_stringn("type_any")),
 																vx_core.V_else(
-																	vx_core.A_string_from_stringn("v_" + allowtypename + "_from_any(type_any)"))})) +
+																	vx_core.A_string_cast_stringn("v_" + allowtypename + "_from_any(type_any)"))})) +
 													"\n    if value !== " + vx_core.V_code_e(type_lang, allow_type) + " {" +
 													"\n      output.append(value)" +
 													"\n    }" +
@@ -1362,13 +1125,13 @@ func code_type_func_map(
 	case vx_core.C_extends_map:
 		var typename = vx_core.V_code_type_name(type_scope, type_type)
 		var liststring []string
-		var main_type = type_type.P_container_type
+		var main_type = type_type.P_container
 		var maintypename = vx_core.V_code_type_name(
 			type_scope,
 			main_type)
 		var prop = "" +
 			vx_core.V_code_from_any(type_scope, indent, path,
-				vx_core.A_string_from_stringn(
+				vx_core.A_string_cast_stringn(
 					"\n// V_"+typename+"_mapany_from_"+typename+
 						"\npublic static func V_"+typename+"_mapany_from_"+typename+"("+
 						"\n  _ type_"+typename+" : "+vx_core.V_code_type_typename(type_scope, type_type)+
@@ -1396,12 +1159,12 @@ func code_type_func_map(
 							[]*vx_core.Type_thenelse{
 								vx_core.V_then_from_booleann(
 									type_type.P_path == "vx/core/any",
-									vx_core.V_string_cast_any(vx_core.E_string)),
+									vx_core.V_any_cast_string(vx_core.E_string)),
 								vx_core.V_then_from_booleann(
 									vx_core.V_func_from_type(type_type) != vx_core.E_func,
 									vx_core.A_anylist_run_from_listany(
 										[]*vx_core.Type_any{
-											vx_core.A_string_from_stringn(
+											vx_core.A_string_cast_stringn(
 												"\n// V_" + typename + "_map_from_map" + allowtypename +
 													"\npublic static func V_" + typename + "_mapany_from_map" + allowtypename + "(" +
 													"\n  _ mapvalue : [String:" + vx_core.V_code_type_typename(type_scope, allow_type) + "]" +
@@ -1412,7 +1175,7 @@ func code_type_func_map(
 													"\n  }" +
 													"\n  return output" +
 													"\n}"),
-											vx_core.A_string_from_stringn(
+											vx_core.A_string_cast_stringn(
 												"\n// V_" + typename + "_map" + allowtypename + "_from_mapany" +
 													"\npublic static func V_" + typename + "_map" + allowtypename + "_from_mapany(" +
 													"\n  _ mapany : [String:" + vx_core.V_code_type_typename(type_scope, vx_core.T_any) + "]" +
@@ -1426,9 +1189,9 @@ func code_type_func_map(
 															[]*vx_core.Type_thenelse{
 																vx_core.V_then_from_booleann(
 																	type_type.P_path == "vx/core/any",
-																	vx_core.A_string_from_stringn("type_any")),
+																	vx_core.A_string_cast_stringn("type_any")),
 																vx_core.V_else(
-																	vx_core.A_string_from_stringn(allowpkg + "v_" + allowtypename + "_from_any(type_any)"))})) +
+																	vx_core.A_string_cast_stringn(allowpkg + "v_" + allowtypename + "_from_any(type_any)"))})) +
 													"\n    if value !== " + vx_core.V_code_e(type_scope, allow_type) + " {" +
 													"\n      output[key] = value" +
 													"\n    }" +
@@ -1470,7 +1233,7 @@ func lang_type_f(
 		var type_func *vx_core.Type_func = vx_core.V_func_from_type(
 			type_type)
 		if type_func != vx_core.E_func {
-			type_return = type_func.P_return_type
+			type_return = type_func.P_return
 			body = lang_func_body(type_scope, indent+1, type_func)
 			var listprop []string
 			if type_func.P_generic_type != nil {
@@ -1483,11 +1246,11 @@ func lang_type_f(
 					listprop = append(listprop, prop)
 				}
 			}
-			if type_func.P_context {
+			if type_func.P_context == vx_core.C_true {
 				var prop string = vx_core.V_code_func_var(type_scope, indent+1, vx_core.C_var_context)
 				listprop = append(listprop, prop)
 			}
-			var varlist *vx_core.Type_varlist = type_func.P_type_varlist
+			var varlist *vx_core.Type_varlist = type_func.P_arglist
 			if varlist != vx_core.E_varlist {
 				var listvar []*vx_core.Type_var = varlist.P_listvar
 				for _, type_var := range listvar {
@@ -1612,7 +1375,7 @@ func code_type_func_copy(
 				default:
 					switch type_type.P_extends {
 					case vx_core.C_extends_list:
-						var container_type *vx_core.Type_type = type_type.P_container_type
+						var container_type *vx_core.Type_type = type_type.P_container
 						var allownamen = vx_core.V_code_type_name(type_scope, container_type)
 						var allowtypen = vx_core.V_code_type_typename(type_scope, container_type)
 						header2 = "" +
@@ -1662,7 +1425,7 @@ func code_type_func_copy(
 							lineindent + "    ]" +
 							lineindent + "  )"
 					case vx_core.C_extends_map:
-						var container_type *vx_core.Type_type = type_type.P_container_type
+						var container_type *vx_core.Type_type = type_type.P_container
 						var allownamen = vx_core.V_code_type_name(type_scope, container_type)
 						var allowtypen = vx_core.V_code_type_typename(type_scope, container_type)
 						header2 = "" +
@@ -1730,13 +1493,13 @@ func code_type_func_copy(
 								letpropn = "" +
 									lineindent + "    var " + ppropname + " : Vx_Core.Type_any = Vx_Core.v_any_from_anymap_keyn(" +
 									lineindent + "      merged_anymap," +
-									lineindent + "      \"" + vx_core.V_stringn_from_string(property.P_name) + "\"" +
+									lineindent + "      \"" + vx_core.V_stringn_cast_string(property.P_name) + "\"" +
 									lineindent + "    )"
 							default:
 								letpropn = "" +
 									lineindent + "    let " + ppropname + "_any : Vx_Core.Type_any = Vx_Core.v_any_from_anymap_keyn(" +
 									lineindent + "      merged_anymap," +
-									lineindent + "      \"" + vx_core.V_stringn_from_string(property.P_name) + "\"" +
+									lineindent + "      \"" + vx_core.V_stringn_cast_string(property.P_name) + "\"" +
 									lineindent + "    )" +
 									lineindent + "    var " + ppropname + " : " + vx_core.V_code_type_typename(type_scope, var_type) + " = " + vx_core.V_code_type_pkgname(type_scope, var_type) + "v_" + vx_core.V_code_type_name(type_scope, var_type) + "_from_any(" +
 									lineindent + "      " + ppropname + "_any" +
@@ -1967,13 +1730,13 @@ func code_type_props(
 		}
 		switch type_type.P_extends {
 		case vx_core.C_extends_list:
-			var list_type *vx_core.Type_type = type_type.P_container_type
+			var list_type *vx_core.Type_type = type_type.P_container
 			props = "" +
 				lineindent + "var type_list : " + vx_core.V_code_type_typename(type_scope, vx_core.T_list) + " = " + vx_core.V_code_e(type_scope, vx_core.T_list) +
 				lineindent + "var list" + vx_core.V_code_type_name(type_scope, list_type) + " : [" + vx_core.V_code_t(type_scope, list_type) + "] = []"
 			listoutput = append(listoutput, props)
 		case vx_core.C_extends_map:
-			var map_type *vx_core.Type_type = type_type.P_container_type
+			var map_type *vx_core.Type_type = type_type.P_container
 			props = "" +
 				lineindent + "var type_map : " + vx_core.V_code_type_typename(type_scope, vx_core.T_map) + " = " + vx_core.V_code_e(type_scope, vx_core.T_map) +
 				lineindent + "var map" + vx_core.V_code_type_name(type_scope, map_type) + " : [String:" + vx_core.V_code_type_typename(type_scope, map_type) + "] = [:]"
@@ -2050,7 +1813,7 @@ func lang_types_from_listtype(
 	listtype []*vx_core.Type_type) string {
 	var listoutput []string
 	for _, type_type := range listtype {
-		listoutput = append(listoutput, code_type_class(lang, type_type))
+		listoutput = append(listoutput, code_type_declare(lang, type_type))
 	}
 	var output = vx_core.V_stringn_from_liststringn_joinn(listoutput, "")
 	return output
@@ -2076,29 +1839,62 @@ func const_from_vxconst(
 
 func type_from_vxtype(
 	type_vxtype *vxtype) *vx_core.Type_type {
-	var output *vx_core.Type_type = vx_core.V_type_create()
-	var name string = type_vxtype.name
-	var pkgname string = type_vxtype.pkgname
-	var path string = name
-	if pkgname != "" {
-		path = pkgname + "/" + name
+	var output *vx_core.Type_type = vx_core.E_type
+	switch NameFromType(type_vxtype) {
+	case "vx/core/any":
+		output = vx_core.T_any
+	case "vx/core/boolean":
+		output = vx_core.T_boolean
+	case "vx/core/float":
+		output = vx_core.T_float
+	case "vx/core/int":
+		output = vx_core.T_int
+	case "vx/core/string":
+		output = vx_core.T_string
+	case "vx/core/type":
+		output = vx_core.T_type
+	default:
+		output = vx_core.V_type_create()
+		var name string = type_vxtype.name
+		var pkgname string = type_vxtype.pkgname
+		var path string = name
+		if pkgname != "" {
+			path = pkgname + "/" + name
+		}
+		var extends *vx_core.Type_string = vx_core.E_string
+		switch type_vxtype.extends {
+		case ":func":
+			extends = vx_core.C_extends_func
+		case ":list":
+			extends = vx_core.C_extends_list
+		case ":map":
+			extends = vx_core.C_extends_map
+		case ":struct":
+			extends = vx_core.C_extends_struct
+		}
+		output.P_name = name
+		output.P_pkgname = pkgname
+		output.P_alias = type_vxtype.alias
+		output.P_extends = extends
+		output.P_path = path
+		output.P_propertylist = varlist_from_listvxarg(type_vxtype.properties)
 	}
-	var extends *vx_core.Type_string = vx_core.E_string
-	switch type_vxtype.extends {
-	case ":func":
-		extends = vx_core.C_extends_func
-	case ":list":
-		extends = vx_core.C_extends_list
-	case ":map":
-		extends = vx_core.C_extends_map
-	case ":struct":
-		extends = vx_core.C_extends_struct
+	return output
+}
+
+func varlist_from_listvxarg(
+	listvxarg []vxarg) *vx_core.Type_varlist {
+	var output *vx_core.Type_varlist = vx_core.E_varlist
+	if len(listvxarg) > 0 {
+		var listvar []*vx_core.Type_var = []*vx_core.Type_var{}
+		for _, type_vxarg := range listvxarg {
+			var type_var = vx_core.V_var_create()
+			type_var.P_name = vx_core.V_string_cast_stringn(type_vxarg.name)
+			type_var.P_type = type_from_vxtype(type_vxarg.vxtype)
+			listvar = append(listvar, type_var)
+		}
+		output = vx_core.V_varlist_from_listvar(listvar)
 	}
-	output.P_name = name
-	output.P_pkgname = pkgname
-	output.P_alias = type_vxtype.alias
-	output.P_extends = extends
-	output.P_path = path
 	return output
 }
 

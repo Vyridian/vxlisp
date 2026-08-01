@@ -1,0 +1,13 @@
+
+// :swift
+Vx_Core.t_any
+
+Vx_Core.e_any
+
+Vx_Core.t_type
+
+Vx_Core.e_type
+
+Vx_Core.t_const
+
+Vx_Core.e_const

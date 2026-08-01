@@ -9,6 +9,7 @@ func V_boolean_from_booleann(
  }
  return output
 }
+
 // :swift
 // v_boolean_from_booleann
 public static func v_boolean_from_booleann(

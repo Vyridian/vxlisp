@@ -1,0 +1,41 @@
+
+  // v_any_startup
+  public static func v_any_startup(
+  ) -> Vx_Core.Type_type {
+    var t_variable : Vx_Core.Type_type = Vx_Core.t_any
+    var e_variable : Vx_Core.Type_any = Vx_Core.e_any
+    Vx_Core.v_any_initialize(
+      e_variable)
+    Vx_Core.v_type_t_startup(
+      t_variable,
+      "vx/core",
+      "any",
+      Vx_Core.e_string,
+      e_variable)
+    t_variable.p_propertylist = Vx_Core.v_varlist_from_listvar(
+      [
+        Vx_Core.v_var_new_private_from_namen_type(
+          "backref",
+          Vx_Core.t_any),
+        Vx_Core.v_var_new_private_from_namen_type(
+          "refcount",
+          Vx_Core.t_intn),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "type",
+          Vx_Core.t_type),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "const",
+          Vx_Core.t_const),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "msgblock",
+          Vx_Core.t_msgblock),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "delta",
+          Vx_Core.t_delta),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "isrun",
+          Vx_Core.t_booleann)
+      ])
+    let output : Vx_Core.Type_type = t_variable
+    return output
+  }

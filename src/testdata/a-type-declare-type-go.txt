@@ -1,0 +1,239 @@
+
+// (type type)
+type Type_type struct {
+ type_any       *Type_any
+ type_generic   *Type_generic
+ P_path         string
+ P_pkgname      string
+ P_name         string
+ P_idx          int
+ P_extends      *Type_string
+ P_empty        *Type_any
+ P_propertylist *Type_varlist
+ P_container    *Type_type
+ P_allowtypes   *Type_typelist
+ P_func         *Type_func
+ P_isnative     bool
+}
+
+// V_type_constructor
+func V_type_constructor() *Type_type {
+ var output *Type_type = new(Type_type)
+ return output
+}
+
+// V_type_create
+func V_type_create() *Type_type {
+ var output *Type_type = V_type_constructor()
+ V_type_initialize(
+  output)
+ return output
+}
+
+// V_type_initialize
+func V_type_initialize(
+ value *Type_type) {
+ value.type_any = V_any_from_type_backref(
+  T_type,
+  T_type)
+ value.type_generic = E_generic
+ value.P_path = ""
+ value.P_pkgname = ""
+ value.P_name = ""
+ value.P_alias = ""
+ value.P_idx = 0
+ value.P_extends = E_string
+ value.P_empty = E_any
+ value.P_propertylist = E_varlist
+ value.P_container = E_type
+ value.P_allowtypes = E_typelist
+ value.P_func = E_func
+ value.P_isntaive = false
+}
+
+// V_type_startup
+func V_type_startup() *Type_type {
+ var t_variable *Type_type = T_type
+ var e_variable *Type_type = E_type
+ V_type_initialize(
+  e_variable)
+ V_type_t_startup(
+  t_variable,
+  "vx/core",
+  "type",
+  E_string,
+  e_variable.type_any)
+ return t_variable
+}
+
+// V_any_cast_type
+func V_any_cast_type(
+ type_type *Type_type) *Type_any {
+ var output *Type_any = type_type.type_any
+ if output == nil {
+  println("Error:any-cast-type:Missing type_any:" + type_type.P_name)
+  output = E_any
+ }
+ return output
+}
+
+// V_type_cast_any
+func V_type_cast_any(
+ type_any *Type_any) *Type_type {
+ var output *Type_type = E_type
+ var value, ok = type_any.backref.(*Type_type)
+ if ok {
+  output = value
+ }
+ return output
+}
+
+func V_type_code_from_any(
+ type_scope *Type_scope,
+ indent int,
+ path string,
+ type_any *Type_any) string {
+ var output = ""
+ var type_type *Type_type = V_type_cast_any(
+  type_any)
+ var type_lang *Type_lang = type_scope.P_lang
+ var pkgnamen = V_code_pkgnamen(
+  type_scope,
+  V_pkgnamen_from_scope(
+   type_scope))
+ var typenamen = V_code_type_name(
+  type_scope,
+  type_type)
+ switch type_lang {
+ case C_lang_go:
+  if pkgnamen == type_type.P_pkgname {
+   pkgnamen = ""
+  }
+  output = pkgnamen + "T_" + typenamen
+ default:
+  output = pkgnamen + "t_" + typenamen
+ }
+ return output
+}
+
+func V_type_listkey_from_any(
+ type_any *Type_any) []string {
+ var output []string = []string{}
+ var type_type = type_any.P_type
+ var type_varlist = type_type.P_propertylist
+ if type_varlist != E_varlist {
+  var listvar = type_varlist.P_listvar
+  for _, type_var := range listvar {
+   var prop *Type_string = type_var.P_name
+   var propn string = V_stringn_cast_string(prop)
+   output = append(output, propn)
+  }
+ }
+ return output
+}
+
+func V_type_new_from_pkgnamen_namen_extends_type_native(
+ pkgnamen string,
+ namen string,
+ extends_string *Type_string,
+ type_type *Type_type,
+ isnativen bool) *Type_type {
+ var t_variable *Type_type = V_type_create()
+ var e_variable *Type_type = V_type_create()
+ V_type_initialize(
+  e_variable)
+ V_type_t_startup(
+  t_variable,
+  pkgnamen,
+  namen,
+  extends_string,
+  e_variable.type_any)
+ if type_type != E_type {
+  t_variable.P_container = type_type
+  t_variable.P_allowtypes = V_typelist_from_listtype(
+   []*Type_type{
+    type_type})
+ }
+ t_variable.P_isnative = isnativen
+ return t_variable
+}
+
+func V_type_new_from_scope_namen_return_varlist_value(
+ type_scope *Type_scope,
+ namen string,
+ return_type *Type_type,
+ type_varlist *Type_varlist,
+ value_any *Type_any) *Type_type {
+ var pkgnamen string = type_scope.P_package.P_path
+ var t_variable *Type_type = V_type_create()
+ var e_variable *Type_type = V_type_create()
+ V_type_initialize(
+  e_variable)
+ V_type_t_startup(
+  t_variable,
+  pkgnamen,
+  namen,
+  C_extends_func,
+  e_variable.type_any)
+ var type_func *Type_func = V_func_create()
+ type_func.P_return = return_type
+ type_func.P_arglist = type_varlist
+ type_func.P_value = value_any
+ t_variable.P_func = type_func
+ var output *Type_type = t_variable
+ return output
+}
+
+func V_type_t_startup(
+ type_type *Type_type,
+ pkgname string,
+ name string,
+ extends_string *Type_string,
+ empty_any *Type_any) {
+ var path string = ""
+ switch pkgname {
+ case "":
+  path = name
+ default:
+  path = pkgname + "/" + name
+ }
+ type_type.P_path = path
+ type_type.P_pkgname = pkgname
+ type_type.P_name = name
+ type_type.P_alias = name
+ type_type.P_idx = 0
+ type_type.P_extends = extends_string
+ type_type.type_generic = V_generic_new_code(
+  V_type_code_from_any)
+ type_type.type_any = V_any_from_type_backref(type_type, type_type)
+ type_type.type_any.P_const = V_const_type(type_type)
+ type_type.type_any.P_type = type_type
+ type_type.P_empty = empty_any
+ type_type.P_propertylist = V_varlist_from_listvar(
+  []*Type_var{
+   V_var_new_private_from_namen_type("type-generic", T_generic),
+   V_var_new_public_from_namen_type("path", T_stringn),
+   V_var_new_public_from_namen_type("pkgname", T_stringn),
+   V_var_new_public_from_namen_type("name", T_stringn),
+   V_var_new_public_from_namen_type("alias", T_stringn),
+   V_var_new_public_from_namen_type("idx", T_intn),
+   V_var_new_public_from_namen_type("extends", T_string),
+   V_var_new_public_from_namen_type("empty", T_any),
+   V_var_new_public_from_namen_type("propertylist", T_varlist),
+   V_var_new_public_from_namen_type("container", T_type),
+   V_var_new_public_from_namen_type("allowtypes", T_typelist),
+   V_var_new_public_from_namen_type("func", T_func),
+  })
+ type_type.P_container = E_type
+ type_type.P_allowtypes = E_typelist
+ type_type.P_func = E_func
+ type_type.P_isnative = false
+ empty_any.P_const = V_const_empty(type_type)
+}
+
+// V_type_from_any
+func V_type_from_any(
+ type_any *Type_any) *Type_type {
+ var output = type_any.P_type
+ return output
+}

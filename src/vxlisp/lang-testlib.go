@@ -1475,7 +1475,7 @@ func LangTestLib_memory_leak_test(
 				sindent + "output = output && vx_core::vx_memory_leak_test(testname, irefcount)" + lang.lineend
 		} else {
 			output = "" +
-				sindent + "vx_core::vx_memory_leak_test(testname, irefcount, " + vx_core.V_stringn_from_intn(expected) + ")" + lang.lineend
+				sindent + "vx_core::vx_memory_leak_test(testname, irefcount, " + vx_core.V_stringn_cast_intn(expected) + ")" + lang.lineend
 
 		}
 	}

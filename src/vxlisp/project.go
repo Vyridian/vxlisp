@@ -337,7 +337,7 @@ func ProjectReadAllFromPath(
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if !msgblock.iserror {
 		for _, filename := range filenames {
-			if project == emptyproject && BooleanFromStringEnds(filename, "/project.vxlisp") {
+			if project == emptyproject && vx_core.V_booleann_from_stringn_endsn(filename, "/project.vxlisp") {
 				project, msgs = ProjectReadFromFilename(filename)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 			} else {

@@ -1,0 +1,6 @@
+
+// V_any_constructor
+func V_any_constructor() *Type_any {
+ var output *Type_any = new(Type_any)
+ return output
+}

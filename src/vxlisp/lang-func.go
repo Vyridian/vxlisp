@@ -152,7 +152,7 @@ func LangFuncDefFromFunc(
 		LangPkgNameDot(lang, "vx/core") + "funcdef_new(" +
 		lineindent + "  \"" + fnc.pkgname + "\", // pkgname" +
 		lineindent + "  \"" + fnc.name + "\", // name" +
-		lineindent + "  " + vx_core.V_stringn_from_intn(fnc.idx) + ", // idx" +
+		lineindent + "  " + vx_core.V_stringn_cast_intn(fnc.idx) + ", // idx" +
 		lineindent + "  " + StringFromBoolean(fnc.async) + ", // async" +
 		lineindent + "  " + LangTypeDef(lang, fnc.vxtype, 4) + " // typedef" +
 		lineindent + ")"
@@ -350,7 +350,7 @@ func LangFuncFFunc(
 			valuetext = "output = " + valuetext
 		}
 		if valuetext != "" {
-			if !BooleanFromStringEnds(valuetext, ";") {
+			if !vx_core.V_booleann_from_stringn_endsn(valuetext, ";") {
 				valuetext += lang.lineend
 			}
 			valuetext = linesubindent + StringFromStringIndent(
@@ -479,7 +479,7 @@ func LangFuncHeaderAll(
 		if value != "" {
 			soutput := "output"
 			if outputnum > 0 {
-				soutput += "_" + vx_core.V_stringn_from_intn(outputnum)
+				soutput += "_" + vx_core.V_stringn_cast_intn(outputnum)
 			}
 			isskip := false
 			switch NameFromType(fnc.vxtype) {
@@ -674,7 +674,7 @@ func LangFuncLambdaArgIndex(
 		if iswrapped {
 			g_ifuncdepth += 1
 			ioutputnum = g_ifuncdepth
-			outputname = "output_" + vx_core.V_stringn_from_intn(ioutputnum)
+			outputname = "output_" + vx_core.V_stringn_cast_intn(ioutputnum)
 			listarg := fnc.listarg
 			lastarg := listarg[len(listarg)-1]
 			if !fnc.async {
@@ -687,7 +687,7 @@ func LangFuncLambdaArgIndex(
 		}
 		if lambdaarg.async {
 			lastoutputnum := g_ifuncdepth
-			lastoutputname := "output_" + vx_core.V_stringn_from_intn(lastoutputnum)
+			lastoutputname := "output_" + vx_core.V_stringn_cast_intn(lastoutputnum)
 			listarg := fnc.listarg
 			lastarg := listarg[len(listarg)-1]
 			sfncvalue, msgs := LangFromValue(
@@ -695,7 +695,7 @@ func LangFuncLambdaArgIndex(
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			g_ifuncdepth += 1
 			ioutputargnum := g_ifuncdepth
-			outputname := "output_" + vx_core.V_stringn_from_intn(ioutputargnum)
+			outputname := "output_" + vx_core.V_stringn_cast_intn(ioutputargnum)
 			lambdavaluetext, msgs := LangFromValue(lang, indent+1,
 				lambdaarg.value, pkgname, fnc, true, test, argsubpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -952,7 +952,7 @@ func LangFuncValueArgIndex(
 			if argvalue.code == ":func" && argvalue.name == "fn" {
 				g_ifuncdepth += 1
 				ioutputnum := g_ifuncdepth
-				outputname := "output_" + vx_core.V_stringn_from_intn(ioutputnum)
+				outputname := "output_" + vx_core.V_stringn_cast_intn(ioutputnum)
 				argfunc := FuncFromValue(argvalue)
 				var lambdaargs []string
 				var lambdavars []string
@@ -1066,7 +1066,7 @@ func LangFuncValueArgIndex(
 					if !argvaluearg.vxtype.isfunc {
 						g_ifuncdepth += 1
 						ioutputnum := g_ifuncdepth
-						outputname := "output_" + vx_core.V_stringn_from_intn(ioutputnum)
+						outputname := "output_" + vx_core.V_stringn_cast_intn(ioutputnum)
 						work, msgs := LangFromValue(lang, indent+2,
 							argvalue, pkgname, fnc, true, test, argsubpath)
 						msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -1102,7 +1102,7 @@ func LangFuncValueArgIndex(
 						soutput := ""
 						g_ifuncdepth += 1
 						ioutputnum := g_ifuncdepth
-						outputname := "output_" + vx_core.V_stringn_from_intn(ioutputnum)
+						outputname := "output_" + vx_core.V_stringn_cast_intn(ioutputnum)
 						if funcargfunc.async {
 							soutput = LangVarFuture(lang, indent+2, anytype,
 								outputname, work)
@@ -1125,7 +1125,7 @@ func LangFuncValueArgIndex(
 				default:
 					g_ifuncdepth += 1
 					ioutputnum := g_ifuncdepth
-					outputname := "output_" + vx_core.V_stringn_from_intn(ioutputnum)
+					outputname := "output_" + vx_core.V_stringn_cast_intn(ioutputnum)
 					funcargasync := arg.vxtype.vxfunc.async
 					argfuncasync := false
 					argfunctype := emptytype
@@ -1776,7 +1776,7 @@ func LangFuncVxRepl(
 								"vx_any",
 								LangFuncCallVx(lang, 4,
 									func_new_int,
-									vx_core.V_stringn_from_intn(argidx)))))
+									vx_core.V_stringn_cast_intn(argidx)))))
 				replparams += replparam
 				listargname = append(
 					listargname, "generic_"+LangFromName(fnc.generictype.name))
@@ -1795,7 +1795,7 @@ func LangFuncVxRepl(
 						"vx_any",
 						LangFuncCallVx(lang, 4,
 							func_new_int,
-							vx_core.V_stringn_from_intn(argidx)))))
+							vx_core.V_stringn_cast_intn(argidx)))))
 			replparams += replparam
 			argidx += 1
 		}
@@ -1814,7 +1814,7 @@ func LangFuncVxRepl(
 								"vx_any",
 								LangFuncCallVx(lang, 4,
 									func_new_int,
-									vx_core.V_stringn_from_intn(argidx)))))
+									vx_core.V_stringn_cast_intn(argidx)))))
 				replparams += replparam
 				listargname = append(listargname, argname)
 				argidx += 1

@@ -1,0 +1,8 @@
+
+  // v_any_constructor
+  public static func v_any_constructor(
+  ) -> Vx_Core.Type_any {
+    Vx_Core.v_global_reserve()
+    let output : Vx_Core.Type_any = Vx_Core.Type_any()
+    return output
+  }

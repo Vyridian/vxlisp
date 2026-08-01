@@ -243,15 +243,15 @@ func NewType(typename string) *vxtype {
 		typ.extends = ":map"
 	default:
 		isfound := false
-		if BooleanFromStringEnds(typename, "-1") {
+		if vx_core.V_booleann_from_stringn_endsn(typename, "-1") {
 			isfound = true
-		} else if BooleanFromStringEnds(typename, "-2") {
+		} else if vx_core.V_booleann_from_stringn_endsn(typename, "-2") {
 			isfound = true
-		} else if BooleanFromStringEnds(typename, "-3") {
+		} else if vx_core.V_booleann_from_stringn_endsn(typename, "-3") {
 			isfound = true
-		} else if BooleanFromStringEnds(typename, "-4") {
+		} else if vx_core.V_booleann_from_stringn_endsn(typename, "-4") {
 			isfound = true
-		} else if BooleanFromStringEnds(typename, "-5") {
+		} else if vx_core.V_booleann_from_stringn_endsn(typename, "-5") {
 			isfound = true
 		}
 		if isfound {
@@ -315,15 +315,15 @@ func NewTypeList(typename string, basetype *vxtype) *vxtype {
 	typ.extends = ":list"
 	typ.allowtypes = []*vxtype{basetype}
 	isfound := false
-	if BooleanFromStringEnds(typename, "-1") {
+	if vx_core.V_booleann_from_stringn_endsn(typename, "-1") {
 		isfound = true
-	} else if BooleanFromStringEnds(typename, "-2") {
+	} else if vx_core.V_booleann_from_stringn_endsn(typename, "-2") {
 		isfound = true
-	} else if BooleanFromStringEnds(typename, "-3") {
+	} else if vx_core.V_booleann_from_stringn_endsn(typename, "-3") {
 		isfound = true
-	} else if BooleanFromStringEnds(typename, "-4") {
+	} else if vx_core.V_booleann_from_stringn_endsn(typename, "-4") {
 		isfound = true
-	} else if BooleanFromStringEnds(typename, "-5") {
+	} else if vx_core.V_booleann_from_stringn_endsn(typename, "-5") {
 		isfound = true
 	}
 	if isfound {
@@ -338,15 +338,15 @@ func NewTypeMap(typename string, basetype *vxtype) *vxtype {
 	typ.extends = ":map"
 	typ.allowtypes = []*vxtype{basetype}
 	isfound := false
-	if BooleanFromStringEnds(typename, "-1") {
+	if vx_core.V_booleann_from_stringn_endsn(typename, "-1") {
 		isfound = true
-	} else if BooleanFromStringEnds(typename, "-2") {
+	} else if vx_core.V_booleann_from_stringn_endsn(typename, "-2") {
 		isfound = true
-	} else if BooleanFromStringEnds(typename, "-3") {
+	} else if vx_core.V_booleann_from_stringn_endsn(typename, "-3") {
 		isfound = true
-	} else if BooleanFromStringEnds(typename, "-4") {
+	} else if vx_core.V_booleann_from_stringn_endsn(typename, "-4") {
 		isfound = true
-	} else if BooleanFromStringEnds(typename, "-5") {
+	} else if vx_core.V_booleann_from_stringn_endsn(typename, "-5") {
 		isfound = true
 	}
 	if isfound {
@@ -363,15 +363,15 @@ func NewTypeStruct(
 	typ.extends = ":struct"
 	typ.properties = listproperty
 	isfound := false
-	if BooleanFromStringEnds(typename, "-1") {
+	if vx_core.V_booleann_from_stringn_endsn(typename, "-1") {
 		isfound = true
-	} else if BooleanFromStringEnds(typename, "-2") {
+	} else if vx_core.V_booleann_from_stringn_endsn(typename, "-2") {
 		isfound = true
-	} else if BooleanFromStringEnds(typename, "-3") {
+	} else if vx_core.V_booleann_from_stringn_endsn(typename, "-3") {
 		isfound = true
-	} else if BooleanFromStringEnds(typename, "-4") {
+	} else if vx_core.V_booleann_from_stringn_endsn(typename, "-4") {
 		isfound = true
-	} else if BooleanFromStringEnds(typename, "-5") {
+	} else if vx_core.V_booleann_from_stringn_endsn(typename, "-5") {
 		isfound = true
 	}
 	if isfound {
@@ -463,11 +463,11 @@ func BooleanAllowFromTypeType(
 func BooleanGenericFromType(typ *vxtype) bool {
 	name := NameFromType(typ)
 	output := false
-	if BooleanFromStringEnds(name, "-1") {
+	if vx_core.V_booleann_from_stringn_endsn(name, "-1") {
 		output = true
-	} else if BooleanFromStringEnds(name, "-2") {
+	} else if vx_core.V_booleann_from_stringn_endsn(name, "-2") {
 		output = true
-	} else if BooleanFromStringEnds(name, "-3") {
+	} else if vx_core.V_booleann_from_stringn_endsn(name, "-3") {
 		output = true
 	}
 	return output
