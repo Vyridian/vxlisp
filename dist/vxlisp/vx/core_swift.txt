@@ -1,3 +1,1508 @@
+  public static func v_main_test() {
+    v_global_startup()
+    let string_helloworld : Type_string = v_string_from_stringn("Hello World")
+    // (string)
+    v_test(
+      v_any_from_stringn("Hello World"),
+      v_any_from_string(string_helloworld)
+    )
+    // (any
+    //  (stringlist))
+    let stringlist_helloworld : Type_stringlist = v_stringlist_from_liststringn(
+      ["Hello", "World"]
+    )
+    v_test(
+      v_any_from_stringn("" +
+        "(stringlist" +
+        "\n \"Hello\"" +
+        "\n \"World\")"
+      ),
+      v_any_from_stringlist(stringlist_helloworld)
+    )
+/*
+    // (string<-stringlist-join)
+    let string_join : Type_string = v_string_from_stringn(", ")
+    v_test(
+      v_any_from_stringn("Hello, World"),
+      v_any_from_string(
+       t_string,
+       v_string_from_stringlist_join(
+        stringlist_helloworld,
+        string_join
+       )
+      )
+    )
+    let any_string_join : Type_any = v_any_from_string(
+      t_string,
+      string_join
+    )
+    // (any<-type-listany
+    //  string<-stringlist-join
+    //  [stringlist_helloworld
+    //   string_join])
+    v_test(
+      v_any_from_stringn("Hello, World"),
+      v_any_from_func(
+        t_string,
+        t_string_from_stringlist_join,
+        v_anylist_from_listany([
+          v_any_from_stringlist(
+            t_stringlist,
+            stringlist_helloworld
+          ),
+          v_any_from_string(
+            t_string,
+            string_join
+          )
+        ])
+      )
+    )
+    // (let : any
+    //  [stringlist_helloworld
+    //   string_join]
+    //  (fn : any
+    //   (string<-stringlist-join
+    //    stringlist_helloworld
+    //    ",")))
+    v_test(
+      v_any_from_stringn("Hello, World"),
+      v_let(
+        t_string,
+        v_anylist_from_listany([
+          v_any_from_stringlist(
+            t_stringlist,
+            stringlist_helloworld
+          ),
+          v_any_from_stringn(", "),
+        ]),
+        {(t_string) -> Type_any in
+          let v_string_joined4 = v_string_from_stringlist_join(
+            stringlist_helloworld, string_join
+          )
+          return v_any_from_string(
+            t_string,
+            v_string_joined4
+          )
+        }
+      )
+    )
+*/
+    // (new stringlist "a" "b")
+    v_test(
+      v_any_from_stringn(
+        "(stringlist" +
+        "\n \"a\"" +
+        "\n \"b\")"
+      ),
+      f_new(
+        t_stringlist,
+        v_anylist_from_listany([
+          v_any_from_stringn("a"),
+          v_any_from_stringn("b")
+        ])
+      )
+    )
+    // (string
+    //  (any<-type-listany
+    //   string
+    //   [stringlist string_join]))
+    // (string
+    //  (any<-type-listany
+    //   string
+    //   [stringlist string_join]))
+    // "HelloWorld, "
+    // (list<-list-listany-fn)
+    v_global_shutdown()
+  }
+  // v_any_from_anymap_keyn
+  public static func v_any_from_anymap_keyn(
+    _ type_anymap : Vx_Core.Type_anymap,
+    _ keyn : String
+  ) -> Vx_Core.Type_any {
+    var output : Vx_Core.Type_any = Vx_Core.e_any
+    if let type_any : Vx_Core.Type_any = type_anymap.mapany[keyn] {
+      output = type_any
+    }
+    return output
+  }
+  // v_any_from_fn_any
+  public static func v_any_from_fn_any(
+    _ return_type : Type_type,
+    _ fn_any : Type_fn_any
+  ) -> Type_any {
+    return fn_any(return_type)
+  }
+  // v_any_from_fn_any_listcapture
+  public static func v_any_from_fn_any_listcapture(
+    _ return_type : Type_type,
+    _ fn_any : Type_fn_any,
+    _ listcapture : [Type_any]
+  ) -> Type_any {
+    return fn_any(return_type)
+  }
+  // v_any_from_func
+  public static func v_any_from_func(
+    _ return_type : Type_type,
+    _ type_type : Type_type,
+    _ type_anylist : Type_anylist
+  ) -> Type_any {
+    var output : Type_any = v_empty(return_type)
+    let type_generic : Type_generic = v_generic_from_type(type_type)
+    output = type_generic.p_any_from_func(
+      return_type,
+      type_anylist
+    )
+    return output
+  }
+  // v_any_from_listany_indexn
+  public static func v_any_from_listany_indexn(
+    _ return_type : Type_type,
+    _ listany : [Type_any],
+    _ indexn : Int
+  ) -> Type_any {
+    var output : Type_any = v_empty(return_type)
+    if listany.count >= indexn {
+      output = listany[indexn - 1]
+    }
+    return output
+  }
+  // v_any_from_mapany_keyn
+  public static func v_any_from_mapany_keyn(
+    _ mapany : [String:Vx_Core.Type_any],
+    _ keyn : String
+  ) -> Vx_Core.Type_any {
+    var output : Vx_Core.Type_any = Vx_Core.e_any
+    if let type_any : Vx_Core.Type_any = mapany[keyn] {
+      output = type_any
+    }
+    return output
+  }
+  // v_any_from_msgblock
+  public static func v_any_from_msgblock(
+    _ return_type : Type_type,
+    _ value : Type_msgblock
+  ) -> Type_any {
+    return value.type_any
+  }
+  // v_any_new_from_type_backref
+  public static func v_any_new_from_type_backref(
+    _ type_type : Type_type,
+    _ backref : AnyObject?
+  ) -> Type_any {
+    var output : Type_any = Type_any()
+    output.type_type = type_type
+    output.backref = unsafeBitCast(backref, to: AnyObject.self)
+    return output
+  }
+  // v_anylist_from_filtertype_anylist
+  public static func v_anylist_from_filtertype_anylist(
+    filter_type : Vx_Core.Type_type,
+    anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_anylist {
+    let orig_msgblock : Type_msgblock = Vx_Core.v_msgblock_from_any(anylist.type_any)
+    let orig_listany : [Vx_Core.Type_any] = anylist.listany
+    var msgblock : Type_msgblock = Vx_Core.e_msgblock
+    let filternamen : String = Vx_Core.v_typenamen_from_type(filter_type)
+    var listany : [Vx_Core.Type_any] = []
+    for type_any : Vx_Core.Type_any in orig_listany {
+      let typenamen : String = Vx_Core.v_typenamen_from_any(type_any)
+      if typenamen == filternamen {
+        if Vx_Core.f_is_empty_1(type_any) === Vx_Core.c_false {
+          listany.append(type_any)
+        }
+      } else if typenamen == (filternamen + "list") {
+        let listadd : [Vx_Core.Type_any] = Vx_Core.v_listany_from_any(type_any)
+        listany = Vx_Core.v_listany_from_listany_listany(
+          listany,
+          listadd
+        )
+      } else if typenamen == (filternamen + "map") {
+        let listadd : [Vx_Core.Type_any] = Vx_Core.v_listany_from_any(type_any)
+        listany = Vx_Core.v_listany_from_listany_listany(
+          listany,
+          listadd
+        )
+      } else {
+        msgblock = Vx_Core.v_msgblock_from_msgblock_type_any(
+          msgblock,
+          filter_type,
+          type_any
+        )
+      }
+    }
+    var ischanged : Vx_Core.Type_boolean = Vx_Core.c_false
+    if msgblock !== orig_msgblock {
+      ischanged = Vx_Core.c_true
+    }
+    if ischanged === Vx_Core.c_false {
+      ischanged = Vx_Core.v_boolean_issame_from_listany_listany(
+        listany,
+        orig_listany
+      )
+    }
+    if msgblock !== orig_msgblock {
+      ischanged = Vx_Core.c_true
+    }
+    var output : Vx_Core.Type_anylist = anylist
+    if ischanged === Vx_Core.c_true {
+      output = v_anylist_create()
+      output.listany = listany
+      output.type_any.type_msgblock = msgblock
+    }
+    return output
+  }
+  // v_anylist_from_listany
+  public static func v_anylist_from_listany(
+    _ listany : [Vx_Core.Type_any]
+  ) -> Vx_Core.Type_anylist {
+    var output : Vx_Core.Type_anylist = Vx_Core.e_anylist
+    if listany.count > 0 {
+      output = v_anylist_new()
+      output.listany = listany
+    }
+    return output
+  }
+  // v_anylist_from_type_anylist_anylist
+  public static func v_anylist_from_type_anylist_anylist(
+    _ type_type : Vx_Core.Type_type,
+    _ orig_anylist : Vx_Core.Type_anylist,
+    _ compare_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_anylist {
+    return Vx_Core.e_anylist
+  }
+  // v_anylist_from_stringlist
+  public static func v_anylist_from_stringlist(
+    _ type_stringlist : Vx_Core.Type_stringlist
+  ) -> Type_anylist {
+    var listany : [Vx_Core.Type_any] = Vx_Core.v_listany_from_stringlist(
+      type_stringlist
+    )
+    let output : Vx_Core.Type_anylist = Vx_Core.v_anylist_from_listany(
+      listany
+    )
+    return output
+  }
+  // v_anylist_new
+  public static func v_anylist_new(
+  ) -> Type_anylist {
+    var output : Type_anylist = Type_anylist()
+    v_anylist_startup(
+      output
+    )
+    return output
+  }
+/*
+  // v_anymap_from_filtertype_anylist
+  public static func v_anymap_from_filtertype_anylist(
+    filter_type : Vx_Core.Type_type,
+    anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_anymap {
+    let orig_msgblock : Vx_Core.Type_msgblock = Vx_Core.v_msgblock_from_any(anylist.type_any)
+    let orig_listany : [Vx_Core.Type_any] = anylist.listany
+    var msgblock : Vx_Core.Type_msgblock = Vx_Core.e_msgblock
+    let filternamen : String = Vx_Core.v_typenamen_from_type(filter_type)
+    var keyn : String = ""
+    var listkeyn : [String] = []
+    var mapany : [String:Vx_Core.Type_any] = [:]
+    for type_any : Vx_Core.Type_any in orig_listany {
+      let typenamen : String = Vx_Core.v_typenamen_from_any(type_any)
+      if typenamen == (filternamen + "map") {
+        let mapadd : [String:Vx_Core.Type_any] = Vx_Core.v_mapany_from_any(type_any)
+        mapany = Vx_Core.v_mapany_from_mapany_mapany(mapany, mapadd)
+      } else if keyn == "" {
+        if typenamen == "vx/core/string" {
+          let key_string : Vx_Core.Type_string = Vx_Core.v_string_from_any(type_any)
+          keyn = key_string.stringn
+        } else {
+          msgblock = Vx_Core.v_msgblock_from_msgblock_type_any(
+            msgblock, filter_type, type_any
+          )
+        }
+      } else {
+        if typenamen == filternamen {
+          if Vx_Core.f_is_empty_1(type_any) === Vx_Core.c_false {
+            mapany[keyn] = type_any
+          }
+          keyn = ""
+        } else {
+          msgblock = Vx_Core.v_msgblock_from_msgblock_type_any(
+            msgblock, filter_type, type_any
+          )
+        }
+      }
+    }
+    var ischanged : Vx_Core.Type_boolean = Vx_Core.c_false
+    if msgblock !== orig_msgblock {
+      ischanged = Vx_Core.c_true
+    }
+    if ischanged === Vx_Core.c_false {
+      if listkeyn.count > 0 {
+        ischanged = Vx_Core.c_true
+      }
+    }
+    var output : Vx_Core.Type_anymap = anymap
+    if ischanged === Vx_Core.c_true {
+      output = v_anymap_create()
+      output.type_map.listkeyn = listkeyn
+      output.mapany = mapany
+      output.msgblock = msgblock
+    }
+    return output
+  }
+*/
+  // v_anymap_from_listtype_anymap_anylist
+  public static func v_anymap_from_listtype_anymap_anylist(
+    _ listtype : [Vx_Core.Type_type],
+    _ orig_anymap : Vx_Core.Type_anymap,
+    _ compare_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_anymap {
+    return Vx_Core.e_anymap
+  }
+  // v_anymap_from_mapany
+  public static func v_anymap_from_mapany(
+    _ mapany : [String:Vx_Core.Type_any]
+  ) -> Vx_Core.Type_anymap {
+    var output : Vx_Core.Type_anymap = Vx_Core.e_anymap
+    if mapany.count > 0 {
+      output = Vx_Core.v_anymap_new()
+      output.mapany = mapany
+    }
+    return output
+  }
+  // v_anymap_from_type_anymap_anylist
+  public static func v_anymap_from_type_anymap_anylist(
+    _ type_type : Vx_Core.Type_type,
+    _ anymap : Vx_Core.Type_anymap,
+    _ anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_anymap {
+    return Vx_Core.e_anymap
+  }
+  // v_anymap_new
+  public static func v_anymap_new(
+  ) -> Type_anymap {
+    var output : Type_anymap = Type_anymap()
+    v_anymap_startup(output)
+    return output
+  }
+  // v_boolean_from_boolean_from_func
+  public static func v_boolean_from_boolean_from_func(
+    _ type_boolean_from_func : Type_boolean_from_func
+  ) -> Type_boolean {
+    return c_false
+  }
+  // v_booleann_from_boolean_from_func
+  public static func v_booleann_from_boolean_from_func(
+    _ type_boolean_from_func : Type_boolean_from_func
+  ) -> Bool {
+    return v_booleann_from_boolean(
+      v_boolean_from_boolean_from_func(
+        type_boolean_from_func
+      )
+    )
+  }
+  // v_boolean_issame_from_anylist_anylist
+  public static func v_boolean_issame_from_anylist_anylist(
+    _ orig_anylist : Vx_Core.Type_anylist,
+    _ compare_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_boolean {
+    return Vx_Core.c_false
+  }
+  // v_boolean_issame_from_anymap_anymap
+  public static func v_boolean_issame_from_anymap_anymap(
+    _ orig_anymap : Vx_Core.Type_anymap,
+    _ compare_anymap : Vx_Core.Type_anymap
+  ) -> Vx_Core.Type_boolean {
+    return Vx_Core.c_false
+  }
+  // v_boolean_issame_from_listany_listany
+  public static func v_boolean_issame_from_listany_listany(
+    _ orig_listany : [Vx_Core.Type_any],
+    _ compare_listany : [Vx_Core.Type_any]
+  ) -> Vx_Core.Type_boolean {
+    return Vx_Core.c_false
+  }
+
+/*
+  // v_booleann_from_case_compare
+  public static func v_booleann_from_case_compare(
+    _ type_case : Type_case,
+    _ compare_any : Type_any
+  ) -> Bool {
+    var output : Bool = false
+    if type_case.compare_any === compare_any {
+      output = true
+    } else if v_booleann_from_listany_contains(
+      type_case.listcompare,
+      compare_any) {
+      output = true
+    }
+    return output
+  }
+  // v_booleann_from_listany_contains
+  public static func v_booleann_from_listany_contains(
+    _ listany : [Type_any],
+    _ valany : Type_any
+  ) -> Bool {
+    var output = false
+    for anyitem : Type_any in listany {
+      if anyitem === valany {
+        output = true
+        break
+      }
+    }
+    return output
+  }
+*/
+  // v_booleann_from_stringn_endsn
+  public static func v_booleann_from_stringn_endsn(
+    _ stringn : String,
+    _ endsn : String
+  ) -> Bool {
+    var output : Bool = false
+    if stringn.count != 0 {
+      let endi : Int = v_intn_from_stringn_findlastn(stringn, endsn)
+      output = endi == stringn.count
+    }
+    return output
+  }
+  // v_booleann_from_stringn_startsn
+  public static func v_booleann_from_stringn_startsn(
+    _ stringn : String,
+    _ startsn : String
+  ) -> Bool {
+    var output : Bool = false
+    if stringn.count != 0 {
+      let starti : Int = v_intn_from_stringn_findn(stringn, startsn)
+      output = starti == 1
+    }
+    return output
+  }
+  // v_booleann_from_stringn_startsn_endsn
+  public static func v_booleann_from_stringn_startsn_endsn(
+    _ stringn : String,
+    _ startsn : String,
+    _ endsn : String
+  ) -> Bool {
+    let startsb : Bool = v_booleann_from_stringn_startsn(stringn, startsn)
+    let endsb : Bool = v_booleann_from_stringn_endsn(stringn, startsn)
+    let output : Bool = startsb && endsb
+    return output
+  }
+  // v_booleann_from_thenelse
+  public static func v_booleann_from_thenelse(
+    _ thenelse : Type_thenelse
+  ) -> Bool {
+    var output : Bool = false
+    let fn_cond : Type_boolean_from_func = thenelse.p_fn_cond
+    output = v_booleann_from_boolean_from_func(fn_cond)
+    return output
+  }
+/*
+  // v_const_from_any
+  public static func v_const_from_any(
+    _ type_any : Type_any
+  ) -> Type_const {
+    var output : Type_const = e_const
+    if let type_const : Type_const = type_any.type_const {
+      output = type_const
+    }
+    return output
+  }
+*/
+  // v_const_new_e_from_type
+  public static func v_const_new_e_from_type(
+    _ type_type : Type_type
+  ) -> Type_const {
+    var output : Type_const = Type_const()
+    output.name =
+      "(empty " +
+      v_typenamen_from_type(type_type) +
+      ")"
+    output.isempty = true
+    return output
+  }
+  // v_const_new_from_namen
+  public static func v_const_new_from_namen(
+    _ namen : String
+  ) -> Type_const {
+    var output : Type_const = Type_const()
+    output.name = namen
+    return output
+  }
+  // v_const_new_t_from_type
+  public static func v_const_new_t_from_type(
+    _ type_type : Type_type
+  ) -> Type_const {
+    var output : Type_const = Type_const()
+    output.name = v_typenamen_from_type(type_type)
+    output.istype = true
+    return output
+  }
+  // v_decimal_from_number
+  public static func v_decimal_from_number(
+    _ numberval : Type_number
+  ) -> Type_decimal {
+    return numberval.type_decimal
+  }
+  // v_extendsn_from_type
+  public static func v_extendsn_from_type(
+    _ type_type : Type_type
+  ) -> String {
+    return v_stringn_from_string(type_type.p_extends)
+  }
+  // v_generic_from_any
+  public static func v_generic_from_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_generic {
+    var type_type : Vx_Core.Type_type = Vx_Core.v_type_from_any(type_any)
+    let output : Vx_Core.Type_generic = Vx_Core.v_generic_from_type(type_type)
+    return output
+  }
+  // v_generic_from_type
+  public static func v_generic_from_type(
+    _ type_type : Vx_Core.Type_type
+  ) -> Vx_Core.Type_generic {
+    var output : Vx_Core.Type_generic = Vx_Core.e_generic
+    if let type_generic : Vx_Core.Type_generic = type_type.type_generic {
+      output = type_generic
+    } else {
+      print("Error: Type_generic missing - v_generic_from_type")
+    }
+    return output
+  }
+  // v_global_refcount
+  public static func v_global_refcount(
+  ) -> Int {
+    return g_refcount
+  }
+  // v_global_refcount_check
+  public static func v_global_refcount_check(
+    _ origcount : Int
+  ) {
+    if g_refcount != origcount {
+      v_log_string(
+        "Memory Check: " +
+        String(g_refcount) +
+        " != " +
+        String(origcount)
+      )
+    }
+  }
+  // v_global_release
+  public static func v_global_release(
+  ) {
+    g_refcount -= 1
+  }
+  // v_global_reserve
+  public static func v_global_reserve(
+  ) {
+    g_refcount += 1
+  }
+  // v_global_shutdown
+  public static func v_global_shutdown() {
+    if g_refcount > 0 {
+      print("Memory Leak: " + String(g_refcount))
+    }
+  }
+  // v_global_startup
+  public static func v_global_startup() {
+    v_package_register()
+  }
+  // v_if
+  public static func v_if(
+    _ return_type : Type_type,
+    _ booleanif : Type_boolean,
+    _ fn_then : Type_fn_any,
+    _ fn_else : Type_fn_any
+  ) -> Type_any {
+    var output : Type_any
+    if v_booleann_from_boolean(booleanif) {
+      output = v_any_from_fn_any(
+        return_type,
+        fn_then
+      )
+    } else {
+      output = v_any_from_fn_any(
+        return_type,
+        fn_else
+      )
+    }
+    return output
+  }
+/*
+  // v_if_1
+  public static func v_if_1(
+    _ return_type : Type_type,
+    _ listthenelse : [Type_thenelse]
+  ) -> Type_any {
+    var output : Type_any = e_any
+    var i : Int = 0
+    var icount : Int = listthenelse.count
+    for thenelse : Type_thenelse in listthenelse {
+      i += 1
+      if i == icount {
+        output = v_any_value_from_thenelse(
+          return_type,
+          thenelse
+        )
+        break
+      } else {
+        let isfound = v_booleann_from_thenelse(thenelse)
+        if isfound {
+          output = v_any_value_from_thenelse(
+            return_type,
+            thenelse
+          )
+          break
+        }
+      }
+    }
+    return output
+  }
+*/
+  // v_intn_from_listany_find
+  public static func v_intn_from_listany_find(
+    _ listany : [Type_any],
+    _ anyfind : Type_any
+  ) -> Int {
+    var output : Int = 0
+    var i : Int = 0
+    for anyitem : Type_any in listany {
+      i += 1
+      if anyitem === anyfind {
+        output = i
+        break
+      }
+    }
+    return output
+  }
+  // v_intn_from_stringn_findn
+  public static func v_intn_from_stringn_findn(
+    _ stringn : String,
+    _ findn : String
+  ) -> Int {
+    var output = 0
+    if let range = stringn.range(of: findn) {
+      output = 1 + stringn.distance(
+        from: stringn.startIndex,
+        to: range.lowerBound
+      )
+    }
+    return output
+  }
+  // v_intn_from_stringn_findlastn
+  public static func v_intn_from_stringn_findlastn(
+    _ stringn : String,
+    _ findlastn : String
+  ) -> Int {
+    var output = 0
+    if let range = stringn.range(of: findlastn, options: .backwards) {
+      let lastindex = range.lowerBound
+      output = 1 + stringn.distance(from: stringn.startIndex, to: lastindex)
+    }
+    return output
+  }
+  // v_let
+  public static func v_let(
+    _ return_type : Type_type,
+    _ listcapture : [Type_any],
+    _ fn_any : Type_fn_any
+  ) -> Type_any {
+    return v_any_from_fn_any_listcapture(
+      return_type,
+      fn_any,
+      listcapture
+    )
+  }
+  // v_listany_from_any
+  public static func v_listany_from_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> [Vx_Core.Type_any] {
+    let type_anylist : Vx_Core.Type_anylist = Vx_Core.v_anylist_from_any(type_any)
+    let output : [Vx_Core.Type_any] = type_anylist.listany
+    return output
+  }
+  // v_listany_from_anylist
+  public static func v_listany_from_anylist(
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> [Vx_Core.Type_any] {
+    var output : [Vx_Core.Type_any] = []
+    for value : Vx_Core.Type_any in type_anylist.listany {
+      output.append(value)
+    }
+    return output
+  }
+  // v_listany_from_list
+  public static func v_listany_from_list(
+    _ type_list : Vx_Core.Type_list
+  ) -> [Vx_Core.Type_any] {
+    let type_any : Vx_Core.Type_any = type_list.type_any
+    let output : [Vx_Core.Type_any] = Vx_Core.v_listany_from_any(type_any)
+    return output
+  }
+  // v_listany_from_listany_listany
+  public static func v_listany_from_listany_listany(
+    _ orig_listany : [Vx_Core.Type_any],
+    _ compare_listany : [Vx_Core.Type_any]
+  ) -> [Vx_Core.Type_any] {
+    let output : [Vx_Core.Type_any] = []
+    return output
+  }
+  // v_listany_from_stringlist
+  public static func v_listany_from_stringlist(
+    _ type_stringlist : Vx_Core.Type_stringlist
+  ) -> [Vx_Core.Type_any] {
+    var listany : [Vx_Core.Type_any] = []
+    let liststring : [Vx_Core.Type_string] = type_stringlist.liststring
+    if liststring.count > 0 {
+      for type_string : Vx_Core.Type_string in liststring {
+        var type_any : Vx_Core.Type_any = Vx_Core.v_any_from_string(
+          type_string
+        )
+        if type_any !== e_any {
+          listany.append(type_any)
+        }
+      }
+    }
+    return listany
+  }
+  // v_listkeyn_from_map
+  public static func v_listkeyn_from_map(
+    _ type_map : Vx_Core.Type_map
+  ) -> [String] {
+    let output : [String] = type_map.listkeyn
+    return output
+  }
+  // v_listkeyn_from_struct
+  public static func v_listkeyn_from_struct(
+    _ type_struct : Vx_Core.Type_struct
+  ) -> [String] {
+    let output : [String] = type_struct.listkeyn
+    return output
+  }
+  // v_log_any
+  public static func v_log_any(
+    _ type_any : Type_any
+  ) {
+    let stringn : String = v_stringn_display_from_any(type_any)
+    print(stringn)
+  }
+  // v_log_string
+  public static func v_log_string(
+    _ stringn : String
+  ) {
+    print(stringn)
+  }
+  // v_mapany_from_anymap
+  public static func v_mapany_from_anymap(
+    _ type_anymap : Vx_Core.Type_anymap
+  ) -> [String:Vx_Core.Type_any] {
+    var output : [String:Vx_Core.Type_any] = type_anymap.mapany
+    return output
+  }
+  // v_package_new_from_namen_listtype_listconst
+  public static func v_package_new_from_namen_listtype_listconst(
+    _ namen : String,
+    _ listtype : [Type_type],
+    _ listconst : [Type_any]
+  ) -> Type_package {
+    var output : Type_package = v_package_create()
+    var mapany : [String:Type_any] = [:]
+    for type_any : Type_any in listconst {
+      let type_const : Type_const = v_const_from_any(type_any)
+      let keyn : String = type_const.name
+      mapany[keyn] = type_any
+    }
+    output.p_typemap = v_typemap_from_listtype(listtype)
+    output.p_constmap = v_anymap_from_mapany(mapany)
+    return output
+  }
+  // v_release_any
+  public static func v_release_any(
+    _ type_any : Type_any
+  ) {
+    if type_any.type_const === nil {
+      v_global_release()
+      type_any.refcount -= 1
+      if type_any.refcount <= 0 {
+        v_shutdown_any(type_any)
+      }
+    }
+  }
+  // v_release_except_listany
+  public static func v_release_except_listany(
+    _ except_any : Vx_Core.Type_any,
+    _ listany : [Vx_Core.Type_any]
+  ) {
+    for type_any : Vx_Core.Type_any in listany {
+      if type_any !== except_any {
+        Vx_Core.v_release_any(type_any)
+      }
+    }
+  }
+  // v_release_listany
+  public static func v_release_listany(
+    _ listany : [Vx_Core.Type_any]
+  ) {
+    for type_any : Vx_Core.Type_any in listany {
+      Vx_Core.v_release_any(type_any)
+    }
+  }
+  // v_release_mapany
+  public static func v_release_mapany(
+    _ mapany : [String:Vx_Core.Type_any]
+  ) {
+    for type_any : Vx_Core.Type_any in mapany.values {
+      Vx_Core.v_release_any(type_any)
+    }
+  }
+  // v_reserve_any
+  public static func v_reserve_any(
+    _ type_any : Vx_Core.Type_any
+  ) {
+    if type_any.type_const === nil {
+      type_any.refcount += 1
+      v_global_reserve()
+    }
+  }
+  // v_reserve_delta
+  public static func v_reserve_delta(
+    _ type_delta : Vx_Core.Type_delta
+  ) {
+    v_global_reserve()
+  }
+  // v_reserve_listany
+  public static func v_reserve_listany(
+    _ listany : [Vx_Core.Type_any]
+  ) {
+    for type_any : Vx_Core.Type_any in listany {
+      Vx_Core.v_reserve_any(type_any)
+    }
+  }
+  // v_reserve_mapany
+  public static func v_reserve_mapany(
+    _ mapany : [String:Vx_Core.Type_any]
+  ) {
+    for type_any : Vx_Core.Type_any in mapany.values {
+      Vx_Core.v_reserve_any(type_any)
+    }
+  }
+  // v_reserve_msgblock
+  public static func v_reserve_msgblock(
+    _ type_msgblock : Vx_Core.Type_msgblock
+  ) {
+    v_reserve_any(type_msgblock.type_any)
+  }
+  // v_shutdown_any
+  public static func v_shutdown_any(
+    _ type_any : Type_any
+  ) {
+    v_any_shutdown(type_any)
+  }
+  // v_startup_e - mutating
+  public static func v_startup_e(
+    _ type_type : Type_type,
+    _ type_any : Type_any
+  ) {
+    let type_const : Type_const = v_const_new_e_from_type(type_type)
+    type_any.type_const = type_const
+  }
+  // v_startup_t - mutating
+  public static func v_startup_t(
+    _ type_type : Type_type,
+    _ type_generic : Type_generic
+  ) {
+    let type_any : Type_any = Type_any()
+    type_any.type_type = type_type
+    type_any.type_const = v_const_new_t_from_type(type_type)
+    type_type.type_any = type_any
+    type_type.type_generic = type_generic
+  }
+/*
+  // v_string_from_stringlist_join
+  public static func v_string_from_stringlist_join(
+    _ stringlist : Type_stringlist,
+    _ join : Type_string
+  ) -> Type_string {
+    let liststring : [Type_string] = stringlist.liststring
+    var listsstring : [String] = []
+    for type_string : Type_string in liststring {
+      let valuen = type_string.valuen
+      listsstring.append(valuen)
+    }
+    let joinn = join.valuen
+    let resultn = v_stringn_from_liststringn_joinn(listsstring, joinn)
+    let output = v_string_from_stringn(resultn)
+    return output
+  }
+  // v_stringlist_from_anylist
+  public static func v_stringlist_from_anylist(
+    _ type_anylist : Type_anylist
+  ) -> Type_stringlist {
+    return e_stringlist
+  }
+*/
+  // v_stringlist_from_liststringn
+  public static func v_stringlist_from_liststringn(
+    _ liststringn : [String]
+  ) -> Type_stringlist {
+    var liststring : [Type_string] = []
+    for stringn : String in liststringn {
+      let type_string : Type_string = v_string_from_stringn(stringn)
+      if type_string !== e_string {
+        liststring.append(type_string)
+      }
+    }
+    var output : Type_stringlist = v_stringlist_create()
+    output.liststring = liststring
+    return output
+  }
+  // v_stringn_display_from_any
+  public static func v_stringn_display_from_any(
+    _ type_any : Type_any
+  ) -> String {
+    return v_stringn_display_from_any_indentn_detailn(
+      type_any, 0, false
+    )
+  }
+  // v_stringn_display_from_any_indent
+  public static func v_stringn_display_from_any_indentn_detailn(
+    _ type_any : Type_any,
+    _ indentn : Int,
+    _ detailn : Bool
+  ) -> String {
+    let indentlinen : String = v_stringn_from_indentn_linen(indentn, true)
+    let type_type : Type_type = v_type_from_any(type_any)
+    let typenamen : String = v_typenamen_from_type(type_type)
+    var labeln : String = typenamen
+    var output : String = ""
+    switch typenamen {
+    case "vx/core/string":
+      let type_string : Type_string = v_string_from_any(type_any)
+      let valuen : String = v_stringn_from_string(type_string)
+      output = indentlinen + "\"" + valuen + "\""
+    default:
+      let extendsn : String = v_extendsn_from_type(type_type)
+      if v_stringn_from_stringn_startsn(labeln, "vx/core") {
+        labeln = v_stringn_from_stringn_aftern(labeln, "vx/core")
+      }
+      var paramsn : String = ""
+      switch extendsn {
+      case ":func":
+        paramsn += ":func"
+      case ":list":
+        let type_list : Type_list = v_list_from_any(type_any)
+        output = v_stringn_display_from_list_labeln_indentn_detailn(
+          type_list, labeln, indentn, detailn
+        )
+      case ":many":
+        paramsn += ":many"
+      case ":map":
+        paramsn += ":map"
+      case ":one":
+        paramsn += ":one"
+      case ":struct":
+        paramsn += ":struct"
+      case ":string":
+        paramsn += ":string"
+      case ":type":
+        paramsn += ":struct"
+      default:
+        print(
+         "Error: v_stringn_display_from_any_indentn_detailn - Missing " +
+         typenamen +
+         " :extends"
+        )
+      }
+    }
+    return output
+  }
+  // v_stringn_display_from_list_labeln_indentn_detailn
+  public static func v_stringn_display_from_list_labeln_indentn_detailn(
+    _ type_list : Type_list,
+    _ labeln : String,
+    _ indentn : Int,
+    _ detailn : Bool
+  ) -> String {
+    var output : String = ""
+    let list_any : [Type_any] = v_listany_from_list(type_list)
+    let indentlinen : String = v_stringn_from_indentn_linen(indentn, true)
+    if list_any.count == 0 {
+      output = indentlinen + "(" + labeln + ")"
+    } else {
+      var listparam : [String] = []
+      for type_any : Type_any in list_any {
+        let paramn : String = v_stringn_display_from_any_indentn_detailn(
+          type_any, indentn + 1, detailn
+        )
+        listparam.append(paramn)
+      }
+      let paramsn : String = v_stringn_from_liststringn_joinn(
+        listparam, ""
+      )
+      output = indentlinen + "(" + labeln + paramsn + ")"
+    }
+    return output
+  }
+  // v_stringn_from_indentn_linen
+  public static func v_stringn_from_indentn_linen(
+    _ indentn : Int,
+    _ linen : Bool
+  ) -> String {
+    var output : String = ""
+    if indentn > 0 {
+      if linen {
+        output = "\n"
+      }
+      output += v_stringn_from_stringn_repeatn(" ", indentn)
+    }
+    return output
+  }
+  // v_stringn_from_liststringn_joinn
+  public static func v_stringn_from_liststringn_joinn(
+    _ liststringn : [String],
+    _ joinn : String
+  ) -> String {
+    return liststringn.joined(separator: joinn)
+  }
+  // v_stringn_from_stringn_aftern
+  public static func v_stringn_from_stringn_aftern(
+    _ stringn : String,
+    _ aftern : String
+  ) -> String {
+    var output : String = ""
+    let starti : Int = v_intn_from_stringn_findn(stringn, aftern)
+    if starti >= 1 {
+      let leni : Int = aftern.length
+      let endindex = stringn.index(
+        stringn.startIndex,
+        offsetBy: starti + leni
+      )
+      output = String(stringn[endindex...])
+    }
+    return output
+  }
+  // v_stringn_from_stringn_aftern_beforen
+  public static func v_stringn_from_stringn_aftern_beforen(
+    _ stringn : String,
+    _ aftern : String,
+    _ beforen : String
+  ) -> String {
+    var output : String = ""
+    let starti : Int = v_intn_from_stringn_findn(stringn, aftern)
+    let endi : Int = v_intn_from_stringn_findlastn(stringn, beforen)
+    if starti >= 1 && endi > starti {
+      let leni : Int = aftern.length
+      let startindex = stringn.index(
+        stringn.startIndex,
+        offsetBy: starti - 1 + leni
+      )
+      let endindex = stringn.index(
+        stringn.startIndex,
+        offsetBy: endi - 1
+      )
+      output = String(stringn[startindex..<endindex])
+    }
+    return output
+  }
+  // v_stringn_from_stringn_repeatn
+  public static func v_stringn_from_stringn_repeatn(
+    _ stringn : String,
+    _ repeatn : Int
+  ) -> String {
+    return String(repeating: stringn, count: repeatn)
+  }
+  // v_stringn_from_stringn_startsn
+  public static func v_stringn_from_stringn_startsn(
+    _ stringn : String,
+    _ startsn : String
+  ) -> Bool {
+    return stringn.starts(with: startsn)
+  }
+/*
+  // v_switch
+  public static func v_switch(
+    _ return_type : Type_type,
+    _ valany : Type_any,
+    _ listcase : [Type_case]
+  ) -> Type_any {
+    var output : Type_any = v_empty(return_type)
+    var i : Int = 0
+    var counti : Int = listcase.count
+    for type_case : Type_case in listcase {
+      i += 1
+      if i == counti {
+        output = v_any_value_from_case(
+          return_type,
+          type_case
+        )
+        break
+      } else {
+        let foundb = v_booleann_from_case_compare(
+          type_case,
+          valany
+        )
+        if foundb {
+          output = v_any_value_from_case(
+            return_type,
+            type_case
+          )
+          break
+        }
+      }
+    }
+    return output
+  }
+*/
+  // v_sync_from_async
+  public static func v_sync_from_async(
+    _ type_async : Type_async
+  ) -> Type_any {
+    return e_any
+  }
+  // v_test
+  public static func v_test(
+    _ expected : Type_any,
+    _ actual : Type_any
+  ) -> Type_boolean {
+    let expectedn : String = v_stringn_display_from_any(expected)
+    let actualn  : String = v_stringn_display_from_any(actual)
+    var output : Type_boolean = c_false
+    if expectedn == actualn {
+      print("Passed")
+      output = c_true
+    } else if v_booleann_from_stringn_startsn_endsn(expectedn, "\"", "\"") {
+      let expected2n : String = v_stringn_from_stringn_aftern_beforen(
+        expectedn, "\"", "\""
+      )
+      if expected2n == actualn {
+        output = c_true
+      }
+    }
+    if output === c_false {
+      v_log_string(
+        "Test Failed:" +
+        "\n:expected" +
+        "\n" + expectedn +
+        "\n:actual" +
+        "\n" + actualn
+      )
+    }
+    return output
+  }
+
+  // Type_fn_any
+  // :java
+  // @FunctionalInterface
+  //  interface Type_fn_any {
+  //    Type_any apply([Type_any]);
+  // }
+  public typealias Type_fn_any = (Type_type) -> Type_any
+
+  public typealias Type_fn_any_from_listany = (Type_type, [Type_any]) -> Type_any
+
+  public typealias Type_fn_boolean = () -> Type_boolean
+
+  public typealias Type_fn_booleann = () -> Bool
+
+  public class Type_delta {
+    var mapstringn : [String:String] = [:]
+    var mapany : [String:Type_any] = [:]
+  }
+
+  // v_delta_from_any
+  public static func v_delta_from_any(
+    _ type_any : Type_any
+  ) -> Type_delta {
+    var output : Type_delta = e_delta
+    if let type_delta : Type_delta = type_any.type_delta {
+      output = type_delta
+    }
+    return output
+  }
+  // v_delta_from_any_mapany
+  public static func v_delta_from_any_mapany(
+    _ type_any : Type_any,
+    _ mapany : [String:Type_any]
+  ) -> Type_delta {
+    var mapmerged : [String:Type_any] = mapany
+    let orig_delta : Type_delta = v_delta_from_any(type_any)
+    let maporig : [String:Type_any] = orig_delta.mapany
+    mapmerged = maporig.merging(mapany) {current, _ in current}
+    var output : Type_delta = Type_delta()
+    output.mapany = mapmerged
+    return output
+  }
+  // v_delta_from_delta_keyn_orign_changen
+  public static func v_delta_from_delta_keyn_orign_changen(
+    _ type_delta : Type_delta,
+    _ keyn : String,
+    _ orign : String,
+    _ changen : String
+  ) -> Type_delta {
+    var output = e_delta
+    if type_delta === e_delta {
+    } else if orign == changen {
+    } else {
+      var mapstringn : [String:String] = type_delta.mapstringn
+      if let prevn : String = mapstringn[keyn] {
+      } else {
+        mapstringn[keyn] = orign
+      }
+    }
+    return output
+  }
+
+  // v_listasync_from_async
+  public static func v_listasync_from_async(
+    _ type_async : Type_async
+  ) -> [Type_async] {
+    var output : [Type_async] = type_async.listasync
+    return output
+  }
+  // v_result_from_async
+  public static func v_result_from_async(
+    _ type_async : Type_async
+  ) -> Type_any {
+    var output : Type_any = type_async.result
+    return output
+  }
+
+/*
+  public class Type_case {
+    var type_any : Type_any = e_any
+    var anycompare : Type_any = e_any
+    var listcompare : [Type_any] = []
+    var fn_any : Type_fn_any?
+    public init() {}
+  }
+
+*/
+
+  // v_msg_error_from_code_path
+  public static func v_msg_error_from_code_path(
+    _ coden : String,
+    _ pathn : String
+  ) -> Type_msg {
+    var output : Type_msg = v_msg_create()
+    output.p_severity = c_msg_severe
+    output.p_code = v_string_from_stringn(coden)
+    output.p_path = v_string_from_stringn(pathn)
+    return output
+  }
+
+  // v_msgblock_from_msgblock_msg
+  public static func v_msgblock_from_msgblock_msg(
+    _ type_msgblock : Vx_Core.Type_msgblock,
+    _ type_msg : Vx_Core.Type_msg
+  ) -> Type_msgblock {
+    var output : Vx_Core.Type_msgblock = Vx_Core.v_msgblock_copy(
+      type_msgblock,
+      Vx_Core.v_anylist_from_listany([
+        type_msg.type_any
+      ])
+    )
+    return output
+  }
+  // v_msgblock_from_msgblock_type_any
+  public static func v_msgblock_from_msgblock_type_any(
+    _ type_msgblock : Vx_Core.Type_msgblock,
+    _ type_type : Vx_Core.Type_type,
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_msgblock {
+    return type_msgblock
+  }
+
+  public static func v_float_from_number(
+    _ numberval : Type_number
+  ) -> Type_float {
+    return numberval.type_float
+  }
+
+  public static func v_int_from_number(
+    _ numberval : Type_number
+  ) -> Type_int {
+    return numberval.type_int
+  }
+
+/*
+  public static func v_number_from_any(
+    _ valany : Type_any
+  ) -> Type_number {
+    return e_number
+  }
+*/
+
+  public static func v_number_from_float(
+    _ floatval : Type_float
+  ) -> Type_number {
+    return e_number
+  }
+
+  public static func v_number_from_int(
+    _ intval : Type_int
+  ) -> Type_number {
+    return e_number
+  }
+
+  public static func v_anylist_from_numberlist(
+    numberlist : Type_numberlist
+  ) -> Type_anylist {
+    return e_anylist
+  }
+  public static func v_numberlist_from_any(
+    any : Type_any
+  ) -> Type_numberlist {
+    return e_numberlist
+  }
+  public static func v_numberlist_from_anylist(
+    anylist : Type_anylist
+  ) -> Type_numberlist {
+    return e_numberlist
+  }
+
+  // v_any_from_typemap
+  public static func v_any_from_typemap(
+    _ return_type : Type_type,
+    _ typemap : Type_typemap
+  ) -> Type_any {
+    return typemap.type_any
+  }
+  // v_type_from_skey
+  public static func v_type_from_typemap_keyn(
+    _ typemap : Type_typemap,
+    _ keyn : String
+  ) -> Type_type {
+    if let output = typemap.maptype[keyn] {
+      return output
+    } else {
+      return e_type
+    }
+  }
+  // v_typemap_from_listtype
+  public static func v_typemap_from_listtype(
+    _ listtype : [Type_type]
+  ) -> Type_typemap {
+    var maptype : [String:Type_type] = [:]
+    for type_type : Type_type in listtype {
+      let key : String = v_typenamen_from_type(type_type)
+      maptype[key] = type_type
+    }
+    var output : Type_typemap = v_typemap_from_maptype(maptype)
+    return output
+  }
+  // v_typemap_from_maptype
+  public static func v_typemap_from_maptype(
+    _ maptype : [String:Type_type]
+  ) -> Type_typemap {
+    var output : Type_typemap = v_typemap_new()
+    output.maptype = maptype
+    return output
+  }
+  // v_typemap_new
+  public static func v_typemap_new(
+  ) -> Type_typemap {
+    var output : Type_typemap = Type_typemap()
+    v_typemap_startup(output)
+    return output
+  }
+
+  // v_any_from_package
+  public static func v_any_from_package(
+    _ return_type : Type_type,
+    _ type_package : Type_package
+  ) -> Type_any {
+    return type_package.type_any
+  }
+  // v_package_from_name_listtype
+  public static func v_package_from_namen_listtype(
+    _ namen : String,
+    _ listtype : [Type_type]
+  ) -> Type_package {
+    var output : Type_package = Type_package()
+    v_package_startup(output)
+    output.p_pkgname = v_string_from_stringn(namen)
+    output.p_typemap = v_typemap_from_listtype(listtype)
+    return output
+  }
+  // v_pkgnamen_from_package
+  public static func v_pkgnamen_from_package(
+    _ type_package : Type_package
+  ) -> String {
+    return v_stringn_from_string(type_package.p_pkgname)
+  }
+
+  public class Type_packageregistry {
+    var packagemap : Type_packagemap = e_packagemap
+    public init() {}
+  }
+
+  // v_packageregistry_register
+  public static func v_packageregistry_register(
+    _ type_package : Type_package
+  ) {
+    c_packageregistry.packagemap = v_packagemap_copy(
+      c_packageregistry.packagemap,
+      Vx_Core.v_anylist_from_listany([
+        v_any_from_package(t_package, type_package)
+      ])
+    )
+  }
+
+/*
+  // v_package_register
+  public static func v_package_register() {
+    let listtype : [Type_type] = [
+      v_any_register(),
+      //v_decimal_register(),
+      v_msg_register(),
+      v_msgblock_register(),
+      v_packagemap_register(),
+      v_string_register(),
+      v_string_from_stringlist_join_register(),
+      v_stringlist_register(),
+      v_typemap_register()
+    ]
+    let type_package : Type_package = v_package_from_namen_listtype(
+      "vx/core",
+      listtype
+    )
+    v_packageregistry_register(type_package)
+  }
+*/
+
+/*
+  public class Type_var {
+    var type_any : Type_any = e_any
+    var type_struct : Type_struct = e_struct
+    var namen : String = ""
+    var valanyue : Type_any = e_any
+    public init() {}
+  }
+  // v_var_from_name_any
+  public static func v_var_from_namen_any(
+    namen : String,
+    type_any : Type_any
+  ) -> Type_var {
+    return e_var
+  }
+*/
+
+  public static let c_extends_const : Type_string = Type_string()
+  public static let c_extends_func : Type_string = Type_string()
+  public static let c_extends_list : Type_string = Type_string()
+  public static let c_extends_map : Type_string = Type_string()
+  public static let c_extends_string : Type_string = Type_string()
+  public static let c_extends_struct : Type_string = Type_string()
+  public static let c_extends_type : Type_string = Type_string()
+
+  public static let c_packageregistry : Type_packageregistry = Type_packageregistry()
+
+  public static let e_delta : Type_delta = Type_delta()
+  public static let e_generic : Type_generic = Type_generic()
+  public static var g_refcount : Int = 0
+
+/*
   public final class Future {
 
     private enum State {
@@ -374,68 +1879,6 @@
   public static let emptylistany : [Vx_Core.Type_any] = []
 
   public static let emptymapany : Vx_Core.Map<any Vx_Core.Type_any> = Vx_Core.Map<any Vx_Core.Type_any>()
-
-  open class Class_base {
-
-    internal var vx_iref : Int = 0
-    public var vx_p_constdef : Vx_Core.Type_constdef? = nil
-    internal var vxmsgblock : Vx_Core.Type_msgblock? = nil
-
-    open func vx_new(
-      _ vals : [Any]
-    ) -> any Vx_Core.Type_any {
-      return Vx_Core.e_any
-    }
-
-    open func vx_copy(
-      _ vals : [Any]
-    ) -> any Vx_Core.Type_any {
-      return Vx_Core.e_any
-    }
-
-    open func vx_empty() -> any Vx_Core.Type_any {
-      return Vx_Core.e_any
-    }
-
-    open func vx_type() -> any Vx_Core.Type_any {
-      return Vx_Core.t_any
-    }
-
-    open func vx_typedef() -> any Vx_Core.Type_typedef {
-      return Vx_Core.e_typedef
-    }
-
-    public func vx_constdef() -> any Vx_Core.Type_constdef {
-      return vx_p_constdef ?? Vx_Core.e_constdef
-    }
-
-    public func vx_dispose() -> [any Vx_Core.Type_any] {
-      vx_iref = 0
-      vx_p_constdef = nil
-      vxmsgblock = nil
-      return emptylistany
-    }
-
-    public func vx_msgblock() -> any Vx_Core.Type_msgblock {
-      return vxmsgblock ?? Vx_Core.e_msgblock
-    }
-
-    public func vx_release() -> Bool {
-      if vx_iref < 0 {
-        return false
-      } else if vx_iref == 0 {
-        vx_iref = -1
-        return true
-      } else {
-        vx_iref -= 1
-        return false
-      }
-    }
-
-    public func vx_reserve() {
-      vx_iref += 1
-    }
-  }
 
   public struct KeyValue<T> {
     public var key: String = ""
@@ -1287,10 +2730,10 @@
             let fn_cond : any Vx_Core.Func_boolean_from_func = thenelse.fn_cond()
             let cond : any Vx_Core.Type_boolean = fn_cond.vx_boolean_from_func()
             if cond.vx_boolean() == true {
-              fnany = thenelse.fn_any()
+              fnany = thenelse.p_fn_any()
             }
           } else if scode == ":else" {
-            fnany = thenelse.fn_any()
+            fnany = thenelse.p_fn_any()
           }
         }
         return fnany
@@ -2186,7 +3629,7 @@
         let valsub2 = mapval2.getOrElse(
           key, Vx_Core.e_any
         )
-        if !Vx_Core.f_is_empty_1(valsub2).vx_boolean() {
+        if Vx_Core.f_is_empty_1(valsub2) === Vx_Core.c_false {
           if !key.starts(with: ":") {
             key = ":" + key
           }
@@ -2328,14 +3771,14 @@
       switch code {
       case ":case":
         if Vx_Core.f_eq(value, thenelse.value()).vx_boolean() {
-          fn_any = thenelse.fn_any()
+          fn_any = thenelse.p_fn_any()
         }
       case ":casemany":
         if Vx_Core.f_contains_1(thenelse.values(), value).vx_boolean() {
-          fn_any = thenelse.fn_any()
+          fn_any = thenelse.p_fn_any()
         }
       case ":else":
-        fn_any = thenelse.fn_any()
+        fn_any = thenelse.p_fn_any()
       default:
         break
       }
@@ -2370,3 +3813,4 @@
   ) -> any Vx_Core.Type_typedef {
     return value.vx_typedef()
   }
+*/

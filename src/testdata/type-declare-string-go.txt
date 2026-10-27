@@ -1,0 +1,132 @@
+
+// (type string)
+type Type_string struct {
+	P_any     *Type_any
+	P_stringn string
+}
+
+// V_string_constructor
+func V_string_constructor() *Type_string {
+	var output *Type_string = new(Type_string)
+	return output
+}
+
+// V_string_create
+func V_string_create() *Type_string {
+	var output *Type_string = V_string_constructor()
+	V_string_initialize(
+		output)
+	return output
+}
+
+// V_string_initialize
+func V_string_initialize(
+	value *Type_string) {
+	value.P_any = V_any_from_type_backref(
+		T_string,
+		value)
+	value.P_stringn = ""
+}
+
+// V_string_shutdown
+func V_string_shutdown(
+	value *Type_string) {
+	value.P_stringn = ""
+	V_any_shutdown(
+		value.P_any)
+	V_global_release()
+}
+
+// V_string_startup
+func V_string_startup() *Type_type {
+	var t_variable *Type_type = T_string
+	var e_variable *Type_string = E_string
+	V_string_initialize(
+		e_variable)
+	V_type_t_startup(
+		t_variable,
+		"vx/core",
+		"string",
+		E_string,
+		e_variable.P_any)
+	t_variable.P_propertylist = V_varlist_from_listvar(
+		[]*Type_var{
+			V_var_new_public_from_namen_type(
+				"stringn",
+				T_stringn)})
+	var type_generic *Type_generic = V_generic_create()
+	type_generic.P_code_funcn = V_code_string
+	type_generic.P_copy_funcn = V_copy_string
+	type_generic.P_new_funcn = V_new_string
+	t_variable.type_generic = type_generic
+	var output *Type_type = t_variable
+	return output
+}
+
+// V_cast_string
+func V_cast_string(
+	value *Type_string) *Type_any {
+	var output *Type_any = value.P_any
+	return output
+}
+
+// V_string_cast
+func V_string_cast(
+	type_any *Type_any) *Type_string {
+	var output *Type_string = E_string
+	var value, ok = type_any.backref.(*Type_string)
+	if ok {
+		output = value
+	}
+	return output
+}
+
+// V_string_copy
+func V_string_copy(
+	value *Type_string,
+	type_anylist *Type_anylist) *Type_string {
+	var output *Type_string = E_string
+	return output
+}
+
+// V_copy_string
+func V_copy_string(
+	type_any *Type_any,
+	type_anylist *Type_anylist) *Type_any {
+	var value *Type_string = V_string_cast(
+		type_any)
+	var copy_value *Type_string = V_string_copy(
+		value,
+		type_anylist)
+	var output *Type_any = copy_value.P_any
+	return output
+}
+
+// V_string_new
+func V_string_new(
+	type_anylist *Type_anylist) *Type_string {
+	var output *Type_string = V_string_copy(
+		E_string,
+		type_anylist)
+	return output
+}
+
+// V_new_string
+func V_new_string(
+	type_anylist *Type_anylist) *Type_any {
+	var value *Type_string = V_string_new(
+		type_anylist)
+	var output *Type_any = value.P_any
+	return output
+}
+
+// F_string
+func F_string(
+	type_anylist *Type_anylist) *Type_string {
+	var output *Type_string = V_string_new(
+		type_anylist)
+	return output
+}
+
+var T_string *Type_type = V_type_constructor()
+var E_string *Type_string = V_string_constructor()

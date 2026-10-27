@@ -26,6 +26,7 @@ type vxproject struct {
 	listproject []*vxproject
 	mapnative   map[string]string
 	textblock   *vxtextblock
+	P_project   *vx_core.Type_project
 }
 
 var emptyproject = NewProject("")
@@ -34,34 +35,37 @@ func NewPath() *vxpath {
 	return new(vxpath)
 }
 
-func NewProject(prjname string) *vxproject {
+func NewProject(
+	prjname string) *vxproject {
 	output := new(vxproject)
 	output.name = prjname
 	return output
 }
 
 func ExecuteProjectCommand(
-	project *vxproject,
+	vxproject *vxproject,
 	origcommand *vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("ExecutProjectCommand")
-	path := StringPathFromProjectCmd(project, origcommand)
+	path := StringPathFromProjectCmd(vxproject, origcommand)
 	command := NewCommandCopy(origcommand)
 	command.path = path
 	issource := false
 	switch command.code {
 	case ":doc":
-		msgs := WriteDocFromProjectCmd(project, command)
+		msgs := WriteDocFromProjectCmd(vxproject, command)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	case ":source", ":test":
+		project_from_vxproject(
+			vxproject)
 		if !issource {
 			msgs := LangWriteFromProjectCmdNative(
-				command.lang, project, command)
+				command.lang, vxproject, command)
 			msgblock = MsgblockAddBlock(
 				msgblock, msgs)
 		}
 		issource = true
 	case ":webserver":
-		WebServerStart(project, command)
+		WebServerStart(vxproject, command)
 	}
 	return msgblock
 }

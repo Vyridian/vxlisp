@@ -1,0 +1,8 @@
+
+// V_any_create
+func V_any_create() *Type_any {
+	var output *Type_any = V_any_constructor()
+	V_any_initialize(
+		output)
+	return output
+}

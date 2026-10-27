@@ -1,0 +1,245 @@
+
+// (type type)
+type Type_type struct {
+	P_any          *Type_any
+	type_generic   *Type_generic
+	P_path         string
+	P_pkgname      string
+	P_name         string
+	P_alias        string
+	P_idx          int
+	P_extends      *Type_string
+	P_empty        *Type_any
+	P_propertylist *Type_varlist
+	P_container    *Type_type
+	P_allowtypes   *Type_typelist
+	P_func         *Type_func
+	P_isnative     bool
+	P_prefix       string
+}
+
+// V_type_constructor
+func V_type_constructor() *Type_type {
+	var output *Type_type = new(Type_type)
+	return output
+}
+
+// V_type_create
+func V_type_create() *Type_type {
+	var output *Type_type = V_type_constructor()
+	V_type_initialize(
+		output)
+	return output
+}
+
+// V_type_initialize
+func V_type_initialize(
+	value *Type_type) {
+	value.P_any = V_any_from_type_backref(
+		T_type,
+		value)
+	value.type_generic = E_generic
+	value.P_path = ""
+	value.P_pkgname = ""
+	value.P_name = ""
+	value.P_alias = ""
+	value.P_idx = 0
+	value.P_extends = E_string
+	value.P_empty = E_any
+	value.P_propertylist = E_varlist
+	value.P_container = E_type
+	value.P_allowtypes = E_typelist
+	value.P_func = E_func
+	value.P_isnative = false
+	value.P_prefix = ""
+}
+
+// V_type_shutdown
+func V_type_shutdown(
+	value *Type_type) {
+	if value.type_generic != E_generic {
+		V_generic_shutdown(
+			value.type_generic)
+		value.type_generic = E_generic
+	}
+	value.P_path = ""
+	value.P_pkgname = ""
+	value.P_name = ""
+	value.P_alias = ""
+	value.P_idx = 0
+	if value.P_extends != E_string {
+		V_release_any(
+			V_cast_string(
+				value.P_extends))
+		value.P_extends = E_string
+	}
+	if value.P_empty != E_any {
+		V_release_any(
+			value.P_empty)
+		value.P_empty = E_any
+	}
+	if value.P_propertylist != E_varlist {
+		V_release_any(
+			V_cast_varlist(
+				value.P_propertylist))
+		value.P_propertylist = E_varlist
+	}
+	value.P_container = E_type
+	if value.P_allowtypes != E_typelist {
+		V_release_any(
+			V_cast_typelist(
+				value.P_allowtypes))
+		value.P_allowtypes = E_typelist
+	}
+	if value.P_func != E_func {
+		V_release_any(
+			V_cast_func(
+				value.P_func))
+		value.P_func = E_func
+	}
+	value.P_isnative = false
+	value.P_prefix = ""
+	V_any_shutdown(
+		value.P_any)
+	V_global_release()
+}
+
+// V_type_startup
+func V_type_startup() *Type_type {
+	var t_variable *Type_type = T_type
+	var e_variable *Type_type = E_type
+	V_type_initialize(
+		e_variable)
+	V_type_t_startup(
+		t_variable,
+		"vx/core",
+		"type",
+		E_string,
+		e_variable.P_any)
+	t_variable.P_propertylist = V_varlist_from_listvar(
+		[]*Type_var{
+			V_var_new_private_from_namen_type(
+				"type-generic",
+				T_generic),
+			V_var_new_public_from_namen_type(
+				"path",
+				T_stringn),
+			V_var_new_public_from_namen_type(
+				"pkgname",
+				T_stringn),
+			V_var_new_public_from_namen_type(
+				"name",
+				T_stringn),
+			V_var_new_public_from_namen_type(
+				"alias",
+				T_stringn),
+			V_var_new_public_from_namen_type(
+				"idx",
+				T_intn),
+			V_var_new_public_from_namen_type(
+				"extends",
+				T_string),
+			V_var_new_public_from_namen_type(
+				"empty",
+				T_any),
+			V_var_new_public_from_namen_type(
+				"propertylist",
+				T_varlist),
+			V_var_new_public_from_namen_type(
+				"container",
+				T_type),
+			V_var_new_public_from_namen_type(
+				"allowtypes",
+				T_typelist),
+			V_var_new_public_from_namen_type(
+				"func",
+				T_func),
+			V_var_new_public_from_namen_type(
+				"isnative",
+				T_booleann),
+			V_var_new_public_from_namen_type(
+				"prefix",
+				T_stringn)})
+	var type_generic *Type_generic = V_generic_create()
+	type_generic.P_code_funcn = V_code_type
+	type_generic.P_copy_funcn = V_copy_type
+	type_generic.P_new_funcn = V_new_type
+	t_variable.type_generic = type_generic
+	var output *Type_type = t_variable
+	return output
+}
+
+// V_cast_type
+func V_cast_type(
+	value *Type_type) *Type_any {
+	var output *Type_any = value.P_any
+	return output
+}
+
+// V_type_cast
+func V_type_cast(
+	type_any *Type_any) *Type_type {
+	var output *Type_type = E_type
+	var value, ok = type_any.backref.(*Type_type)
+	if ok {
+		output = value
+	}
+	return output
+}
+
+// V_type_copy
+func V_type_copy(
+	value *Type_type,
+	type_anylist *Type_anylist) *Type_type {
+	var output *Type_type = E_type
+	return output
+}
+
+// V_copy_type
+func V_copy_type(
+	type_any *Type_any,
+	type_anylist *Type_anylist) *Type_any {
+	var value *Type_type = V_type_cast(
+		type_any)
+	var copy_value *Type_type = V_type_copy(
+		value,
+		type_anylist)
+	var output *Type_any = copy_value.P_any
+	return output
+}
+
+// V_empty
+func V_empty(
+	type_type *Type_type) *Type_any {
+	var output *Type_any = type_type.P_empty
+	return output
+}
+
+// V_type_new
+func V_type_new(
+	type_anylist *Type_anylist) *Type_type {
+	var output *Type_type = V_type_copy(
+		E_type,
+		type_anylist)
+	return output
+}
+
+// V_new_type
+func V_new_type(
+	type_anylist *Type_anylist) *Type_any {
+	var value *Type_type = V_type_new(
+		type_anylist)
+	var output *Type_any = value.P_any
+	return output
+}
+
+// F_type
+func F_type(
+	type_anylist *Type_anylist) *Type_type {
+	var output *Type_type = V_type_new(
+		type_anylist)
+	return output
+}
+
+var T_type *Type_type = V_type_constructor()
+var E_type *Type_type = V_type_constructor()

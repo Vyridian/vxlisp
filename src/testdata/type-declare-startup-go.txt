@@ -1,0 +1,39 @@
+
+// V_any_startup
+func V_any_startup() *Type_type {
+	var t_variable *Type_type = T_any
+	var e_variable *Type_any = E_any
+	V_any_initialize(
+		e_variable)
+	V_type_t_startup(
+		t_variable,
+		"vx/core",
+		"any",
+		E_string,
+		e_variable)
+	t_variable.P_propertylist = V_varlist_from_listvar(
+		[]*Type_var{
+			V_var_new_private_from_namen_type(
+				"backref",
+				T_any),
+			V_var_new_private_from_namen_type(
+				"refcount",
+				T_intn),
+			V_var_new_public_from_namen_type(
+				"type",
+				T_type),
+			V_var_new_public_from_namen_type(
+				"const",
+				T_const),
+			V_var_new_public_from_namen_type(
+				"msgblock",
+				T_msgblock),
+			V_var_new_public_from_namen_type(
+				"delta",
+				T_delta),
+			V_var_new_public_from_namen_type(
+				"isrun",
+				T_booleann)})
+	var output *Type_type = t_variable
+	return output
+}

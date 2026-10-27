@@ -1,7 +1,7 @@
 
   // (type string)
   public class Type_string {
-    var type_any : Vx_Core.Type_any?
+    var p_any : Vx_Core.Type_any!
     var p_stringn : String
     public init() {}
   }
@@ -27,7 +27,7 @@
   public static func v_string_initialize(
     _ value : Vx_Core.Type_string
   ) {
-    value.type_any = Vx_Core.v_any_from_type_backref(
+    value.p_any = Vx_Core.v_any_from_type_backref(
       Vx_Core.t_string,
       value)
     value.p_stringn = ""
@@ -38,6 +38,9 @@
     _ value : Vx_Core.Type_string
   ) {
     value.p_stringn = ""
+    Vx_Core.v_any_shutdown(
+      value.p_any)
+    Vx_Core.v_global_release()
   }
 
   // v_string_startup
@@ -52,7 +55,7 @@
       "vx/core",
       "string",
       Vx_Core.e_string,
-      e_variable.type_any)
+      e_variable.p_any)
     t_variable.p_propertylist = Vx_Core.v_varlist_from_listvar(
       [
         Vx_Core.v_var_new_public_from_namen_type(
@@ -60,39 +63,96 @@
           Vx_Core.t_stringn)
       ])
     var type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_create()
-    type_generic.p_code_from_any_funcn = Vx_Core.v_code_from_any_string
+    type_generic.p_code_funcn = Vx_Core.v_code_string
+    type_generic.p_copy_funcn = Vx_Core.v_copy_string
+    type_generic.p_new_funcn = Vx_Core.v_new_string
     t_variable.type_generic = type_generic
     let output : Vx_Core.Type_type = t_variable
     return output
   }
 
-  // v_any_cast_string
-  public static func v_any_cast_string(
+  // v_cast_string
+  public static func v_cast_string(
     _ value : Vx_Core.Type_string
   ) -> Vx_Core.Type_any {
-    let output : Vx_Core.Type_any = value.type_any
+    let output : Vx_Core.Type_any = value.p_any
     return output
   }
 
-  // v_any_cast_stringn
-  public static func v_any_from_stringn(
-    _ stringn : String
-  ) -> Vx_Core.Type_any {
-    let value : Vx_Core.Type_string = Vx_Core.v_string_from_stringn(
-      stringn)
-    let output : Vx_Core.Type_any = Vx_Core.v_any_cast_string(
-      value)
-    return output
-  }
-
-  // v_string_cast_any
-  public static func v_string_cast_any(
+  // v_string_cast
+  public static func v_string_cast(
     _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_string {
     var output : Vx_Core.Type_string = Vx_Core.e_string
     if type_any.type_type === Vx_Core.t_string {
       output = unsafeBitCast(type_any.backref, to: Vx_Core.Type_string.self)
     }
+    return output
+  }
+
+  // v_string_copy
+  public static func v_string_copy(
+    _ value : Vx_Core.Type_string,
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_string {
+    let output : Vx_Core.Type_string = Vx_Core.e_string
+    return output
+  }
+
+  // v_copy_string
+  public static func v_copy_string(
+    _ type_any : Vx_Core.Type_any,
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_any {
+    let value : Vx_Core.Type_string = Vx_Core.v_string_cast(
+      type_any)
+    let copy_value : Vx_Core.Type_string = Vx_Core.v_string_copy(
+      value,
+      type_anylist)
+    let output : Vx_Core.Type_any = copy_value.p_any
+    return output
+  }
+
+  // v_string_new
+  public static func v_string_new(
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_string {
+    let output : Vx_Core.Type_string = Vx_Core.v_string_copy(
+      Vx_Core.e_string,
+      type_anylist)
+    return output
+  }
+
+  // v_new_string
+  public static func v_new_string(
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_any {
+    let value : Vx_Core.Type_string = Vx_Core.v_string_new(
+      type_anylist)
+    let output : Vx_Core.Type_any = value.p_any
+    return output
+  }
+
+  // f_string
+  public static func f_string(
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_string {
+    let output : Vx_Core.Type_string = Vx_Core.v_string_new(
+      type_anylist)
+    return output
+  }
+
+  public static let t_string : Vx_Core.Type_type = Vx_Core.v_type_constructor()
+  public static let e_string : Vx_Core.Type_string = Vx_Core.v_string_constructor()
+
+  // v_any_from_stringn
+  public static func v_any_from_stringn(
+    _ stringn : String
+  ) -> Vx_Core.Type_any {
+    let value : Vx_Core.Type_string = Vx_Core.v_string_from_stringn(
+      stringn)
+    let output : Vx_Core.Type_any = Vx_Core.v_cast_string(
+      value)
     return output
   }
 
@@ -195,14 +255,3 @@
     )
     return output
   }
-
-  // f_string
-  public static func f_string(
-    _ anylist : Vx_Core.Type_anylist
-  ) -> Vx_Core.Type_string {
-    let output : Vx_Core.Type_string = v_string_copy(e_string, anylist)
-    return output
-  }
-
-  public static let t_string : Vx_Core.Type_type = Vx_Core.v_type_constructor()
-  public static let e_string : Vx_Core.Type_string = Vx_Core.v_string_constructor()

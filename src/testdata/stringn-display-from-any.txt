@@ -1,0 +1,115 @@
+// :any
+(type any)
+// :any
+(empty any)
+// :string
+"Hello World"
+// :stringlist
+(stringlist
+ "Hello"
+ "World")
+// :stringmap
+(stringmap
+ :a "1"
+ :b "2")
+// :anylist
+(anylist
+ "Hello"
+ "World")
+// :anymap
+(anymap
+ :a "Hello"
+ :b "World")
+// :typemap
+(typemap
+ :vx/core/string string)
+// :constmap
+(constmap
+ :vx/core/false
+  (const
+   :pkgname "vx/core"
+   :name "false"
+   :path "vx/core/false"
+   :isempty true
+   :type boolean))
+// :package
+(package
+ :path "vx/core"
+ :anymap
+  (anymap
+   :false false)
+ :constmap
+  (constmap
+   :vx/core/false
+    (const
+     :pkgname "vx/core"
+     :name "false"
+     :path "vx/core/false"
+     :isempty true
+     :type boolean))
+ :typemap
+  (typemap
+   :vx/core/string string))
+// :project
+(project
+ :packagemap
+  (packagemap
+   :vx/core
+    (package
+     :path "vx/core"
+     :anymap
+      (anymap
+       :false false)
+     :constmap
+      (constmap
+       :vx/core/false
+        (const
+         :pkgname "vx/core"
+         :name "false"
+         :path "vx/core/false"
+         :isempty true
+         :type boolean))
+     :typemap
+      (typemap
+       :vx/core/string string))))
+// :var
+(var
+ :name "myvar"
+ :type string)
+// :func
+(func
+ :type boolean<-booleann
+ :return boolean
+ :arglist
+  (varlist
+   (var
+    :name "booleann"
+    :type booleann))
+ :value
+  (anylist
+   (var-declare
+    :var
+     (var
+      :name "output"
+      :type boolean
+      :mutable true))
+   (if
+    :thenelselist
+     (thenelselist
+      (thenelse
+       :code ":then"
+       :if
+        (var
+         :name "booleann"
+         :type booleann)
+       :then
+        (var-set
+         :var
+          (var
+           :name "output"
+           :type boolean
+           :mutable true)
+         :value true))))))
+// :func-declare
+(func-declare
+ :type boolean<-booleann)

@@ -1,0 +1,88 @@
+
+// (type any)
+type Type_any struct {
+	backref    any
+	refcount   int
+	P_type     *Type_type
+	P_const    *Type_const
+	P_msgblock *Type_msgblock
+	P_delta    *Type_delta
+	P_isrun    bool
+}
+
+// (type boolean)
+type Type_boolean struct {
+	P_any      *Type_any
+	P_booleann bool
+}
+
+// (type float)
+type Type_float struct {
+	P_any    *Type_any
+	P_floatn float64
+}
+
+type Type_cast_funcn func(type_type *Type_type, type_any *Type_any) *Type_any
+type Type_code_funcn func(type_scope *Type_scope, indent int, path string, type_any *Type_any) string
+type Type_copy_funcn func(type_any *Type_any, type_anylist *Type_anylist) *Type_any
+type Type_count_funcn func(type_any *Type_any) int
+type Type_func_funcn func(type_type *Type_type) *Type_func
+type Type_get_keyn_funcn func(type_any *Type_any, keyn string) *Type_any
+type Type_get_indexn_funcn func(type_any *Type_any, indexn int) *Type_any
+type Type_listany_funcn func(type_any *Type_any) []*Type_any
+type Type_listkey_funcn func(type_any *Type_any) []string
+type Type_mapany_funcn func(type_any *Type_any) map[string]*Type_any
+type Type_new_funcn func(type_anylist *Type_anylist) *Type_any
+type Type_set_keyn_funcn func(type_any *Type_any, keyn string, value *Type_any)
+type Type_set_indexn_funcn func(type_any *Type_any, indexn int, value *Type_any)
+type Type_shutdown_funcn func(type_any *Type_any)
+
+// (type generic)
+type Type_generic struct {
+	P_any              *Type_any
+	P_cast_funcn       Type_cast_funcn
+	P_code_funcn       Type_code_funcn
+	P_copy_funcn       Type_copy_funcn
+	P_count_funcn      Type_count_funcn
+	P_func_funcn       Type_func_funcn
+	P_get_keyn_funcn   Type_get_keyn_funcn
+	P_get_indexn_funcn Type_get_indexn_funcn
+	P_listany_funcn    Type_listany_funcn
+	P_listkey_funcn    Type_listkey_funcn
+	P_mapany_funcn     Type_mapany_funcn
+	P_new_funcn        Type_new_funcn
+	P_set_keyn_funcn   Type_set_keyn_funcn
+	P_set_indexn_funcn Type_set_indexn_funcn
+	P_shutdown_funcn   Type_shutdown_funcn
+}
+
+// (type int)
+type Type_int struct {
+	P_any  *Type_any
+	P_intn int
+}
+
+// (type string)
+type Type_string struct {
+	P_any     *Type_any
+	P_stringn string
+}
+
+// (type type)
+type Type_type struct {
+	P_any          *Type_any
+	type_generic   *Type_generic
+	P_path         string
+	P_pkgname      string
+	P_name         string
+	P_alias        string
+	P_idx          int
+	P_extends      *Type_string
+	P_empty        *Type_any
+	P_propertylist *Type_varlist
+	P_container    *Type_type
+	P_allowtypes   *Type_typelist
+	P_func         *Type_func
+	P_isnative     bool
+	P_prefix       string
+}

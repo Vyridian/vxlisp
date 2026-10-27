@@ -36,10 +36,12 @@ func LangFilesFromProjectCmd(
 	project *vxproject,
 	command *vxcommand) ([]*vxfile, *vxmsgblock) {
 	msgblock := NewMsgBlock("LangFilesFromProjectCmd")
-	cmdpath := PathFromProjectCmd(project, command)
+	cmdpath := PathFromProjectCmd(
+		project, command)
 	pkgprefix, apppath, testpath := LangProjectPkgPrefixAppPathTestPath(
 		lang, project, command, cmdpath)
-	var files []*vxfile = LangFilesCustom(lang, project, command, cmdpath)
+	var files []*vxfile = LangFilesCustom(
+		lang, project, command, cmdpath)
 	switch command.code {
 	case ":source":
 		file := NewFile()
@@ -51,28 +53,38 @@ func LangFilesFromProjectCmd(
 	case ":test":
 		file := NewFile()
 		file.name = "AppTest" + lang.sourcefile
-		file.path = LangAppTestPath(lang, testpath)
+		file.path = LangAppTestPath(
+			lang, testpath)
 		file.text = LangTestApp(
 			lang, project, command, pkgprefix)
 		files = append(files, file)
 		file = NewFile()
 		file.name = "TestLib" + lang.sourcefile
-		file.path = LangTestLibPath(lang, testpath)
-		file.text = LangTestLib(lang)
+		file.path = LangTestLibPath(
+			lang, testpath)
+		file.text = LangTestLib(
+			lang)
 		files = append(files, file)
 	}
-	pkgs := ListPackageFromProject(project)
+	pkgs := ListPackageFromProject(
+		project)
 	for _, pkg := range pkgs {
 		iscontinue := true
 		if len(lang.filewhitelist) > 0 {
-			iscontinue = vx_core.V_booleann_from_liststringn_containsn(lang.filewhitelist, pkg.name)
+			iscontinue = vx_core.V_booleann_from_liststringn_containsn(
+				lang.filewhitelist,
+				pkg.name)
 		}
 		if len(lang.fileblacklist) > 0 {
-			iscontinue = !vx_core.V_booleann_from_liststringn_containsn(lang.fileblacklist, pkg.name)
+			iscontinue = !vx_core.V_booleann_from_liststringn_containsn(
+				lang.fileblacklist,
+				pkg.name)
 		}
 		if iscontinue {
 			subprefix, subdomainpath := LangPackageSubPrefixSubDomainPath(
-				lang, command, pkg)
+				lang,
+				command,
+				pkg)
 			pkgname := pkg.name
 			pkgpath := ""
 			pos := strings.LastIndex(pkgname, "/")
@@ -80,7 +92,8 @@ func LangFilesFromProjectCmd(
 				pkgpath = pkgname[0:pos]
 				pkgname = pkgname[pos+1:]
 			}
-			pkgname = vx_core.V_stringn_uppercasefirst(pkgname)
+			pkgname = vx_core.V_stringn_uppercasefirst(
+				pkgname)
 			pkgpath = LangNativePkgpath(lang, pkgpath)
 			switch command.code {
 			case ":source":
@@ -159,25 +172,25 @@ func LangFromName(
 
 func LangFromPackage(
 	lang *vxlang,
-	pkg *vxpackage,
-	project *vxproject,
+	vxpackage *vxpackage,
+	vxproject *vxproject,
 	pkgprefix string) (string, *vxmsgblock) {
 	var output string = ""
 	msgblock := NewMsgBlock("LangFromPackage")
 	if lang.version == 2 {
 		output, msgblock = lang_from_package(
-			lang, pkg, project, pkgprefix)
+			lang, vxpackage, vxproject, pkgprefix)
 	} else {
 		pkgpath, pkgname := LangPackagePathFromPrefixName(
-			lang, pkgprefix, pkg.name)
-		specialcode := project.mapnative[pkg.name+"_"+lang.name+".txt"]
+			lang, pkgprefix, vxpackage.name)
+		specialcode := vxproject.mapnative[vxpackage.name+"_"+lang.name+".txt"]
 		if specialcode != "" {
 			specialcode += "\n"
 		}
-		typkeys := ListKeyFromMapType(pkg.maptype)
+		typkeys := ListKeyFromMapType(vxpackage.maptype)
 		typetexts := ""
 		packageline := LangNativePackageLine(
-			lang, pkg.name, pkgpath)
+			lang, vxpackage.name, pkgpath)
 		namespaceopen, namespaceclose := LangNamespaceOpenClose(
 			lang, pkgname, pkgpath)
 		packagestatic := "" +
@@ -188,29 +201,29 @@ func LangFromPackage(
 			LangVarCollection(lang, 2, rawmaptype, functype,
 				"mapfunc", ":new")
 		for _, typid := range typkeys {
-			typ := pkg.maptype[typid]
+			typ := vxpackage.maptype[typid]
 			typetext, msgs := LangType(lang, typ)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			typetexts += typetext
 			packagestatic += "" +
 				"\n    maptype.put(\"" + typ.name + "\", " + LangTypeT(lang, typ) + ")" + lang.lineend
 		}
-		cnstkeys := ListKeyFromMapConst(pkg.mapconst)
+		cnstkeys := ListKeyFromMapConst(vxpackage.mapconst)
 		consttexts := ""
 		staticopen, staticclose := LangNativePackageStaticOpenClose(lang)
 		for _, cnstid := range cnstkeys {
-			cnst := pkg.mapconst[cnstid]
-			consttext, constlate, msgs := LangConst(lang, cnst, project, pkg)
+			cnst := vxpackage.mapconst[cnstid]
+			consttext, constlate, msgs := LangConst(lang, cnst, vxproject, vxpackage)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			consttexts += consttext
 			staticopen += constlate
 			packagestatic += "" +
 				"\n    mapconst.put(\"" + cnst.name + "\", " + LangConstC(lang, cnst) + ")" + lang.lineend
 		}
-		fnckeys := ListKeyFromMapFunc(pkg.mapfunc)
+		fnckeys := ListKeyFromMapFunc(vxpackage.mapfunc)
 		functexts := ""
 		for _, fncid := range fnckeys {
-			fncs := pkg.mapfunc[fncid]
+			fncs := vxpackage.mapfunc[fncid]
 			for _, fnc := range fncs {
 				fnctext, msgs := LangFunc(lang, fnc)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -221,7 +234,7 @@ func LangFromPackage(
 		}
 		packagestatic += "" +
 			"\n    " + LangPkgNameDot(lang, "vx/core") + "vx_global_package_set(" +
-			"\n      \"" + pkg.name + "\"," +
+			"\n      \"" + vxpackage.name + "\"," +
 			"\n      " + LangFuncCallVx(lang, 3, func_mapimmutable, "maptype") + "," +
 			"\n      " + LangFuncCallVx(lang, 3, func_mapimmutable, "mapconst") + "," +
 			"\n      " + LangFuncCallVx(lang, 3, func_mapimmutable, "mapfunc") +
@@ -236,7 +249,7 @@ func LangFromPackage(
 			staticclose
 			//		emptytypes
 		imports := LangPackageImports(
-			lang, pkg, pkgprefix, body, false)
+			lang, vxpackage, pkgprefix, body, false)
 		output = "" +
 			packageline +
 			imports +
@@ -483,21 +496,21 @@ func LangTypeCoverageNumsValNew(
 
 func LangWriteFromProjectCmd(
 	lang *vxlang,
-	project *vxproject,
+	vxproject *vxproject,
 	command *vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("LangWriteFromProjectCmd")
 	files, msgs := LangFilesFromProjectCmd(
-		lang, project, command)
+		lang, vxproject, command)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	msgs = WriteListFile(files)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	switch command.code {
 	case ":test":
-		targetpath := PathFromProjectCmd(project, command)
+		targetpath := PathFromProjectCmd(vxproject, command)
 		targetpath = LangTestTargetPath(
 			lang, targetpath)
 		targetpath += "/resources"
-		msgs := LangFolderCopyTestdataFromProjectPath(project, targetpath)
+		msgs := LangFolderCopyTestdataFromProjectPath(vxproject, targetpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	return msgblock

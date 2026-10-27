@@ -1,0 +1,303 @@
+
+  // (type type)
+  public class Type_type {
+    var p_any : Vx_Core.Type_any!
+    var type_generic : Vx_Core.Type_generic!
+    var p_path : String
+    var p_pkgname : String
+    var p_name : String
+    var p_alias : String
+    var p_idx : Int
+    var p_extends : Vx_Core.Type_string!
+    var p_empty : Vx_Core.Type_any!
+    var p_propertylist : Vx_Core.Type_varlist!
+    var p_container : Vx_Core.Type_type!
+    var p_allowtypes : Vx_Core.Type_typelist!
+    var p_func : Vx_Core.Type_func!
+    var p_isnative : Bool
+    var p_prefix : String
+    public init() {}
+  }
+
+  // v_type_constructor
+  public static func v_type_constructor(
+  ) -> Vx_Core.Type_type {
+    Vx_Core.v_global_reserve()
+    let output : Vx_Core.Type_type = Vx_Core.Type_type()
+    return output
+  }
+
+  // v_type_create
+  public static func v_type_create(
+  ) -> Vx_Core.Type_type {
+    var output : Vx_Core.Type_type = Vx_Core.v_type_constructor()
+    Vx_Core.v_type_initialize(
+      output)
+    return output
+  }
+
+  // v_type_initialize
+  public static func v_type_initialize(
+    _ value : Vx_Core.Type_type
+  ) {
+    value.p_any = Vx_Core.v_any_from_type_backref(
+      Vx_Core.t_type,
+      value)
+    value.type_generic = Vx_Core.e_generic
+    value.p_path = ""
+    value.p_pkgname = ""
+    value.p_name = ""
+    value.p_alias = ""
+    value.p_idx = 0
+    value.p_extends = Vx_Core.e_string
+    value.p_empty = Vx_Core.e_any
+    value.p_propertylist = Vx_Core.e_varlist
+    value.p_container = Vx_Core.e_type
+    value.p_allowtypes = Vx_Core.e_typelist
+    value.p_func = Vx_Core.e_func
+    value.p_isnative = false
+    value.p_prefix = ""
+  }
+
+  // v_type_shutdown
+  public static func v_type_shutdown(
+    _ value : Vx_Core.Type_type
+  ) {
+    if value.type_generic !== Vx_Core.e_generic {
+      Vx_Core.v_generic_shutdown(
+        value.type_generic)
+      value.type_generic = Vx_Core.e_generic
+    }
+    value.p_path = ""
+    value.p_pkgname = ""
+    value.p_name = ""
+    value.p_alias = ""
+    value.p_idx = 0
+    if value.p_extends !== Vx_Core.e_string {
+      Vx_Core.v_release_any(
+        Vx_Core.v_cast_string(
+          value.p_extends))
+      value.p_extends = Vx_Core.e_string
+    }
+    if value.p_empty !== Vx_Core.e_any {
+      Vx_Core.v_release_any(
+        value.p_empty)
+      value.p_empty = Vx_Core.e_any
+    }
+    if value.p_propertylist !== Vx_Core.e_varlist {
+      Vx_Core.v_release_any(
+        Vx_Core.v_cast_varlist(
+          value.p_propertylist))
+      value.p_propertylist = Vx_Core.e_varlist
+    }
+    value.p_container = Vx_Core.e_type
+    if value.p_allowtypes !== Vx_Core.e_typelist {
+      Vx_Core.v_release_any(
+        Vx_Core.v_cast_typelist(
+          value.p_allowtypes))
+      value.p_allowtypes = Vx_Core.e_typelist
+    }
+    if value.p_func !== Vx_Core.e_func {
+      Vx_Core.v_release_any(
+        Vx_Core.v_cast_func(
+          value.p_func))
+      value.p_func = Vx_Core.e_func
+    }
+    value.p_isnative = false
+    value.p_prefix = ""
+    Vx_Core.v_any_shutdown(
+      value.p_any)
+    Vx_Core.v_global_release()
+  }
+
+  // v_type_startup
+  public static func v_type_startup(
+  ) -> Vx_Core.Type_type {
+    var t_variable : Vx_Core.Type_type = Vx_Core.t_type
+    var e_variable : Vx_Core.Type_type = Vx_Core.e_type
+    Vx_Core.v_type_initialize(
+      e_variable)
+    Vx_Core.v_type_t_startup(
+      t_variable,
+      "vx/core",
+      "type",
+      Vx_Core.e_string,
+      e_variable.p_any)
+    t_variable.p_propertylist = Vx_Core.v_varlist_from_listvar(
+      [
+        Vx_Core.v_var_new_private_from_namen_type(
+          "type-generic",
+          Vx_Core.t_generic),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "path",
+          Vx_Core.t_stringn),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "pkgname",
+          Vx_Core.t_stringn),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "name",
+          Vx_Core.t_stringn),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "alias",
+          Vx_Core.t_stringn),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "idx",
+          Vx_Core.t_intn),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "extends",
+          Vx_Core.t_string),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "empty",
+          Vx_Core.t_any),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "propertylist",
+          Vx_Core.t_varlist),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "container",
+          Vx_Core.t_type),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "allowtypes",
+          Vx_Core.t_typelist),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "func",
+          Vx_Core.t_func),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "isnative",
+          Vx_Core.t_booleann),
+        Vx_Core.v_var_new_public_from_namen_type(
+          "prefix",
+          Vx_Core.t_stringn)
+      ])
+    var type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_create()
+    type_generic.p_code_funcn = Vx_Core.v_code_type
+    type_generic.p_copy_funcn = Vx_Core.v_copy_type
+    type_generic.p_new_funcn = Vx_Core.v_new_type
+    t_variable.type_generic = type_generic
+    let output : Vx_Core.Type_type = t_variable
+    return output
+  }
+
+  // v_cast_type
+  public static func v_cast_type(
+    _ value : Vx_Core.Type_type
+  ) -> Vx_Core.Type_any {
+    let output : Vx_Core.Type_any = value.p_any
+    return output
+  }
+
+  // v_type_cast
+  public static func v_type_cast(
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_type {
+    var output : Vx_Core.Type_type = Vx_Core.e_type
+    if type_any.type_type === Vx_Core.t_type {
+      output = unsafeBitCast(type_any.backref, to: Vx_Core.Type_type.self)
+    }
+    return output
+  }
+
+  // v_type_copy
+  public static func v_type_copy(
+    _ value : Vx_Core.Type_type,
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_type {
+    let output : Vx_Core.Type_type = Vx_Core.e_type
+    return output
+  }
+
+  // v_copy_type
+  public static func v_copy_type(
+    _ type_any : Vx_Core.Type_any,
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_any {
+    let value : Vx_Core.Type_type = Vx_Core.v_type_cast(
+      type_any)
+    let copy_value : Vx_Core.Type_type = Vx_Core.v_type_copy(
+      value,
+      type_anylist)
+    let output : Vx_Core.Type_any = copy_value.p_any
+    return output
+  }
+
+  // v_empty
+  public static func v_empty(
+    _ type_type : Vx_Core.Type_type
+  ) -> Vx_Core.Type_any {
+    let output : Vx_Core.Type_any = type_type.p_empty
+    return output
+  }
+
+  // v_type_new
+  public static func v_type_new(
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_type {
+    let output : Vx_Core.Type_type = Vx_Core.v_type_copy(
+      Vx_Core.e_type,
+      type_anylist)
+    return output
+  }
+
+  // v_new_type
+  public static func v_new_type(
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_any {
+    let value : Vx_Core.Type_type = Vx_Core.v_type_new(
+      type_anylist)
+    let output : Vx_Core.Type_any = value.p_any
+    return output
+  }
+
+  // f_type
+  public static func f_type(
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_type {
+    let output : Vx_Core.Type_type = Vx_Core.v_type_new(
+      type_anylist)
+    return output
+  }
+
+  public static let t_type : Vx_Core.Type_type = Vx_Core.v_type_constructor()
+  public static let e_type : Vx_Core.Type_type = Vx_Core.v_type_constructor()
+
+  // v_typename_from_any
+  public static func v_typename_from_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_string {
+    let type_type : Vx_Core.Type_type = Vx_Core.v_type_from_any(
+      type_any)
+    let output : Vx_Core.Type_string = Vx_Core.v_typename_from_type(
+      type_type)
+    return output
+  }
+
+  // v_typename_from_type
+  public static func v_typename_from_type(
+    _ type_type : Vx_Core.Type_type
+  ) -> Vx_Core.Type_string {
+    return type_type.p_name
+  }
+
+  // v_typenamen_from_any
+  public static func v_typenamen_from_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> String {
+    let type_type : Vx_Core.Type_type = Vx_Core.v_type_from_any(
+      type_any)
+    let output : String = Vx_Core.v_typenamen_from_type(
+      type_type)
+    return output
+  }
+
+  // v_typenamen_from_type
+  public static func v_typenamen_from_type(
+    _ type_type : Vx_Core.Type_type
+  ) -> String {
+    let type_string : Vx_Core.Type_string = Vx_Core.v_typename_from_type(
+      type_type)
+    let output : String = Vx_Core.v_stringn_from_string(
+      type_string)
+    return output
+  }
+
+  public static let t_type : Vx_Core.Type_type = Vx_Core.v_type_constructor()
+  public static let e_type : Type_type = v_type_constructor()

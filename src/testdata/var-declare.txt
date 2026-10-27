@@ -8,4 +8,4 @@ var nullable_any *Type_any
 let immutable_booleann : Bool = false
 var mutable_booleann : Bool = false
 var default_any : Vx_Core.Type_any = Vx_Core.e_any
-var nullable_any : Vx_Core.Type_any?
+var nullable_any : Vx_Core.Type_any!

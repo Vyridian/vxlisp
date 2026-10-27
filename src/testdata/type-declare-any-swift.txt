@@ -3,10 +3,10 @@
   public class Type_any {
     var backref : AnyObject?
     var refcount : Int
-    var p_type : Vx_Core.Type_type?
-    var p_const : Vx_Core.Type_const?
-    var p_msgblock : Vx_Core.Type_msgblock?
-    var p_delta : Vx_Core.Type_delta?
+    var p_type : Vx_Core.Type_type!
+    var p_const : Vx_Core.Type_const!
+    var p_msgblock : Vx_Core.Type_msgblock!
+    var p_delta : Vx_Core.Type_delta!
     var p_isrun : Bool
     public init() {}
   }
@@ -109,16 +109,116 @@
     return output
   }
 
+  // v_cast_any
+  public static func v_cast_any(
+    _ type_type : Vx_Core.Type_type,
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_any {
+    let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_type(
+      type_type)
+    let output : Vx_Core.Type_any = Vx_Core.v_cast_generic(
+      type_generic,
+      type_type,
+      type_any)
+    return output
+  }
+
   // v_copy_any
   public static func v_copy_any(
     _ type_any : Vx_Core.Type_any,
     _ type_anylist : Vx_Core.Type_anylist
   ) -> Vx_Core.Type_any {
-    var type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
+    let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
       type_any)
-    var output : Vx_Core.Type_any = type_generic.Vx_Core.p_copy_funcn(
+    let output : Vx_Core.Type_any = Vx_Core.v_copy_generic(
+      type_generic,
       type_any,
       type_anylist)
+    return output
+  }
+
+  // v_count_any
+  public static func v_count_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> Int {
+    let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
+      type_any)
+    let output : Int = Vx_Core.v_count_generic(
+      type_generic,
+      type_any)
+    return output
+  }
+
+  // v_empty_from_any
+  public static func v_empty_from_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_any {
+    let type_type : Vx_Core.Type_type = type_any.p_type
+    let output : Vx_Core.Type_any = type_type.p_empty
+    return output
+  }
+
+  // v_get_keyn_any
+  public static func v_get_keyn_any(
+    _ type_any : Vx_Core.Type_any,
+    _ keyn : String
+  ) -> Vx_Core.Type_any {
+    let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
+      type_any)
+    let output : Vx_Core.Type_any = Vx_Core.v_get_keyn_generic(
+      type_generic,
+      type_any,
+      keyn)
+    return output
+  }
+
+  // v_get_indexn_any
+  public static func v_get_indexn_any(
+    _ type_any : Vx_Core.Type_any,
+    _ indexn : Int
+  ) -> Vx_Core.Type_any {
+    let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
+      type_any)
+    let output : Vx_Core.Type_any = Vx_Core.v_get_indexn_generic(
+      type_generic,
+      type_any,
+      indexn)
+    return output
+  }
+
+  // v_listany_any
+  public static func v_listany_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> [Vx_Core.Type_any] {
+    let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
+      type_any)
+    let output : [Vx_Core.Type_any] = Vx_Core.v_listany_generic(
+      type_generic,
+      type_any)
+    return output
+  }
+
+  // v_listkey_any
+  public static func v_listkey_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> [String] {
+    let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
+      type_any)
+    let output : [String] = Vx_Core.v_listkey_generic(
+      type_generic,
+      type_any)
+    return output
+  }
+
+  // v_mapany_any
+  public static func v_mapany_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> [String:Vx_Core.Type_any] {
+    let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
+      type_any)
+    let output : [String:Vx_Core.Type_any] = Vx_Core.v_mapany_generic(
+      type_generic,
+      type_any)
     return output
   }
 
@@ -127,9 +227,10 @@
     _ type_type : Vx_Core.Type_type,
     _ type_anylist : Vx_Core.Type_anylist
   ) -> Vx_Core.Type_any {
-    var type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_type(
+    let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_type(
       type_type)
-    var output : Vx_Core.Type_any = type_generic.Vx_Core.p_new_funcn(
+    let output : Vx_Core.Type_any = Vx_Core.v_new_generic(
+      type_generic,
       type_type,
       type_anylist)
     return output
@@ -142,12 +243,10 @@
     type_any.refcount -= 1
     if type_any.refcount <= 0 {
       if type_any.refcount < 0 {
-        Vx_Core.v_log_liststringn(
-          [
-            "Error: Negative Refcount - ",
+        Vx_Core.v_log_stringn(
+          "Error: Negative Refcount - " +
             Vx_Core.v_typenamen_from_any(
-              type_any)
-          ])
+              type_any))
       }
       Vx_Core.v_shutdown_any(
         type_any)
@@ -160,26 +259,18 @@
   ) {
     var type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
       type_any)
-    type_generic.Vx_Core.p_shutdown_funcn(
+    type_generic.p_shutdown_funcn(
       type_any)
   }
 
-  // v_empty_from_any
-  public static func v_empty_from_any(
-    _ type_any : Vx_Core.Type_any
-  ) -> Type_any {
-    let type_type : Type_type = Vx_Core.v_type_from_any(type_any)
-    let output : Vx_Core.Type_any = Vx_Core.v_empty(type_type)
-    return output
-  }
-
-  // v_any_from_any
-  public static func v_any_from_any(
-    _ type_type : Type_type,
-    _ type_any : Type_any
-  ) -> Type_any {
-    let generic_type : Generic_type = v_generic_type_from_type(type_type)
-    let output : Type_any = generic_type.p_any_from_any(type_type, type_any)
+  // f_any
+  public static func f_any(
+    _ type_type : Vx_Core.Type_type,
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_any {
+    let output : Vx_Core.Type_any = Vx_Core.v_new_any(
+      type_type,
+      type_anylist)
     return output
   }
 
