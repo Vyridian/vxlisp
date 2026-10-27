@@ -1,6 +1,6 @@
 
-  // v_any_shutdown
-  public static func v_any_shutdown(
+  // v_shutdown_any
+  public static func v_shutdown_any(
     _ value : Vx_Core.Type_any
   ) {
     value.backref = nil
@@ -8,14 +8,14 @@
     if type_msgblock !== Vx_Core.e_msgblock {
       value.p_msgblock = Vx_Core.e_msgblock
       Vx_Core.v_release_any(
-        type_msgblock.type_any)
+        type_msgblock.p_any)
     }
     let type_const : Vx_Core.Type_const = value.p_const
     if type_const !== Vx_Core.e_const {
       value.p_const = Vx_Core.e_const
       Vx_Core.v_release_any(
-        type_const.type_any)
+        type_const.p_any)
     }
     value.p_type = Vx_Core.e_type
-    Vx_Core.v_global_release()
+    Vx_Core.v_release_global()
   }

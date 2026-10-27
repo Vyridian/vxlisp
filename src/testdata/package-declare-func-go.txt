@@ -1,0 +1,105 @@
+
+// V_const_from_any
+func V_const_from_any(
+	type_any *Type_any) *Type_const {
+	var output *Type_const = type_any.P_const
+	return output
+}
+
+// V_empty
+func V_empty(
+	type_type *Type_type) *Type_any {
+	var output *Type_any = type_type.P_empty
+	return output
+}
+
+// V_empty_from_any
+func V_empty_from_any(
+	type_any *Type_any) *Type_any {
+	var type_type *Type_type = type_any.P_type
+	var output *Type_any = type_type.P_empty
+	return output
+}
+
+// V_global_register_from_pathn_listtype_listconst
+func V_global_register_from_pathn_listtype_listconst(
+	pathn string,
+	listtype []*Type_type,
+	listany []*Type_any) bool {
+	var listkey []string = []string{}
+	var listconstany []*Type_any = []*Type_any{}
+	var listconst []*Type_const = []*Type_const{}
+	for _, type_any := range listany {
+		var type_const *Type_const = V_const_from_any(
+			type_any)
+		if type_const != E_const {
+			var namen string = type_const.P_name
+			listkey = append(listkey, namen)
+			listconstany = append(listconstany, type_any)
+			listconst = append(listconst, type_const)
+		}
+	}
+	var anymap *Type_anymap = V_anymap_from_listkey_listany(
+		listkey,
+		listconstany)
+	var constmap *Type_constmap = V_constmap_from_listconst(
+		listconst)
+	var typemap *Type_typemap = V_typemap_from_listtype(
+		listtype)
+	var type_package *Type_package = V_create_package()
+	type_package.P_path = pathn
+	type_package.P_anymap = V_reserve_anymap(
+		anymap)
+	type_package.P_constmap = V_reserve_constmap(
+		constmap)
+	type_package.P_typemap = V_reserve_typemap(
+		typemap)
+	var type_project *Type_project = G_global.P_project
+	var type_packagemap *Type_packagemap = type_project.P_packagemap
+	type_project.P_packagemap = V_replace_packagemap(
+		type_packagemap,
+		V_copy_packagemap(
+			type_packagemap,
+			V_anylist_from_listany(
+				[]*Type_any{
+					A_string_cast_stringn(
+						pathn),
+					type_package.P_any})))
+	var output bool = true
+	return output
+}
+
+// V_type_t_startup
+func V_type_t_startup(
+	type_type *Type_type,
+	pkgnamen string,
+	namen string,
+	aliasn string,
+	extends_string *Type_string,
+	empty_any *Type_any) {
+	V_initialize_type(
+		type_type)
+	var pathn string = ""
+	switch pkgnamen {
+	case "":
+		pathn = namen
+	default:
+		pathn = pkgnamen +
+			"/" +
+			namen
+	}
+	type_type.P_path = pathn
+	type_type.P_pkgname = pkgnamen
+	type_type.P_name = namen
+	type_type.P_alias = aliasn
+	type_type.P_extends = extends_string
+	type_type.P_empty = empty_any
+	var type_any *Type_any = V_any_from_type_backref(
+		type_type,
+		type_type)
+	type_any.P_const = V_const_from_type(
+		type_type)
+	type_type.P_any = type_any
+	empty_any.P_const = V_const_empty(
+		type_type)
+}

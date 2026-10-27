@@ -1,0 +1,2 @@
+
+  public static let c_false : Vx_Core.Type_boolean = Vx_Core.v_constructor_boolean()

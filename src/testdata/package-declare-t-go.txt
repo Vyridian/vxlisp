@@ -1,0 +1,3 @@
+
+var T_boolean *Type_type = V_constructor_type()
+var T_string *Type_type = V_constructor_type()

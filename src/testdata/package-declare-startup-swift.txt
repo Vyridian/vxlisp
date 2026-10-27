@@ -1,0 +1,10 @@
+
+  public static let isregistered : Bool = Vx_Core.v_global_register_from_pathn_listtype_listconst(
+    "vx/core",
+    [
+      Vx_Core.v_startup_boolean(),
+      Vx_Core.v_startup_string()
+    ],
+    [
+      Vx_Core.v_const_startup_false()
+    ])

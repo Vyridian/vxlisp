@@ -5,22 +5,22 @@ type Type_string struct {
 	P_stringn string
 }
 
-// V_string_constructor
-func V_string_constructor() *Type_string {
+// V_constructor_string
+func V_constructor_string() *Type_string {
 	var output *Type_string = new(Type_string)
 	return output
 }
 
-// V_string_create
-func V_string_create() *Type_string {
-	var output *Type_string = V_string_constructor()
-	V_string_initialize(
+// V_create_string
+func V_create_string() *Type_string {
+	var output *Type_string = V_constructor_string()
+	V_initialize_string(
 		output)
 	return output
 }
 
-// V_string_initialize
-func V_string_initialize(
+// V_initialize_string
+func V_initialize_string(
 	value *Type_string) {
 	value.P_any = V_any_from_type_backref(
 		T_string,
@@ -28,36 +28,55 @@ func V_string_initialize(
 	value.P_stringn = ""
 }
 
-// V_string_shutdown
-func V_string_shutdown(
-	value *Type_string) {
-	value.P_stringn = ""
-	V_any_shutdown(
-		value.P_any)
-	V_global_release()
+// V_release_string
+func V_release_string(
+	value *Type_string) *Type_string {
+	if value != E_string {
+		V_release_any(
+			value.P_any)
+	}
+	var output *Type_string = E_string
+	return output
 }
 
-// V_string_startup
-func V_string_startup() *Type_type {
+// V_reserve_string
+func V_reserve_string(
+	value *Type_string) *Type_string {
+	V_reserve_any(
+		value.P_any)
+	var output *Type_string = value
+	return output
+}
+
+// V_shutdown_string
+func V_shutdown_string(
+	value *Type_string) {
+	value.P_stringn = ""
+	V_shutdown_any(
+		value.P_any)
+}
+
+// V_startup_string
+func V_startup_string() *Type_type {
 	var t_variable *Type_type = T_string
 	var e_variable *Type_string = E_string
-	V_string_initialize(
+	V_initialize_string(
 		e_variable)
 	V_type_t_startup(
 		t_variable,
 		"vx/core",
 		"string",
+		"string",
 		E_string,
 		e_variable.P_any)
-	t_variable.P_propertylist = V_varlist_from_listvar(
+	t_variable.P_propertymap = V_varmap_from_listvar(
 		[]*Type_var{
 			V_var_new_public_from_namen_type(
 				"stringn",
 				T_stringn)})
-	var type_generic *Type_generic = V_generic_create()
-	type_generic.P_code_funcn = V_code_string
-	type_generic.P_copy_funcn = V_copy_string
-	type_generic.P_new_funcn = V_new_string
+	var type_generic *Type_generic = V_create_generic()
+	type_generic.P_copy_funcn = A_copy_string
+	type_generic.P_new_funcn = A_new_string
 	t_variable.type_generic = type_generic
 	var output *Type_type = t_variable
 	return output
@@ -65,13 +84,6 @@ func V_string_startup() *Type_type {
 
 // V_cast_string
 func V_cast_string(
-	value *Type_string) *Type_any {
-	var output *Type_any = value.P_any
-	return output
-}
-
-// V_string_cast
-func V_string_cast(
 	type_any *Type_any) *Type_string {
 	var output *Type_string = E_string
 	var value, ok = type_any.backref.(*Type_string)
@@ -81,40 +93,54 @@ func V_string_cast(
 	return output
 }
 
-// V_string_copy
-func V_string_copy(
+// A_cast_string
+func A_cast_string(
+	value *Type_string) *Type_any {
+	var output *Type_any = value.P_any
+	return output
+}
+
+// V_clone_string
+func V_clone_string(
+	value *Type_string) *Type_string {
+	var output *Type_string = V_create_string()
+	return output
+}
+
+// V_copy_string
+func V_copy_string(
 	value *Type_string,
 	type_anylist *Type_anylist) *Type_string {
 	var output *Type_string = E_string
 	return output
 }
 
-// V_copy_string
-func V_copy_string(
+// A_copy_string
+func A_copy_string(
 	type_any *Type_any,
 	type_anylist *Type_anylist) *Type_any {
-	var value *Type_string = V_string_cast(
+	var value *Type_string = V_cast_string(
 		type_any)
-	var copy_value *Type_string = V_string_copy(
+	var copy_value *Type_string = V_copy_string(
 		value,
 		type_anylist)
 	var output *Type_any = copy_value.P_any
 	return output
 }
 
-// V_string_new
-func V_string_new(
+// V_new_string
+func V_new_string(
 	type_anylist *Type_anylist) *Type_string {
-	var output *Type_string = V_string_copy(
+	var output *Type_string = V_copy_string(
 		E_string,
 		type_anylist)
 	return output
 }
 
-// V_new_string
-func V_new_string(
+// A_new_string
+func A_new_string(
 	type_anylist *Type_anylist) *Type_any {
-	var value *Type_string = V_string_new(
+	var value *Type_string = V_new_string(
 		type_anylist)
 	var output *Type_any = value.P_any
 	return output
@@ -123,10 +149,10 @@ func V_new_string(
 // F_string
 func F_string(
 	type_anylist *Type_anylist) *Type_string {
-	var output *Type_string = V_string_new(
+	var output *Type_string = V_new_string(
 		type_anylist)
 	return output
 }
 
-var T_string *Type_type = V_type_constructor()
-var E_string *Type_string = V_string_constructor()
+var T_string *Type_type = V_constructor_type()
+var E_string *Type_string = V_constructor_string()

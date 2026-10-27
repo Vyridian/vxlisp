@@ -1,0 +1,2 @@
+
+var E_string *Type_string = V_constructor_string()

@@ -178,7 +178,7 @@ func LangFromPackage(
 	var output string = ""
 	msgblock := NewMsgBlock("LangFromPackage")
 	if lang.version == 2 {
-		output, msgblock = lang_from_package(
+		output, msgblock = lang_from_vxpackage(
 			lang, vxpackage, vxproject, pkgprefix)
 	} else {
 		pkgpath, pkgname := LangPackagePathFromPrefixName(

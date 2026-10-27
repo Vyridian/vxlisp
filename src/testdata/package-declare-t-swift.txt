@@ -1,0 +1,3 @@
+
+  public static let t_boolean : Vx_Core.Type_type = Vx_Core.v_constructor_type()
+  public static let t_string : Vx_Core.Type_type = Vx_Core.v_constructor_type()

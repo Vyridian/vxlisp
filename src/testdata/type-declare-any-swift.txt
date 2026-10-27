@@ -11,33 +11,45 @@
     public init() {}
   }
 
-  // v_any_constructor
-  public static func v_any_constructor(
+  // v_constructor_any
+  public static func v_constructor_any(
   ) -> Vx_Core.Type_any {
-    Vx_Core.v_global_reserve()
+    Vx_Core.v_reserve_global()
     let output : Vx_Core.Type_any = Vx_Core.Type_any()
     return output
   }
 
-  // v_any_create
-  public static func v_any_create(
+  // v_create_any
+  public static func v_create_any(
   ) -> Vx_Core.Type_any {
-    var output : Vx_Core.Type_any = Vx_Core.v_any_constructor()
-    Vx_Core.v_any_initialize(
+    var output : Vx_Core.Type_any = Vx_Core.v_constructor_any()
+    Vx_Core.v_initialize_any(
       output)
     return output
   }
 
-  // v_any_initialize
-  public static func v_any_initialize(
+  // v_initialize_any
+  public static func v_initialize_any(
     _ value : Vx_Core.Type_any
   ) {
     value.p_type = Vx_Core.t_any
     value.backref = value
   }
 
-  // v_any_shutdown
-  public static func v_any_shutdown(
+  // v_release_any
+  public static func v_release_any(
+    _ value : Vx_Core.Type_any
+  ) -> Vx_Core.Type_any {
+    if value !== Vx_Core.e_any {
+      Vx_Core.v_release_any(
+        value)
+    }
+    let output : Vx_Core.Type_any = Vx_Core.e_any
+    return output
+  }
+
+  // v_shutdown_any
+  public static func v_shutdown_any(
     _ value : Vx_Core.Type_any
   ) {
     value.backref = nil
@@ -45,32 +57,33 @@
     if type_msgblock !== Vx_Core.e_msgblock {
       value.p_msgblock = Vx_Core.e_msgblock
       Vx_Core.v_release_any(
-        type_msgblock.type_any)
+        type_msgblock.p_any)
     }
     let type_const : Vx_Core.Type_const = value.p_const
     if type_const !== Vx_Core.e_const {
       value.p_const = Vx_Core.e_const
       Vx_Core.v_release_any(
-        type_const.type_any)
+        type_const.p_any)
     }
     value.p_type = Vx_Core.e_type
-    Vx_Core.v_global_release()
+    Vx_Core.v_release_global()
   }
 
-  // v_any_startup
-  public static func v_any_startup(
+  // v_startup_any
+  public static func v_startup_any(
   ) -> Vx_Core.Type_type {
     var t_variable : Vx_Core.Type_type = Vx_Core.t_any
     var e_variable : Vx_Core.Type_any = Vx_Core.e_any
-    Vx_Core.v_any_initialize(
+    Vx_Core.v_initialize_any(
       e_variable)
     Vx_Core.v_type_t_startup(
       t_variable,
       "vx/core",
       "any",
+      "any",
       Vx_Core.e_string,
       e_variable)
-    t_variable.p_propertylist = Vx_Core.v_varlist_from_listvar(
+    t_variable.p_propertymap = Vx_Core.v_varmap_from_listvar(
       [
         Vx_Core.v_var_new_private_from_namen_type(
           "backref",
@@ -103,7 +116,7 @@
     _ type_type : Vx_Core.Type_type,
     _ backref : AnyObject
   ) -> Vx_Core.Type_any {
-    var output : Vx_Core.Type_any = Vx_Core.v_any_create()
+    var output : Vx_Core.Type_any = Vx_Core.v_create_any()
     output.p_type = type_type
     output.backref = backref
     return output
@@ -123,8 +136,8 @@
     return output
   }
 
-  // v_copy_any
-  public static func v_copy_any(
+  // a_copy_any
+  public static func a_copy_any(
     _ type_any : Vx_Core.Type_any,
     _ type_anylist : Vx_Core.Type_anylist
   ) -> Vx_Core.Type_any {
@@ -133,6 +146,20 @@
     let output : Vx_Core.Type_any = Vx_Core.v_copy_generic(
       type_generic,
       type_any,
+      type_anylist)
+    return output
+  }
+
+  // v_new_any
+  public static func v_new_any(
+    _ type_type : Vx_Core.Type_type,
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_any {
+    let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_type(
+      type_type)
+    let output : Vx_Core.Type_any = Vx_Core.v_new_generic(
+      type_generic,
+      type_type,
       type_anylist)
     return output
   }
@@ -146,15 +173,6 @@
     let output : Int = Vx_Core.v_count_generic(
       type_generic,
       type_any)
-    return output
-  }
-
-  // v_empty_from_any
-  public static func v_empty_from_any(
-    _ type_any : Vx_Core.Type_any
-  ) -> Vx_Core.Type_any {
-    let type_type : Vx_Core.Type_type = type_any.p_type
-    let output : Vx_Core.Type_any = type_type.p_empty
     return output
   }
 
@@ -222,20 +240,6 @@
     return output
   }
 
-  // v_new_any
-  public static func v_new_any(
-    _ type_type : Vx_Core.Type_type,
-    _ type_anylist : Vx_Core.Type_anylist
-  ) -> Vx_Core.Type_any {
-    let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_type(
-      type_type)
-    let output : Vx_Core.Type_any = Vx_Core.v_new_generic(
-      type_generic,
-      type_type,
-      type_anylist)
-    return output
-  }
-
   // v_release_any
   public static func v_release_any(
     _ type_any : Vx_Core.Type_any
@@ -253,13 +257,21 @@
     }
   }
 
+  // v_reserve_any
+  public static func v_reserve_any(
+    _ type_any : Vx_Core.Type_any
+  ) {
+    type_any.refcount += 1
+  }
+
   // v_shutdown_any
   public static func v_shutdown_any(
     _ type_any : Vx_Core.Type_any
   ) {
     var type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
       type_any)
-    type_generic.p_shutdown_funcn(
+    Vx_Core.v_shutdown_from_generic(
+      type_generic,
       type_any)
   }
 
@@ -274,42 +286,5 @@
     return output
   }
 
-  // v_release_listany
-  public static func v_release_listany(
-    _ listany : [Type_any]
-  ) {
-    for type_any : Type_any in listany {
-      v_release_any(type_any)
-    }
-  }
-
-  // v_release_listany_except
-  public static func v_release_listany_except(
-    _ listany : [Type_any],
-    _ except_any : Type_any
-  ) {
-    for type_any : Type_any in listany {
-      if type_any !== except_any {
-        v_release_any(type_any)
-      }
-    }
-  }
-
-  // v_reserve_any
-  public static func v_reserve_any(
-    _ type_any : Type_any
-  ) {
-    type_any.refcount += 1
-  }
-
-  // v_reserve_listany
-  public static func v_reserve_listany(
-    _ listany : [Type_any]
-  ) {
-    for type_any : Type_any in listany {
-      v_reserve_any(type_any)
-    }
-  }
-
-  public static let t_any : Vx_Core.Type_type = Vx_Core.v_type_constructor()
-  public static let e_any : Vx_Core.Type_any = Vx_Core.v_any_constructor()
+  public static let t_any : Vx_Core.Type_type = Vx_Core.v_constructor_type()
+  public static let e_any : Vx_Core.Type_any = Vx_Core.v_constructor_any()

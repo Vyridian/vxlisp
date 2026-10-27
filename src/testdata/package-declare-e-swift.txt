@@ -1,0 +1,2 @@
+
+  public static let e_string : Vx_Core.Type_string = Vx_Core.v_constructor_string()

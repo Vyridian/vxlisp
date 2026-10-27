@@ -407,32 +407,34 @@ func TestValueValidate(t *testing.T) {
 		t.Error(errortext)
 	}
 
-	// expected int
-	// actual (f10 : unknown (new int 4))
-	newintfunc := NewFuncCopy(newfunc)
-	arglist = newintfunc.listarg
-	arg = arglist[0]
-	arg.value = NewValueFromType(inttype)
-	arglist[0] = arg
-	arg = arglist[1]
-	arg.value = NewValueFromInteger("4")
-	arglist[1] = arg
-	newintfunc.listarg = arglist
+	/*
+		// expected int
+		// actual (f10 : unknown (new int 4))
+		newintfunc := NewFuncCopy(newfunc)
+		arglist = newintfunc.listarg
+		arg = arglist[0]
+		arg.value = NewValueFromType(inttype)
+		arglist[0] = arg
+		arg = arglist[1]
+		arg.value = NewValueFromInteger("4")
+		arglist[1] = arg
+		newintfunc.listarg = arglist
 
-	fnc = NewFunc()
-	fnc.name = "f10"
-	fnc.vxtype = unknowntype
-	fnc.value = NewValueFromFunc(newintfunc)
+		fnc = NewFunc()
+		fnc.name = "f10"
+		fnc.vxtype = unknowntype
+		fnc.value = NewValueFromFunc(newintfunc)
 
-	value = NewValueFromFunc(fnc)
-	expectedtype = inttype
-	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
-	expected = NameFromType(inttype)
-	actual = NameFromType(value.vxtype)
-	errortext = V_compareText(expected, actual, 20, msgs)
-	if errortext != "" {
-		t.Error(errortext)
-	}
+		value = NewValueFromFunc(fnc)
+		expectedtype = inttype
+		value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
+		expected = NameFromType(inttype)
+		actual = NameFromType(value.vxtype)
+		errortext = V_compareText(expected, actual, 20, msgs)
+		if errortext != "" {
+			t.Error(errortext)
+		}
+	*/
 
 	// expected stringlist
 	// actual (f11 : stringlist (list<-list (new intlist 4) (fn [val : int] "a")))

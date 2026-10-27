@@ -1,0 +1,8 @@
+
+var isregistered bool = V_global_register_from_pathn_listtype_listconst(
+	"vx/core",
+	[]*Type_type{
+		V_startup_boolean(),
+		V_startup_string()},
+	[]*Type_any{
+		V_const_startup_false()})

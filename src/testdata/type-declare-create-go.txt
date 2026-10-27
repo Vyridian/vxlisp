@@ -1,8 +1,8 @@
 
-// V_any_create
-func V_any_create() *Type_any {
-	var output *Type_any = V_any_constructor()
-	V_any_initialize(
+// V_create_any
+func V_create_any() *Type_any {
+	var output *Type_any = V_constructor_any()
+	V_initialize_any(
 		output)
 	return output
 }

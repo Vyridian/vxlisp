@@ -1,6 +1,6 @@
 
-  // v_any_initialize
-  public static func v_any_initialize(
+  // v_initialize_any
+  public static func v_initialize_any(
     _ value : Vx_Core.Type_any
   ) {
     value.p_type = Vx_Core.t_any

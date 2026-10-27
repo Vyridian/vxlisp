@@ -1,9 +1,9 @@
 
-  // v_any_create
-  public static func v_any_create(
+  // v_create_any
+  public static func v_create_any(
   ) -> Vx_Core.Type_any {
-    var output : Vx_Core.Type_any = Vx_Core.v_any_constructor()
-    Vx_Core.v_any_initialize(
+    var output : Vx_Core.Type_any = Vx_Core.v_constructor_any()
+    Vx_Core.v_initialize_any(
       output)
     return output
   }

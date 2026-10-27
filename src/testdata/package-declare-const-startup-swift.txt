@@ -1,0 +1,9 @@
+
+  // v_const_startup_false
+  public static func v_const_startup_false(
+  ) -> Vx_Core.Type_any {
+    var c_variable : Vx_Core.Type_boolean = Vx_Core.c_false
+    c_variable.p_booleann = false
+    let output : Vx_Core.Type_any = c_variable.p_any
+    return output
+  }

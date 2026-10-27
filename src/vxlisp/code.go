@@ -7,26 +7,33 @@ import (
 func const_from_vxconst(
 	vxconst *vxconst) *vx_core.Type_const {
 	var output *vx_core.Type_const = vx_core.V_const_create()
-	var name string = vxconst.name
 	var pkgname string = vxconst.pkgname
+	var name string = vxconst.name
+	var alias string = vxconst.alias
+	if alias == "" {
+		alias = name
+	}
 	var path string = name
 	if pkgname != "" {
 		path = pkgname + "/" + name
 	}
 	output.P_path = path
-	output.P_name = name
 	output.P_pkgname = pkgname
+	output.P_name = name
+	output.P_alias = alias
 	return output
 }
 
+/*
 func const_link_from_project_vxproject(
 	type_const *vx_core.Type_const,
 	type_project *vx_core.Type_project,
 	vxproject *vxproject) {
 }
+*/
 
-func lang_from_package(
-	lang *vxlang,
+func lang_from_vxpackage(
+	vxlang *vxlang,
 	vxpackage *vxpackage,
 	vxproject *vxproject,
 	pkgprefix string) (string, *vxmsgblock) {
@@ -34,11 +41,11 @@ func lang_from_package(
 	var path string = "lang<-package"
 	var indent int = 0
 	var type_scope *vx_core.Type_scope = scope_from_vxlang(
-		lang)
+		vxlang)
 	msgblock := NewMsgBlock("lang<-package")
 	pkgpath, pkgname := LangPackagePathFromPrefixName(
-		lang, pkgprefix, vxpackage.name)
-	specialcode := vxproject.mapnative[vxpackage.name+"_"+lang.name+".txt"]
+		vxlang, pkgprefix, vxpackage.name)
+	specialcode := vxproject.mapnative[vxpackage.name+"_"+vxlang.name+".txt"]
 	if specialcode != "" {
 		specialcode += "\n"
 	}
@@ -49,13 +56,14 @@ func lang_from_package(
 	}
 	var pkgnamen string = vxpackage.name
 	packageline := LangNativePackageLine(
-		lang, pkgnamen, pkgpath)
+		vxlang, pkgnamen, pkgpath)
 	namespaceopen, namespaceclose := LangNamespaceOpenClose(
-		lang, pkgname, pkgpath)
+		vxlang, pkgname, pkgpath)
 	var type_project *vx_core.Type_project = vxproject.P_project
 	var type_package *vx_core.Type_package = vx_core.V_package_from_project_pkgnamen(
 		type_project,
 		pkgnamen)
+	type_scope.P_package = type_package
 	var packageall string = vx_core.V_code_all_from_package(
 		type_scope,
 		indent,
@@ -66,7 +74,7 @@ func lang_from_package(
 		packageall
 		//		emptytypes
 	imports := LangPackageImports(
-		lang, vxpackage, pkgprefix, body, false)
+		vxlang, vxpackage, pkgprefix, body, false)
 	output = "" +
 		packageline +
 		imports +
@@ -190,29 +198,43 @@ func project_link_from_vxproject(
 	vxproject *vxproject) {
 	var listvxpackage []*vxpackage = vxproject.listpackage
 	for _, vxpackage := range listvxpackage {
-		project_linkpackage(
+		project_link_package(
 			type_project,
 			vxpackage)
 	}
 }
 
-func project_linkpackage(
+func project_link_package(
 	type_project *vx_core.Type_project,
 	vxpackage *vxpackage) {
 	var type_package *vx_core.Type_package = vx_core.V_package_from_project_pkgnamen(
 		type_project,
 		vxpackage.name)
+	project_linktype_package(
+		type_project,
+		type_package,
+		vxpackage)
+	project_linkconst_package(
+		type_project,
+		type_package,
+		vxpackage)
+}
+
+func project_linkconst_package(
+	type_project *vx_core.Type_project,
+	type_package *vx_core.Type_package,
+	vxpackage *vxpackage) {
 	var type_constmap *vx_core.Type_constmap = type_package.P_constmap
 	var listkey []string = type_constmap.P_listkey
 	var mapvxconst map[string]*vxconst = vxpackage.mapconst
 	for _, keyn := range listkey {
+		var type_const *vx_core.Type_const = vx_core.V_const_from_constmap_keyn(
+			type_constmap,
+			keyn)
 		var namen string = vx_core.V_stringn_from_stringn_afterlastn(
 			keyn,
 			"/")
 		var vxconst *vxconst = mapvxconst[namen]
-		var type_const *vx_core.Type_const = vx_core.V_const_from_constmap_keyn(
-			type_constmap,
-			keyn)
 		var vxtype *vxtype = vxconst.vxtype
 		var pkgnamen = vxtype.pkgname
 		var typenamen = vxtype.name
@@ -221,7 +243,7 @@ func project_linkpackage(
 			pkgnamen,
 			typenamen)
 		if type_type == vx_core.E_type {
-			println("Lost")
+			println("Lost Const Type")
 			println(pkgnamen + "/" + typenamen)
 		} else {
 			type_const.P_type = type_type
@@ -229,9 +251,93 @@ func project_linkpackage(
 	}
 }
 
+func project_linktype_package(
+	type_project *vx_core.Type_project,
+	type_package *vx_core.Type_package,
+	vxpackage *vxpackage) {
+	var type_typemap *vx_core.Type_typemap = type_package.P_typemap
+	var listkey []string = type_typemap.P_listkey
+	var mapvxtype map[string]*vxtype = vxpackage.maptype
+	for _, keyn := range listkey {
+		var type_type *vx_core.Type_type = vx_core.V_type_from_typemap_keyn(
+			type_typemap,
+			keyn)
+		var namen string = vx_core.V_stringn_from_stringn_afterlastn(
+			keyn,
+			"/")
+		var vxtype, oktype = mapvxtype[namen]
+		if oktype {
+			var p_allowtypes = type_type.P_allowtypes
+			var p_listallowtypes = p_allowtypes.P_listtype
+			var vxallowtypes = vxtype.allowtypes
+			if len(vxallowtypes) > 0 {
+				for _, vxsubtype := range vxallowtypes {
+					var lookuppkgnamen = vxsubtype.pkgname
+					var lookuptypenamen = vxsubtype.name
+					var lookup_type *vx_core.Type_type = vx_core.V_type_from_project_pkgnamen_typenamen(
+						type_project,
+						lookuppkgnamen,
+						lookuptypenamen)
+					if type_type == vx_core.E_type {
+						println("Error:Missing (type :allowtype)")
+						println(lookuppkgnamen + "/" + lookuptypenamen)
+					} else {
+						p_listallowtypes = append(p_listallowtypes, lookup_type)
+					}
+				}
+			}
+			var vxallowfuncs = vxtype.allowfuncs
+			if len(vxallowfuncs) > 0 {
+				for _, vxsubtype := range vxallowfuncs {
+					var lookuppkgnamen string = vxsubtype.pkgname
+					var lookuptypenamen string = vxsubtype.name
+					var lookup_type *vx_core.Type_type = vx_core.V_type_from_project_pkgnamen_typenamen(
+						type_project,
+						lookuppkgnamen,
+						lookuptypenamen)
+					if type_type == vx_core.E_type {
+						println("Error:Missing (type :allowfunc)")
+						println(lookuppkgnamen + "/" + lookuptypenamen)
+					} else {
+						p_listallowtypes = append(p_listallowtypes, lookup_type)
+					}
+				}
+			}
+			if len(p_listallowtypes) == 1 {
+				type_type.P_container = p_listallowtypes[0]
+			} else {
+				type_type.P_container = vx_core.T_any
+			}
+			var propertymap *vx_core.Type_varmap = type_type.P_propertymap
+			var listvxarg []vxarg = vxtype.properties
+			for _, vxarg := range listvxarg {
+				var argnamen string = vxarg.name
+				var vxsubtype = vxarg.vxtype
+				var lookuppkgnamen string = vxsubtype.pkgname
+				var lookuptypenamen string = vxsubtype.name
+				var lookup_type *vx_core.Type_type = vx_core.V_type_from_project_pkgnamen_typenamen(
+					type_project,
+					lookuppkgnamen,
+					lookuptypenamen)
+				if type_type == vx_core.E_type {
+					println("Error: Missing (property :type)")
+					println(lookuppkgnamen + "/" + lookuptypenamen)
+				} else {
+					var property_var *vx_core.Type_var = vx_core.V_var_from_varmap_keyn(
+						propertymap,
+						argnamen)
+					property_var.P_type = lookup_type
+				}
+			}
+		} else {
+			println("!!!(error :code typenotfound :name " + namen + " :func project_linktype_package)")
+		}
+	}
+}
+
 func scope_from_vxlang(
 	lang *vxlang) *vx_core.Type_scope {
-	var output *vx_core.Type_scope = vx_core.V_scope_create()
+	var output *vx_core.Type_scope = vx_core.V_create_scope()
 	switch lang {
 	case langgo:
 		output.P_lang = vx_core.C_lang_go
@@ -258,9 +364,20 @@ func type_from_vxtype(
 	case "vx/core/type":
 		output = vx_core.T_type
 	default:
-		output = vx_core.V_type_create()
-		var name string = type_vxtype.name
-		var alias string = type_vxtype.alias
+		output = vx_core.V_create_type()
+		var suffix string = ""
+		if type_vxtype.isfunc {
+			var idx int = type_vxtype.vxfunc.idx
+			if idx > 0 {
+				suffix = "_" + vx_core.V_stringn_cast_intn(
+					idx)
+			}
+		}
+		var name string = type_vxtype.name + suffix
+		var alias string = type_vxtype.alias + suffix
+		if alias == "" {
+			alias = name
+		}
 		var pkgname string = type_vxtype.pkgname
 		var path string = name
 		if pkgname != "" {
@@ -282,30 +399,32 @@ func type_from_vxtype(
 		output.P_alias = alias
 		output.P_extends = extends
 		output.P_path = path
-		output.P_propertylist = varlist_from_listvxarg(
+		output.P_propertymap = varmap_from_listvxarg(
 			type_vxtype.properties)
 	}
 	return output
 }
 
+/*
 func type_link_from_project_vxproject(
 	type_type *vx_core.Type_type,
 	type_project *vx_core.Type_project,
 	vxproject *vxproject) {
 }
+*/
 
-func varlist_from_listvxarg(
-	listvxarg []vxarg) *vx_core.Type_varlist {
-	var output *vx_core.Type_varlist = vx_core.E_varlist
+func varmap_from_listvxarg(
+	listvxarg []vxarg) *vx_core.Type_varmap {
+	var output *vx_core.Type_varmap = vx_core.E_varmap
 	if len(listvxarg) > 0 {
 		var listvar []*vx_core.Type_var = []*vx_core.Type_var{}
 		for _, type_vxarg := range listvxarg {
-			var type_var = vx_core.V_var_create()
+			var type_var = vx_core.V_create_var()
 			type_var.P_name = vx_core.V_string_cast_stringn(
 				type_vxarg.name)
 			listvar = append(listvar, type_var)
 		}
-		output = vx_core.V_varlist_from_listvar(
+		output = vx_core.V_varmap_from_listvar(
 			listvar)
 	}
 	return output
@@ -319,6 +438,7 @@ func vxpackagemap_from_vxproject(
 	return output
 }
 
+/*
 func code_type_func_copy(
 	type_scope *vx_core.Type_scope,
 	type_type *vx_core.Type_type) string {
@@ -414,8 +534,12 @@ func code_type_func_copy(
 					switch type_type.P_extends {
 					case vx_core.C_extends_list:
 						var container_type *vx_core.Type_type = type_type.P_container
-						var allownamen = vx_core.V_code_type_name(type_scope, container_type)
-						var allowtypen = vx_core.V_code_type_typename(type_scope, container_type)
+						var allownamen = vx_core.V_code_type_name(
+							type_scope,
+							container_type)
+						var allowtypen = vx_core.V_code_type_typename(
+							type_scope,
+							container_type)
 						header2 = "" +
 							lineindent + "  let type_type : Vx_Core.Type_type = " + vxcore + "v_type_from_any(copyval.type_any)" +
 							lineindent + "  let orig_anylist : Vx_Core.Type_anylist = Vx_Core.v_anylist_from_any(" +
@@ -658,3 +782,4 @@ func code_type_func_copy(
 	}
 	return output
 }
+*/

@@ -1,18 +1,19 @@
 
-  // v_any_startup
-  public static func v_any_startup(
+  // v_startup_any
+  public static func v_startup_any(
   ) -> Vx_Core.Type_type {
     var t_variable : Vx_Core.Type_type = Vx_Core.t_any
     var e_variable : Vx_Core.Type_any = Vx_Core.e_any
-    Vx_Core.v_any_initialize(
+    Vx_Core.v_initialize_any(
       e_variable)
     Vx_Core.v_type_t_startup(
       t_variable,
       "vx/core",
       "any",
+      "any",
       Vx_Core.e_string,
       e_variable)
-    t_variable.p_propertylist = Vx_Core.v_varlist_from_listvar(
+    t_variable.p_propertymap = Vx_Core.v_varmap_from_listvar(
       [
         Vx_Core.v_var_new_private_from_namen_type(
           "backref",

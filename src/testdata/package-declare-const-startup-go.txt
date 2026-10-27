@@ -1,0 +1,8 @@
+
+// V_const_startup_false
+func V_const_startup_false() *Type_any {
+	var c_variable *Type_boolean = C_false
+	c_variable.P_booleann = false
+	var output *Type_any = c_variable.P_any
+	return output
+}

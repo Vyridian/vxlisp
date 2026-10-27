@@ -1,6 +1,6 @@
 
-// V_any_initialize
-func V_any_initialize(
+// V_initialize_any
+func V_initialize_any(
 	value *Type_any) {
 	value.P_type = T_any
 	value.backref = value

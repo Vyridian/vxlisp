@@ -10,60 +10,71 @@ type Type_any struct {
 	P_isrun    bool
 }
 
-// V_any_constructor
-func V_any_constructor() *Type_any {
+// V_constructor_any
+func V_constructor_any() *Type_any {
 	var output *Type_any = new(Type_any)
 	return output
 }
 
-// V_any_create
-func V_any_create() *Type_any {
-	var output *Type_any = V_any_constructor()
-	V_any_initialize(
+// V_create_any
+func V_create_any() *Type_any {
+	var output *Type_any = V_constructor_any()
+	V_initialize_any(
 		output)
 	return output
 }
 
-// V_any_initialize
-func V_any_initialize(
+// V_initialize_any
+func V_initialize_any(
 	value *Type_any) {
 	value.P_type = T_any
 	value.backref = value
 }
 
-// V_any_shutdown
-func V_any_shutdown(
+// V_release_any
+func V_release_any(
+	value *Type_any) *Type_any {
+	if value != E_any {
+		V_release_any(
+			value)
+	}
+	var output *Type_any = E_any
+	return output
+}
+
+// V_shutdown_any
+func V_shutdown_any(
 	value *Type_any) {
 	value.backref = nil
 	var type_msgblock *Type_msgblock = value.P_msgblock
 	if type_msgblock != E_msgblock {
 		value.P_msgblock = E_msgblock
 		V_release_any(
-			type_msgblock.type_any)
+			type_msgblock.P_any)
 	}
 	var type_const *Type_const = value.P_const
 	if type_const != E_const {
 		value.P_const = E_const
 		V_release_any(
-			type_const.type_any)
+			type_const.P_any)
 	}
 	value.P_type = E_type
-	V_global_release()
 }
 
-// V_any_startup
-func V_any_startup() *Type_type {
+// V_startup_any
+func V_startup_any() *Type_type {
 	var t_variable *Type_type = T_any
 	var e_variable *Type_any = E_any
-	V_any_initialize(
+	V_initialize_any(
 		e_variable)
 	V_type_t_startup(
 		t_variable,
 		"vx/core",
 		"any",
+		"any",
 		E_string,
 		e_variable)
-	t_variable.P_propertylist = V_varlist_from_listvar(
+	t_variable.P_propertymap = V_varmap_from_listvar(
 		[]*Type_var{
 			V_var_new_private_from_namen_type(
 				"backref",
@@ -94,7 +105,7 @@ func V_any_startup() *Type_type {
 func V_any_from_type_backref(
 	type_type *Type_type,
 	backref any) *Type_any {
-	var output *Type_any = V_any_create()
+	var output *Type_any = V_create_any()
 	output.P_type = type_type
 	output.backref = backref
 	return output
@@ -113,8 +124,8 @@ func V_cast_any(
 	return output
 }
 
-// V_copy_any
-func V_copy_any(
+// A_copy_any
+func A_copy_any(
 	type_any *Type_any,
 	type_anylist *Type_anylist) *Type_any {
 	var type_generic *Type_generic = V_generic_from_any(
@@ -122,6 +133,19 @@ func V_copy_any(
 	var output *Type_any = V_copy_generic(
 		type_generic,
 		type_any,
+		type_anylist)
+	return output
+}
+
+// V_new_any
+func V_new_any(
+	type_type *Type_type,
+	type_anylist *Type_anylist) *Type_any {
+	var type_generic *Type_generic = V_generic_from_type(
+		type_type)
+	var output *Type_any = V_new_generic(
+		type_generic,
+		type_type,
 		type_anylist)
 	return output
 }
@@ -134,14 +158,6 @@ func V_count_any(
 	var output int = V_count_generic(
 		type_generic,
 		type_any)
-	return output
-}
-
-// V_empty_from_any
-func V_empty_from_any(
-	type_any *Type_any) *Type_any {
-	var type_type *Type_type = type_any.P_type
-	var output *Type_any = type_type.P_empty
 	return output
 }
 
@@ -204,19 +220,6 @@ func V_mapany_any(
 	return output
 }
 
-// V_new_any
-func V_new_any(
-	type_type *Type_type,
-	type_anylist *Type_anylist) *Type_any {
-	var type_generic *Type_generic = V_generic_from_type(
-		type_type)
-	var output *Type_any = V_new_generic(
-		type_generic,
-		type_type,
-		type_anylist)
-	return output
-}
-
 // V_release_any
 func V_release_any(
 	type_any *Type_any) {
@@ -233,40 +236,10 @@ func V_release_any(
 	}
 }
 
-// V_release_listany
-func V_release_listany(
-	listany []*Type_any) {
-	for _, type_any := range listany {
-		V_release_any(
-			type_any)
-	}
-}
-
-// V_release_listany_except
-func V_release_listany_except(
-	listany []*Type_any,
-	except_any *Type_any) {
-	for _, type_any := range listany {
-		if type_any != except_any {
-			V_release_any(
-				type_any)
-		}
-	}
-}
-
 // V_reserve_any
 func V_reserve_any(
 	type_any *Type_any) {
 	type_any.refcount += 1
-}
-
-// v_reserve_listany
-func v_reserve_listany(
-	listany []*Type_any) {
-	for _, type_any := range listany {
-		V_reserve_any(
-			type_any)
-	}
 }
 
 // V_shutdown_any
@@ -274,7 +247,7 @@ func V_shutdown_any(
 	type_any *Type_any) {
 	var type_generic *Type_generic = V_generic_from_any(
 		type_any)
-	V_shutdown_generic(
+	V_shutdown_from_generic(
 		type_generic,
 		type_any)
 }
@@ -289,5 +262,5 @@ func F_any(
 	return output
 }
 
-var T_any *Type_type = V_type_constructor()
-var E_any *Type_any = V_any_constructor()
+var T_any *Type_type = V_constructor_type()
+var E_any *Type_any = V_constructor_any()

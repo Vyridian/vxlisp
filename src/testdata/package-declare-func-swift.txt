@@ -1,0 +1,111 @@
+
+  // v_const_from_any
+  public static func v_const_from_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_const {
+    let output : Vx_Core.Type_const = type_any.p_const
+    return output
+  }
+
+  // v_empty
+  public static func v_empty(
+    _ type_type : Vx_Core.Type_type
+  ) -> Vx_Core.Type_any {
+    let output : Vx_Core.Type_any = type_type.p_empty
+    return output
+  }
+
+  // v_empty_from_any
+  public static func v_empty_from_any(
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_any {
+    let type_type : Vx_Core.Type_type = type_any.p_type
+    let output : Vx_Core.Type_any = type_type.p_empty
+    return output
+  }
+
+  // v_global_register_from_pathn_listtype_listconst
+  public static func v_global_register_from_pathn_listtype_listconst(
+    _ pathn : String,
+    _ listtype : [Vx_Core.Type_type],
+    _ listany : [Vx_Core.Type_any]
+  ) -> Bool {
+    var listkey : [String] = []
+    var listconstany : [Vx_Core.Type_any] = []
+    var listconst : [Vx_Core.Type_const] = []
+    for type_any in listany {
+      let type_const : Vx_Core.Type_const = Vx_Core.v_const_from_any(
+        type_any)
+      if type_const !== Vx_Core.e_const {
+        let namen : String = type_const.p_name
+        listkey.append(namen)
+        listconstany.append(type_any)
+        listconst.append(type_const)
+      }
+    }
+    let anymap : Vx_Core.Type_anymap = Vx_Core.v_anymap_from_listkey_listany(
+      listkey,
+      listconstany)
+    let constmap : Vx_Core.Type_constmap = Vx_Core.v_constmap_from_listconst(
+      listconst)
+    let typemap : Vx_Core.Type_typemap = Vx_Core.v_typemap_from_listtype(
+      listtype)
+    var type_package : Vx_Core.Type_package = Vx_Core.v_create_package()
+    type_package.p_path = pathn
+    type_package.p_anymap = Vx_Core.v_reserve_anymap(
+      anymap)
+    type_package.p_constmap = Vx_Core.v_reserve_constmap(
+      constmap)
+    type_package.p_typemap = Vx_Core.v_reserve_typemap(
+      typemap)
+    var type_project : Vx_Core.Type_project = g_global.p_project
+    let type_packagemap : Vx_Core.Type_packagemap = type_project.p_packagemap
+    type_project.p_packagemap = Vx_Core.v_replace_packagemap(
+      type_packagemap,
+      Vx_Core.v_copy_packagemap(
+        type_packagemap,
+        Vx_Core.v_anylist_from_listany(
+          [
+            Vx_Core.a_string_cast_stringn(
+              pathn),
+            type_package.p_any
+          ])))
+    let output : Bool = true
+    return output
+  }
+
+  // v_type_t_startup
+  public static func v_type_t_startup(
+    _ type_type : Vx_Core.Type_type,
+    _ pkgnamen : String,
+    _ namen : String,
+    _ aliasn : String,
+    _ extends_string : Vx_Core.Type_string,
+    _ empty_any : Vx_Core.Type_any
+  ) {
+    Vx_Core.v_initialize_type(
+      type_type)
+    var pathn : String = ""
+    switch pkgnamen {
+    case "":
+      pathn = namen
+    default:
+      pathn = pkgnamen +
+        "/" +
+        namen
+    }
+    type_type.p_path = pathn
+    type_type.p_pkgname = pkgnamen
+    type_type.p_name = namen
+    type_type.p_alias = aliasn
+    type_type.p_extends = extends_string
+    type_type.p_empty = empty_any
+    var type_any : Vx_Core.Type_any = Vx_Core.v_any_from_type_backref(
+      type_type,
+      type_type)
+    type_any.p_const = Vx_Core.v_const_from_type(
+      type_type)
+    type_type.p_any = type_any
+    empty_any.p_const = Vx_Core.v_const_empty(
+      type_type)
+  }

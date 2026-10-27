@@ -549,17 +549,24 @@ func LangFilesCustom(
 		switch command.code {
 		case ":source":
 			packageinit := ""
-			pkgs := ListPackageFromProject(project)
+			pkgs := ListPackageFromProject(
+				project)
 			for _, pkg := range pkgs {
 				iscontinue := true
 				if len(lang.filewhitelist) > 0 {
-					iscontinue = vx_core.V_booleann_from_liststringn_containsn(lang.filewhitelist, pkg.name)
+					iscontinue = vx_core.V_booleann_from_liststringn_containsn(
+						lang.filewhitelist,
+						pkg.name)
 				}
 				if len(lang.fileblacklist) > 0 {
-					iscontinue = !vx_core.V_booleann_from_liststringn_containsn(lang.fileblacklist, pkg.name)
+					iscontinue = !vx_core.V_booleann_from_liststringn_containsn(
+						lang.fileblacklist,
+						pkg.name)
 				}
 				if iscontinue {
-					packageinit += "\n    " + LangPkgNameDot(lang, pkg.name) + "v_startup()"
+					packageinit += "\n    isregistered = isregistered && " +
+						LangPkgNameDot(lang, pkg.name) +
+						"isregistered"
 				}
 			}
 			text := "" +
@@ -570,6 +577,7 @@ func LangFilesCustom(
 				"\n  }" +
 				"\n" +
 				"\n  public static func startup() {" +
+				"\n    var isregistered : Bool = true" +
 				packageinit +
 				"\n  }" +
 				"\n" +

@@ -25,20 +25,22 @@
     public init() {}
   }
 
-  typealias Type_cast_funcn = func (_ type_type : Vx_Core.Type_type, _ type_any : Vx_Core.Type_any) -> Vx_Core.Type_any
-  typealias Type_code_funcn : func (_ type_scope : Vx_Core.Type_scope, _ indent : Int, _ path : String, _ type_any : Vx_Core.Type_any) -> String
-  typealias Type_copy_funcn : func (_ type_any : Vx_Core.Type_any, _ type_anylist : Vx_Core.Type_anylist) -> Vx_Core.Type_any
-  typealias Type_count_funcn : func (_ type_any : Vx_Core.Type_any) -> Int
-  typealias Type_func_funcn : func (_ type_type : Vx_Core.Type_type) -> Vx_Core.Type_func
-  typealias Type_get_keyn_funcn : func (_ type_any : Vx_Core.Type_any, _ keyn : String) -> Vx_Core.Type_any
-  typealias Type_get_indexn_funcn : func (_ type_any : Vx_Core.Type_any, _ indexn : Int) -> Vx_Core.Type_any
-  typealias Type_listany_funcn : func (_ type_any : Vx_Core.Type_any) -> [Vx_Core.Type_any]
-  typealias Type_listkey_funcn : func (_ type_any : Vx_Core.Type_any) -> [String]
-  typealias Type_mapany_funcn : func (_ type_any : Vx_Core.Type_any) -> [String:Vx_Core.Type_any]
-  typealias Type_new_funcn : func (_ type_anylist : Vx_Core.Type_anylist) -> Vx_Core.Type_any
-  typealias Type_set_keyn_funcn : func (_ type_any : Vx_Core.Type_any, _ keyn : String, _ value : Vx_Core.Type_any)
-  typealias Type_set_indexn_funcn : func (_ type_any : Vx_Core.Type_any, _ indexn : Int, _ value : Vx_Core.Type_any)
-  typealias Type_shutdown_funcn : func (_ type_any : Vx_Core.Type_any)
+  typealias Type_cast_funcn = (Vx_Core.Type_type, Vx_Core.Type_any) -> Vx_Core.Type_any
+  typealias Type_code_funcn = (Vx_Core.Type_scope, Int, String, Vx_Core.Type_any) -> String
+  typealias Type_copy_funcn = (Vx_Core.Type_any, Vx_Core.Type_anylist) -> Vx_Core.Type_any
+  typealias Type_count_funcn = (Vx_Core.Type_any) -> Int
+  typealias Type_func_funcn = (Vx_Core.Type_type) -> Vx_Core.Type_func
+  typealias Type_get_keyn_funcn = (Vx_Core.Type_any, String) -> Vx_Core.Type_any
+  typealias Type_get_indexn_funcn = (Vx_Core.Type_any, Int) -> Vx_Core.Type_any
+  typealias Type_listany_funcn = (Vx_Core.Type_any) -> [Vx_Core.Type_any]
+  typealias Type_listkey_funcn = (Vx_Core.Type_any) -> [String]
+  typealias Type_mapany_funcn = (Vx_Core.Type_any) -> [String:Vx_Core.Type_any]
+  typealias Type_new_funcn = (Vx_Core.Type_anylist) -> Vx_Core.Type_any
+  typealias Type_run_funcn = (Vx_Core.Type_anylist) -> Vx_Core.Type_any
+  typealias Type_set_any_anymap_funcn = (Vx_Core.Type_any, Vx_Core.Type_anymap) -> Vx_Core.Type_any
+  typealias Type_set_keyn_funcn = (Vx_Core.Type_any, String, Vx_Core.Type_any)
+  typealias Type_set_indexn_funcn = (Vx_Core.Type_any, Int, Vx_Core.Type_any)
+  typealias Type_shutdown_funcn = (Vx_Core.Type_any)
 
   // (type generic)
   public class Type_generic {
@@ -54,6 +56,8 @@
     var p_listkey_funcn : Vx_Core.Type_listkey_funcn
     var p_mapany_funcn : Vx_Core.Type_mapany_funcn
     var p_new_funcn : Vx_Core.Type_new_funcn
+    var p_run_funcn : Vx_Core.Type_run_funcn
+    var p_set_any_anymap_funcn : Vx_Core.Type_set_any_anymap_funcn
     var p_set_keyn_funcn : Vx_Core.Type_set_keyn_funcn
     var p_set_indexn_funcn : Vx_Core.Type_set_indexn_funcn
     var p_shutdown_funcn : Vx_Core.Type_shutdown_funcn
@@ -85,7 +89,7 @@
     var p_idx : Int
     var p_extends : Vx_Core.Type_string!
     var p_empty : Vx_Core.Type_any!
-    var p_propertylist : Vx_Core.Type_varlist!
+    var p_propertymap : Vx_Core.Type_varmap!
     var p_container : Vx_Core.Type_type!
     var p_allowtypes : Vx_Core.Type_typelist!
     var p_func : Vx_Core.Type_func!
