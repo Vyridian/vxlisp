@@ -71,12 +71,12 @@ func LangFilesFromProjectCmd(
 	for _, pkg := range pkgs {
 		iscontinue := true
 		if len(lang.filewhitelist) > 0 {
-			iscontinue = vx_core.V_booleann_from_liststringn_containsn(
+			iscontinue = vx_core.V_booleann_from_liststringn_findn(
 				lang.filewhitelist,
 				pkg.name)
 		}
 		if len(lang.fileblacklist) > 0 {
-			iscontinue = !vx_core.V_booleann_from_liststringn_containsn(
+			iscontinue = !vx_core.V_booleann_from_liststringn_findn(
 				lang.fileblacklist,
 				pkg.name)
 		}

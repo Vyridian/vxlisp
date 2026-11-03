@@ -554,12 +554,12 @@ func LangFilesCustom(
 			for _, pkg := range pkgs {
 				iscontinue := true
 				if len(lang.filewhitelist) > 0 {
-					iscontinue = vx_core.V_booleann_from_liststringn_containsn(
+					iscontinue = vx_core.V_booleann_from_liststringn_findn(
 						lang.filewhitelist,
 						pkg.name)
 				}
 				if len(lang.fileblacklist) > 0 {
-					iscontinue = !vx_core.V_booleann_from_liststringn_containsn(
+					iscontinue = !vx_core.V_booleann_from_liststringn_findn(
 						lang.fileblacklist,
 						pkg.name)
 				}
@@ -3031,10 +3031,10 @@ func LangTestPackages(
 	for _, pkg := range listpackage {
 		iscontinue := true
 		if len(lang.filewhitelist) > 0 {
-			iscontinue = vx_core.V_booleann_from_liststringn_containsn(lang.filewhitelist, pkg.name)
+			iscontinue = vx_core.V_booleann_from_liststringn_findn(lang.filewhitelist, pkg.name)
 		}
 		if len(lang.fileblacklist) > 0 {
-			iscontinue = !vx_core.V_booleann_from_liststringn_containsn(lang.fileblacklist, pkg.name)
+			iscontinue = !vx_core.V_booleann_from_liststringn_findn(lang.fileblacklist, pkg.name)
 		}
 		if command.filter == "" {
 		} else if !vx_core.V_booleann_from_stringn_startsn(command.filter, pkg.name) {

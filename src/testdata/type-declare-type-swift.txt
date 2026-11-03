@@ -206,8 +206,8 @@
 
   // v_copy_type
   public static func v_copy_type(
-    _ value : Vx_Core.Type_type,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ value : Vx_Core.Type_type
   ) -> Vx_Core.Type_type {
     let output : Vx_Core.Type_type = Vx_Core.e_type
     return output
@@ -215,14 +215,14 @@
 
   // a_copy_type
   public static func a_copy_type(
-    _ type_any : Vx_Core.Type_any,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let value : Vx_Core.Type_type = Vx_Core.v_cast_type(
       type_any)
     let copy_value : Vx_Core.Type_type = Vx_Core.v_copy_type(
-      value,
-      type_anylist)
+      type_anylist,
+      value)
     let output : Vx_Core.Type_any = copy_value.p_any
     return output
   }
@@ -232,8 +232,8 @@
     _ type_anylist : Vx_Core.Type_anylist
   ) -> Vx_Core.Type_type {
     let output : Vx_Core.Type_type = Vx_Core.v_copy_type(
-      Vx_Core.e_type,
-      type_anylist)
+      type_anylist,
+      Vx_Core.e_type)
     return output
   }
 

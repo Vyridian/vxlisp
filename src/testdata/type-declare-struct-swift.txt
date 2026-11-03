@@ -27,19 +27,19 @@
 
   typealias Type_cast_funcn = (Vx_Core.Type_type, Vx_Core.Type_any) -> Vx_Core.Type_any
   typealias Type_code_funcn = (Vx_Core.Type_scope, Int, String, Vx_Core.Type_any) -> String
-  typealias Type_copy_funcn = (Vx_Core.Type_any, Vx_Core.Type_anylist) -> Vx_Core.Type_any
+  typealias Type_copy_funcn = (Vx_Core.Type_anylist, Vx_Core.Type_any) -> Vx_Core.Type_any
   typealias Type_count_funcn = (Vx_Core.Type_any) -> Int
   typealias Type_func_funcn = (Vx_Core.Type_type) -> Vx_Core.Type_func
-  typealias Type_get_keyn_funcn = (Vx_Core.Type_any, String) -> Vx_Core.Type_any
-  typealias Type_get_indexn_funcn = (Vx_Core.Type_any, Int) -> Vx_Core.Type_any
+  typealias Type_get_keyn_funcn = (String, Vx_Core.Type_any) -> Vx_Core.Type_any
+  typealias Type_get_indexn_funcn = (Int, Vx_Core.Type_any) -> Vx_Core.Type_any
   typealias Type_listany_funcn = (Vx_Core.Type_any) -> [Vx_Core.Type_any]
   typealias Type_listkey_funcn = (Vx_Core.Type_any) -> [String]
   typealias Type_mapany_funcn = (Vx_Core.Type_any) -> [String:Vx_Core.Type_any]
   typealias Type_new_funcn = (Vx_Core.Type_anylist) -> Vx_Core.Type_any
   typealias Type_run_funcn = (Vx_Core.Type_anylist) -> Vx_Core.Type_any
-  typealias Type_set_any_anymap_funcn = (Vx_Core.Type_any, Vx_Core.Type_anymap) -> Vx_Core.Type_any
-  typealias Type_set_keyn_funcn = (Vx_Core.Type_any, String, Vx_Core.Type_any)
-  typealias Type_set_indexn_funcn = (Vx_Core.Type_any, Int, Vx_Core.Type_any)
+  typealias Type_set_anymap_funcn = (Vx_Core.Type_anymap, Vx_Core.Type_any) -> Vx_Core.Type_any
+  typealias Type_set_keyn_funcn = (String, Vx_Core.Type_any, Vx_Core.Type_any) -> Vx_Core.Type_any
+  typealias Type_set_indexn_funcn = (Int, Vx_Core.Type_any, Vx_Core.Type_any) -> Vx_Core.Type_any
   typealias Type_shutdown_funcn = (Vx_Core.Type_any)
 
   // (type generic)
@@ -57,7 +57,7 @@
     var p_mapany_funcn : Vx_Core.Type_mapany_funcn
     var p_new_funcn : Vx_Core.Type_new_funcn
     var p_run_funcn : Vx_Core.Type_run_funcn
-    var p_set_any_anymap_funcn : Vx_Core.Type_set_any_anymap_funcn
+    var p_set_anymap_funcn : Vx_Core.Type_set_anymap_funcn
     var p_set_keyn_funcn : Vx_Core.Type_set_keyn_funcn
     var p_set_indexn_funcn : Vx_Core.Type_set_indexn_funcn
     var p_shutdown_funcn : Vx_Core.Type_shutdown_funcn

@@ -38,11 +38,18 @@
 
   // v_release_any
   public static func v_release_any(
-    _ value : Vx_Core.Type_any
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
-    if value !== Vx_Core.e_any {
-      Vx_Core.v_release_any(
-        value)
+    type_any.refcount -= 1
+    if type_any.refcount <= 0 {
+      if type_any.refcount < 0 {
+        Vx_Core.v_log_stringn(
+          "Error: Negative Refcount - " +
+            Vx_Core.v_typenamen_from_any(
+              type_any))
+      }
+      Vx_Core.a_shutdown_any(
+        type_any)
     }
     let output : Vx_Core.Type_any = Vx_Core.e_any
     return output
@@ -138,8 +145,8 @@
 
   // a_copy_any
   public static func a_copy_any(
-    _ type_any : Vx_Core.Type_any,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
       type_any)
@@ -178,94 +185,79 @@
 
   // v_get_keyn_any
   public static func v_get_keyn_any(
-    _ type_any : Vx_Core.Type_any,
-    _ keyn : String
+    _ keyn : String,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
       type_any)
     let output : Vx_Core.Type_any = Vx_Core.v_get_keyn_generic(
-      type_generic,
+      keyn,
       type_any,
-      keyn)
+      type_generic)
     return output
   }
 
   // v_get_indexn_any
   public static func v_get_indexn_any(
-    _ type_any : Vx_Core.Type_any,
-    _ indexn : Int
+    _ indexn : Int,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
       type_any)
     let output : Vx_Core.Type_any = Vx_Core.v_get_indexn_generic(
-      type_generic,
+      indexn,
       type_any,
-      indexn)
+      type_generic)
     return output
   }
 
-  // v_listany_any
-  public static func v_listany_any(
+  // a_listany_any
+  public static func a_listany_any(
     _ type_any : Vx_Core.Type_any
   ) -> [Vx_Core.Type_any] {
     let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
       type_any)
     let output : [Vx_Core.Type_any] = Vx_Core.v_listany_generic(
-      type_generic,
-      type_any)
+      type_any,
+      type_generic)
     return output
   }
 
-  // v_listkey_any
-  public static func v_listkey_any(
+  // a_listkey_any
+  public static func a_listkey_any(
     _ type_any : Vx_Core.Type_any
   ) -> [String] {
     let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
       type_any)
     let output : [String] = Vx_Core.v_listkey_generic(
-      type_generic,
-      type_any)
+      type_any,
+      type_generic)
     return output
   }
 
-  // v_mapany_any
-  public static func v_mapany_any(
+  // a_mapany_any
+  public static func a_mapany_any(
     _ type_any : Vx_Core.Type_any
   ) -> [String:Vx_Core.Type_any] {
     let type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(
       type_any)
     let output : [String:Vx_Core.Type_any] = Vx_Core.v_mapany_generic(
-      type_generic,
-      type_any)
+      type_any,
+      type_generic)
     return output
-  }
-
-  // v_release_any
-  public static func v_release_any(
-    _ type_any : Vx_Core.Type_any
-  ) {
-    type_any.refcount -= 1
-    if type_any.refcount <= 0 {
-      if type_any.refcount < 0 {
-        Vx_Core.v_log_stringn(
-          "Error: Negative Refcount - " +
-            Vx_Core.v_typenamen_from_any(
-              type_any))
-      }
-      Vx_Core.v_shutdown_any(
-        type_any)
-    }
   }
 
   // v_reserve_any
   public static func v_reserve_any(
     _ type_any : Vx_Core.Type_any
-  ) {
+  ) -> Vx_Core.Type_any {
     type_any.refcount += 1
+    let output : Vx_Core.Type_any = type_any
+    return output
   }
 
-  // v_shutdown_any
-  public static func v_shutdown_any(
+  // a_shutdown_any
+  public static func a_shutdown_any(
     _ type_any : Vx_Core.Type_any
   ) {
     var type_generic : Vx_Core.Type_generic = Vx_Core.v_generic_from_any(

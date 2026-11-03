@@ -19,7 +19,7 @@ func Test_stringn_display_from_any(
 			"false"},
 		[]*Type_any{
 			C_false.P_any})
-	var type_package *Type_package = V_package_create()
+	var type_package *Type_package = V_create_package()
 	type_package.P_path = "vx/core"
 	type_package.P_typemap = type_typemap
 	type_package.P_constmap = type_constmap
@@ -48,7 +48,7 @@ func Test_stringn_display_from_any(
 					"Hello"),
 				A_string_cast_stringn(
 					"World")}),
-		V_cast_anymap(
+		A_cast_anymap(
 			V_anymap_from_listkey_listany(
 				[]string{
 					"a",
@@ -142,7 +142,7 @@ func Test_func_declare_v(
 	var listlang = []*Type_lang{
 		C_lang_go,
 		C_lang_swift}
-	var type_package *Type_package = V_package_create()
+	var type_package *Type_package = V_create_package()
 	type_package.P_path = "vx/core"
 	var type_scope *Type_scope = V_create_scope()
 	type_scope.P_package = type_package
@@ -180,7 +180,7 @@ func Test_if_from_type_if_then(
 		C_lang_go,
 		C_lang_java,
 		C_lang_swift}
-	var type_package *Type_package = V_package_create()
+	var type_package *Type_package = V_create_package()
 	type_package.P_path = "vx/core"
 	var type_scope *Type_scope = V_create_scope()
 	type_scope.P_package = type_package
@@ -214,7 +214,7 @@ func Test_type_declare_constructor(
 	var listlang = []*Type_lang{
 		C_lang_go,
 		C_lang_swift}
-	var type_package *Type_package = V_package_create()
+	var type_package *Type_package = V_create_package()
 	type_package.P_path = "vx/core"
 	var type_scope *Type_scope = V_create_scope()
 	type_scope.P_package = type_package
@@ -247,7 +247,7 @@ func Test_type_declare_create(
 	var listlang = []*Type_lang{
 		C_lang_go,
 		C_lang_swift}
-	var type_package *Type_package = V_package_create()
+	var type_package *Type_package = V_create_package()
 	type_package.P_path = "vx/core"
 	var type_scope *Type_scope = V_create_scope()
 	type_scope.P_package = type_package
@@ -279,7 +279,7 @@ func Test_type_declare_initialize(
 	var listlang = []*Type_lang{
 		C_lang_go,
 		C_lang_swift}
-	var type_package *Type_package = V_package_create()
+	var type_package *Type_package = V_create_package()
 	type_package.P_path = "vx/core"
 	var type_scope *Type_scope = V_create_scope()
 	type_scope.P_package = type_package
@@ -311,7 +311,7 @@ func Test_type_declare_shutdown(
 	var listlang = []*Type_lang{
 		C_lang_go,
 		C_lang_swift}
-	var type_package *Type_package = V_package_create()
+	var type_package *Type_package = V_create_package()
 	type_package.P_path = "vx/core"
 	var type_scope *Type_scope = V_create_scope()
 	type_scope.P_package = type_package
@@ -343,7 +343,7 @@ func Test_type_declare_struct(
 	var listlang = []*Type_lang{
 		C_lang_go,
 		C_lang_swift}
-	var type_package *Type_package = V_package_create()
+	var type_package *Type_package = V_create_package()
 	type_package.P_path = "vx/core"
 	var type_scope *Type_scope = V_create_scope()
 	type_scope.P_package = type_package
@@ -394,7 +394,7 @@ func Test_type_declare_startup(
 	var listlang = []*Type_lang{
 		C_lang_go,
 		C_lang_swift}
-	var type_package *Type_package = V_package_create()
+	var type_package *Type_package = V_create_package()
 	type_package.P_path = "vx/core"
 	var type_scope *Type_scope = V_create_scope()
 	type_scope.P_package = type_package
@@ -427,7 +427,7 @@ func Test_var_declare(
 	var listlang = []*Type_lang{
 		C_lang_go,
 		C_lang_swift}
-	var type_package *Type_package = V_package_create()
+	var type_package *Type_package = V_create_package()
 	type_package.P_path = "vx/core"
 	var type_scope *Type_scope = V_create_scope()
 	type_scope.P_package = type_package
@@ -535,7 +535,7 @@ func Test_package_declare(
 	var type_anymap *Type_anymap = V_anymap_from_listkey_listany(
 		listkey,
 		listany)
-	var type_package *Type_package = V_package_create()
+	var type_package *Type_package = V_create_package()
 	type_package.P_path = "vx/core"
 	type_package.P_typemap = type_typemap
 	type_package.P_constmap = type_constmap
@@ -593,7 +593,7 @@ func V_test_listlang() []*Type_lang {
 }
 
 func V_test_scope() *Type_scope {
-	var type_package *Type_package = V_package_create()
+	var type_package *Type_package = V_create_package()
 	type_package.P_path = "vx/core"
 	var output *Type_scope = V_create_scope()
 	output.P_package = type_package
@@ -602,7 +602,7 @@ func V_test_scope() *Type_scope {
 
 func A_const_declare_x(
 	type_const *Type_const) map[string]string {
-	var type_package *Type_package = V_package_create()
+	var type_package *Type_package = V_create_package()
 	type_package.P_path = "vx/core"
 	var type_scope *Type_scope = V_create_scope()
 	type_scope.P_package = type_package
@@ -633,7 +633,7 @@ func A_const_declare_x(
 
 func A_type_declare_x(
 	type_type *Type_type) map[string]string {
-	var type_package *Type_package = V_package_create()
+	var type_package *Type_package = V_create_package()
 	type_package.P_path = "vx/core"
 	var type_scope *Type_scope = V_create_scope()
 	type_scope.P_package = type_package

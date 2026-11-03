@@ -24,40 +24,40 @@ type Type_float struct {
 
 type Type_cast_funcn func(type_type *Type_type, type_any *Type_any) *Type_any
 type Type_code_funcn func(type_scope *Type_scope, indent int, path string, type_any *Type_any) string
-type Type_copy_funcn func(type_any *Type_any, type_anylist *Type_anylist) *Type_any
+type Type_copy_funcn func(type_anylist *Type_anylist, type_any *Type_any) *Type_any
 type Type_count_funcn func(type_any *Type_any) int
 type Type_func_funcn func(type_type *Type_type) *Type_func
-type Type_get_keyn_funcn func(type_any *Type_any, keyn string) *Type_any
-type Type_get_indexn_funcn func(type_any *Type_any, indexn int) *Type_any
+type Type_get_keyn_funcn func(keyn string, type_any *Type_any) *Type_any
+type Type_get_indexn_funcn func(indexn int, type_any *Type_any) *Type_any
 type Type_listany_funcn func(type_any *Type_any) []*Type_any
 type Type_listkey_funcn func(type_any *Type_any) []string
 type Type_mapany_funcn func(type_any *Type_any) map[string]*Type_any
 type Type_new_funcn func(type_anylist *Type_anylist) *Type_any
 type Type_run_funcn func(type_anylist *Type_anylist) *Type_any
-type Type_set_any_anymap_funcn func(type_any *Type_any, type_anymap *Type_anymap) *Type_any
-type Type_set_keyn_funcn func(type_any *Type_any, keyn string, value *Type_any)
-type Type_set_indexn_funcn func(type_any *Type_any, indexn int, value *Type_any)
+type Type_set_anymap_funcn func(type_anymap *Type_anymap, type_any *Type_any) *Type_any
+type Type_set_keyn_funcn func(keyn string, value *Type_any, type_any *Type_any) *Type_any
+type Type_set_indexn_funcn func(indexn int, value *Type_any, type_any *Type_any) *Type_any
 type Type_shutdown_funcn func(type_any *Type_any)
 
 // (type generic)
 type Type_generic struct {
-	P_any                  *Type_any
-	P_cast_funcn           Type_cast_funcn
-	P_code_funcn           Type_code_funcn
-	P_copy_funcn           Type_copy_funcn
-	P_count_funcn          Type_count_funcn
-	P_func_funcn           Type_func_funcn
-	P_get_keyn_funcn       Type_get_keyn_funcn
-	P_get_indexn_funcn     Type_get_indexn_funcn
-	P_listany_funcn        Type_listany_funcn
-	P_listkey_funcn        Type_listkey_funcn
-	P_mapany_funcn         Type_mapany_funcn
-	P_new_funcn            Type_new_funcn
-	P_run_funcn            Type_run_funcn
-	P_set_any_anymap_funcn Type_set_any_anymap_funcn
-	P_set_keyn_funcn       Type_set_keyn_funcn
-	P_set_indexn_funcn     Type_set_indexn_funcn
-	P_shutdown_funcn       Type_shutdown_funcn
+	P_any              *Type_any
+	P_cast_funcn       Type_cast_funcn
+	P_code_funcn       Type_code_funcn
+	P_copy_funcn       Type_copy_funcn
+	P_count_funcn      Type_count_funcn
+	P_func_funcn       Type_func_funcn
+	P_get_keyn_funcn   Type_get_keyn_funcn
+	P_get_indexn_funcn Type_get_indexn_funcn
+	P_listany_funcn    Type_listany_funcn
+	P_listkey_funcn    Type_listkey_funcn
+	P_mapany_funcn     Type_mapany_funcn
+	P_new_funcn        Type_new_funcn
+	P_run_funcn        Type_run_funcn
+	P_set_anymap_funcn Type_set_anymap_funcn
+	P_set_keyn_funcn   Type_set_keyn_funcn
+	P_set_indexn_funcn Type_set_indexn_funcn
+	P_shutdown_funcn   Type_shutdown_funcn
 }
 
 // (type int)

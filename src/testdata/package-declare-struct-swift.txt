@@ -1,19 +1,19 @@
 
   typealias Type_cast_funcn = (Vx_Core.Type_type, Vx_Core.Type_any) -> Vx_Core.Type_any
   typealias Type_code_funcn = (Vx_Core.Type_scope, Int, String, Vx_Core.Type_any) -> String
-  typealias Type_copy_funcn = (Vx_Core.Type_any, Vx_Core.Type_anylist) -> Vx_Core.Type_any
+  typealias Type_copy_funcn = (Vx_Core.Type_anylist, Vx_Core.Type_any) -> Vx_Core.Type_any
   typealias Type_count_funcn = (Vx_Core.Type_any) -> Int
   typealias Type_func_funcn = (Vx_Core.Type_type) -> Vx_Core.Type_func
-  typealias Type_get_keyn_funcn = (Vx_Core.Type_any, String) -> Vx_Core.Type_any
-  typealias Type_get_indexn_funcn = (Vx_Core.Type_any, Int) -> Vx_Core.Type_any
+  typealias Type_get_keyn_funcn = (String, Vx_Core.Type_any) -> Vx_Core.Type_any
+  typealias Type_get_indexn_funcn = (Int, Vx_Core.Type_any) -> Vx_Core.Type_any
   typealias Type_listany_funcn = (Vx_Core.Type_any) -> [Vx_Core.Type_any]
   typealias Type_listkey_funcn = (Vx_Core.Type_any) -> [String]
   typealias Type_mapany_funcn = (Vx_Core.Type_any) -> [String:Vx_Core.Type_any]
   typealias Type_new_funcn = (Vx_Core.Type_anylist) -> Vx_Core.Type_any
   typealias Type_run_funcn = (Vx_Core.Type_anylist) -> Vx_Core.Type_any
-  typealias Type_set_any_anymap_funcn = (Vx_Core.Type_any, Vx_Core.Type_anymap) -> Vx_Core.Type_any
-  typealias Type_set_keyn_funcn = (Vx_Core.Type_any, String, Vx_Core.Type_any)
-  typealias Type_set_indexn_funcn = (Vx_Core.Type_any, Int, Vx_Core.Type_any)
+  typealias Type_set_anymap_funcn = (Vx_Core.Type_anymap, Vx_Core.Type_any) -> Vx_Core.Type_any
+  typealias Type_set_keyn_funcn = (String, Vx_Core.Type_any, Vx_Core.Type_any) -> Vx_Core.Type_any
+  typealias Type_set_indexn_funcn = (Int, Vx_Core.Type_any, Vx_Core.Type_any) -> Vx_Core.Type_any
   typealias Type_shutdown_funcn = (Vx_Core.Type_any)
 
   // (type generic)
@@ -31,7 +31,7 @@
     var p_mapany_funcn : Vx_Core.Type_mapany_funcn
     var p_new_funcn : Vx_Core.Type_new_funcn
     var p_run_funcn : Vx_Core.Type_run_funcn
-    var p_set_any_anymap_funcn : Vx_Core.Type_set_any_anymap_funcn
+    var p_set_anymap_funcn : Vx_Core.Type_set_anymap_funcn
     var p_set_keyn_funcn : Vx_Core.Type_set_keyn_funcn
     var p_set_indexn_funcn : Vx_Core.Type_set_indexn_funcn
     var p_shutdown_funcn : Vx_Core.Type_shutdown_funcn
@@ -74,7 +74,7 @@
     value.p_mapany_funcn = nil
     value.p_new_funcn = nil
     value.p_run_funcn = nil
-    value.p_set_any_anymap_funcn = nil
+    value.p_set_anymap_funcn = nil
     value.p_set_keyn_funcn = nil
     value.p_set_indexn_funcn = nil
     value.p_shutdown_funcn = nil
@@ -108,7 +108,7 @@
     value.p_mapany_funcn = nil
     value.p_new_funcn = nil
     value.p_run_funcn = nil
-    value.p_set_any_anymap_funcn = nil
+    value.p_set_anymap_funcn = nil
     value.p_set_keyn_funcn = nil
     value.p_set_indexn_funcn = nil
     value.p_shutdown_funcn = nil
@@ -170,8 +170,8 @@
           "run-funcn",
           Vx_Core.t_run_funcn),
         Vx_Core.v_var_new_public_from_namen_type(
-          "set-any-anymap-funcn",
-          Vx_Core.t_set_any_anymap_funcn),
+          "set-anymap-funcn",
+          Vx_Core.t_set_anymap_funcn),
         Vx_Core.v_var_new_public_from_namen_type(
           "set-keyn-funcn",
           Vx_Core.t_set_keyn_funcn),
@@ -215,8 +215,8 @@
 
   // v_copy_generic
   public static func v_copy_generic(
-    _ value : Vx_Core.Type_generic,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ value : Vx_Core.Type_generic
   ) -> Vx_Core.Type_generic {
     let output : Vx_Core.Type_generic = Vx_Core.e_generic
     return output
@@ -224,14 +224,14 @@
 
   // a_copy_generic
   public static func a_copy_generic(
-    _ type_any : Vx_Core.Type_any,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let value : Vx_Core.Type_generic = Vx_Core.v_cast_generic(
       type_any)
     let copy_value : Vx_Core.Type_generic = Vx_Core.v_copy_generic(
-      value,
-      type_anylist)
+      type_anylist,
+      value)
     let output : Vx_Core.Type_any = copy_value.p_any
     return output
   }
@@ -241,8 +241,8 @@
     _ type_anylist : Vx_Core.Type_anylist
   ) -> Vx_Core.Type_generic {
     let output : Vx_Core.Type_generic = Vx_Core.v_copy_generic(
-      Vx_Core.e_generic,
-      type_anylist)
+      type_anylist,
+      Vx_Core.e_generic)
     return output
   }
 
@@ -262,6 +262,68 @@
   ) -> Vx_Core.Type_generic {
     let output : Vx_Core.Type_generic = Vx_Core.v_new_generic(
       type_anylist)
+    return output
+  }
+
+  // (type global)
+  public class Type_global {
+    var p_any : Vx_Core.Type_any!
+    var p_refcount : Int
+    var p_project : Vx_Core.Type_project!
+    public init() {}
+  }
+
+  // v_constructor_global
+  public static func v_constructor_global(
+  ) -> Vx_Core.Type_global {
+    Vx_Core.v_reserve_global()
+    let output : Vx_Core.Type_global = Vx_Core.Type_global()
+    return output
+  }
+
+  // v_create_global
+  public static func v_create_global(
+  ) -> Vx_Core.Type_global {
+    var output : Vx_Core.Type_global = Vx_Core.v_constructor_global()
+    Vx_Core.v_initialize_global(
+      output)
+    return output
+  }
+
+  // v_initialize_global
+  public static func v_initialize_global(
+    _ value : Vx_Core.Type_global
+  ) {
+    value.p_any = Vx_Core.v_any_from_type_backref(
+      Vx_Core.t_global,
+      value)
+    value.p_refcount = 0
+    value.p_project = Vx_Core.e_project
+  }
+
+  // v_startup_global
+  public static func v_startup_global(
+  ) -> Vx_Core.Type_type {
+    var t_variable : Vx_Core.Type_type = Vx_Core.t_global
+    var e_variable : Vx_Core.Type_global = Vx_Core.e_global
+    Vx_Core.v_initialize_global(
+      e_variable)
+    Vx_Core.v_type_t_startup(
+      t_variable,
+      "vx/core",
+      "global",
+      "global",
+      Vx_Core.c_extends_struct,
+      e_variable.p_any)
+    t_variable.p_propertymap = Vx_Core.v_varmap_from_listvar(
+      [
+       Vx_Core.v_var_new_public_from_namen_type(
+         "refcount",
+         Vx_Core.t_intn),
+       Vx_Core.v_var_new_public_from_namen_type(
+         "project",
+         Vx_Core.t_project)])
+    let output : Vx_Core.Type_type = t_variable
     return output
   }
 
@@ -416,8 +478,8 @@
 
   // v_copy_lang
   public static func v_copy_lang(
-    _ value : Vx_Core.Type_lang,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ value : Vx_Core.Type_lang
   ) -> Vx_Core.Type_lang {
     let output : Vx_Core.Type_lang = Vx_Core.e_lang
     return output
@@ -425,14 +487,14 @@
 
   // a_copy_lang
   public static func a_copy_lang(
-    _ type_any : Vx_Core.Type_any,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let value : Vx_Core.Type_lang = Vx_Core.v_cast_lang(
       type_any)
     let copy_value : Vx_Core.Type_lang = Vx_Core.v_copy_lang(
-      value,
-      type_anylist)
+      type_anylist,
+      value)
     let output : Vx_Core.Type_any = copy_value.p_any
     return output
   }
@@ -442,8 +504,8 @@
     _ type_anylist : Vx_Core.Type_anylist
   ) -> Vx_Core.Type_lang {
     let output : Vx_Core.Type_lang = Vx_Core.v_copy_lang(
-      Vx_Core.e_lang,
-      type_anylist)
+      type_anylist,
+      Vx_Core.e_lang)
     return output
   }
 
@@ -459,8 +521,8 @@
 
   // v_get_keyn_lang
   public static func v_get_keyn_lang(
-    _ value : Vx_Core.Type_lang,
-    _ keyn : String
+    _ keyn : String,
+    _ value : Vx_Core.Type_lang
   ) -> Vx_Core.Type_any {
     var output : Vx_Core.Type_any = Vx_Core.e_any
     switch keyn {
@@ -488,14 +550,32 @@
 
   // a_get_keyn_lang
   public static func a_get_keyn_lang(
-    _ type_any : Vx_Core.Type_any,
-    _ keyn : String
+    _ keyn : String,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let value : Vx_Core.Type_lang = Vx_Core.v_cast_lang(
       type_any)
     let output : Vx_Core.Type_any = Vx_Core.v_get_keyn_lang(
-      value,
-      keyn)
+      keyn,
+      value)
+    return output
+  }
+
+  // v_mapany_lang
+  public static func v_mapany_lang(
+    _ value : Vx_Core.Type_lang
+  ) -> [String:Vx_Core.Type_any] {
+    var output : [String:Vx_Core.Type_any] = [:]
+    let listkey : [String] = Vx_Core.a_listkey_any(
+      value.p_any)
+    for keyn in listkey {
+      let item_value : Vx_Core.Type_any = Vx_Core.v_get_keyn_lang(
+        keyn,
+        value)
+      if item_value !== Vx_Core.e_any {
+        output[keyn] = item_value
+      }
+    }
     return output
   }
 
@@ -503,19 +583,10 @@
   public static func a_mapany_lang(
     _ type_any : Vx_Core.Type_any
   ) -> [String:Vx_Core.Type_any] {
-    var output : [String:Vx_Core.Type_any] = [:]
     let value : Vx_Core.Type_lang = Vx_Core.v_cast_lang(
       type_any)
-    let listkey : [String] = Vx_Core.v_listkey_any(
-      type_any)
-    for keyn in listkey {
-      let sub_any : Vx_Core.Type_any = Vx_Core.v_get_keyn_lang(
-        value,
-        keyn)
-      if sub_any !== Vx_Core.e_any {
-        output[keyn] = sub_any
-      }
-    }
+    let output : [String:Vx_Core.Type_any] = Vx_Core.v_mapany_lang(
+      value)
     return output
   }
 
@@ -668,8 +739,8 @@
 
   // v_copy_scope
   public static func v_copy_scope(
-    _ value : Vx_Core.Type_scope,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ value : Vx_Core.Type_scope
   ) -> Vx_Core.Type_scope {
     let output : Vx_Core.Type_scope = Vx_Core.e_scope
     return output
@@ -677,14 +748,14 @@
 
   // a_copy_scope
   public static func a_copy_scope(
-    _ type_any : Vx_Core.Type_any,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let value : Vx_Core.Type_scope = Vx_Core.v_cast_scope(
       type_any)
     let copy_value : Vx_Core.Type_scope = Vx_Core.v_copy_scope(
-      value,
-      type_anylist)
+      type_anylist,
+      value)
     let output : Vx_Core.Type_any = copy_value.p_any
     return output
   }
@@ -694,8 +765,8 @@
     _ type_anylist : Vx_Core.Type_anylist
   ) -> Vx_Core.Type_scope {
     let output : Vx_Core.Type_scope = Vx_Core.v_copy_scope(
-      Vx_Core.e_scope,
-      type_anylist)
+      type_anylist,
+      Vx_Core.e_scope)
     return output
   }
 
@@ -711,8 +782,8 @@
 
   // v_get_keyn_scope
   public static func v_get_keyn_scope(
-    _ value : Vx_Core.Type_scope,
-    _ keyn : String
+    _ keyn : String,
+    _ value : Vx_Core.Type_scope
   ) -> Vx_Core.Type_any {
     var output : Vx_Core.Type_any = Vx_Core.e_any
     switch keyn {
@@ -731,14 +802,32 @@
 
   // a_get_keyn_scope
   public static func a_get_keyn_scope(
-    _ type_any : Vx_Core.Type_any,
-    _ keyn : String
+    _ keyn : String,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let value : Vx_Core.Type_scope = Vx_Core.v_cast_scope(
       type_any)
     let output : Vx_Core.Type_any = Vx_Core.v_get_keyn_scope(
-      value,
-      keyn)
+      keyn,
+      value)
+    return output
+  }
+
+  // v_mapany_scope
+  public static func v_mapany_scope(
+    _ value : Vx_Core.Type_scope
+  ) -> [String:Vx_Core.Type_any] {
+    var output : [String:Vx_Core.Type_any] = [:]
+    let listkey : [String] = Vx_Core.a_listkey_any(
+      value.p_any)
+    for keyn in listkey {
+      let item_value : Vx_Core.Type_any = Vx_Core.v_get_keyn_scope(
+        keyn,
+        value)
+      if item_value !== Vx_Core.e_any {
+        output[keyn] = item_value
+      }
+    }
     return output
   }
 
@@ -746,19 +835,10 @@
   public static func a_mapany_scope(
     _ type_any : Vx_Core.Type_any
   ) -> [String:Vx_Core.Type_any] {
-    var output : [String:Vx_Core.Type_any] = [:]
     let value : Vx_Core.Type_scope = Vx_Core.v_cast_scope(
       type_any)
-    let listkey : [String] = Vx_Core.v_listkey_any(
-      type_any)
-    for keyn in listkey {
-      let sub_any : Vx_Core.Type_any = Vx_Core.v_get_keyn_scope(
-        value,
-        keyn)
-      if sub_any !== Vx_Core.e_any {
-        output[keyn] = sub_any
-      }
-    }
+    let output : [String:Vx_Core.Type_any] = Vx_Core.v_mapany_scope(
+      value)
     return output
   }
 
@@ -952,8 +1032,8 @@
 
   // v_copy_var
   public static func v_copy_var(
-    _ value : Vx_Core.Type_var,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ value : Vx_Core.Type_var
   ) -> Vx_Core.Type_var {
     let output : Vx_Core.Type_var = Vx_Core.e_var
     return output
@@ -961,14 +1041,14 @@
 
   // a_copy_var
   public static func a_copy_var(
-    _ type_any : Vx_Core.Type_any,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let value : Vx_Core.Type_var = Vx_Core.v_cast_var(
       type_any)
     let copy_value : Vx_Core.Type_var = Vx_Core.v_copy_var(
-      value,
-      type_anylist)
+      type_anylist,
+      value)
     let output : Vx_Core.Type_any = copy_value.p_any
     return output
   }
@@ -978,8 +1058,8 @@
     _ type_anylist : Vx_Core.Type_anylist
   ) -> Vx_Core.Type_var {
     let output : Vx_Core.Type_var = Vx_Core.v_copy_var(
-      Vx_Core.e_var,
-      type_anylist)
+      type_anylist,
+      Vx_Core.e_var)
     return output
   }
 
@@ -995,8 +1075,8 @@
 
   // v_get_keyn_var
   public static func v_get_keyn_var(
-    _ value : Vx_Core.Type_var,
-    _ keyn : String
+    _ keyn : String,
+    _ value : Vx_Core.Type_var
   ) -> Vx_Core.Type_any {
     var output : Vx_Core.Type_any = Vx_Core.e_any
     switch keyn {
@@ -1032,14 +1112,32 @@
 
   // a_get_keyn_var
   public static func a_get_keyn_var(
-    _ type_any : Vx_Core.Type_any,
-    _ keyn : String
+    _ keyn : String,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let value : Vx_Core.Type_var = Vx_Core.v_cast_var(
       type_any)
     let output : Vx_Core.Type_any = Vx_Core.v_get_keyn_var(
-      value,
-      keyn)
+      keyn,
+      value)
+    return output
+  }
+
+  // v_mapany_var
+  public static func v_mapany_var(
+    _ value : Vx_Core.Type_var
+  ) -> [String:Vx_Core.Type_any] {
+    var output : [String:Vx_Core.Type_any] = [:]
+    let listkey : [String] = Vx_Core.a_listkey_any(
+      value.p_any)
+    for keyn in listkey {
+      let item_value : Vx_Core.Type_any = Vx_Core.v_get_keyn_var(
+        keyn,
+        value)
+      if item_value !== Vx_Core.e_any {
+        output[keyn] = item_value
+      }
+    }
     return output
   }
 
@@ -1047,19 +1145,10 @@
   public static func a_mapany_var(
     _ type_any : Vx_Core.Type_any
   ) -> [String:Vx_Core.Type_any] {
-    var output : [String:Vx_Core.Type_any] = [:]
     let value : Vx_Core.Type_var = Vx_Core.v_cast_var(
       type_any)
-    let listkey : [String] = Vx_Core.v_listkey_any(
-      type_any)
-    for keyn in listkey {
-      let sub_any : Vx_Core.Type_any = Vx_Core.v_get_keyn_var(
-        value,
-        keyn)
-      if sub_any !== Vx_Core.e_any {
-        output[keyn] = sub_any
-      }
-    }
+    let output : [String:Vx_Core.Type_any] = Vx_Core.v_mapany_var(
+      value)
     return output
   }
 
@@ -1132,7 +1221,7 @@
   public static func v_shutdown_varlist(
     _ value : Vx_Core.Type_varlist
   ) {
-    let listany : [Vx_Core.Type_any] = Vx_Core.v_listany_any(
+    let listany : [Vx_Core.Type_any] = Vx_Core.a_listany_any(
       value.p_any)
     Vx_Core.v_release_listany(
       listany)
@@ -1196,8 +1285,8 @@
 
   // v_copy_varlist
   public static func v_copy_varlist(
-    _ value : Vx_Core.Type_varlist,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ value : Vx_Core.Type_varlist
   ) -> Vx_Core.Type_varlist {
     let output : Vx_Core.Type_varlist = Vx_Core.e_varlist
     return output
@@ -1205,14 +1294,14 @@
 
   // a_copy_varlist
   public static func a_copy_varlist(
-    _ type_any : Vx_Core.Type_any,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let value : Vx_Core.Type_varlist = Vx_Core.v_cast_varlist(
       type_any)
     let copy_value : Vx_Core.Type_varlist = Vx_Core.v_copy_varlist(
-      value,
-      type_anylist)
+      type_anylist,
+      value)
     let output : Vx_Core.Type_any = copy_value.p_any
     return output
   }
@@ -1222,8 +1311,8 @@
     _ type_anylist : Vx_Core.Type_anylist
   ) -> Vx_Core.Type_varlist {
     let output : Vx_Core.Type_varlist = Vx_Core.v_copy_varlist(
-      Vx_Core.e_varlist,
-      type_anylist)
+      type_anylist,
+      Vx_Core.e_varlist)
     return output
   }
 
@@ -1239,8 +1328,8 @@
 
   // v_get_indexn_varlist
   public static func v_get_indexn_varlist(
-    _ value : Vx_Core.Type_varlist,
-    _ indexn : Int
+    _ indexn : Int,
+    _ value : Vx_Core.Type_varlist
   ) -> Vx_Core.Type_var {
     var output : Vx_Core.Type_var = Vx_Core.e_var
     let listitem : [Vx_Core.Type_var] = value.p_listvar
@@ -1255,15 +1344,27 @@
 
   // a_get_indexn_varlist
   public static func a_get_indexn_varlist(
-    _ type_any : Vx_Core.Type_any,
-    _ indexn : Int
+    _ indexn : Int,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let value : Vx_Core.Type_varlist = Vx_Core.v_cast_varlist(
       type_any)
     let item : Vx_Core.Type_var = Vx_Core.v_get_indexn_varlist(
-      value,
-      indexn)
+      indexn,
+      value)
     let output : Vx_Core.Type_any = item.p_any
+    return output
+  }
+
+  // v_listany_varlist
+  public static func v_listany_varlist(
+    _ value : Vx_Core.Type_varlist
+  ) -> [Vx_Core.Type_any] {
+    var output : [Vx_Core.Type_any] = []
+    let listvar : [Vx_Core.Type_var] = value.p_listvar
+    for item in listvar {
+      output.append(item.p_any)
+    }
     return output
   }
 
@@ -1273,9 +1374,8 @@
   ) -> [Vx_Core.Type_any] {
     let value : Vx_Core.Type_varlist = Vx_Core.v_cast_varlist(
       type_any)
-    let listvar : [Vx_Core.Type_var] = value.p_listvar
-    let output : [Vx_Core.Type_any] = Vx_Core.v_listany_from_listvar_varlist(
-      listvar)
+    let output : [Vx_Core.Type_any] = Vx_Core.v_listany_varlist(
+      value)
     return output
   }
 
@@ -1295,6 +1395,252 @@
     _ type_anylist : Vx_Core.Type_anylist
   ) -> Vx_Core.Type_varlist {
     let output : Vx_Core.Type_varlist = Vx_Core.v_new_varlist(
+      type_anylist)
+    return output
+  }
+
+  // (type varmap)
+  public class Type_varmap {
+    var p_any : Vx_Core.Type_any!
+    var p_listkey : [String]!
+    var p_mapvar : [String:Vx_Core.Type_var]!
+    public init() {}
+  }
+
+  // v_constructor_varmap
+  public static func v_constructor_varmap(
+  ) -> Vx_Core.Type_varmap {
+    Vx_Core.v_reserve_global()
+    let output : Vx_Core.Type_varmap = Vx_Core.Type_varmap()
+    return output
+  }
+
+  // v_create_varmap
+  public static func v_create_varmap(
+  ) -> Vx_Core.Type_varmap {
+    var output : Vx_Core.Type_varmap = Vx_Core.v_constructor_varmap()
+    Vx_Core.v_initialize_varmap(
+      output)
+    return output
+  }
+
+  // v_initialize_varmap
+  public static func v_initialize_varmap(
+    _ value : Vx_Core.Type_varmap
+  ) {
+    value.p_any = Vx_Core.v_any_from_type_backref(
+      Vx_Core.t_varmap,
+      value)
+    value.p_listkey = []
+    value.p_mapvar = [:]
+  }
+
+  // v_release_varmap
+  public static func v_release_varmap(
+    _ value : Vx_Core.Type_varmap
+  ) -> Vx_Core.Type_varmap {
+    if value !== Vx_Core.e_varmap {
+      Vx_Core.v_release_any(
+        value.p_any)
+    }
+    let output : Vx_Core.Type_varmap = Vx_Core.e_varmap
+    return output
+  }
+
+  // v_reserve_varmap
+  public static func v_reserve_varmap(
+    _ value : Vx_Core.Type_varmap
+  ) -> Vx_Core.Type_varmap {
+    Vx_Core.v_reserve_any(
+      value.p_any)
+    let output : Vx_Core.Type_varmap = value
+    return output
+  }
+
+  // v_shutdown_varmap
+  public static func v_shutdown_varmap(
+    _ value : Vx_Core.Type_varmap
+  ) {
+    let listany : [Vx_Core.Type_any] = Vx_Core.a_listany_any(
+      value.p_any)
+    Vx_Core.v_release_listany(
+      listany)
+    value.p_listkey = nil
+    value.p_mapvar = nil
+    Vx_Core.v_shutdown_any(
+      value.p_any)
+    Vx_Core.v_release_global()
+  }
+
+  // v_startup_varmap
+  public static func v_startup_varmap(
+  ) -> Vx_Core.Type_type {
+    var t_variable : Vx_Core.Type_type = Vx_Core.t_varmap
+    var e_variable : Vx_Core.Type_varmap = Vx_Core.e_varmap
+    Vx_Core.v_initialize_varmap(
+      e_variable)
+    Vx_Core.v_type_t_startup(
+      t_variable,
+      "vx/core",
+      "varmap",
+      "varmap",
+      Vx_Core.c_extends_map,
+      e_variable.p_any)
+    t_variable.p_container = Vx_Core.t_var
+    var type_generic : Vx_Core.Type_generic = Vx_Core.v_create_generic()
+    type_generic.p_copy_funcn = Vx_Core.a_copy_varmap
+    type_generic.p_new_funcn = Vx_Core.a_new_varmap
+    type_generic.p_get_keyn_funcn = Vx_Core.a_get_keyn_varmap
+    type_generic.p_listkey_funcn = Vx_Core.a_listkey_varmap
+    type_generic.p_mapany_funcn = Vx_Core.a_mapany_varmap
+    t_variable.type_generic = type_generic
+    let output : Vx_Core.Type_type = t_variable
+    return output
+  }
+
+  // v_cast_varmap
+  public static func v_cast_varmap(
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_varmap {
+    var output : Vx_Core.Type_varmap = Vx_Core.e_varmap
+    if type_any.p_type === Vx_Core.t_varmap {
+      output = unsafeBitCast(type_any.backref, to: Vx_Core.Type_varmap.self)
+    }
+    return output
+  }
+
+  // a_cast_varmap
+  public static func a_cast_varmap(
+    _ value : Vx_Core.Type_varmap
+  ) -> Vx_Core.Type_any {
+    let output : Vx_Core.Type_any = value.p_any
+    return output
+  }
+
+  // v_clone_varmap
+  public static func v_clone_varmap(
+    _ value : Vx_Core.Type_varmap
+  ) -> Vx_Core.Type_varmap {
+    var output : Vx_Core.Type_varmap = Vx_Core.v_create_varmap()
+    return output
+  }
+
+  // v_copy_varmap
+  public static func v_copy_varmap(
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ value : Vx_Core.Type_varmap
+  ) -> Vx_Core.Type_varmap {
+    let output : Vx_Core.Type_varmap = Vx_Core.e_varmap
+    return output
+  }
+
+  // a_copy_varmap
+  public static func a_copy_varmap(
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_any {
+    let value : Vx_Core.Type_varmap = Vx_Core.v_cast_varmap(
+      type_any)
+    let copy_value : Vx_Core.Type_varmap = Vx_Core.v_copy_varmap(
+      type_anylist,
+      value)
+    let output : Vx_Core.Type_any = copy_value.p_any
+    return output
+  }
+
+  // v_new_varmap
+  public static func v_new_varmap(
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_varmap {
+    let output : Vx_Core.Type_varmap = Vx_Core.v_copy_varmap(
+      type_anylist,
+      Vx_Core.e_varmap)
+    return output
+  }
+
+  // a_new_varmap
+  public static func a_new_varmap(
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_any {
+    let value : Vx_Core.Type_varmap = Vx_Core.v_new_varmap(
+      type_anylist)
+    let output : Vx_Core.Type_any = value.p_any
+    return output
+  }
+
+  // v_get_keyn_varmap
+  public static func v_get_keyn_varmap(
+    _ keyn : String,
+    _ value : Vx_Core.Type_varmap
+  ) -> Vx_Core.Type_var {
+    let mapvalue : [String:Vx_Core.Type_var] = value.p_mapvar
+    let output : Vx_Core.Type_var = mapvalue[keyn, default: Vx_Core.e_var]
+    return output
+  }
+
+  // a_get_keyn_varmap
+  public static func a_get_keyn_varmap(
+    _ keyn : String,
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_any {
+    let value : Vx_Core.Type_varmap = Vx_Core.v_cast_varmap(
+      type_any)
+    let output : Vx_Core.Type_any = Vx_Core.v_get_keyn_varmap(
+      keyn,
+      value)
+    return output
+  }
+
+  // v_listkey_varmap
+  public static func v_listkey_varmap(
+    _ value : Vx_Core.Type_varmap
+  ) -> [String] {
+    let output : [String] = value.p_listkey
+    return output
+  }
+
+  // a_listkey_varmap
+  public static func a_listkey_varmap(
+    _ type_any : Vx_Core.Type_any
+  ) -> [String] {
+    let value : Vx_Core.Type_varmap = Vx_Core.v_cast_varmap(
+      type_any)
+    let output : [String] = Vx_Core.v_listkey_varmap(
+      value)
+    return output
+  }
+
+  // v_mapany_varmap
+  public static func v_mapany_varmap(
+    _ value : Vx_Core.Type_varmap
+  ) -> [String:Vx_Core.Type_any] {
+    var output : [String:Vx_Core.Type_any] = [:]
+    let listkey : [String] = value.p_listkey
+    for keyn in listkey {
+      let item_value : Vx_Core.Type_var = Vx_Core.v_get_keyn_varmap(
+        keyn,
+        value)
+      output[keyn] = item_value.p_any
+    }
+    return output
+  }
+
+  // a_mapany_varmap
+  public static func a_mapany_varmap(
+    _ type_any : Vx_Core.Type_any
+  ) -> [String:Vx_Core.Type_any] {
+    let value : Vx_Core.Type_varmap = Vx_Core.v_cast_varmap(
+      type_any)
+    let output : [String:Vx_Core.Type_any] = Vx_Core.v_mapany_varmap(
+      value)
+    return output
+  }
+
+  // f_varmap
+  public static func f_varmap(
+    _ type_anylist : Vx_Core.Type_anylist
+  ) -> Vx_Core.Type_varmap {
+    let output : Vx_Core.Type_varmap = Vx_Core.v_new_varmap(
       type_anylist)
     return output
   }
@@ -1422,8 +1768,8 @@
 
   // v_copy_boolean
   public static func v_copy_boolean(
-    _ value : Vx_Core.Type_boolean,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ value : Vx_Core.Type_boolean
   ) -> Vx_Core.Type_boolean {
     let output : Vx_Core.Type_boolean = Vx_Core.c_false
     return output
@@ -1431,14 +1777,14 @@
 
   // a_copy_boolean
   public static func a_copy_boolean(
-    _ type_any : Vx_Core.Type_any,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let value : Vx_Core.Type_boolean = Vx_Core.v_cast_boolean(
       type_any)
     let copy_value : Vx_Core.Type_boolean = Vx_Core.v_copy_boolean(
-      value,
-      type_anylist)
+      type_anylist,
+      value)
     let output : Vx_Core.Type_any = copy_value.p_any
     return output
   }
@@ -1448,8 +1794,8 @@
     _ type_anylist : Vx_Core.Type_anylist
   ) -> Vx_Core.Type_boolean {
     let output : Vx_Core.Type_boolean = Vx_Core.v_copy_boolean(
-      Vx_Core.c_false,
-      type_anylist)
+      type_anylist,
+      Vx_Core.c_false)
     return output
   }
 
@@ -1595,8 +1941,8 @@
 
   // v_copy_string
   public static func v_copy_string(
-    _ value : Vx_Core.Type_string,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ value : Vx_Core.Type_string
   ) -> Vx_Core.Type_string {
     let output : Vx_Core.Type_string = Vx_Core.e_string
     return output
@@ -1604,14 +1950,14 @@
 
   // a_copy_string
   public static func a_copy_string(
-    _ type_any : Vx_Core.Type_any,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let value : Vx_Core.Type_string = Vx_Core.v_cast_string(
       type_any)
     let copy_value : Vx_Core.Type_string = Vx_Core.v_copy_string(
-      value,
-      type_anylist)
+      type_anylist,
+      value)
     let output : Vx_Core.Type_any = copy_value.p_any
     return output
   }
@@ -1621,8 +1967,8 @@
     _ type_anylist : Vx_Core.Type_anylist
   ) -> Vx_Core.Type_string {
     let output : Vx_Core.Type_string = Vx_Core.v_copy_string(
-      Vx_Core.e_string,
-      type_anylist)
+      type_anylist,
+      Vx_Core.e_string)
     return output
   }
 

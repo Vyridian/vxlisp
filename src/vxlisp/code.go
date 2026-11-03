@@ -6,7 +6,7 @@ import (
 
 func const_from_vxconst(
 	vxconst *vxconst) *vx_core.Type_const {
-	var output *vx_core.Type_const = vx_core.V_const_create()
+	var output *vx_core.Type_const = vx_core.V_create_const()
 	var pkgname string = vxconst.pkgname
 	var name string = vxconst.name
 	var alias string = vxconst.alias
@@ -119,7 +119,7 @@ func listtype_from_listvxtype(
 
 func package_from_vxpackage(
 	vxpackage *vxpackage) *vx_core.Type_package {
-	var output *vx_core.Type_package = vx_core.V_package_create()
+	var output *vx_core.Type_package = vx_core.V_create_package()
 	var listvxconst []*vxconst = vxpackage.listconst
 	var listconst []*vx_core.Type_const = listconst_from_listvxconst(
 		listvxconst)
@@ -228,9 +228,9 @@ func project_linkconst_package(
 	var listkey []string = type_constmap.P_listkey
 	var mapvxconst map[string]*vxconst = vxpackage.mapconst
 	for _, keyn := range listkey {
-		var type_const *vx_core.Type_const = vx_core.V_const_from_constmap_keyn(
-			type_constmap,
-			keyn)
+		var type_const *vx_core.Type_const = vx_core.V_get_keyn_constmap(
+			keyn,
+			type_constmap)
 		var namen string = vx_core.V_stringn_from_stringn_afterlastn(
 			keyn,
 			"/")
@@ -255,16 +255,24 @@ func project_linktype_package(
 	type_project *vx_core.Type_project,
 	type_package *vx_core.Type_package,
 	vxpackage *vxpackage) {
+	var pathfuncn string = "project-linktype-package"
 	var type_typemap *vx_core.Type_typemap = type_package.P_typemap
 	var listkey []string = type_typemap.P_listkey
 	var mapvxtype map[string]*vxtype = vxpackage.maptype
+	var mapvxfunc map[string][]*vxfunc = vxpackage.mapfunc
 	for _, keyn := range listkey {
-		var type_type *vx_core.Type_type = vx_core.V_type_from_typemap_keyn(
-			type_typemap,
-			keyn)
-		var namen string = vx_core.V_stringn_from_stringn_afterlastn(
+		var type_type *vx_core.Type_type = vx_core.V_get_keyn_typemap(
 			keyn,
-			"/")
+			type_typemap)
+		var namen string = ""
+		switch keyn {
+		case "vx/core//":
+			namen = "/"
+		default:
+			namen = vx_core.V_stringn_from_stringn_afterlastn(
+				keyn,
+				"/")
+		}
 		var vxtype, oktype = mapvxtype[namen]
 		if oktype {
 			var p_allowtypes = type_type.P_allowtypes
@@ -279,7 +287,7 @@ func project_linktype_package(
 						lookuppkgnamen,
 						lookuptypenamen)
 					if type_type == vx_core.E_type {
-						println("Error:Missing (type :allowtype)")
+						println("Error:Missing (type :allowtype) :func " + pathfuncn)
 						println(lookuppkgnamen + "/" + lookuptypenamen)
 					} else {
 						p_listallowtypes = append(p_listallowtypes, lookup_type)
@@ -296,7 +304,7 @@ func project_linktype_package(
 						lookuppkgnamen,
 						lookuptypenamen)
 					if type_type == vx_core.E_type {
-						println("Error:Missing (type :allowfunc)")
+						println("Error:Missing (type :allowfunc) :func " + pathfuncn)
 						println(lookuppkgnamen + "/" + lookuptypenamen)
 					} else {
 						p_listallowtypes = append(p_listallowtypes, lookup_type)
@@ -323,14 +331,31 @@ func project_linktype_package(
 					println("Error: Missing (property :type)")
 					println(lookuppkgnamen + "/" + lookuptypenamen)
 				} else {
-					var property_var *vx_core.Type_var = vx_core.V_var_from_varmap_keyn(
-						propertymap,
-						argnamen)
+					var property_var *vx_core.Type_var = vx_core.V_get_keyn_varmap(
+						argnamen,
+						propertymap)
 					property_var.P_type = lookup_type
 				}
 			}
 		} else {
-			println("!!!(error :code typenotfound :name " + namen + " :func project_linktype_package)")
+			var funcn string = namen
+			var funcsuffixn string = vx_core.V_stringn_from_stringn_afterlastn(
+				namen,
+				"_")
+			if funcsuffixn != "" {
+				var funcidx int = vx_core.V_intn_cast_stringn(
+					funcsuffixn)
+				if funcidx > 0 {
+					funcn = vx_core.V_stringn_from_stringn_beforelastn(
+						namen,
+						"_")
+				}
+			}
+			var _, okfunc = mapvxfunc[funcn]
+			if okfunc {
+			} else {
+				println("!!!(error :code typenotfound :name " + keyn + " :func " + pathfuncn)
+			}
 		}
 	}
 }
@@ -355,10 +380,16 @@ func type_from_vxtype(
 		output = vx_core.T_any
 	case "vx/core/boolean":
 		output = vx_core.T_boolean
+	case "vx/core/const":
+		output = vx_core.T_const
 	case "vx/core/float":
 		output = vx_core.T_float
 	case "vx/core/int":
 		output = vx_core.T_int
+	case "vx/core/package":
+		output = vx_core.T_package
+	case "vx/core/project":
+		output = vx_core.T_project
 	case "vx/core/string":
 		output = vx_core.T_string
 	case "vx/core/type":

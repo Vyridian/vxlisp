@@ -1,8 +1,61 @@
 
+// V_anymap_from_listkey_listany
+func V_anymap_from_listkey_listany(
+	listkey []string,
+	listany []*Type_any) *Type_anymap {
+	var output *Type_anymap = E_anymap
+	var keylenn int = len(listkey)
+	if keylenn > 0 {
+		var itemlenn int = 0
+		var listkeyvalid []string = []string{}
+		var mapany map[string]*Type_any = map[string]*Type_any{}
+		for idx, keyn := range listkey {
+			if idx <= keylenn {
+				var item_value *Type_any = listany[idx]
+				if item_value != E_any {
+					V_reserve_any(
+						item_value)
+					itemlenn += 1
+					listkeyvalid = append(listkeyvalid, keyn)
+					mapany[keyn] = item_value
+				}
+			}
+		}
+		if itemlenn > 0 {
+			output = V_create_anymap()
+			output.P_listkey = listkeyvalid
+			output.P_mapany = mapany
+		}
+	}
+	return output
+}
+
 // V_const_from_any
 func V_const_from_any(
 	type_any *Type_any) *Type_const {
 	var output *Type_const = type_any.P_const
+	return output
+}
+
+// V_const_from_pkgnamen_namen_aliasn_any
+func V_const_from_pkgnamen_namen_aliasn_any(
+	pkgnamen string,
+	namen string,
+	aliasn string,
+	type_any *Type_any) *Type_const {
+	var output *Type_const = V_create_const()
+	if pkgnamen == "" {
+		output.P_path = namen
+	} else {
+		output.P_path = pkgnamen +
+			"/" +
+			namen
+	}
+	output.P_pkgname = pkgnamen
+	output.P_name = namen
+	output.P_alias = aliasn
+	output.P_type = type_any.P_type
+	type_any.P_const = output
 	return output
 }
 
@@ -59,12 +112,12 @@ func V_global_register_from_pathn_listtype_listconst(
 	type_project.P_packagemap = V_replace_packagemap(
 		type_packagemap,
 		V_copy_packagemap(
-			type_packagemap,
 			V_anylist_from_listany(
 				[]*Type_any{
 					A_string_cast_stringn(
 						pathn),
-					type_package.P_any})))
+					type_package.P_any}),
+			type_packagemap))
 	var output bool = true
 	return output
 }

@@ -38,7 +38,7 @@ func ListCaptureFromFunc(
 				listsubsubarg := ListArgFromValue(subargvalue)
 				for _, subsubarg := range listsubsubarg {
 					inner := LangFromName(subsubarg.alias)
-					if !vx_core.V_booleann_from_liststringn_containsn(listlocalarg, inner) {
+					if !vx_core.V_booleann_from_liststringn_findn(listlocalarg, inner) {
 						listlocalarg = append(listlocalarg, inner)
 					}
 				}
@@ -46,7 +46,7 @@ func ListCaptureFromFunc(
 				var listmore []string
 				listmore = ListCaptureFromValue(arg.value, listlocalarg, subpath)
 				for _, outer := range listmore {
-					if !vx_core.V_booleann_from_liststringn_containsn(output, outer) {
+					if !vx_core.V_booleann_from_liststringn_findn(output, outer) {
 						output = append(output, outer)
 					}
 				}
@@ -66,7 +66,7 @@ func ListCaptureFromFunc(
 				listsubarg := ListArgFromValue(argvalue)
 				for _, subarg := range listsubarg {
 					inner := LangFromName(subarg.alias)
-					if !vx_core.V_booleann_from_liststringn_containsn(listlocalarg, inner) {
+					if !vx_core.V_booleann_from_liststringn_findn(listlocalarg, inner) {
 						listlocalarg = append(listlocalarg, inner)
 					}
 				}
@@ -74,7 +74,7 @@ func ListCaptureFromFunc(
 					subargvalue := subarg.value
 					listmore := ListCaptureFromValue(subargvalue, listlocalarg, subpath)
 					for _, outer := range listmore {
-						if !vx_core.V_booleann_from_liststringn_containsn(output, outer) {
+						if !vx_core.V_booleann_from_liststringn_findn(output, outer) {
 							output = append(output, outer)
 						}
 					}
@@ -85,13 +85,13 @@ func ListCaptureFromFunc(
 				case ":arg":
 					subarg := ArgFromValue(argvalue)
 					outer := LangFromName(subarg.alias)
-					if !vx_core.V_booleann_from_liststringn_containsn(listlocalarg, outer) {
+					if !vx_core.V_booleann_from_liststringn_findn(listlocalarg, outer) {
 						listlocalarg = append(listlocalarg, outer)
 					}
 				case ":func":
 					listmore := ListCaptureFromValue(argvalue, listlocalarg, subpath)
 					for _, outer := range listmore {
-						if !vx_core.V_booleann_from_liststringn_containsn(output, outer) {
+						if !vx_core.V_booleann_from_liststringn_findn(output, outer) {
 							output = append(output, outer)
 						}
 					}
@@ -127,7 +127,7 @@ func ListCaptureFromFunc(
 			value := arg.value
 			listmore := ListCaptureFromValue(value, listinnerarg, subpath)
 			for _, outer := range listmore {
-				if !vx_core.V_booleann_from_liststringn_containsn(output, outer) {
+				if !vx_core.V_booleann_from_liststringn_findn(output, outer) {
 					output = append(output, outer)
 				}
 			}
@@ -149,8 +149,8 @@ func ListCaptureFromValue(
 			outer = arg.name
 		}
 		outer = LangFromName(outer)
-		if vx_core.V_booleann_from_liststringn_containsn(listinnerarg, outer) {
-		} else if !vx_core.V_booleann_from_liststringn_containsn(output, outer) {
+		if vx_core.V_booleann_from_liststringn_findn(listinnerarg, outer) {
+		} else if !vx_core.V_booleann_from_liststringn_findn(output, outer) {
 			output = append(output, outer)
 		}
 	case ":func":
@@ -161,8 +161,8 @@ func ListCaptureFromValue(
 		}
 		listmore := ListCaptureFromFunc(fnc, listinnerarg, subpath)
 		for _, more := range listmore {
-			if vx_core.V_booleann_from_liststringn_containsn(listinnerarg, more) {
-			} else if vx_core.V_booleann_from_liststringn_containsn(output, more) {
+			if vx_core.V_booleann_from_liststringn_findn(listinnerarg, more) {
+			} else if vx_core.V_booleann_from_liststringn_findn(output, more) {
 			} else {
 				output = append(output, more)
 			}

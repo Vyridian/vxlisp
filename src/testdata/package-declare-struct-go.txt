@@ -1,40 +1,40 @@
 
 type Type_cast_funcn func(type_type *Type_type, type_any *Type_any) *Type_any
 type Type_code_funcn func(type_scope *Type_scope, indent int, path string, type_any *Type_any) string
-type Type_copy_funcn func(type_any *Type_any, type_anylist *Type_anylist) *Type_any
+type Type_copy_funcn func(type_anylist *Type_anylist, type_any *Type_any) *Type_any
 type Type_count_funcn func(type_any *Type_any) int
 type Type_func_funcn func(type_type *Type_type) *Type_func
-type Type_get_keyn_funcn func(type_any *Type_any, keyn string) *Type_any
-type Type_get_indexn_funcn func(type_any *Type_any, indexn int) *Type_any
+type Type_get_keyn_funcn func(keyn string, type_any *Type_any) *Type_any
+type Type_get_indexn_funcn func(indexn int, type_any *Type_any) *Type_any
 type Type_listany_funcn func(type_any *Type_any) []*Type_any
 type Type_listkey_funcn func(type_any *Type_any) []string
 type Type_mapany_funcn func(type_any *Type_any) map[string]*Type_any
 type Type_new_funcn func(type_anylist *Type_anylist) *Type_any
 type Type_run_funcn func(type_anylist *Type_anylist) *Type_any
-type Type_set_any_anymap_funcn func(type_any *Type_any, type_anymap *Type_anymap) *Type_any
-type Type_set_keyn_funcn func(type_any *Type_any, keyn string, value *Type_any)
-type Type_set_indexn_funcn func(type_any *Type_any, indexn int, value *Type_any)
+type Type_set_anymap_funcn func(type_anymap *Type_anymap, type_any *Type_any) *Type_any
+type Type_set_keyn_funcn func(keyn string, value *Type_any, type_any *Type_any) *Type_any
+type Type_set_indexn_funcn func(indexn int, value *Type_any, type_any *Type_any) *Type_any
 type Type_shutdown_funcn func(type_any *Type_any)
 
 // (type generic)
 type Type_generic struct {
-	P_any                  *Type_any
-	P_cast_funcn           Type_cast_funcn
-	P_code_funcn           Type_code_funcn
-	P_copy_funcn           Type_copy_funcn
-	P_count_funcn          Type_count_funcn
-	P_func_funcn           Type_func_funcn
-	P_get_keyn_funcn       Type_get_keyn_funcn
-	P_get_indexn_funcn     Type_get_indexn_funcn
-	P_listany_funcn        Type_listany_funcn
-	P_listkey_funcn        Type_listkey_funcn
-	P_mapany_funcn         Type_mapany_funcn
-	P_new_funcn            Type_new_funcn
-	P_run_funcn            Type_run_funcn
-	P_set_any_anymap_funcn Type_set_any_anymap_funcn
-	P_set_keyn_funcn       Type_set_keyn_funcn
-	P_set_indexn_funcn     Type_set_indexn_funcn
-	P_shutdown_funcn       Type_shutdown_funcn
+	P_any              *Type_any
+	P_cast_funcn       Type_cast_funcn
+	P_code_funcn       Type_code_funcn
+	P_copy_funcn       Type_copy_funcn
+	P_count_funcn      Type_count_funcn
+	P_func_funcn       Type_func_funcn
+	P_get_keyn_funcn   Type_get_keyn_funcn
+	P_get_indexn_funcn Type_get_indexn_funcn
+	P_listany_funcn    Type_listany_funcn
+	P_listkey_funcn    Type_listkey_funcn
+	P_mapany_funcn     Type_mapany_funcn
+	P_new_funcn        Type_new_funcn
+	P_run_funcn        Type_run_funcn
+	P_set_anymap_funcn Type_set_anymap_funcn
+	P_set_keyn_funcn   Type_set_keyn_funcn
+	P_set_indexn_funcn Type_set_indexn_funcn
+	P_shutdown_funcn   Type_shutdown_funcn
 }
 
 // V_constructor_generic
@@ -69,7 +69,7 @@ func V_initialize_generic(
 	value.P_mapany_funcn = nil
 	value.P_new_funcn = nil
 	value.P_run_funcn = nil
-	value.P_set_any_anymap_funcn = nil
+	value.P_set_anymap_funcn = nil
 	value.P_set_keyn_funcn = nil
 	value.P_set_indexn_funcn = nil
 	value.P_shutdown_funcn = nil
@@ -101,7 +101,7 @@ func V_shutdown_generic(
 	value.P_mapany_funcn = nil
 	value.P_new_funcn = nil
 	value.P_run_funcn = nil
-	value.P_set_any_anymap_funcn = nil
+	value.P_set_anymap_funcn = nil
 	value.P_set_keyn_funcn = nil
 	value.P_set_indexn_funcn = nil
 	value.P_shutdown_funcn = nil
@@ -161,8 +161,8 @@ func V_startup_generic() *Type_type {
 				"run-funcn",
 				T_run_funcn),
 			V_var_new_public_from_namen_type(
-				"set-any-anymap-funcn",
-				T_set_any_anymap_funcn),
+				"set-anymap-funcn",
+				T_set_anymap_funcn),
 			V_var_new_public_from_namen_type(
 				"set-keyn-funcn",
 				T_set_keyn_funcn),
@@ -203,21 +203,21 @@ func V_clone_generic(
 
 // V_copy_generic
 func V_copy_generic(
-	value *Type_generic,
-	type_anylist *Type_anylist) *Type_generic {
+	type_anylist *Type_anylist,
+	value *Type_generic) *Type_generic {
 	var output *Type_generic = E_generic
 	return output
 }
 
 // A_copy_generic
 func A_copy_generic(
-	type_any *Type_any,
-	type_anylist *Type_anylist) *Type_any {
+	type_anylist *Type_anylist,
+	type_any *Type_any) *Type_any {
 	var value *Type_generic = V_cast_generic(
 		type_any)
 	var copy_value *Type_generic = V_copy_generic(
-		value,
-		type_anylist)
+		type_anylist,
+		value)
 	var output *Type_any = copy_value.P_any
 	return output
 }
@@ -226,8 +226,8 @@ func A_copy_generic(
 func V_new_generic(
 	type_anylist *Type_anylist) *Type_generic {
 	var output *Type_generic = V_copy_generic(
-		E_generic,
-		type_anylist)
+		type_anylist,
+		E_generic)
 	return output
 }
 
@@ -245,6 +245,62 @@ func F_generic(
 	type_anylist *Type_anylist) *Type_generic {
 	var output *Type_generic = V_new_generic(
 		type_anylist)
+	return output
+}
+
+// (type global)
+type Type_global struct {
+	P_any      *Type_any
+	P_refcount int
+	P_project  *Type_project
+}
+
+// V_constructor_global
+func V_constructor_global() *Type_global {
+	var output *Type_global = new(Type_global)
+	return output
+}
+
+// V_create_global
+func V_create_global() *Type_global {
+	var output *Type_global = V_constructor_global()
+	V_initialize_global(
+		output)
+	return output
+}
+
+// V_initialize_global
+func V_initialize_global(
+	value *Type_global) {
+	value.P_any = V_any_from_type_backref(
+		T_global,
+		value)
+	value.P_refcount = 0
+	value.P_project = E_project
+}
+
+// V_startup_global
+func V_startup_global() *Type_type {
+	var t_variable *Type_type = T_global
+	var e_variable = *Type_global = E_global
+	V_initialize_global(
+		e_variable)
+	V_type_t_startup(
+		t_variable,
+		"vx/core",
+		"global",
+		"global",
+		C_extends_struct,
+		e_variable.P_any)
+	t_variable.P_propertymap = V_varmap_from_listvar(
+		[]*Type_var{
+			V_var_new_public_from_namen_type(
+				"refcount",
+				T_intn),
+			V_var_new_public_from_namen_type(
+				"project",
+				T_project)})
+	var output *Type_type = t_variable
 	return output
 }
 
@@ -386,21 +442,21 @@ func V_clone_lang(
 
 // V_copy_lang
 func V_copy_lang(
-	value *Type_lang,
-	type_anylist *Type_anylist) *Type_lang {
+	type_anylist *Type_anylist,
+	value *Type_lang) *Type_lang {
 	var output *Type_lang = E_lang
 	return output
 }
 
 // A_copy_lang
 func A_copy_lang(
-	type_any *Type_any,
-	type_anylist *Type_anylist) *Type_any {
+	type_anylist *Type_anylist,
+	type_any *Type_any) *Type_any {
 	var value *Type_lang = V_cast_lang(
 		type_any)
 	var copy_value *Type_lang = V_copy_lang(
-		value,
-		type_anylist)
+		type_anylist,
+		value)
 	var output *Type_any = copy_value.P_any
 	return output
 }
@@ -409,8 +465,8 @@ func A_copy_lang(
 func V_new_lang(
 	type_anylist *Type_anylist) *Type_lang {
 	var output *Type_lang = V_copy_lang(
-		E_lang,
-		type_anylist)
+		type_anylist,
+		E_lang)
 	return output
 }
 
@@ -425,8 +481,8 @@ func A_new_lang(
 
 // V_get_keyn_lang
 func V_get_keyn_lang(
-	value *Type_lang,
-	keyn string) *Type_any {
+	keyn string,
+	value *Type_lang) *Type_any {
 	var output *Type_any = E_any
 	switch keyn {
 	case "name":
@@ -453,32 +509,40 @@ func V_get_keyn_lang(
 
 // A_get_keyn_lang
 func A_get_keyn_lang(
-	type_any *Type_any,
-	keyn string) *Type_any {
+	keyn string,
+	type_any *Type_any) *Type_any {
 	var value *Type_lang = V_cast_lang(
 		type_any)
 	var output *Type_any = V_get_keyn_lang(
-		value,
-		keyn)
+		keyn,
+		value)
+	return output
+}
+
+// V_mapany_lang
+func V_mapany_lang(
+	value *Type_lang) map[string]*Type_any {
+	var output map[string]*Type_any = map[string]*Type_any{}
+	var listkey []string = A_listkey_any(
+		value.P_any)
+	for _, keyn := range listkey {
+		var item_value *Type_any = V_get_keyn_lang(
+			keyn,
+			value)
+		if item_value != E_any {
+			output[keyn] = item_value
+		}
+	}
 	return output
 }
 
 // A_mapany_lang
 func A_mapany_lang(
 	type_any *Type_any) map[string]*Type_any {
-	var output map[string]*Type_any = map[string]*Type_any{}
 	var value *Type_lang = V_cast_lang(
 		type_any)
-	var listkey []string = V_listkey_any(
-		type_any)
-	for _, keyn := range listkey {
-		var sub_any *Type_any = V_get_keyn_lang(
-			value,
-			keyn)
-		if sub_any != E_any {
-			output[keyn] = sub_any
-		}
-	}
+	var output map[string]*Type_any = V_mapany_lang(
+		value)
 	return output
 }
 
@@ -617,21 +681,21 @@ func V_clone_scope(
 
 // V_copy_scope
 func V_copy_scope(
-	value *Type_scope,
-	type_anylist *Type_anylist) *Type_scope {
+	type_anylist *Type_anylist,
+	value *Type_scope) *Type_scope {
 	var output *Type_scope = E_scope
 	return output
 }
 
 // A_copy_scope
 func A_copy_scope(
-	type_any *Type_any,
-	type_anylist *Type_anylist) *Type_any {
+	type_anylist *Type_anylist,
+	type_any *Type_any) *Type_any {
 	var value *Type_scope = V_cast_scope(
 		type_any)
 	var copy_value *Type_scope = V_copy_scope(
-		value,
-		type_anylist)
+		type_anylist,
+		value)
 	var output *Type_any = copy_value.P_any
 	return output
 }
@@ -640,8 +704,8 @@ func A_copy_scope(
 func V_new_scope(
 	type_anylist *Type_anylist) *Type_scope {
 	var output *Type_scope = V_copy_scope(
-		E_scope,
-		type_anylist)
+		type_anylist,
+		E_scope)
 	return output
 }
 
@@ -656,8 +720,8 @@ func A_new_scope(
 
 // V_get_keyn_scope
 func V_get_keyn_scope(
-	value *Type_scope,
-	keyn string) *Type_any {
+	keyn string,
+	value *Type_scope) *Type_any {
 	var output *Type_any = E_any
 	switch keyn {
 	case "lang":
@@ -675,32 +739,40 @@ func V_get_keyn_scope(
 
 // A_get_keyn_scope
 func A_get_keyn_scope(
-	type_any *Type_any,
-	keyn string) *Type_any {
+	keyn string,
+	type_any *Type_any) *Type_any {
 	var value *Type_scope = V_cast_scope(
 		type_any)
 	var output *Type_any = V_get_keyn_scope(
-		value,
-		keyn)
+		keyn,
+		value)
+	return output
+}
+
+// V_mapany_scope
+func V_mapany_scope(
+	value *Type_scope) map[string]*Type_any {
+	var output map[string]*Type_any = map[string]*Type_any{}
+	var listkey []string = A_listkey_any(
+		value.P_any)
+	for _, keyn := range listkey {
+		var item_value *Type_any = V_get_keyn_scope(
+			keyn,
+			value)
+		if item_value != E_any {
+			output[keyn] = item_value
+		}
+	}
 	return output
 }
 
 // A_mapany_scope
 func A_mapany_scope(
 	type_any *Type_any) map[string]*Type_any {
-	var output map[string]*Type_any = map[string]*Type_any{}
 	var value *Type_scope = V_cast_scope(
 		type_any)
-	var listkey []string = V_listkey_any(
-		type_any)
-	for _, keyn := range listkey {
-		var sub_any *Type_any = V_get_keyn_scope(
-			value,
-			keyn)
-		if sub_any != E_any {
-			output[keyn] = sub_any
-		}
-	}
+	var output map[string]*Type_any = V_mapany_scope(
+		value)
 	return output
 }
 
@@ -880,21 +952,21 @@ func V_clone_var(
 
 // V_copy_var
 func V_copy_var(
-	value *Type_var,
-	type_anylist *Type_anylist) *Type_var {
+	type_anylist *Type_anylist,
+	value *Type_var) *Type_var {
 	var output *Type_var = E_var
 	return output
 }
 
 // A_copy_var
 func A_copy_var(
-	type_any *Type_any,
-	type_anylist *Type_anylist) *Type_any {
+	type_anylist *Type_anylist,
+	type_any *Type_any) *Type_any {
 	var value *Type_var = V_cast_var(
 		type_any)
 	var copy_value *Type_var = V_copy_var(
-		value,
-		type_anylist)
+		type_anylist,
+		value)
 	var output *Type_any = copy_value.P_any
 	return output
 }
@@ -903,8 +975,8 @@ func A_copy_var(
 func V_new_var(
 	type_anylist *Type_anylist) *Type_var {
 	var output *Type_var = V_copy_var(
-		E_var,
-		type_anylist)
+		type_anylist,
+		E_var)
 	return output
 }
 
@@ -919,8 +991,8 @@ func A_new_var(
 
 // V_get_keyn_var
 func V_get_keyn_var(
-	value *Type_var,
-	keyn string) *Type_any {
+	keyn string,
+	value *Type_var) *Type_any {
 	var output *Type_any = E_any
 	switch keyn {
 	case "pkgname":
@@ -955,32 +1027,40 @@ func V_get_keyn_var(
 
 // A_get_keyn_var
 func A_get_keyn_var(
-	type_any *Type_any,
-	keyn string) *Type_any {
+	keyn string,
+	type_any *Type_any) *Type_any {
 	var value *Type_var = V_cast_var(
 		type_any)
 	var output *Type_any = V_get_keyn_var(
-		value,
-		keyn)
+		keyn,
+		value)
+	return output
+}
+
+// V_mapany_var
+func V_mapany_var(
+	value *Type_var) map[string]*Type_any {
+	var output map[string]*Type_any = map[string]*Type_any{}
+	var listkey []string = A_listkey_any(
+		value.P_any)
+	for _, keyn := range listkey {
+		var item_value *Type_any = V_get_keyn_var(
+			keyn,
+			value)
+		if item_value != E_any {
+			output[keyn] = item_value
+		}
+	}
 	return output
 }
 
 // A_mapany_var
 func A_mapany_var(
 	type_any *Type_any) map[string]*Type_any {
-	var output map[string]*Type_any = map[string]*Type_any{}
 	var value *Type_var = V_cast_var(
 		type_any)
-	var listkey []string = V_listkey_any(
-		type_any)
-	for _, keyn := range listkey {
-		var sub_any *Type_any = V_get_keyn_var(
-			value,
-			keyn)
-		if sub_any != E_any {
-			output[keyn] = sub_any
-		}
-	}
+	var output map[string]*Type_any = V_mapany_var(
+		value)
 	return output
 }
 
@@ -1044,7 +1124,7 @@ func V_reserve_varlist(
 // V_shutdown_varlist
 func V_shutdown_varlist(
 	value *Type_varlist) {
-	var listany []*Type_any = V_listany_any(
+	var listany []*Type_any = A_listany_any(
 		value.P_any)
 	V_release_listany(
 		listany)
@@ -1104,21 +1184,21 @@ func V_clone_varlist(
 
 // V_copy_varlist
 func V_copy_varlist(
-	value *Type_varlist,
-	type_anylist *Type_anylist) *Type_varlist {
+	type_anylist *Type_anylist,
+	value *Type_varlist) *Type_varlist {
 	var output *Type_varlist = E_varlist
 	return output
 }
 
 // A_copy_varlist
 func A_copy_varlist(
-	type_any *Type_any,
-	type_anylist *Type_anylist) *Type_any {
+	type_anylist *Type_anylist,
+	type_any *Type_any) *Type_any {
 	var value *Type_varlist = V_cast_varlist(
 		type_any)
 	var copy_value *Type_varlist = V_copy_varlist(
-		value,
-		type_anylist)
+		type_anylist,
+		value)
 	var output *Type_any = copy_value.P_any
 	return output
 }
@@ -1127,8 +1207,8 @@ func A_copy_varlist(
 func V_new_varlist(
 	type_anylist *Type_anylist) *Type_varlist {
 	var output *Type_varlist = V_copy_varlist(
-		E_varlist,
-		type_anylist)
+		type_anylist,
+		E_varlist)
 	return output
 }
 
@@ -1143,8 +1223,8 @@ func A_new_varlist(
 
 // V_get_indexn_varlist
 func V_get_indexn_varlist(
-	value *Type_varlist,
-	indexn int) *Type_var {
+	indexn int,
+	value *Type_varlist) *Type_var {
 	var output *Type_var = E_var
 	var listitem []*Type_var = value.P_listvar
 	if len(listitem) <= indexn {
@@ -1158,14 +1238,25 @@ func V_get_indexn_varlist(
 
 // A_get_indexn_varlist
 func A_get_indexn_varlist(
-	type_any *Type_any,
-	indexn int) *Type_any {
+	indexn int,
+	type_any *Type_any) *Type_any {
 	var value *Type_varlist = V_cast_varlist(
 		type_any)
 	var item *Type_var = V_get_indexn_varlist(
-		value,
-		indexn)
+		indexn,
+		value)
 	var output *Type_any = item.P_any
+	return output
+}
+
+// V_listany_varlist
+func V_listany_varlist(
+	value *Type_varlist) []*Type_any {
+	var output []*Type_any = []*Type_any{}
+	var listvar []*Type_var = value.P_listvar
+	for _, item := range listvar {
+		output = append(output, item.P_any)
+	}
 	return output
 }
 
@@ -1174,9 +1265,8 @@ func A_listany_varlist(
 	type_any *Type_any) []*Type_any {
 	var value *Type_varlist = V_cast_varlist(
 		type_any)
-	var listvar []*Type_var = value.P_listvar
-	var output []*Type_any = V_listany_from_listvar_varlist(
-		listvar)
+	var output []*Type_any = V_listany_varlist(
+		value)
 	return output
 }
 
@@ -1194,6 +1284,229 @@ func V_listany_from_listvar_varlist(
 func F_varlist(
 	type_anylist *Type_anylist) *Type_varlist {
 	var output *Type_varlist = V_new_varlist(
+		type_anylist)
+	return output
+}
+
+// (type varmap)
+type Type_varmap struct {
+	P_any     *Type_any
+	P_listkey []string
+	P_mapvar  map[string]*Type_var
+}
+
+// V_constructor_varmap
+func V_constructor_varmap() *Type_varmap {
+	var output *Type_varmap = new(Type_varmap)
+	return output
+}
+
+// V_create_varmap
+func V_create_varmap() *Type_varmap {
+	var output *Type_varmap = V_constructor_varmap()
+	V_initialize_varmap(
+		output)
+	return output
+}
+
+// V_initialize_varmap
+func V_initialize_varmap(
+	value *Type_varmap) {
+	value.P_any = V_any_from_type_backref(
+		T_varmap,
+		value)
+	value.P_listkey = []string{}
+	value.P_mapvar = map[string]*Type_var{}
+}
+
+// V_release_varmap
+func V_release_varmap(
+	value *Type_varmap) *Type_varmap {
+	if value != E_varmap {
+		V_release_any(
+			value.P_any)
+	}
+	var output *Type_varmap = E_varmap
+	return output
+}
+
+// V_reserve_varmap
+func V_reserve_varmap(
+	value *Type_varmap) *Type_varmap {
+	V_reserve_any(
+		value.P_any)
+	var output *Type_varmap = value
+	return output
+}
+
+// V_shutdown_varmap
+func V_shutdown_varmap(
+	value *Type_varmap) {
+	var listany []*Type_any = A_listany_any(
+		value.P_any)
+	V_release_listany(
+		listany)
+	value.P_listkey = nil
+	value.P_mapvar = nil
+	V_shutdown_any(
+		value.P_any)
+}
+
+// V_startup_varmap
+func V_startup_varmap() *Type_type {
+	var t_variable *Type_type = T_varmap
+	var e_variable *Type_varmap = E_varmap
+	V_initialize_varmap(
+		e_variable)
+	V_type_t_startup(
+		t_variable,
+		"vx/core",
+		"varmap",
+		"varmap",
+		C_extends_map,
+		e_variable.P_any)
+	t_variable.P_container = T_var
+	var type_generic *Type_generic = V_create_generic()
+	type_generic.P_copy_funcn = A_copy_varmap
+	type_generic.P_new_funcn = A_new_varmap
+	type_generic.P_get_keyn_funcn = A_get_keyn_varmap
+	type_generic.P_listkey_funcn = A_listkey_varmap
+	type_generic.P_mapany_funcn = A_mapany_varmap
+	t_variable.type_generic = type_generic
+	var output *Type_type = t_variable
+	return output
+}
+
+// V_cast_varmap
+func V_cast_varmap(
+	type_any *Type_any) *Type_varmap {
+	var output *Type_varmap = E_varmap
+	var value, ok = type_any.backref.(*Type_varmap)
+	if ok {
+		output = value
+	}
+	return output
+}
+
+// A_cast_varmap
+func A_cast_varmap(
+	value *Type_varmap) *Type_any {
+	var output *Type_any = value.P_any
+	return output
+}
+
+// V_clone_varmap
+func V_clone_varmap(
+	value *Type_varmap) *Type_varmap {
+	var output *Type_varmap = V_create_varmap()
+	return output
+}
+
+// V_copy_varmap
+func V_copy_varmap(
+	type_anylist *Type_anylist,
+	value *Type_varmap) *Type_varmap {
+	var output *Type_varmap = E_varmap
+	return output
+}
+
+// A_copy_varmap
+func A_copy_varmap(
+	type_anylist *Type_anylist,
+	type_any *Type_any) *Type_any {
+	var value *Type_varmap = V_cast_varmap(
+		type_any)
+	var copy_value *Type_varmap = V_copy_varmap(
+		type_anylist,
+		value)
+	var output *Type_any = copy_value.P_any
+	return output
+}
+
+// V_new_varmap
+func V_new_varmap(
+	type_anylist *Type_anylist) *Type_varmap {
+	var output *Type_varmap = V_copy_varmap(
+		type_anylist,
+		E_varmap)
+	return output
+}
+
+// A_new_varmap
+func A_new_varmap(
+	type_anylist *Type_anylist) *Type_any {
+	var value *Type_varmap = V_new_varmap(
+		type_anylist)
+	var output *Type_any = value.P_any
+	return output
+}
+
+// V_get_keyn_varmap
+func V_get_keyn_varmap(
+	keyn string,
+	value *Type_varmap) *Type_var {
+	var mapvalue map[string]*Type_var = value.P_mapvar
+	var output *Type_var = V_get_keyn_orelse(mapvalue, keyn, E_var)
+	return output
+}
+
+// A_get_keyn_varmap
+func A_get_keyn_varmap(
+	keyn string,
+	type_any *Type_any) *Type_any {
+	var value *Type_varmap = V_cast_varmap(
+		type_any)
+	var output *Type_any = V_get_keyn_varmap(
+		keyn,
+		value)
+	return output
+}
+
+// V_listkey_varmap
+func V_listkey_varmap(
+	value *Type_varmap) []string {
+	var output []string = value.P_listkey
+	return output
+}
+
+// A_listkey_varmap
+func A_listkey_varmap(
+	type_any *Type_any) []string {
+	var value *Type_varmap = V_cast_varmap(
+		type_any)
+	var output []string = V_listkey_varmap(
+		value)
+	return output
+}
+
+// V_mapany_varmap
+func V_mapany_varmap(
+	value *Type_varmap) map[string]*Type_any {
+	var output map[string]*Type_any = map[string]*Type_any{}
+	var listkey []string = value.P_listkey
+	for _, keyn := range listkey {
+		var item_value *Type_var = V_get_keyn_varmap(
+			keyn,
+			value)
+		output[keyn] = item_value.P_any
+	}
+	return output
+}
+
+// A_mapany_varmap
+func A_mapany_varmap(
+	type_any *Type_any) map[string]*Type_any {
+	var value *Type_varmap = V_cast_varmap(
+		type_any)
+	var output map[string]*Type_any = V_mapany_varmap(
+		value)
+	return output
+}
+
+// F_varmap
+func F_varmap(
+	type_anylist *Type_anylist) *Type_varmap {
+	var output *Type_varmap = V_new_varmap(
 		type_anylist)
 	return output
 }
@@ -1308,21 +1621,21 @@ func V_clone_boolean(
 
 // V_copy_boolean
 func V_copy_boolean(
-	value *Type_boolean,
-	type_anylist *Type_anylist) *Type_boolean {
+	type_anylist *Type_anylist,
+	value *Type_boolean) *Type_boolean {
 	var output *Type_boolean = C_false
 	return output
 }
 
 // A_copy_boolean
 func A_copy_boolean(
-	type_any *Type_any,
-	type_anylist *Type_anylist) *Type_any {
+	type_anylist *Type_anylist,
+	type_any *Type_any) *Type_any {
 	var value *Type_boolean = V_cast_boolean(
 		type_any)
 	var copy_value *Type_boolean = V_copy_boolean(
-		value,
-		type_anylist)
+		type_anylist,
+		value)
 	var output *Type_any = copy_value.P_any
 	return output
 }
@@ -1331,8 +1644,8 @@ func A_copy_boolean(
 func V_new_boolean(
 	type_anylist *Type_anylist) *Type_boolean {
 	var output *Type_boolean = V_copy_boolean(
-		C_false,
-		type_anylist)
+		type_anylist,
+		C_false)
 	return output
 }
 
@@ -1463,21 +1776,21 @@ func V_clone_string(
 
 // V_copy_string
 func V_copy_string(
-	value *Type_string,
-	type_anylist *Type_anylist) *Type_string {
+	type_anylist *Type_anylist,
+	value *Type_string) *Type_string {
 	var output *Type_string = E_string
 	return output
 }
 
 // A_copy_string
 func A_copy_string(
-	type_any *Type_any,
-	type_anylist *Type_anylist) *Type_any {
+	type_anylist *Type_anylist,
+	type_any *Type_any) *Type_any {
 	var value *Type_string = V_cast_string(
 		type_any)
 	var copy_value *Type_string = V_copy_string(
-		value,
-		type_anylist)
+		type_anylist,
+		value)
 	var output *Type_any = copy_value.P_any
 	return output
 }
@@ -1486,8 +1799,8 @@ func A_copy_string(
 func V_new_string(
 	type_anylist *Type_anylist) *Type_string {
 	var output *Type_string = V_copy_string(
-		E_string,
-		type_anylist)
+		type_anylist,
+		E_string)
 	return output
 }
 

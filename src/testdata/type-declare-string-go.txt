@@ -109,21 +109,21 @@ func V_clone_string(
 
 // V_copy_string
 func V_copy_string(
-	value *Type_string,
-	type_anylist *Type_anylist) *Type_string {
+	type_anylist *Type_anylist,
+	value *Type_string) *Type_string {
 	var output *Type_string = E_string
 	return output
 }
 
 // A_copy_string
 func A_copy_string(
-	type_any *Type_any,
-	type_anylist *Type_anylist) *Type_any {
+	type_anylist *Type_anylist,
+	type_any *Type_any) *Type_any {
 	var value *Type_string = V_cast_string(
 		type_any)
 	var copy_value *Type_string = V_copy_string(
-		value,
-		type_anylist)
+		type_anylist,
+		value)
 	var output *Type_any = copy_value.P_any
 	return output
 }
@@ -132,8 +132,8 @@ func A_copy_string(
 func V_new_string(
 	type_anylist *Type_anylist) *Type_string {
 	var output *Type_string = V_copy_string(
-		E_string,
-		type_anylist)
+		type_anylist,
+		E_string)
 	return output
 }
 

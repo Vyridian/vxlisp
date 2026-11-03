@@ -1,9 +1,64 @@
 
+  // v_anymap_from_listkey_listany
+  public static func v_anymap_from_listkey_listany(
+    _ listkey : [String],
+    _ listany : [Vx_Core.Type_any]
+  ) -> Vx_Core.Type_anymap {
+    var output : Vx_Core.Type_anymap = Vx_Core.e_anymap
+    let keylenn : Int = listkey.count
+    if keylenn > 0 {
+      var itemlenn : Int = 0
+      var listkeyvalid : [String] = []
+      var mapany : [String:Vx_Core.Type_any] = [:]
+      for (idx, keyn) in listkey.enumerated() {
+        if idx <= keylenn {
+          let item_value : Vx_Core.Type_any = listany[idx]
+          if item_value !== Vx_Core.e_any {
+            Vx_Core.v_reserve_any(
+              item_value)
+            itemlenn += 1
+            listkeyvalid.append(keyn)
+            mapany[keyn] = item_value
+          }
+        }
+      }
+      if itemlenn > 0 {
+        output = Vx_Core.v_create_anymap()
+        output.p_listkey = listkeyvalid
+        output.p_mapany = mapany
+      }
+    }
+    return output
+  }
+
   // v_const_from_any
   public static func v_const_from_any(
     _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_const {
     let output : Vx_Core.Type_const = type_any.p_const
+    return output
+  }
+
+  // v_const_from_pkgnamen_namen_aliasn_any
+  public static func v_const_from_pkgnamen_namen_aliasn_any(
+    _ pkgnamen : String,
+    _ namen : String,
+    _ aliasn : String,
+    _ type_any : Vx_Core.Type_any
+  ) -> Vx_Core.Type_const {
+    var output : Vx_Core.Type_const = Vx_Core.v_create_const()
+    if pkgnamen == "" {
+      output.p_path = namen
+    } else {
+      output.p_path = pkgnamen +
+        "/" +
+        namen
+    }
+    output.p_pkgname = pkgnamen
+    output.p_name = namen
+    output.p_alias = aliasn
+    output.p_type = type_any.p_type
+    type_any.p_const = output
     return output
   }
 
@@ -63,13 +118,13 @@
     type_project.p_packagemap = Vx_Core.v_replace_packagemap(
       type_packagemap,
       Vx_Core.v_copy_packagemap(
-        type_packagemap,
         Vx_Core.v_anylist_from_listany(
           [
             Vx_Core.a_string_cast_stringn(
               pathn),
             type_package.p_any
-          ])))
+          ]),
+        type_packagemap))
     let output : Bool = true
     return output
   }

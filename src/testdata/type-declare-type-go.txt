@@ -193,21 +193,21 @@ func V_clone_type(
 
 // V_copy_type
 func V_copy_type(
-	value *Type_type,
-	type_anylist *Type_anylist) *Type_type {
+	type_anylist *Type_anylist,
+	value *Type_type) *Type_type {
 	var output *Type_type = E_type
 	return output
 }
 
 // A_copy_type
 func A_copy_type(
-	type_any *Type_any,
-	type_anylist *Type_anylist) *Type_any {
+	type_anylist *Type_anylist,
+	type_any *Type_any) *Type_any {
 	var value *Type_type = V_cast_type(
 		type_any)
 	var copy_value *Type_type = V_copy_type(
-		value,
-		type_anylist)
+		type_anylist,
+		value)
 	var output *Type_any = copy_value.P_any
 	return output
 }
@@ -216,8 +216,8 @@ func A_copy_type(
 func V_new_type(
 	type_anylist *Type_anylist) *Type_type {
 	var output *Type_type = V_copy_type(
-		E_type,
-		type_anylist)
+		type_anylist,
+		E_type)
 	return output
 }
 

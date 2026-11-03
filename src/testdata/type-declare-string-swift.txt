@@ -122,8 +122,8 @@
 
   // v_copy_string
   public static func v_copy_string(
-    _ value : Vx_Core.Type_string,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ value : Vx_Core.Type_string
   ) -> Vx_Core.Type_string {
     let output : Vx_Core.Type_string = Vx_Core.e_string
     return output
@@ -131,14 +131,14 @@
 
   // a_copy_string
   public static func a_copy_string(
-    _ type_any : Vx_Core.Type_any,
-    _ type_anylist : Vx_Core.Type_anylist
+    _ type_anylist : Vx_Core.Type_anylist,
+    _ type_any : Vx_Core.Type_any
   ) -> Vx_Core.Type_any {
     let value : Vx_Core.Type_string = Vx_Core.v_cast_string(
       type_any)
     let copy_value : Vx_Core.Type_string = Vx_Core.v_copy_string(
-      value,
-      type_anylist)
+      type_anylist,
+      value)
     let output : Vx_Core.Type_any = copy_value.p_any
     return output
   }
@@ -148,8 +148,8 @@
     _ type_anylist : Vx_Core.Type_anylist
   ) -> Vx_Core.Type_string {
     let output : Vx_Core.Type_string = Vx_Core.v_copy_string(
-      Vx_Core.e_string,
-      type_anylist)
+      type_anylist,
+      Vx_Core.e_string)
     return output
   }
 

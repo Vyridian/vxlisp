@@ -33,10 +33,17 @@ func V_initialize_any(
 
 // V_release_any
 func V_release_any(
-	value *Type_any) *Type_any {
-	if value != E_any {
-		V_release_any(
-			value)
+	type_any *Type_any) *Type_any {
+	type_any.refcount -= 1
+	if type_any.refcount <= 0 {
+		if type_any.refcount < 0 {
+			V_log_stringn(
+				"Error: Negative Refcount - " +
+					V_typenamen_from_any(
+						type_any))
+		}
+		A_shutdown_any(
+			type_any)
 	}
 	var output *Type_any = E_any
 	return output
@@ -126,8 +133,8 @@ func V_cast_any(
 
 // A_copy_any
 func A_copy_any(
-	type_any *Type_any,
-	type_anylist *Type_anylist) *Type_any {
+	type_anylist *Type_anylist,
+	type_any *Type_any) *Type_any {
 	var type_generic *Type_generic = V_generic_from_any(
 		type_any)
 	var output *Type_any = V_copy_generic(
@@ -163,87 +170,73 @@ func V_count_any(
 
 // V_get_keyn_any
 func V_get_keyn_any(
-	type_any *Type_any,
-	keyn string) *Type_any {
+	keyn string,
+	type_any *Type_any) *Type_any {
 	var type_generic *Type_generic = V_generic_from_any(
 		type_any)
 	var output *Type_any = V_get_keyn_generic(
-		type_generic,
+		keyn,
 		type_any,
-		keyn)
+		type_generic)
 	return output
 }
 
 // V_get_indexn_any
 func V_get_indexn_any(
-	type_any *Type_any,
-	indexn int) *Type_any {
+	indexn int,
+	type_any *Type_any) *Type_any {
 	var type_generic *Type_generic = V_generic_from_any(
 		type_any)
 	var output *Type_any = V_get_indexn_generic(
-		type_generic,
+		indexn,
 		type_any,
-		indexn)
+		type_generic)
 	return output
 }
 
-// V_listany_any
-func V_listany_any(
+// A_listany_any
+func A_listany_any(
 	type_any *Type_any) []*Type_any {
 	var type_generic *Type_generic = V_generic_from_any(
 		type_any)
 	var output []*Type_any = V_listany_generic(
-		type_generic,
-		type_any)
+		type_any,
+		type_generic)
 	return output
 }
 
-// V_listkey_any
-func V_listkey_any(
+// A_listkey_any
+func A_listkey_any(
 	type_any *Type_any) []string {
 	var type_generic *Type_generic = V_generic_from_any(
 		type_any)
 	var output []string = V_listkey_generic(
-		type_generic,
-		type_any)
+		type_any,
+		type_generic)
 	return output
 }
 
-// V_mapany_any
-func V_mapany_any(
+// A_mapany_any
+func A_mapany_any(
 	type_any *Type_any) map[string]*Type_any {
 	var type_generic *Type_generic = V_generic_from_any(
 		type_any)
 	var output map[string]*Type_any = V_mapany_generic(
-		type_generic,
-		type_any)
+		type_any,
+		type_generic)
 	return output
-}
-
-// V_release_any
-func V_release_any(
-	type_any *Type_any) {
-	type_any.refcount -= 1
-	if type_any.refcount <= 0 {
-		if type_any.refcount < 0 {
-			V_log_stringn(
-				"Error: Negative Refcount - " +
-					V_typenamen_from_any(
-						type_any))
-		}
-		V_shutdown_any(
-			type_any)
-	}
 }
 
 // V_reserve_any
 func V_reserve_any(
-	type_any *Type_any) {
+	type_any *Type_any) *Type_any {
 	type_any.refcount += 1
+	var output *Type_any = type_any
+	return output
 }
 
-// V_shutdown_any
-func V_shutdown_any(
+// A_shutdown_any
+func A_shutdown_any(
 	type_any *Type_any) {
 	var type_generic *Type_generic = V_generic_from_any(
 		type_any)
