@@ -882,6 +882,7 @@ func V_const_from_pkgnamen_namen_aliasn_any(
 	return output
 }
 
+// V_extends_from_any
 func V_extends_from_any(
 	type_any *Type_any) *Type_string {
 	var output = V_extends_from_type(
@@ -890,21 +891,23 @@ func V_extends_from_any(
 	return output
 }
 
+// V_extends_from_type
 func V_extends_from_type(
 	type_type *Type_type) *Type_string {
 	var output = type_type.P_extends
 	return output
 }
 
+// V_file_stringn_read_from_filenamen
 func V_file_stringn_read_from_filenamen(
 	filenamen string) (string, *Type_msgblock) {
 	text := ""
 	msgblock := V_msgblock_from_namen(
 		"V_file_stringn_read_from_filenamen")
-	var readfilename = filenamen
+	var readfilename string = filenamen
 	var isabsolute = filepath.IsAbs(filenamen)
 	if !isabsolute {
-		folder, err := os.Getwd()
+		var folder, err = os.Getwd()
 		for err == nil {
 			_, statErr := os.Stat(filepath.Join(folder, "go.mod"))
 			if statErr == nil {
@@ -923,7 +926,6 @@ func V_file_stringn_read_from_filenamen(
 	if err == nil {
 		text = string(content)
 	} else {
-		fmt.Println(filenamen)
 		fmt.Println(os.Getwd())
 		fmt.Println(err)
 		msgblock = V_msgblock_from_msgblock_errorn(

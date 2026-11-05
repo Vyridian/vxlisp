@@ -78,6 +78,9 @@ func Test_stringn_display_from_any(
 			"\n" + V_stringn_display_from_any(type_any) +
 			"\n"
 	}
+	println("!!!!")
+	println(len(listany))
+	println(actualn)
 	V_test_from_file(
 		t,
 		path,
